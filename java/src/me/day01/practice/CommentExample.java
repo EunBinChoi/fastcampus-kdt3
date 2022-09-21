@@ -1,6 +1,6 @@
-package me.java.comment; // 패키지 (클래스 집합, 이름은 소문자로 작성)
+package me.day01.practice;
 
-public class Main { // 클래스 (이름은 대문자로 작성, Upper Camel Case
+public class CommentExample { // 클래스 (이름은 대문자로 작성, Upper Camel Case
     public static void main(String[] args) { // 메인 함수 (프로그램 실행시 자동으로 호출되어 순차적으로 문장이 실행됨)
         /*
          * this is javadoc comment
@@ -17,11 +17,11 @@ public class Main { // 클래스 (이름은 대문자로 작성, Upper Camel Cas
          * ㅁㄴㅇㅁㄴㅇ*/
 
         // 문장 끝에는 세미콜론 (;) 작성
-        System.out.print("Hello Java World - 1"); // 콘솔에 출력하는 함수
-        System.out.print("Hello Java World - 2");
-        System.out.print("Hello Java World - 3");
-        System.out.print("Hello Java World - 4");
-        System.out.print("Hello Java World - 5");
+        System.out.println("Hello Java World - 1"); // 콘솔에 출력하는 함수
+        System.out.println("Hello Java World - 2");
+        System.out.println("Hello Java World - 3");
+        System.out.println("Hello Java World - 4");
+        System.out.println("Hello Java World - 5");
 
         // 콘솔에 출력하는 함수
         System.out.println("1"); // 콘솔에 출력하는 함수 (문장 + 엔터)
