@@ -6,8 +6,7 @@ public class BooleanExample {
 
         if (stop) {
             System.out.println("stop");
-        }
-        else {
+        } else {
             System.out.println("start");
         }
     }
