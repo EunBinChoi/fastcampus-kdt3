@@ -1,4 +1,4 @@
-package me.day04.practice;
+package me.day05.practice;
 
 public class Practice04 {
 }
