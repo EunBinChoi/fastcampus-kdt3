@@ -22,7 +22,7 @@ public class ValidDataCheckExample {
 
         // 영문자 (대문자와 소문자 존재)를 입력받을 경우
         char alpha = sc.next().toLowerCase().charAt(0);
-        if (!(alpha >= 'a' && alpha <= 'z') && !(alpha >= 'A' && alpha <= 'Z')) {
+        if (!((alpha >= 'a' && alpha <= 'z') || (alpha >= 'A' && alpha <= 'Z'))) {
             System.out.println("Alphabet - Not Valid Data");
         }
 
