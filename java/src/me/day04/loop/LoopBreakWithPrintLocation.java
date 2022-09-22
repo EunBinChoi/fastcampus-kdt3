@@ -8,6 +8,7 @@ public class LoopBreakWithPrintLocation {
             System.out.println("num = " + num);
 
             if (num % 3 == 0) break;
+
             System.out.println("num = " + num);
             System.out.println("==================");
         }
