@@ -10,7 +10,7 @@ public class ForStatementExample2 {
         double avg = 0;
 
         for(int i = 0; i < NUM; i++) {
-            sum += sc.nextInt();
+            sum += sc.nextDouble();
         }
         avg = sum / NUM;
         System.out.println("sum = " + sum);
