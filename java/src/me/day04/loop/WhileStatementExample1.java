@@ -6,7 +6,7 @@ public class WhileStatementExample1 {
 
         int i = 1;
         while (i <= 9) {
-            System.out.printf("%d x %d = %d\n", times, i, times*i);
+            System.out.printf("%d x %d = %d\n", times, i, times * i);
             i++;
         }
     }
