@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class StringSplitExample {
     public static void main(String[] args) {
-        String str1 = "010-1234-5678";
+        String str1 = "010-1234--5678";
         String[] strSplit1 = str1.split("-");
         System.out.println("strSplit2 = " + Arrays.toString(strSplit1));
         

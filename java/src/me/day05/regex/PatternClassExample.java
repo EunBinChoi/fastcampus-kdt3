@@ -13,7 +13,7 @@ public class PatternClassExample {
         System.out.println("Pattern.matches(EMAIL_REGEX, email) = " + Pattern.matches(EMAIL_REGEX, email));
 
         email = "qwe@naver.";
-        System.out.println("Pattern.matches(EMAIL_REGEX, email)a = " + Pattern.matches(EMAIL_REGEX, email));
+        System.out.println("Pattern.matches(EMAIL_REGEX, email) = " + Pattern.matches(EMAIL_REGEX, email));
         System.out.println();
 
 

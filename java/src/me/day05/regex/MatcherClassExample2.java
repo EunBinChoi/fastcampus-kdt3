@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 public class MatcherClassExample2 {
     static final String REGEX = "a*b";
     public static void main(String[] args) {
-
         String input = "aabzzzaabxxxxabyyyy";
 
         Pattern pattern = Pattern.compile(REGEX);
