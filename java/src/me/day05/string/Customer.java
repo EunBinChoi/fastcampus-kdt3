@@ -51,12 +51,12 @@ public class Customer {
         return Objects.hash(id, name, membership);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Customer{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", membership=" + membership +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", membership=" + membership +
+                '}';
+    }
 }

@@ -3,26 +3,27 @@ package me.day05.regex;
 import java.util.regex.Pattern;
 
 public class PatternClassExample {
+    static final String EMAIL_REGEX = "^\\w+@\\w+\\.\\w+(\\.\\w+)?$";
+    static final String PHONE_REGEX = "^\\d{2,3}-\\d{3,4}-\\d{4}$";
     public static void main(String[] args) {
-        String strRegEx1 = "qwerty@gmail.com";
-        String emailRegEx = "^\\w+@\\w+\\.\\w+(\\.\\w+)?$";
-        System.out.println("Pattern.matches(emailRegEx, strRegEx1) = " + Pattern.matches(emailRegEx, strRegEx1));
+        String email = "qwerty@gmail.com";
+        System.out.println("Pattern.matches(EMAIL_REGEX, email) = " + Pattern.matches(EMAIL_REGEX, email));
 
-        strRegEx1 = "qweqw@naver.co.kr";
-        System.out.println("Pattern.matches(emailRegEx, strRegEx1) = " + Pattern.matches(emailRegEx, strRegEx1));
+        email = "qweqw@naver.co.kr";
+        System.out.println("Pattern.matches(EMAIL_REGEX, email) = " + Pattern.matches(EMAIL_REGEX, email));
 
-        strRegEx1 = "qwe@naver.";
-        System.out.println("Pattern.matches(emailRegEx, strRegEx1) = " + Pattern.matches(emailRegEx, strRegEx1));
+        email = "qwe@naver.";
+        System.out.println("Pattern.matches(EMAIL_REGEX, email)a = " + Pattern.matches(EMAIL_REGEX, email));
         System.out.println();
 
-        String strRegEx2 = "010-1234-5678";
-        String phoneRegEx = "^\\d{2,3}-\\d{3,4}-\\d{4}$";
-        System.out.println("Pattern.matches(phoneRegEx, strRegEx2) = " + Pattern.matches(phoneRegEx, strRegEx2));
 
-        strRegEx2 = "02-000-0000";
-        System.out.println("Pattern.matches(phoneRegEx, strRegEx2) = " + Pattern.matches(phoneRegEx, strRegEx2));
+        String phone = "010-1234-5678";
+        System.out.println("Pattern.matches(PHONE_REGEX, phone) = " + Pattern.matches(PHONE_REGEX, phone));
 
-        strRegEx2 = "010-00000-0000";
-        System.out.println("Pattern.matches(phoneRegEx, strRegEx2) = " + Pattern.matches(phoneRegEx, strRegEx2));
+        phone = "02-000-0000";
+        System.out.println("Pattern.matches(PHONE_REGEX, phone) = " + Pattern.matches(PHONE_REGEX, phone));
+
+        phone = "010-00000-0000";
+        System.out.println("Pattern.matches(PHONE_REGEX, phone) = " + Pattern.matches(PHONE_REGEX, phone));
     }
 }

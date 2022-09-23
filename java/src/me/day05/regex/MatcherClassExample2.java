@@ -4,12 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MatcherClassExample2 {
+    static final String REGEX = "a*b";
     public static void main(String[] args) {
-        String REGEX = "a*b";
-        String INPUT = "aabzzzaabxxxxabyyyy";
+
+        String input = "aabzzzaabxxxxabyyyy";
 
         Pattern pattern = Pattern.compile(REGEX);
-        Matcher matcher = pattern.matcher(INPUT);
+        Matcher matcher = pattern.matcher(input);
 
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {

@@ -4,16 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MatcherClassExample1 {
+    static final String REGEX = "^[a-zA-Z]*$";
     public static void main(String[] args) {
         // 코딩 테스트 문제 (https://school.programmers.co.kr/learn/courses/30/lessons/17682)
 
         // 1. 생성하기, 정규식 일치여부 판별하기
-        String REGEX = "^[a-zA-Z]*$";
-        String INPUT = "hello world";
-        System.out.println(Pattern.matches(REGEX, INPUT)); // 공백 포함. false
+        String input = "hello world";
+        System.out.println(Pattern.matches(REGEX, input)); // 공백 포함. false
 
         Pattern pattern = Pattern.compile(REGEX);
-        Matcher matcher = pattern.matcher(INPUT);
+        Matcher matcher = pattern.matcher(input);
         System.out.println(matcher.matches()); // 공백 포함. false
         System.out.println();
 
