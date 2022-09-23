@@ -25,12 +25,12 @@ public class StringReplaceExample {
         System.out.println();
 
         // 입력 데이터 형식 확인 (포맷 확인)
-        String strAll4 = "abasdasd!!012345^~*#"; // 영문자와 숫자 이외의 문자 제거
-        String replaceAllRegEx1 = strAll4.toLowerCase().replaceAll(NOT_ALNUM_REGEX, "");
+        String strAll4 = "abasdasd!!012345^~*#";
+        String replaceAllRegEx1 = strAll4.toLowerCase().replaceAll(NOT_ALNUM_REGEX, ""); // 영문자와 숫자 이외 문자 제거
         System.out.println("replaceAllRegEx1 = " + replaceAllRegEx1);
 
-        String strAll5 = "가나다라마바사ABCDEFG"; // 한글 제거
-        String replaceAllRegEx2 = strAll5.replaceAll(KOREAN_REGEX, "");
+        String strAll5 = "가나다라마바사ABCDEFG";
+        String replaceAllRegEx2 = strAll5.replaceAll(KOREAN_REGEX, ""); // 한글 제거
         System.out.println("replaceAllRegEx2 = " + replaceAllRegEx2);
         System.out.println();
     }
