@@ -26,7 +26,7 @@ public class CommentExample { // 클래스 (이름은 대문자로 작성, Upper
         // 콘솔에 출력하는 함수
         System.out.println("1"); // 콘솔에 출력하는 함수 (문장 + 엔터)
         System.out.print("2"); // 콘솔에 출력하는 함수 (문장만 출력)
-        System.out.printf("3"); // 콘솔에 출력하는 함수 (포맷에 맞춰 출력)
+        System.out.print("3"); // 콘솔에 출력하는 함수 (포맷에 맞춰 출력)
         System.out.println();
     }
 }

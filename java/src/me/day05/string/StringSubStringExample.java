@@ -5,7 +5,7 @@ public class StringSubStringExample {
         String str = "Java is Fun.";
         String substring1 = str.substring(0, 4);
         String substring2 = str.substring(5);
-        String substring3 = str.substring(5, str.length()); // str.length() 생략가능
+        String substring3 = str.substring(5); // str.length() 생략가능
 
         System.out.println("substring1 = " + substring1);
         System.out.println("substring2 = " + substring2);

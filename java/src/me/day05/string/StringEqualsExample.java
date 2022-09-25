@@ -7,7 +7,7 @@ public class StringEqualsExample {
 
         boolean isEquals1 = s1.equals(s2);
         boolean isEquals2 = s1.equalsIgnoreCase(s2);
-        boolean isEquals3 = s1.toLowerCase().equals(s2.toLowerCase());
+        boolean isEquals3 = s1.equalsIgnoreCase(s2);
         // equalsIgnoreCase()의 내부 구현 방법
 
         System.out.println(isEquals1); // false
