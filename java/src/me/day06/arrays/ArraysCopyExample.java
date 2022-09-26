@@ -41,7 +41,6 @@ public class ArraysCopyExample {
         String[][] strArr2d = {{"a", "ab", "abc"}, {"1", "12", "123"}, {"a1", "b2", "c3"}};
         String[][] strArr2dCopy = strArr2d; // 주소값 대입
 
-//        Arrays 클래스로 불가, Cloneable 인터페이스 구현해야 함 (이후 공부)
         final int NEW_ROW = 3;
         final int NEW_COL = 5;
         arr2dCopy = deepCopy(arr2d, NEW_ROW, NEW_COL);
