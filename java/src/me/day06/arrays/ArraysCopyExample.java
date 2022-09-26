@@ -1,4 +1,3 @@
-package me.day06.arrays;
 
 import java.util.Arrays;
 
@@ -84,7 +83,9 @@ public class ArraysCopyExample {
     public static int[][] deepCopy(int[][] original, int newRow, int newColumn) {
         int[][] copied = new int[newRow][newColumn];
         for (int i = 0; i < original.length; i++) {
-            System.arraycopy(original[i], 0, copied[i], 0, original[i].length);
+            for (int j = 0; j < original[i].length; j++) {
+                copied[i][j] = original[i][j];
+            }
         }
         return copied;
     }
