@@ -12,14 +12,14 @@ public class ArraysCopyExample {
         final int NEW_LEN = 7;
 
         arr1dCopy = Arrays.copyOf(arr1d, NEW_LEN); // 배열 원소값 복사
-        strArr1dCopy = Arrays.copyOf(strArr1dCopy, NEW_LEN); // 배열 원소값 복사
+        strArr1dCopy = Arrays.copyOf(strArr1d, NEW_LEN); // 배열 원소값 복사
         System.out.println(Arrays.toString(arr1dCopy));
         System.out.println(Arrays.toString(strArr1dCopy));
 
         System.out.println(arr1d == arr1dCopy); // false
         System.out.println(Arrays.equals(arr1d, arr1dCopy)); // false
         System.out.println(strArr1d == strArr1dCopy); // false
-        System.out.println(Arrays.deepEquals(strArr1d, strArr1dCopy)); // false
+        System.out.println(Arrays.equals(strArr1d, strArr1dCopy)); // false
 
         arr1dCopy = copy(arr1d, NEW_LEN); // 배열 원소값 복사
         strArr1dCopy = copy(strArr1dCopy, NEW_LEN); // 배열 원소값 복사
@@ -29,8 +29,10 @@ public class ArraysCopyExample {
 
         System.out.println(arr1d == arr1dCopy); // false
         System.out.println(Arrays.equals(arr1d, arr1dCopy)); // false
+        // String.equals()
+        // for(int i = 0; i < str.length() ...) ...
         System.out.println(strArr1d == strArr1dCopy); // false
-        System.out.println(Arrays.deepEquals(strArr1d, strArr1dCopy)); // false
+        System.out.println(Arrays.equals(strArr1d, strArr1dCopy)); // false
 
 
         // 이차원 배열 복사
@@ -66,7 +68,9 @@ public class ArraysCopyExample {
     }
     public static int[] copy(int[] original, int newLength) {
         int[] copied = new int[newLength];
-        System.arraycopy(original, 0, copied, 0, original.length);
+        for (int i = 0; i < original.length; i++) {
+            copied[i] = original[i];
+        }
         return copied;
     }
     public static String[] copy(String[] original, int newLength) {

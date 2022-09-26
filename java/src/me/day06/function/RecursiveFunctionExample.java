@@ -21,8 +21,6 @@ public class RecursiveFunctionExample {
         System.out.println("fiboFor   = " + fiboFor(N));
         System.out.println("fiboRecur = " + fiboRecur(N));
         System.out.println();
-
-
     }
     public static long sigmaFor(int n) {
         int value = 0;
@@ -33,7 +31,7 @@ public class RecursiveFunctionExample {
     }
     public static long sigmaRecur(int n) {
         if (n == 1) return 1;
-        else return n + sigmaRecur(n-1);
+        return n + sigmaRecur(n-1);
     }
     public static long factFor(int n) {
         int value = 1;
@@ -60,7 +58,6 @@ public class RecursiveFunctionExample {
     }
     public static long fiboRecur(int n) {
         if (n <= 1) return n;
-
         return fiboRecur(n - 1) + fiboRecur(n - 2);
     }
 }

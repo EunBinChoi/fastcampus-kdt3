@@ -25,7 +25,9 @@ public class Array2dMajorExample {
     public static int[][] InitializeRowMajor(int[][] original) {
         int[][] rowMajor = new int[original.length][original[0].length];
         for (int i = 0; i < rowMajor.length; i++) {
-            System.arraycopy(original[i], 0, rowMajor[i], 0, rowMajor[i].length);
+            for (int j = 0; j < rowMajor[i].length; j++) {
+                rowMajor[i][j] = original[i][j];
+            }
         }
         return rowMajor;
     }

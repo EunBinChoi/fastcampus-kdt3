@@ -8,6 +8,7 @@ public class InstanceFunctionExample {
     public static void main(String[] args) {
         Employees employees = new Employees();
         employees.random();
+        System.out.println(employees);
         Position mostPosition = employees.findPositionNameWithMostPeople();
         Department mostDepartment = employees.findDepartmentNameWithMostPeople();
         System.out.println("mostPosition = " + mostPosition);

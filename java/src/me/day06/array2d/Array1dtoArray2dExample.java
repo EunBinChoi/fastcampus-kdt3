@@ -16,7 +16,9 @@ public class Array1dtoArray2dExample {
 
         int[][] arr2d = new int[ROW_NUM][COL_NUM];
         for (int i = 0; i < arr2d.length; i++) {
-            System.arraycopy(arr1d, i * 5 + 0, arr2d[i], 0, arr2d[i].length);
+            for (int j = 0; j < arr2d[i].length; j++) {
+                arr2d[i][j] = arr1d[i * COL_NUM + j];
+            }
         }
         for (int i = 0; i < arr2d.length; i++) {
             for (int j = 0; j < arr2d[i].length; j++) {
@@ -28,7 +30,9 @@ public class Array1dtoArray2dExample {
 
         int[] arr1dRevert = new int[ROW_NUM * COL_NUM];
         for (int i = 0; i < arr2d.length; i++) {
-            System.arraycopy(arr2d[i], 0, arr1dRevert, i * 5 + 0, arr2d[i].length);
+            for (int j = 0; j < arr2d[i].length; j++) {
+                arr1dRevert[i * COL_NUM + j] = arr2d[i][j];
+            }
         }
         for (int element: arr1dRevert) {
             System.out.printf("%2d ", element);
