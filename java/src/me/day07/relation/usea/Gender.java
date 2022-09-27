@@ -1,4 +1,4 @@
-package me.day07.objectarray;
+package me.day07.relation.usea;
 
 public enum Gender {
     MALE("남성"), FEMALE("여성");

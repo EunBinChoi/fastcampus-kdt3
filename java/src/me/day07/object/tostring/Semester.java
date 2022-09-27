@@ -1,4 +1,4 @@
-package me.day07.object;
+package me.day07.object.tostring;
 
 public enum Semester {
     EXCEED("초과학기"), EIGHTH("8학기"), SEVENTH("7학기"),

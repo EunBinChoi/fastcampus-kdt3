@@ -1,4 +1,4 @@
-package me.day07.object;
+package me.day07.object.tostring;
 
 public class ObjectToStringExample {
     public static void main(String[] args) {

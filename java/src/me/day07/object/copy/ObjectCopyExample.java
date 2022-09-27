@@ -1,6 +1,6 @@
-package me.day07.object;
+package me.day07.object.copy;
 
-import me.day07.objectarray.Person;
+import me.day07.object.compare.Person;
 
 import java.util.Arrays;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package me.day07.usea;
+package me.day07.relation.isa;
 
 public class SportCar extends Car {
     // 부모한테서 상속받은 필드
@@ -6,7 +6,11 @@ public class SportCar extends Car {
     // String modelName;
     // String company;
     // int speed;
-    private int turbo;
+
+    // 컴파일러가 부모 객체 super 생성
+    // 눈으로는 안보이지만 내부적으로 super 존재함
+    // Car super = new Car();가 살고 있음
+    int turbo;
 
     public SportCar() {}
 
@@ -40,7 +44,7 @@ public class SportCar extends Car {
 
     @Override
     public String toString() {
-        return "SportCar{" + super.toString() + ", " +
+        return "SportCar{" + super.toString() + ", " + // 부모 객체 호출
                 "turbo=" + turbo +
                 '}';
     }

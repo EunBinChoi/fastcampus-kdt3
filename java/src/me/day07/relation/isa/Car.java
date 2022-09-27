@@ -1,4 +1,4 @@
-package me.day07.isa;
+package me.day07.relation.isa;
 
 public class Car {
     String ID;

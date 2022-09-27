@@ -1,4 +1,4 @@
-package me.day07.usea;
+package me.day07.object.compare;
 
 public enum Gender {
     MALE("남성"), FEMALE("여성");

@@ -1,6 +1,8 @@
-package me.day07.usea;
+package me.day07.object.compare;
 
-public class Person {
+import java.util.Objects;
+
+public class Person implements Comparable<Person> {
     private String name;
     private Gender gender;
     private String birthdate;
@@ -47,10 +49,18 @@ public class Person {
         this.registrationNumber = registrationNumber;
     }
 
-    public void drive(Car car) {
-        System.out.println(String.format("%s를 통해 이동중입니다....", car));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(name, person.name) && gender == person.gender && Objects.equals(birthdate, person.birthdate) && Objects.equals(registrationNumber, person.registrationNumber);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gender, birthdate, registrationNumber);
+    }
 
     @Override
     public String toString() {
@@ -60,5 +70,15 @@ public class Person {
                 ", birthdate='" + birthdate + '\'' +
                 ", registrationNumber='" + registrationNumber + '\'' +
                 '}';
+    }
+
+    // 객체에 담긴 필드는 여러개가 있는데 이 중에서 어떤 걸 기준으로 정렬할 것인가를 정의하는 메소드
+    @Override
+    public int compareTo(Person o) {
+        if (this.name.compareTo(o.name) < 0) return -1;
+        else if (this.name.compareTo(o.name) == 0) {
+            return this.birthdate.compareTo(o.birthdate);
+        }
+        else return 1;
     }
 }

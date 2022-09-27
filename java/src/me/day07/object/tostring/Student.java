@@ -1,4 +1,4 @@
-package me.day07.object;
+package me.day07.object.tostring;
 
 import java.util.Arrays;
 

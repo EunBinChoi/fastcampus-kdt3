@@ -1,4 +1,4 @@
-package me.day07.hasa;
+package me.day07.relation.hasa;
 
 public class Circle {
     private Point centerPoint;

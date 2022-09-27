@@ -1,4 +1,4 @@
-package me.day07.objectarray;
+package me.day07.object.compare;
 
 import java.util.Arrays;
 import java.util.Comparator;
