@@ -9,9 +9,9 @@ public class Main {
         Person[] people = new Person[NUM];
 
         // person[i] 객체 생성
-        for (int i = 0; i < people.length; i++) {
-            people[i] = new Person();
-        }
+//        for (int i = 0; i < people.length; i++) {
+//            people[i] = new Person();
+//        }
 
         people[0] = new Person("cc", Gender.MALE, "881010", "881010-1112345");
         people[1] = new Person("aa", Gender.MALE, "990320", "990320-1354290");
@@ -35,6 +35,7 @@ public class Main {
         Arrays.sort(people, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
+
                 return o1.getBirthdate().compareTo(o2.getBirthdate()) * -1;
             }
         });

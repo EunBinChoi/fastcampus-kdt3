@@ -71,6 +71,7 @@ public class ObjectCopyExample implements Cloneable {
         ObjectCopyExample objectCopyExample = new ObjectCopyExample();
         objectCopyExample.setIntVariable(origin.intVariable);
         objectCopyExample.setStrVariable(origin.strVariable);
+
         objectCopyExample.personArray = new Person[origin.personArray.length];
         for (int i = 0; i < objectCopyExample.personArray.length; i++) {
             objectCopyExample.personArray[i] = new Person();

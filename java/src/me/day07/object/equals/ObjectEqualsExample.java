@@ -18,7 +18,7 @@ public class ObjectEqualsExample {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ObjectEqualsExample that = (ObjectEqualsExample) o;
-        return intVariable == that.intVariable && Objects.equals(strVariable, that.strVariable);
+        return intVariable == that.intVariable && strVariable.equals(that.strVariable);
     }
 
     @Override
