@@ -1,6 +1,5 @@
 package me.day09.pattern.factory.abstracts;
 
-import me.day09.pattern.factory.abstracts.PizzaType;
 
 public abstract class PizzaStore {
 
