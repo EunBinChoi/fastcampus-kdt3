@@ -8,8 +8,7 @@ public class StudentMain {
 
         Student[] students = new Student[10];
         for (int i = 0; i < students.length; i++) {
-            students[i] = new Student(Integer.toString(i + 1),
-                    Character.toString('a' + i),
+            students[i] = new Student(Character.toString('a' + i),
                     Semester.values()[i % Semester.values().length]);
             System.out.println("학생 수 = " + Student.getNumOfStudent());
             System.out.println(students[i]);

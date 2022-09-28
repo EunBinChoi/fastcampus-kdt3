@@ -1,5 +1,7 @@
 package me.day09.pattern.factory.abstracts;
 
+import me.day09.pattern.factory.abstracts.*;
+
 public class CheesePizza extends Pizza {
 	PizzaIngredientFactory ingredientFactory;
 

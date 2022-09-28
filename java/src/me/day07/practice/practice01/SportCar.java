@@ -1,6 +1,7 @@
 package me.day07.practice.practice01;
 
 public class SportCar extends Car {
+
     int turbo;
 
     public SportCar() {}

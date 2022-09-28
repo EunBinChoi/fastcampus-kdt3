@@ -1,4 +1,4 @@
-package me.day08.pattern.factory.method;
+package me.day09.pattern.factory.method;
 
 public class ChicagoStylePepperoniPizza extends Pizza {
 	public ChicagoStylePepperoniPizza() {

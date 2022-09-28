@@ -1,6 +1,5 @@
-package me.day08.pattern.factory.abstracts;
+package me.day09.pattern.factory.abstracts;
 
-import me.day08.pattern.factory.simple.PizzaType;
 
 public class PizzaTestDrive {
 

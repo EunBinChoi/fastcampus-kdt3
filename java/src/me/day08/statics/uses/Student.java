@@ -9,13 +9,16 @@ public class Student {
 
     private static int numOfStudent = 0;
 
-    public Student() { numOfStudent++; }
+    public Student() {
+        numOfStudent++;
+        ID = String.format("%04s", numOfStudent);
+    }
 
-    public Student(String ID, String name, Semester currentSemester) {
-        this.ID = ID;
+    public Student(String name, Semester currentSemester) {
+        numOfStudent++;
+        this.ID = String.format("%04s", numOfStudent);
         this.name = name;
         this.currentSemester = currentSemester;
-        numOfStudent++;
     }
 
     public String getID() {

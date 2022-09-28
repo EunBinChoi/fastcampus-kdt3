@@ -1,4 +1,5 @@
-package me.day08.pattern.factory.simple;
+package me.day09.pattern.factory.simple;
+
 
 public class PepperoniPizza extends Pizza {
 	public PepperoniPizza() {

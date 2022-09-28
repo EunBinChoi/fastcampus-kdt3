@@ -1,6 +1,6 @@
 package me.day09.pattern.factory.abstracts;
 
-import me.day09.pattern.factory.simple.PizzaType;
+import me.day09.pattern.factory.abstracts.PizzaType;
 
 public class ChicagoPizzaStore extends PizzaStore {
 
