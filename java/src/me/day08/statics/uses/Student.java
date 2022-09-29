@@ -11,12 +11,12 @@ public class Student {
 
     public Student() {
         numOfStudent++;
-        ID = String.format("%04s", numOfStudent);
+        ID = String.format("%04d", numOfStudent);
     }
 
     public Student(String name, Semester currentSemester) {
         numOfStudent++;
-        this.ID = String.format("%04s", numOfStudent);
+        this.ID = String.format("%04d", numOfStudent);
         this.name = name;
         this.currentSemester = currentSemester;
     }

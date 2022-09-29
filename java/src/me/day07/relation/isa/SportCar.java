@@ -12,9 +12,12 @@ public class SportCar extends Car {
     // Car super = new Car();가 살고 있음
     int turbo;
 
-    public SportCar() {}
+    public SportCar() {
+        //super();
+    }
 
     public SportCar(int turbo) {
+        //super();
         this.turbo = turbo;
     }
 
