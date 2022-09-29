@@ -1,6 +1,6 @@
-package me.day09.interfaces.example;
+package me.day09.interfaces.polymorphism;
 
-public class SmartRefrig implements SmartPhoneControllable {
+public class SmartTV implements SmartPhoneControllable {
     private int volume;
     private boolean isMute;
 
@@ -16,7 +16,9 @@ public class SmartRefrig implements SmartPhoneControllable {
 
     @Override
     public void setVolume(int volume) {
-        this.volume = volume;
+        if (volume >= SmartPhoneControllable.MIN_VOLUME && volume <= SmartPhoneControllable.MAX_VOLUME) {
+            this.volume = volume;
+        }
     }
 
     @Override

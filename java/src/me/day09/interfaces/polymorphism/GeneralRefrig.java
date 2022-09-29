@@ -1,6 +1,6 @@
-package me.day09.interfaces.example;
+package me.day09.interfaces.polymorphism;
 
-public class SmartTV implements SmartPhoneControllable {
+public class GeneralRefrig implements RemoteControllable {
     private int volume;
     private boolean isMute;
 
@@ -16,7 +16,9 @@ public class SmartTV implements SmartPhoneControllable {
 
     @Override
     public void setVolume(int volume) {
-        this.volume = volume;
+        if (volume >= RemoteControllable.MIN_VOLUME && volume <= RemoteControllable.MAX_VOLUME) {
+            this.volume = volume;
+        }
     }
 
     @Override
@@ -27,10 +29,5 @@ public class SmartTV implements SmartPhoneControllable {
     @Override
     public void changeBattery() {
         System.out.println(GeneralRefrig.class.getName() + " change battery...");
-    }
-
-    @Override
-    public void listenVoice() {
-        System.out.println(GeneralRefrig.class.getName() + " listening your voice...");
     }
 }

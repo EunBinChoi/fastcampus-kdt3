@@ -1,4 +1,4 @@
-package me.day09.interfaces.example;
+package me.day09.interfaces.polymorphism;
 
 public class GeneralMonitor implements RemoteControllable {
     private int volume;
@@ -16,7 +16,9 @@ public class GeneralMonitor implements RemoteControllable {
 
     @Override
     public void setVolume(int volume) {
-        this.volume = volume;
+        if (volume >= RemoteControllable.MIN_VOLUME && volume <= RemoteControllable.MAX_VOLUME) {
+            this.volume = volume;
+        }
     }
 
     @Override

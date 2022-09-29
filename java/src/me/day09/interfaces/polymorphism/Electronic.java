@@ -1,4 +1,4 @@
-package me.day09.interfaces.example;
+package me.day09.interfaces.polymorphism;
 
 import java.util.Objects;
 

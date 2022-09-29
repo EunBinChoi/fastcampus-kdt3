@@ -1,4 +1,4 @@
-package me.day09.interfaces.example;
+package me.day09.interfaces.polymorphism;
 
 public interface RemoteControllable {
     static final int MAX_VOLUME = 10;
