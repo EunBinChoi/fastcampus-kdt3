@@ -32,7 +32,7 @@ public class Trapezoid extends Shape {
     // draw() 함수 무조건 재정의!
     @Override
     public void draw() {
-        System.out.println(Triangle.class.getName() + " draw()");
+        System.out.println(Trapezoid.class.getName() + " draw()");
     }
 
     @Override

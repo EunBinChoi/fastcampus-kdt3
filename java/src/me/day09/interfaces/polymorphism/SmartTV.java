@@ -32,11 +32,11 @@ public class SmartTV extends Electronic implements SmartPhoneControllable {
 
     @Override
     public void changeBattery() {
-        System.out.println(GeneralRefrig.class.getName() + " change battery...");
+        System.out.println(GeneralRefrig.class.getName() + " Change Battery...");
     }
 
     @Override
     public void listenVoice() {
-        System.out.println(GeneralRefrig.class.getName() + " listening your voice...");
+        System.out.println(GeneralRefrig.class.getName() + " Listening Your Voice...");
     }
 }

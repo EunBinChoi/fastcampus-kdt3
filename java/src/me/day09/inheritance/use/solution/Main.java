@@ -11,6 +11,7 @@ public class Main {
         for (int i = 0; i < cars.length; i++) {
             System.out.println(cars[i]);
         }
+        System.out.println(Car.COMPANY);
         System.out.println();
 
         SportCar[] sportCars = new SportCar[NUM_CAR];
@@ -20,5 +21,6 @@ public class Main {
         for (int i = 0; i < cars.length; i++) {
             System.out.println(sportCars[i]);
         }
+        System.out.println(SportCar.COMPANY);
     }
 }

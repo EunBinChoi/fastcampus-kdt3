@@ -24,7 +24,7 @@ public class Main {
         final double PI = 3.14;
         if (shape instanceof Circle) {
             return ((Circle) shape).getRadius() * ((Circle) shape).getRadius() * PI;
-        } else if (shape instanceof  Rectangle) {
+        } else if (shape instanceof Rectangle) {
             return ((Rectangle) shape).getWidth() * ((Rectangle) shape).getHeight();
         } else if (shape instanceof Triangle) {
             return ((Triangle) shape).getBase() * ((Triangle) shape).getHeight() * 0.5;

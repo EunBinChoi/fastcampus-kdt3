@@ -5,4 +5,7 @@ public class UnivStudent extends Person implements DriveLicenseAble {
     public void renew() {
         System.out.println("Renew Driver License");
     }
+    static void staticMethod() {
+        System.out.println("UnvStudent - Static Method");
+    }
 }

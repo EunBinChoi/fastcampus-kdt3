@@ -36,11 +36,11 @@ public class Main {
         System.out.println(smartPhoneControllable2);
         System.out.println();
 
-        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
         // 객체 배열
         RemoteControllable[] remoteControllables = { new GeneralMonitor(), new GeneralRefrig(), new GeneralTV() };
         for (int i = 0; i < remoteControllables.length; i++) {
-            remoteControllables[i].off();
+            remoteControllables[i].on();
             remoteControllables[i].setVolume(10);
             remoteControllables[i].toggleMute();
             remoteControllables[i].off();
@@ -50,7 +50,7 @@ public class Main {
 
         SmartPhoneControllable[] smartPhoneControllables = { new SmartRefrig(), new SmartTV() };
         for (int i = 0; i < smartPhoneControllables.length; i++) {
-            smartPhoneControllables[i].off();
+            smartPhoneControllables[i].on();
             smartPhoneControllables[i].setVolume(10);
             smartPhoneControllables[i].toggleMute();
             smartPhoneControllables[i].listenVoice();
