@@ -27,7 +27,7 @@ public class GeneralRefrig extends Electronic implements RemoteControllable {
     @Override
     public void toggleMute() {
         isMute = !isMute;
-        System.out.println(isMute + " Status ... ");
+        System.out.println((isMute  ? "Mute" : "Unmute") + " Status ... ");
     }
 
     @Override

@@ -5,19 +5,35 @@ public class Main {
         RemoteControllable remoteControllable1 = new GeneralMonitor();
         RemoteControllable remoteControllable2 = new GeneralRefrig();
         RemoteControllable remoteControllable3 = new GeneralTV();
+        ((GeneralTV)remoteControllable3).setProductNo("0001");
+        ((GeneralTV)remoteControllable3).setModelName("OLED");
+        ((GeneralTV)remoteControllable3).setCompanyName("LG");
+        ((GeneralTV)remoteControllable3).setVolume(5);
+        System.out.println(remoteControllable3);
+        System.out.println();
+
         remoteControllable3.on();
         remoteControllable3.setVolume(100);
         remoteControllable3.toggleMute();
         remoteControllable3.off();
+        System.out.println(remoteControllable3);
         System.out.println();
 
         SmartPhoneControllable smartPhoneControllable1 = new SmartRefrig();
         SmartPhoneControllable smartPhoneControllable2 = new SmartTV();
+        ((SmartTV)smartPhoneControllable2).setProductNo("0002");
+        ((SmartTV)smartPhoneControllable2).setModelName("OLED-SMART");
+        ((SmartTV)smartPhoneControllable2).setCompanyName("LG");
+        ((SmartTV)smartPhoneControllable2).setVolume(10);
+        System.out.println(smartPhoneControllable2);
+        System.out.println();
+
         smartPhoneControllable2.on();
         smartPhoneControllable2.setVolume(100);
         smartPhoneControllable2.toggleMute();
         smartPhoneControllable2.listenVoice();
         smartPhoneControllable2.off();
+        System.out.println(smartPhoneControllable2);
         System.out.println();
 
         ////////////////////////////////////////////////////////////
@@ -41,7 +57,5 @@ public class Main {
             smartPhoneControllables[i].off();
             System.out.println();
         }
-
-
     }
 }
