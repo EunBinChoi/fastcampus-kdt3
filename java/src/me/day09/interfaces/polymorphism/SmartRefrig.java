@@ -1,6 +1,6 @@
 package me.day09.interfaces.polymorphism;
 
-public class SmartRefrig implements SmartPhoneControllable {
+public class SmartRefrig extends Electronic implements SmartPhoneControllable {
     private int volume;
     private boolean isMute;
 

@@ -1,6 +1,6 @@
 package me.day09.interfaces.polymorphism;
 
-public class GeneralRefrig implements RemoteControllable {
+public class GeneralRefrig extends Electronic implements RemoteControllable {
     private int volume;
     private boolean isMute;
 

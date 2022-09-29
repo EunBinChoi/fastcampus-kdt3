@@ -1,6 +1,6 @@
 package me.day09.interfaces.polymorphism;
 
-public class GeneralTV implements RemoteControllable {
+public class GeneralTV extends Electronic implements RemoteControllable {
     private int volume;
     private boolean isMute;
 
