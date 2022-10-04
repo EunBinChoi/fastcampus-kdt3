@@ -1,3 +1,4 @@
+package me.day06.arrays;
 
 import java.util.Arrays;
 

@@ -68,5 +68,7 @@ public class Array2dInitExample {
             }
             System.out.println();
         }
+
+        sc.close();
     }
 }

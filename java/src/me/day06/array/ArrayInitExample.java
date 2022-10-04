@@ -41,5 +41,7 @@ public class ArrayInitExample {
         for (int score : scores5) {
             System.out.println("score = " + score);
         }
+
+        sc.close();
     }
 }

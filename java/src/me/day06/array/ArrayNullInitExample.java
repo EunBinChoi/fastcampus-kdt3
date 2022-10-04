@@ -14,5 +14,7 @@ public class ArrayNullInitExample {
         for (int i = 0; i < intArr.length; i++) {
             System.out.println("i = " + i + ", scores2[i] = " + intArr[i]);
         }
+
+        sc.close();
     }
 }

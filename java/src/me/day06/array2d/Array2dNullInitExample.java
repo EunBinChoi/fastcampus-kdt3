@@ -20,6 +20,6 @@ public class Array2dNullInitExample {
             }
             System.out.println();
         }
-
+        sc.close();
     }
 }
