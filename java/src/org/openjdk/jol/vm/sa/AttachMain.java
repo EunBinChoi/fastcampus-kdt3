@@ -47,7 +47,7 @@ class AttachMain {
         Method detachMethod = null;
 
         try {
-            // Gets request from caller process over standard input
+            // Gets request from caller process over standard input.txt
             in = new ObjectInputStream(System.in);
             out = new ObjectOutputStream(bos);
 

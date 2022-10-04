@@ -176,7 +176,7 @@ public class ServiceabilityAgentSupport {
 
             Request request = new Request(processId, processor, DEFAULT_TIMEOUT_IN_MSECS);
 
-            // Get input, output and error streams
+            // Get input.txt, output and error streams
             InputStream is = agentProcess.getInputStream();
             OutputStream os = agentProcess.getOutputStream();
             InputStream es = agentProcess.getErrorStream();
