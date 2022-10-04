@@ -15,5 +15,7 @@ public class ForStatementExample2 {
         avg = sum / NUM;
         System.out.println("sum = " + sum);
         System.out.println("avg = " + avg);
+
+        sc.close();
     }
 }

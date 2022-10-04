@@ -20,5 +20,7 @@ public class ForStatementExample3 {
         }
         System.out.println("최솟값 = " + minValue);
         System.out.println("최댓값 = " + maxValue);
+
+        sc.close();
     }
 }

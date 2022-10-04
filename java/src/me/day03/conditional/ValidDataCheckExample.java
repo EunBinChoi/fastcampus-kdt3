@@ -30,5 +30,7 @@ public class ValidDataCheckExample {
         if (!(alpha >= 'a' && alpha <= 'z')) {
             System.out.println("Alphabet - Not Valid Data");
         }
+
+        sc.close();
     }
 }

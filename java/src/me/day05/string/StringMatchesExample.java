@@ -21,5 +21,7 @@ public class StringMatchesExample {
         boolean passwordCheck = password.matches(PASSWORD_REGEX);
         System.out.println(userIdCheck   ? "아이디  사용 가능 :)" : "아이디  사용 불가능 :(");
         System.out.println(passwordCheck ? "비밀번호 사용 가능 :)" : "비밀번호 사용 불가능 :(");
+
+        sc.close();
     }
 }

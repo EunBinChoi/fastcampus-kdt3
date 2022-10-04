@@ -17,5 +17,7 @@ public class InputExample {
         height = sc.nextDouble();
 
         System.out.println("이름은 " + name + "나이는 " + age + " 키는 " + height + "입니다");
+
+        sc.close();
     }
 }
