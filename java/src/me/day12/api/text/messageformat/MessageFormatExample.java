@@ -1,5 +1,7 @@
 package me.day12.api.text.messageformat;
 
+import me.day12.api.util.scanner.ScannerExample;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.MessageFormat;
@@ -22,7 +24,6 @@ public class MessageFormatExample {
         }
         System.out.println();
 
-        // From Strings to Person[]
         MessageFormat messageFormat = new MessageFormat(pattern);
         Person[] peopleParse = new Person[peopleString.length];
         for (int i = 0; i < peopleString.length; i++) {
@@ -35,9 +36,10 @@ public class MessageFormatExample {
         /////////////////////////////////////////////////////
         /////////////////////////////////////////////////////
         // 파일에서 읽어오기
-        String location = System.getProperty("user.dir") + "/src/me/day12/api/text/messageformat/input.txt";
+        final String PATH = MessageFormatExample.class.getResource("").getPath();
+        final String FILENAME = "input.txt";
         String pattern2 = "name: {0}, age: {1}";
-        Scanner scanner = new Scanner(new File(location));
+        Scanner scanner = new Scanner(new File(PATH + FILENAME));
 
         MessageFormat messageFormat2 = new MessageFormat(pattern2);
 
