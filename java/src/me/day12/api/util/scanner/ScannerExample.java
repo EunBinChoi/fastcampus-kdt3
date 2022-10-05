@@ -41,7 +41,9 @@ public class ScannerExample {
 //        System.out.println();
 //        scanner.close();
 
-        String location = System.getProperty("user.dir") + "/src/me/day12/api/util/scanner/input.txt";
+//        String location = System.getProperty("user.dir") + "/src/me/day12/api/util/scanner/input.txt";
+         String location = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        System.out.println(location);
         Scanner scanner1 = new Scanner(new File(location));
         
         while (scanner1.hasNext()) {
