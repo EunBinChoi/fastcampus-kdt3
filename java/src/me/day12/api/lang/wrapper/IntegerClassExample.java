@@ -65,8 +65,8 @@ public class IntegerClassExample {
         System.out.println("Integer.TYPE = " + Integer.TYPE);
         System.out.println("Integer.SIZE = " + Integer.SIZE);
         System.out.println("Integer.BYTES = " + Integer.BYTES);
-        System.out.println("Integer.MAX_VALUE = " + Integer.MAX_VALUE); // -2^15
-        System.out.println("Integer.MIN_VALUE = " + Integer.MIN_VALUE); // 2^15-1
+        System.out.println("Integer.MAX_VALUE = " + Integer.MAX_VALUE);
+        System.out.println("Integer.MIN_VALUE = " + Integer.MIN_VALUE);
         System.out.println();
 
         // compare, compareUnsigned

@@ -2,7 +2,7 @@ package me.day12.api.lang.object;
 
 import java.util.Objects;
 
-public class Person implements Comparable<Person> {
+public class Person implements Cloneable { // extends Object는 없지만 내부적으로 Object 상속
     private String name;
     private Gender gender;
     private String birthdate;
@@ -72,20 +72,8 @@ public class Person implements Comparable<Person> {
                 '}';
     }
 
-    // 객체에 담긴 필드는 여러개가 있는데 이 중에서 어떤 걸 기준으로 정렬할 것인가를 정의하는 메소드
-    // o1.compareTo(o2)
-    // o1 < o2: 음수 반환
-    // o1 == o2: 0 반환
-    // o1 > o2: 양수 반환
     @Override
-    public int compareTo(Person o) {
-        if (this.name.compareTo(o.name) < 0) return -1;
-        else if (this.name.compareTo(o.name) == 0) {
-//            if (this.birthdate.compareTo(o.birthdate) < 0) return -1;
-//            else if (this.birthdate.compareTo(o.birthdate) == 0) return 0;
-//            else return 1;
-            return this.birthdate.compareTo(o.birthdate);
-        }
-        else return 1;
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
