@@ -1,11 +1,11 @@
-package me.day12.api.time.localdate;
+package me.day12.api.time.instant;
 
 import java.time.Instant;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class TimeAPIExample {
+public class InstantExample2 {
     public static void main(String[] args) {
         ///////////////////////////////////////////////////////////////////////////
         // Time API의 클래스

@@ -1,4 +1,4 @@
-package me.day12.api.time.localdate;
+package me.day12.api.time.local;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class LocalDateExample {
+public class LocalExample {
     public static void main(String[] args) {
         // https://stackoverflow.com/questions/32437550/whats-the-difference-between-instant-and-localdatetime
         // Date -> Instant -> ZonedDateTime -> LocalDate, LocalDateTime

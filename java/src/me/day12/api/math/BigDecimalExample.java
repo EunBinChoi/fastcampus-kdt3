@@ -1,7 +1,5 @@
 package me.day12.api.math;
 
-import me.day09.polymorphism.ancestor.B;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
