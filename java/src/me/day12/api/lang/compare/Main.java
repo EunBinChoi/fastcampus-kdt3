@@ -35,7 +35,9 @@ public class Main {
         Arrays.sort(people, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-
+//                if (o1.getBirthdate().compareTo(o2.getBirthdate()) < 0) return 1;
+//                else if (o1.getBirthdate().compareTo(o2.getBirthdate()) < 0) return 0;
+//                else return -1;
                 return o1.getBirthdate().compareTo(o2.getBirthdate()) * -1;
             }
         });

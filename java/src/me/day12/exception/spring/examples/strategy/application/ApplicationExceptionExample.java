@@ -19,7 +19,7 @@ public class ApplicationExceptionExample {
         System.out.println("2. 두번째 전략 - 반환값을 통해 예외 확인");
         Account2 account2 = new Account2("2345-6789", "sally2", new BigDecimal(1000000));
         int ret = account2.withdraw(new BigDecimal(2000000));
-        if(ret == 1) {
+        if (ret == 1) {
             System.out.println("정상적으로 출금되었습니다.");
         } else {
             System.out.println("잔고 금액이 부족합니다.");

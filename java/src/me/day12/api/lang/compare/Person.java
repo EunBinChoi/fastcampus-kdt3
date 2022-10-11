@@ -77,10 +77,15 @@ public class Person implements Comparable<Person> {
     // o1 < o2: 음수 반환
     // o1 == o2: 0 반환
     // o1 > o2: 양수 반환
+    // {Person p1, Person p2, ..... Person pN};
+    // Arrays.sort(people);
+    // p1.compareTo(p2);
     @Override
     public int compareTo(Person o) {
+        // 이름으로 오름차순
         if (this.name.compareTo(o.name) < 0) return -1;
         else if (this.name.compareTo(o.name) == 0) {
+            // 생년월일로 오름차순
 //            if (this.birthdate.compareTo(o.birthdate) < 0) return -1;
 //            else if (this.birthdate.compareTo(o.birthdate) == 0) return 0;
 //            else return 1;

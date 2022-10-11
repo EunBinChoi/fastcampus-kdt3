@@ -11,7 +11,7 @@ class Country {
     }
 }
 
-class PhoneNumber implements Cloneable {
+class PhoneNumber {
     private String owner;
     private String phoneNumber;
     private final Country[] COUNTRY = {new Country("KR"), new Country("JP"), new Country("US")};
@@ -86,17 +86,17 @@ class PhoneNumber implements Cloneable {
 
 public class CloneableExample {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        System.out.println("1. clone()을 통한 복제");
-        PhoneNumber phoneNumber = new PhoneNumber();
-        PhoneNumber cloned = phoneNumber.clone();
-        System.out.println("phoneNumber == cloned : " + (phoneNumber == cloned));
-        System.out.println("phoneNumber.equals(cloned) : " + (phoneNumber.equals(cloned)));
-        System.out.println("phoneNumber.getClass() == cloned.getClass() : " + (phoneNumber.getClass() == cloned.getClass()));
-        System.out.println();
-
-        System.out.println(phoneNumber.getCOUNTRY()); // 주소 동일. final 필드에 대해서는 복사 어려움
-        System.out.println(cloned.getCOUNTRY()); // 주소 동일. final 필드에 대해서는 복사 어려움
-        System.out.println();
+//        System.out.println("1. clone()을 통한 복제");
+//        PhoneNumber phoneNumber = new PhoneNumber();
+//        PhoneNumber cloned = phoneNumber.clone();
+//        System.out.println("phoneNumber == cloned : " + (phoneNumber == cloned));
+//        System.out.println("phoneNumber.equals(cloned) : " + (phoneNumber.equals(cloned)));
+//        System.out.println("phoneNumber.getClass() == cloned.getClass() : " + (phoneNumber.getClass() == cloned.getClass()));
+//        System.out.println();
+//
+//        System.out.println(phoneNumber.getCOUNTRY()); // 주소 동일. final 필드에 대해서는 복사 어려움
+//        System.out.println(cloned.getCOUNTRY()); // 주소 동일. final 필드에 대해서는 복사 어려움
+//        System.out.println();
 
         System.out.println("2. 팩토리 메소드를 통한 복제");
         PhoneNumber phoneNumber2 = new PhoneNumber();
