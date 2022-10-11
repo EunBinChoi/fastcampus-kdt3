@@ -2,7 +2,7 @@ package me.day13.thread.synchronizeds.nonsynchronized;
 
 import java.util.Objects;
 
-public class GameAccount {
+public class GameAccount { // 공유된 객체
     private String userID;
     private String userPassword;
 

@@ -1,46 +1,67 @@
-package me.day13.generic.extend;
+package me.day13.generic.bound;
 
 
-import me.day13.generic.extend.gift.Item;
+import me.day13.generic.bound.gift.Item;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Gifts<E extends Item> {
+public class Gifts<T extends Item> {
 
     private static final int DEFULAT_SIZE = 10;
     private int size;
 
-    private E[] gifts;
+    private T[] gifts;
     private int count;
 
     public Gifts() {
-        gifts = (E[]) new Item[DEFULAT_SIZE];
+        gifts = (T[]) new Item[DEFULAT_SIZE];
         this.size = DEFULAT_SIZE;
     }
 
     public Gifts(int size) {
-        gifts = (E[]) new Item[size];
+        gifts = (T[]) new Item[size];
         this.size = size;
     }
 
-    public E get(int i) {
+    public T get(int i) {
         return gifts[i];
     }
 
-    public void add(E element) {
+    public void set(int i, T element) {
+        // TODO: set(int i, T element) method implementation
+    }
+
+
+    public void add(T element) {
         if (count < size) {
             gifts[count] = element;
             count++;
         } else {
-            E[] origin = Arrays.copyOf(gifts, count);
+            T[] origin = Arrays.copyOf(gifts, count);
             size *= 2;
             gifts = Arrays.copyOf(origin, size);
             add(element);
         }
     }
 
-    public void remove(E element) {
+    public void add(int i, T element) {
+        // TODO: add(int i, T element) method implementation
+    }
+
+    public void clear() {
+        // TODO: clear() method implementation
+    }
+
+    public void pop() {
+        // TODO: pop() method implementation
+    }
+
+    public void remove(int i ) {
+        // TODO: remove(int i) method implementation
+    }
+
+    public void remove(T element) {
         int elementIndex = -1;
         for (int i = 0; i < count; i++) {
             if (gifts[i] != null) {
@@ -71,11 +92,11 @@ public class Gifts<E extends Item> {
         this.size = size;
     }
 
-    public E[] getGifts() {
+    public T[] getGifts() {
         return gifts;
     }
 
-    public void setGifts(E[] gifts) {
+    public void setGifts(T[] gifts) {
         this.gifts = gifts;
     }
 

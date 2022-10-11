@@ -79,8 +79,8 @@ public class Course<T> {
             registerStudents = Arrays.copyOf(copied, size);
             add(t);
         }
-
     }
+
 
     public T remove(T t) {
         if (t == null) {

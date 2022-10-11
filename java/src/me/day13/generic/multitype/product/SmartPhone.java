@@ -1,4 +1,4 @@
-package me.day13.generic.multiparam.product;
+package me.day13.generic.multitype.product;
 
 import java.util.Objects;
 

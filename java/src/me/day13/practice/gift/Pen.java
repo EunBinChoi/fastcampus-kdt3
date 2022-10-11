@@ -1,22 +1,21 @@
-package me.day13.generic.extend.gift;
+package me.day13.practice.gift;
 
 import java.util.Objects;
 
-public class Note extends Item {
+public class Pen extends Item {
+    protected String inkColor;
 
-    protected boolean hasLine;
-
-    public Note() {
+    public Pen() {
     }
 
-    public Note(String productNo) {
+    public Pen(String productNo) {
         this.productNo = productNo;
     }
 
-    public Note(String productNo, String companyName, boolean hasLine) {
+    public Pen(String productNo, String companyName, String inkColor) {
         this.productNo = productNo;
         this.companyName = companyName;
-        this.hasLine = hasLine;
+        this.inkColor = inkColor;
     }
 
     public String getProductNo() {
@@ -35,33 +34,33 @@ public class Note extends Item {
         this.companyName = companyName;
     }
 
-    public boolean hasLine() {
-        return hasLine;
+    public String getInkColor() {
+        return inkColor;
     }
 
-    public void setHasLine(boolean hasLine) {
-        this.hasLine = hasLine;
+    public void setInkColor(String inkColor) {
+        this.inkColor = inkColor;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Note note = (Note) o;
-        return hasLine == note.hasLine && productNo.equals(note.productNo) && companyName.equals(note.companyName);
+        Pen pen = (Pen) o;
+        return productNo.equals(pen.productNo) && companyName.equals(pen.companyName) && inkColor.equals(pen.inkColor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productNo, companyName, hasLine);
+        return Objects.hash(productNo, companyName, inkColor);
     }
 
     @Override
     public String toString() {
-        return "Note{" +
+        return "Pen{" +
                 "productNo='" + productNo + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", hasLine=" + hasLine +
+                ", inkColor='" + inkColor + '\'' +
                 '}';
     }
 }

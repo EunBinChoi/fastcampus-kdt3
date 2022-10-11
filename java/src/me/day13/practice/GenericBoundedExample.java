@@ -1,9 +1,12 @@
-package me.day13.generic.extend;
+package me.day13.practice;
 
 
-import me.day13.generic.extend.gift.*;
+import me.day13.practice.gift.Note;
+import me.day13.practice.gift.Pen;
+import me.day13.practice.gift.SmartPhone;
+import me.day13.practice.gift.Tablet;
 
-public class GenericExtendsExample {
+public class GenericBoundedExample {
     public static void main(String[] args) {
 
         Gifts<Note> randomNotes = new Gifts<>();

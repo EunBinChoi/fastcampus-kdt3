@@ -1,4 +1,4 @@
-package me.day13.generic.extend.gift;
+package me.day13.practice.gift;
 
 import java.util.Objects;
 

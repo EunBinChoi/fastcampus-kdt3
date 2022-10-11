@@ -2,13 +2,6 @@ package me.day13.generic.method;
 
 import java.util.Objects;
 
-/** <T>: T는 타입 파라미터 (T, K, V, R, E)
- *
- *  T: type
- *  K: key, V: value
- *  R: return
- *  E: element
- * */
 public class Box<T> {
     private T item;
 

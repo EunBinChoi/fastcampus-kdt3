@@ -1,17 +1,22 @@
-package me.day13.generic.extend.gift;
+package me.day13.practice.gift;
 
 import java.util.Objects;
 
-public abstract class Item {
+public class Note extends Item {
 
-    protected String productNo;
-    protected String companyName;
-    public Item() {
+    protected boolean hasLine;
+
+    public Note() {
     }
 
-    public Item(String productNo, String companyName) {
+    public Note(String productNo) {
+        this.productNo = productNo;
+    }
+
+    public Note(String productNo, String companyName, boolean hasLine) {
         this.productNo = productNo;
         this.companyName = companyName;
+        this.hasLine = hasLine;
     }
 
     public String getProductNo() {
@@ -30,24 +35,33 @@ public abstract class Item {
         this.companyName = companyName;
     }
 
+    public boolean hasLine() {
+        return hasLine;
+    }
+
+    public void setHasLine(boolean hasLine) {
+        this.hasLine = hasLine;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return productNo.equals(item.productNo) && companyName.equals(item.companyName);
+        Note note = (Note) o;
+        return hasLine == note.hasLine && productNo.equals(note.productNo) && companyName.equals(note.companyName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productNo, companyName);
+        return Objects.hash(productNo, companyName, hasLine);
     }
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "Note{" +
                 "productNo='" + productNo + '\'' +
                 ", companyName='" + companyName + '\'' +
+                ", hasLine=" + hasLine +
                 '}';
     }
 }

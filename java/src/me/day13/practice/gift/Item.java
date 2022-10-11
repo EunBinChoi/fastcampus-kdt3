@@ -1,26 +1,25 @@
-package me.day13.generic.multiparam.product;
+package me.day13.practice.gift;
 
 import java.util.Objects;
 
-public class Product {
+public abstract class Item {
 
-    protected String modelName;
+    protected String productNo;
     protected String companyName;
-
-    public Product() {
+    public Item() {
     }
 
-    public Product(String modelName, String companyName) {
-        this.modelName = modelName;
+    public Item(String productNo, String companyName) {
+        this.productNo = productNo;
         this.companyName = companyName;
     }
 
-    public String getModelName() {
-        return modelName;
+    public String getProductNo() {
+        return productNo;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void setProductNo(String productNo) {
+        this.productNo = productNo;
     }
 
     public String getCompanyName() {
@@ -35,19 +34,19 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return modelName.equals(product.modelName) && companyName.equals(product.companyName);
+        Item item = (Item) o;
+        return productNo.equals(item.productNo) && companyName.equals(item.companyName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(modelName, companyName);
+        return Objects.hash(productNo, companyName);
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "modelName='" + modelName + '\'' +
+        return "Item{" +
+                "productNo='" + productNo + '\'' +
                 ", companyName='" + companyName + '\'' +
                 '}';
     }

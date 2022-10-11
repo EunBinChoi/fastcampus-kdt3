@@ -1,12 +1,12 @@
-package me.day13.generic.multiparam;
+package me.day13.generic.multitype;
 
 
-import me.day13.generic.multiparam.product.Product;
-import me.day13.generic.multiparam.product.ProductMap;
-import me.day13.generic.multiparam.product.SmartPhone;
-import me.day13.generic.multiparam.product.Tablet;
+import me.day13.generic.multitype.product.Product;
+import me.day13.generic.multitype.product.ProductMap;
+import me.day13.generic.multitype.product.SmartPhone;
+import me.day13.generic.multitype.product.Tablet;
 
-public class GenericMultiParamExample {
+public class GenericMultiTypeExample {
     public static void main(String[] args) {
 
         ProductMap<String, Product> productMap1 = new ProductMap<>();
