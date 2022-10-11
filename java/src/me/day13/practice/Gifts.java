@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Gifts<T extends Item> {
 
-    private static final int DEFULAT_SIZE = 10;
+    private static final int DEFULAT_SIZE = 2;
     private int size;
 
     private T[] gifts;
@@ -24,16 +24,92 @@ public class Gifts<T extends Item> {
         this.size = size;
     }
 
+    public void trimToSize() {
+        gifts = Arrays.copyOf(gifts, count);
+    }
+
+    public void print() {
+        if (count == 0) {
+            System.out.println("Nothing to print in array.");
+            return;
+        }
+
+        for (int i = 0; i < count; i++) {
+            System.out.println(gifts[i]);
+        }
+    }
+
+    public boolean isNull(T element) {
+        return (element == null);
+    }
+
+    public boolean isEmpty() {
+        return (count == 0);
+    }
+
+    public int isDuplicatedProductNo(T element) {
+        for (int i = 0; i < gifts.length; i++) {
+            if (gifts[i] != null) {
+                if (gifts[i].getProductNo() != null) {
+                    if (gifts[i].getProductNo().equals(element.getProductNo())) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    public boolean isIndexInRange(int i, boolean isAddMethod) {
+        return isAddMethod ? (i >= 0 && i <= count) : (i >= 0 && i < count);
+    }
+
+
     public T get(int i) {
+        if (!isIndexInRange(i , false)) {
+            System.out.println("Input index [" + i + "] is too small or large." );
+            return null;
+        }
+
         return gifts[i];
+
     }
 
     public void set(int i, T element) {
         // TODO: set(int i, T element) method implementation
+        if (!isIndexInRange(i , false)) {
+            System.out.println("Input index [" + i + "] is too small or large." );
+            return;
+        }
+
+        if (isNull(element)) {
+            System.out.println("Input element null. " + element);
+            return;
+        }
+
+        int duplicatedIdx = isDuplicatedProductNo(element);
+        if (duplicatedIdx != -1) {
+            System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
+            return;
+        }
+
+        gifts[i] = element;
     }
 
 
     public void add(T element) {
+        if (isNull(element)) {
+            System.out.println("Input element null. " + element);
+            return;
+        }
+
+        int duplicatedIdx = isDuplicatedProductNo(element);
+        if (duplicatedIdx != -1) {
+            System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
+            return;
+        }
+
         if (count < size) {
             gifts[count] = element;
             count++;
@@ -47,21 +123,94 @@ public class Gifts<T extends Item> {
 
     public void add(int i, T element) {
         // TODO: add(int i, T element) method implementation
+        if (!isIndexInRange(i , true)) {
+            System.out.println("Input index [" + i + "] is too small or large." );
+            return;
+        }
+
+        if (isNull(element)) {
+            System.out.println("Input element null. " + element);
+            return;
+        }
+
+        int duplicatedIdx = isDuplicatedProductNo(element);
+        if (duplicatedIdx != -1) {
+            System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
+            return;
+        }
+
+        if (count + 1 < size) {
+            for (int j = count; j > i; j--) {
+                gifts[j] = gifts[j-1];
+            }
+            gifts[i] = element;
+            count++;
+
+        } else {
+            T[] origin = Arrays.copyOf(gifts, count);
+            size *= 2;
+            gifts = Arrays.copyOf(origin, size);
+            add(i, element);
+        }
+
     }
 
     public void clear() {
         // TODO: clear() method implementation
+        if (isEmpty()) {
+            System.out.println("Array is Empty.");
+            return;
+        }
+
+        Arrays.fill(gifts, null);
+        count = 0;
     }
 
     public void pop() {
         // TODO: pop() method implementation
+        if (isEmpty()) {
+            System.out.println("Array is Empty.");
+            return;
+        }
+
+        if (gifts.length > 0) {
+            gifts[count-1] = null;
+            count--;
+        }
     }
 
-    public void remove(int i ) {
+    public void remove(int i) {
         // TODO: remove(int i) method implementation
+
+        if (isEmpty()) {
+            System.out.println("Array is Empty.");
+            return;
+        }
+
+        if (!isIndexInRange(i , false)) {
+            System.out.println("Input index [" + i + "] is too small or large." );
+            return;
+        }
+
+        gifts[i] = null;
+        for (int j = i + 1; j < count; j++) {
+            gifts[j - 1] = gifts[j];
+        }
+        count--;
     }
 
     public void remove(T element) {
+
+        if (isEmpty()) {
+            System.out.println("Array is Empty.");
+            return;
+        }
+
+        if (isNull(element)) {
+            System.out.println("Input element null. " + element);
+            return;
+        }
+
         int elementIndex = -1;
         for (int i = 0; i < count; i++) {
             if (gifts[i] != null) {
@@ -93,7 +242,7 @@ public class Gifts<T extends Item> {
     }
 
     public T[] getGifts() {
-        return gifts;
+        return Arrays.copyOf(gifts, count);
     }
 
     public void setGifts(T[] gifts) {
@@ -127,7 +276,7 @@ public class Gifts<T extends Item> {
     public String toString() {
         return "RandomGiftBox{" +
                 "size=" + size +
-                ", gifts=" + Arrays.toString(gifts) +
+                ", gifts=" + Arrays.toString(Arrays.copyOf(gifts, count)) +
                 ", count=" + count +
                 '}';
     }
