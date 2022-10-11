@@ -11,4 +11,11 @@ public interface CourseUtils {
         System.out.println(course + " is registered successfully.\n\n");
     }
 
+//    static <T extends  Person> void registerPersonCourse(Course<T> course) {
+//        System.out.println(course + " is registered successfully.\n\n");
+//    }
+//    static <T extends  Animal> void registerAnimalCourse(Course<T> course) {
+//        System.out.println(course + " is registered successfully.\n\n");
+//    }
+
 }
