@@ -37,10 +37,10 @@ public class StudentDao {
         return false;
     }
 
-    public boolean update(Predicate<Object> condition, DataBase.Column column, Object value) {
-        // TODO: condition에 맞는 학생들만 update
-        return false;
-    }
+//    public boolean update(Predicate<Object> condition, DataBase.Column column, Object value) {
+//         TODO: condition에 맞는 학생들만 update
+//        return false;
+//    }
 
     public boolean delete() {
         // TODO: 전체 학생들 delete

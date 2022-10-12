@@ -20,8 +20,10 @@ public class Main {
         randomNotes.print();
         System.out.println();
 
-
+        randomNotes.trimToSize();
+        System.out.println("[Before Size Doubling] randomNotes.getSize() = " + randomNotes.getSize()); // doubling 되기 전
         randomNotes.add(2, new Note("5001", "모닝글로리", false));
+        System.out.println("[After  Size Doubling] randomNotes.getSize() = " + randomNotes.getSize()); // doubling 된 후
         randomNotes.print();
         System.out.println();
 
@@ -37,11 +39,13 @@ public class Main {
         randomNotes.print();
         System.out.println();
 
-        randomNotes.pop();
+        Note popNode = randomNotes.pop();
+        System.out.println("popNode = " + popNode);
         randomNotes.print();
         System.out.println();
 
-        randomNotes.pop();
+        popNode = randomNotes.pop();
+        System.out.println("popNode = " + popNode);
         randomNotes.print();
         System.out.println();
 
