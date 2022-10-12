@@ -62,17 +62,41 @@ public class Member {
 
     private boolean isRule2(String candidate) {
         // TODO: 실습 4 로직 구현
-        return false;
+        String[] currentArray = memberPhoneNumber.split("-");
+        String[] candiArray = candidate.split("-");
+
+        if (currentArray[1] == null || candiArray[1] == null) return false;
+        if (currentArray[1].length() != candiArray[1].length()) return false;
+
+        return currentArray[1].equals(candiArray[1]);
     }
 
     private boolean isRule3(String candidate) {
         // TODO: 실습 4 로직 구현
-        return false;
+        String[] currentArray = memberPhoneNumber.split("-");
+        String[] candiArray = candidate.split("-");
+
+        if (currentArray[2] == null || candiArray[2] == null) return false;
+        if (currentArray[2].length() != candiArray[2].length()) return false;
+
+        return currentArray[2].equals(candiArray[2]);
     }
 
     private boolean isRule4(String candidate) {
         // TODO: 실습 4 로직 구현
-        return false;
+        String current = memberPhoneNumber.replace("010-", "");
+        String candi = candidate.replace("010-", "");
+
+        if (current.length() != candi.length()) return false;
+
+        int count = 0;
+        for (int i = 0; i < current.length(); i++) {
+            if (current.charAt(i) != candi.charAt(i)) {
+                count++;
+            }
+        }
+
+        return (count == 3);
     }
 
     public String getNewPhoneNumber(String[] candidates) {

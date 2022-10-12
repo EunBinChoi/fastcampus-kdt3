@@ -30,6 +30,11 @@ public class Circle extends Shape {
         System.out.println(Circle.class.getName() + " draw()");
     }
 
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
 
     @Override
     public boolean equals(Object o) {

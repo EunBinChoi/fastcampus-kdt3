@@ -36,6 +36,15 @@ public class Trapezoid extends Shape {
     }
 
     @Override
+    public double calculateArea() {
+        double upper = Math.abs(lines[0].getEnd().getX() - lines[0].getStart().getX());
+        double lower = Math.abs(lines[1].getEnd().getX() - lines[1].getStart().getX());
+        double height = Math.abs(lines[1].getStart().getY() - lines[0].getStart().getY());
+        
+        return (upper + lower) * height * 0.5;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

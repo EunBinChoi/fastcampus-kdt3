@@ -42,6 +42,11 @@ public class Rectangle extends Shape {
     }
 
     @Override
+    public double calculateArea() {
+        return width * height;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
