@@ -1,9 +1,6 @@
 package me.day14.collection.map.hashtable;
 
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class HashTableExample {
     public static void main(String[] args) {
@@ -121,7 +118,6 @@ public class HashTableExample {
 
         Map<Integer, String> hashTable2 = new Hashtable<>(Map.ofEntries(entries));
         System.out.println("hashTable2 = " + hashTable2);
-
 
     }
 }
