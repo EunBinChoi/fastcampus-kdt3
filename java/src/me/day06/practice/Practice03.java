@@ -16,7 +16,7 @@ public class Practice03 {
                 {100, 85, 77}
         };
 
-        String[] subjectsName = {"국어", "수학", "영어"};
+        String[] subjectsName = { "국어", "수학", "영어" };
         int[] subjects = new int[SUBJECT_NUM];
         for (int i = 0; i < subjects.length; i++) {
             subjects[i] = i;
