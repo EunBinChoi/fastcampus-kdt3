@@ -6,7 +6,6 @@ import java.util.Vector;
 class MyArrayList<E> extends ArrayList<E> {
     @Override
     public boolean add(E e) {
-        int data = (Integer) e;
         for (int i = 1; i <= 100; i++) {
             System.out.println("[ MyArrayList ] " +
                     Thread.currentThread().getName() + " : " + i);
@@ -18,7 +17,6 @@ class MyArrayList<E> extends ArrayList<E> {
 class MyVector<E> extends Vector<E> {
     @Override
     public synchronized boolean add(E e) { // synchronized
-        int data = (Integer) e;
         for (int i = 1; i <= 100; i++) {
             System.out.println("[ MyVector ] " +
                     Thread.currentThread().getName() + " : " + i);

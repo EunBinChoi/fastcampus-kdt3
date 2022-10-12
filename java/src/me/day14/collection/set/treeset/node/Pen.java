@@ -2,7 +2,7 @@ package me.day14.collection.set.treeset.node;
 
 import java.util.Objects;
 
-public class Pen {
+public class Pen implements Comparable<Pen>{
     protected String productNo;
     protected String companyName;
     protected String inkColor;
@@ -64,5 +64,10 @@ public class Pen {
                 ", companyName='" + companyName + '\'' +
                 ", inkColor='" + inkColor + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Pen o) {
+        return this.productNo.compareTo(o.productNo) * -1;
     }
 }

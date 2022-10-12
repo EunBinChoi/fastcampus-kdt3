@@ -71,8 +71,7 @@ public class HashMapExample {
         System.out.println();
 
         // 원소 반복하기
-        for (Map.Entry<Integer, String> entry: hashMap.entrySet())
-        {
+        for (Map.Entry<Integer, String> entry: hashMap.entrySet()) {
             Integer key = entry.getKey();
             String value = entry.getValue();
             System.out.println( "key => " + key + ", value => " + value);
@@ -113,8 +112,7 @@ public class HashMapExample {
         Integer[] keys = hashMap1.keySet().toArray(new Integer[0]);
         String[] values = hashMap1.values().toArray(new String[0]);
         Object[] objects = hashMap1.entrySet().toArray();
-        Map.Entry<Integer, String>[] entries 
-                = (Map.Entry<Integer, String>[]) hashMap1.entrySet().toArray(new Map.Entry[hashMap1.size()]);
+        Map.Entry<Integer, String>[] entries = (Map.Entry<Integer, String>[]) hashMap1.entrySet().toArray(new Map.Entry[hashMap1.size()]);
         System.out.println("keys   = " + Arrays.toString(keys));
         System.out.println("values = " + Arrays.toString(values));
         System.out.println("objects = " + Arrays.toString(objects));

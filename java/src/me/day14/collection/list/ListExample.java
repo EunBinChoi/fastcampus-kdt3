@@ -8,7 +8,7 @@ public class ListExample {
     public static void main(String[] args) {
         // List는 인터페이스이기 때문에 객체 생성이나 추가, 삭제, 수정 연산 불가능 (UnsupportedOperationException)
 
-        List<Integer> intStreamList = IntStream.range(1, 11).mapToObj(i -> i).collect(Collectors.toList());
+        List<Integer> intStreamList = IntStream.range(1, 11).mapToObj(i -> Integer.valueOf(i)).collect(Collectors.toList());
         System.out.println("intStreamList = " + intStreamList);
         System.out.println();
 
@@ -69,7 +69,6 @@ public class ListExample {
         System.out.println("list.lastIndexOf(100) => " + list.lastIndexOf(100)); // 뒤에서 부터 찾음
         System.out.println(list);
         System.out.println();
-
 
         // 일부 원소 포함관계 확인
         System.out.println("list.contains(3) => " + list.contains(3));

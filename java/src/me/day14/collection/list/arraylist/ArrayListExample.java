@@ -1,9 +1,6 @@
 package me.day14.collection.list.arraylist;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class ArrayListExample {
     public static void main(String[] args) {
@@ -43,7 +40,7 @@ public class ArrayListExample {
         System.out.println("subList = " + subList);
 
         // 반환된 컬렉션 일부를 모두 추가
-        arrayList.addAll(subList);
+        arrayList.addAll(subList); // 마지막에 addAll
         System.out.println(arrayList);
         System.out.println("arrayList.size() => " + arrayList.size());
         System.out.println();
@@ -55,6 +52,15 @@ public class ArrayListExample {
                 return Integer.compare(o1, o2);
             }
         });
+        arrayList.sort(null); // new ArrayList<Integer>()
+        System.out.println("sort() => " + arrayList);
+        Collections.sort(arrayList, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        }); // Comparable (natural ordering)
+        System.out.println("sort() => " + arrayList);
         System.out.println(arrayList);
         System.out.println();
 
@@ -71,12 +77,14 @@ public class ArrayListExample {
         System.out.println();
 
         // 일부 컬렉션 포함관계 확인
-        System.out.println("arrayList.containsAll(List.of(3, 4, 5, 6, 7)) => " + arrayList.containsAll(List.of(3, 4, 5, 6, 7)));
+        System.out.println("arrayList.containsAll(List.of(3, 4, 5, 6, 7)) => " +
+                arrayList.containsAll(List.of(3, 4, 5, 6, 7)));
         System.out.println(arrayList);
         System.out.println();
 
         // 현재 컬렉션과 주어진 컬렉션 사이의 교집합 반환
-        System.out.println("arrayList.retainAll(List.of(3, 4, 5, 6, 7)) => " + arrayList.retainAll(List.of(3, 4, 5, 6, 7)));
+        System.out.println("arrayList.retainAll(List.of(3, 4, 5, 6, 7)) => "
+                + arrayList.retainAll(List.of(3, 4, 5, 6, 7)));
         System.out.println(arrayList);
         System.out.println();
 
@@ -91,10 +99,15 @@ public class ArrayListExample {
 //        System.out.println("arrayList.remove(5) = " + arrayList.remove(20)); // IndexOutOfBoundsException
 
         // 인덱스로 원소 삭제
-        System.out.println("arrayList.remove(2) = " + arrayList.remove(2));
+        System.out.println("arrayList.remove(2) = "
+                + arrayList.remove(2));
 
         // 값으로 원소 삭제
-        System.out.println("arrayList.remove(Integer.valueOf(5)) = " + arrayList.remove(Integer.valueOf(5)));
+        System.out.println("arrayList.remove(Integer.valueOf(5)) = "
+                + arrayList.remove(Integer.valueOf(5)));
+//        arrayList.remove(2); // index (remove(int))
+//        arrayList.remove(Integer.valueOf(2)); // element (remove(Integer))
+
         System.out.println(arrayList);
         System.out.println();
 

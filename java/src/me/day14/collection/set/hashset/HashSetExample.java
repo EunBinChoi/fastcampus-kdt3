@@ -37,6 +37,8 @@ public class HashSetExample {
         System.out.println("hashSet.size() = " + hashSet.size());
         System.out.println();
 
+//        hashSet.get(i)
+
         // Set은 hashCode()를 키 값으로 저장하기 때문에 인덱스 개념이 없음
         // Set 내부 반복하려면 반복자를 통해 반복함
         Iterator<Integer> iterator = hashSet.iterator();
@@ -51,7 +53,7 @@ public class HashSetExample {
 //        hashSet.indexOf()
 //        hashSet.lastIndexOf()
 //        hashSet.subList(1, 2);
-        hashSet.remove(Integer.valueOf(1)); // 인덱스를 통해 삭제하는 것이 아니라 2라는 object 삭제
+        hashSet.remove(Integer.valueOf(1)); // 인덱스를 통해 삭제하는 것이 아니라 1라는 object 삭제
         System.out.println("hashSet = " + hashSet);
         System.out.println("hashSet.size() = " + hashSet.size());
         System.out.println();
