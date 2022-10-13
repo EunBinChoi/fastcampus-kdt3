@@ -61,7 +61,6 @@ public class Member {
     }
 
     private boolean isRule2(String candidate) {
-        // TODO: 실습 4 로직 구현
         String[] currentArray = memberPhoneNumber.split("-");
         String[] candiArray = candidate.split("-");
 
@@ -72,7 +71,6 @@ public class Member {
     }
 
     private boolean isRule3(String candidate) {
-        // TODO: 실습 4 로직 구현
         String[] currentArray = memberPhoneNumber.split("-");
         String[] candiArray = candidate.split("-");
 
@@ -83,7 +81,6 @@ public class Member {
     }
 
     private boolean isRule4(String candidate) {
-        // TODO: 실습 4 로직 구현
         String current = memberPhoneNumber.replace("010-", "");
         String candi = candidate.replace("010-", "");
 
@@ -100,7 +97,6 @@ public class Member {
     }
 
     public String getNewPhoneNumber(String[] candidates) {
-        // TODO: 실습 4 로직 구현
         for (int i = 0; i < candidates.length; i++) {
             if (isRule1(candidates[i])) {
                 return candidates[i];

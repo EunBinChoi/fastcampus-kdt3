@@ -1,16 +1,40 @@
 package me.day14.practice.practice01;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
-
 
 public class DataBase {
-    private static List<Table> tableList = new LinkedList<>();
+    private static DataBase dataBase;
+    private List<Table> tableList;
 
-    public static List<Table> getTableList() {
+    public static DataBase getInstance() {
+        if (dataBase == null) {
+            dataBase = new DataBase();
+        }
+        return dataBase;
+    }
+
+    public DataBase() {
+        tableList = new LinkedList<>();
+    }
+
+    public DataBase(List<Table> tableList) {
+        this.tableList = tableList;
+    }
+
+
+    public List<Table> getTableList() {
         return tableList;
+    }
+
+    public void setTableList(List<Table> tableList) {
+        this.tableList = tableList;
+    }
+
+    @Override
+    public String toString() {
+        return "DataBase{" +
+                "tableList=" + tableList +
+                '}';
     }
 }
