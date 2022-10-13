@@ -48,7 +48,7 @@ public class Groups {
     public void add(Group group) {
         Group grp = this.find(group.getType());
         if (grp != null) {
-            this.edit(group);
+            update(group);
         } else {
             this.groups[this.count] = group;
             ++this.count;
@@ -60,12 +60,20 @@ public class Groups {
         return this.groups[i];
     }
 
-    public void edit(Group group) {
+    public void update(Group group) {
         Group grp = this.find(group.getType());
         if (grp != null) {
             grp.setParam(group.getParam());
         }
 
+    }
+
+    public void print() {
+        for (int i = 0; i < count; i++) {
+            if (groups[i] != null) {
+                System.out.println(groups[i]);
+            }
+        }
     }
 
     public Group find(GroupType groupType) {

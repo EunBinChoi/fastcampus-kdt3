@@ -1,28 +1,23 @@
 package me.smartstore.project.menu;
 
 import me.smartstore.project.customers.ClassifiedCustomersGroup;
-import me.smartstore.project.customers.Customer;
 import me.smartstore.project.customers.Customers;
 import me.smartstore.project.exception.InputEmptyException;
 import me.smartstore.project.exception.InputRangeException;
-import me.smartstore.project.groups.Group;
-import me.smartstore.project.groups.GroupType;
 import me.smartstore.project.groups.Groups;
 import me.smartstore.project.util.Message;
 
-import java.io.PrintStream;
-
-public class ClassifiedMenu extends Menu {
-    private static ClassifiedMenu classifiedMenu;
+public class SummarizedMenu extends Menu {
+    private static SummarizedMenu classifiedMenu;
 
     private final Groups allGroups = Groups.getInstance();
     private final Customers allCustomers = Customers.getInstance();
 
     private ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
 
-    public static ClassifiedMenu getInstance() {
+    public static SummarizedMenu getInstance() {
         if (classifiedMenu == null) {
-            classifiedMenu = new ClassifiedMenu();
+            classifiedMenu = new SummarizedMenu();
         }
         return classifiedMenu;
     }
@@ -54,7 +49,7 @@ public class ClassifiedMenu extends Menu {
 
     public void manageSummaryMenu() {
         classifiedCustomersGroup = allCustomers.classify();
-        System.out.println("classifiedCustomersGroup = " + classifiedCustomersGroup);
+        //System.out.println("Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()) = " + Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()));
 
         while (true) {
             int choice = dispSummaryMenu();
@@ -76,41 +71,12 @@ public class ClassifiedMenu extends Menu {
 
 
     public void dispSummary() {
-        System.out.println();
 
-        for (int i = 0; i < allGroups.length(); ++i) {
-            Group grp = allGroups.get(i);
-            int custCount = 0;
-            if (!classifiedCustomersGroup.get(i).isNull() && !classifiedCustomersGroup.get(i).isEmpty()) {
-                custCount = classifiedCustomersGroup.get(i).getCount();
-            }
-
-            System.out.println();
-            System.out.println("==============================");
-            if (grp.getType().equals(GroupType.NONE)) {
-                System.out.println("Others : " + custCount + " customer(s)");
-            } else {
-                System.out.println(grp.getType() + " Group : " + custCount + " customer(s)");
-                if (grp.getParam() == null) {
-                    System.out.println("[Parameter] null");
-                } else {
-                    System.out.println("[Parameter] " + grp.getParam().toString());
-                }
-            }
-
-            System.out.println("------------------------------");
-            if (!classifiedCustomersGroup.get(i).isNull() && !classifiedCustomersGroup.get(i).isEmpty()) {
-                for (int j = 0; j < custCount; ++j) {
-                    Customer cust = classifiedCustomersGroup.get(i).get(j);
-                    if (cust != null) {
-                        System.out.println("No. " + (j + 1) + " => " + cust);
-                    }
-                }
-            } else {
-                System.out.println("No customer.");
-            }
+        if (classifiedCustomersGroup == null) {
+            System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
+            return;
         }
-
+        classifiedCustomersGroup.print();
     }
 
 

@@ -2,6 +2,7 @@ package me.smartstore.project.customers;
 
 import me.smartstore.project.groups.Group;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class ClassifiedCustomers extends Customers {
@@ -41,6 +42,9 @@ public class ClassifiedCustomers extends Customers {
     public String toString() {
         return "ClassifiedCustomers{" +
                 "group=" + group +
+                ", allGroups=" + allGroups +
+                ", count=" + count +
+                ", customers=" + Arrays.toString(customers) +
                 '}';
     }
 }

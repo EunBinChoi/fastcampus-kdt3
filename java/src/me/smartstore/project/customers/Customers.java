@@ -7,12 +7,12 @@ import me.smartstore.project.groups.Groups;
 import java.util.Arrays;
 
 public class Customers {
-    private static Customers allCustomers;
-    private static final Groups allGroups = Groups.getInstance();
+    protected static Customers allCustomers;
+    protected final Groups allGroups = Groups.getInstance();
 
     public static int SIZE = 10;
-    private int count;
-    private Customer[] customers;
+    protected int count;
+    protected Customer[] customers;
 
     public static Customers getInstance() {
         if (allCustomers == null) {
@@ -41,6 +41,10 @@ public class Customers {
         }
 
         return Arrays.copyOf(this.customers, realCount);
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int length() {
@@ -177,28 +181,35 @@ public class Customers {
 
     public void refresh(Groups groups) {
         if (groups != null) {
-            for (int i = 0; i < this.count; ++i) {
-                Customer cust = this.customers[i];
+            for (int i = 0; i < count; ++i) {
+                Customer cust = customers[i];
                 cust.setGroup(groups.findGroupFor(cust));
             }
 
         }
     }
 
+    public void print() {
+        for (int i = 0; i < count; i++) {
+            if (customers[i] != null) {
+                System.out.printf("No.  %4d => %s\n", (i + 1), customers[i]);
+            }
+        }
+    }
+
     public ClassifiedCustomersGroup classify() {
         ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
-
 
         for (int i = 0; i < allGroups.length(); ++i) {
             Group grp = allGroups.get(i);
             Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
-            System.out.println(Arrays.toString(customers));
+            //System.out.println(Arrays.toString(customers));
 
             ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
             classifiedCustomers.setGroup(grp);
+            classifiedCustomers.setCount(customers.length);
             classifiedCustomers.setCustomers(customers);
 
-            System.out.println("classifiedCustomers = " + classifiedCustomers);
             classifiedCustomersGroup.set(i, classifiedCustomers);
         }
         return classifiedCustomersGroup;

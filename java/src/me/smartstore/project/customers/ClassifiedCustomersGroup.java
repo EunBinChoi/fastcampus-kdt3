@@ -1,15 +1,12 @@
 package me.smartstore.project.customers;
 
 import me.smartstore.project.groups.GroupType;
-import me.smartstore.project.groups.Groups;
-import me.smartstore.project.menu.ClassifiedMenu;
 import me.smartstore.project.menu.OrderType;
 import me.smartstore.project.menu.comparator.*;
 
 import java.util.Arrays;
 
 public class ClassifiedCustomersGroup {
-    private static final Groups allGroups = Groups.getInstance();
     private static ClassifiedCustomersGroup classifiedCustomersGroup;
 
     private ClassifiedCustomers[] classifiedCustomers;
@@ -54,6 +51,22 @@ public class ClassifiedCustomersGroup {
 
     public int length() {
         return GroupType.values().length;
+    }
+    
+    public void print() {
+        for (int i = 0; i < classifiedCustomers.length; i++) {
+            System.out.println("==============================");
+            System.out.println("Group : " + classifiedCustomers[i].getGroup().getType());
+            System.out.println("==============================");
+
+            if (classifiedCustomers[i] == null || classifiedCustomers[i].isEmpty()) {
+                System.out.println("Null.");
+                continue;
+            }
+            classifiedCustomers[i].print();
+            System.out.println("==============================\n");
+        }
+
     }
 
 
