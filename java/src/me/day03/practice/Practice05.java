@@ -7,8 +7,6 @@ public class Practice05 {
         int totalDays = 0;
 
         switch(month) {
-            // (month == 1) || (month == 3) || (month == 5) || (month == 7) ........
-            // month == 부분을 switch case문에서는 생략가능 (가독성 ↑)
             case 1:
             case 3:
             case 5:
@@ -27,7 +25,12 @@ public class Practice05 {
                 break;
 
             case 2:
-                totalDays = 28;
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                    totalDays = 29;
+                } else {
+                    totalDays = 28;
+                }
+
                 break;
         }
 

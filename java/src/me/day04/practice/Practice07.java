@@ -12,7 +12,6 @@ public class Practice07 {
         String[] menus = {"김밥", "라면", "떡볶이", "돈까스", "종료"};
         int[] prices = { 2500, 3000, 4000, 5000 };
         int minPrice = min(prices);
-        System.out.println("minPrice = " + minPrice);
 
         System.out.print("현금 얼마를 가지고 있니? ");
         int money = Integer.parseInt(bufferedReader.readLine());
