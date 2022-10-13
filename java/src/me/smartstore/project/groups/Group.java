@@ -7,7 +7,7 @@ public class Group {
     private Parameter param;
 
     public Group() {
-        this((GroupType)null, (Parameter)null);
+        this(null, null);
     }
 
     public Group(GroupType type, Parameter param) {
@@ -35,7 +35,7 @@ public class Group {
         return allCustomers.findCustomers(this);
     }
 
-    public void edit(GroupType type, Parameter param) {
+    public void update(GroupType type, Parameter param) {
         this.type = type;
         this.param = param;
     }
@@ -51,7 +51,7 @@ public class Group {
             return "GroupType: " + this.type + "\nParameter: null";
         } else {
             GroupType var10000 = this.type;
-            return "GroupType: " + var10000 + "\nParameter: " + this.param.toString();
+            return "GroupType: " + var10000 + "\nParameter: " + this.param;
         }
     }
 }

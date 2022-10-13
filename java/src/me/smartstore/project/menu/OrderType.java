@@ -5,7 +5,7 @@ public enum OrderType {
 
     String sortType = "";
 
-    private OrderType(String sortType) {
+    OrderType(String sortType) {
         this.sortType = sortType;
     }
 

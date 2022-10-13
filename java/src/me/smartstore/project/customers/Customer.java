@@ -1,7 +1,8 @@
 package me.smartstore.project.customers;
 
-import java.util.Objects;
 import me.smartstore.project.groups.Group;
+
+import java.util.Objects;
 
 public class Customer implements Comparable<Customer> {
     private String serialNO;
@@ -86,7 +87,7 @@ public class Customer implements Comparable<Customer> {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.serialNO, this.name, this.userID, this.spentTime, this.totalPay, this.group});
+        return Objects.hash(this.serialNO, this.name, this.userID, this.spentTime, this.totalPay, this.group);
     }
 
     public String toString() {
@@ -94,16 +95,9 @@ public class Customer implements Comparable<Customer> {
     }
 
     public int compareTo(Customer o) {
-        if (this.name != null && o.name != null) {
-            if (this.name.compareTo(o.name) < 0) {
-                return -1;
-            } else if (this.name.compareTo(o.name) == 0) {
-                return this.userID != null && o.userID != null ? this.userID.compareTo(o.userID) : 0;
-            } else {
-                return 1;
-            }
-        } else {
-            return 0;
-        }
+        if (this.name.compareTo(o.name) < 0) return -1;
+        else if (this.name.compareTo(o.name) == 0) return this.userID.compareTo(o.userID);
+        else return 1;
+
     }
 }

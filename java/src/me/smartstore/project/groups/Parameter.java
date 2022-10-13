@@ -42,7 +42,7 @@ public class Parameter {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.minimumSpentTime, this.minimumTotalPay});
+        return Objects.hash(this.minimumSpentTime, this.minimumTotalPay);
     }
 
     public String toString() {

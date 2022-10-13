@@ -3,11 +3,22 @@ package me.smartstore.project.groups;
 import me.smartstore.project.customers.Customer;
 
 public class Groups {
+    private static Groups allGroups;
     private int count;
-    private Group[] groups;
+    private final Group[] groups;
+
+
+
+    public static Groups getInstance() {
+        if (allGroups == null) {
+            allGroups = new Groups();
+        }
+        return allGroups;
+    }
 
     public Groups() {
         this.groups = new Group[GroupType.values().length];
+        initialize();
     }
 
     public Groups(int maxSize) {
@@ -28,15 +39,10 @@ public class Groups {
 
     public void initialize() {
         int i = 0;
-        GroupType[] var2 = GroupType.values();
-        int var3 = var2.length;
-
-        for(int var4 = 0; var4 < var3; ++var4) {
-            GroupType groupType = var2[var4];
-            this.groups[i] = new Group(groupType, (Parameter)null);
-            ++i;
+        for(GroupType groupType : GroupType.values()) {
+            groups[i] = new Group(groupType, null);
+            i++;
         }
-
     }
 
     public void add(Group group) {
@@ -63,16 +69,10 @@ public class Groups {
     }
 
     public Group find(GroupType groupType) {
-        Group[] var2 = this.groups;
-        int var3 = var2.length;
-
-        for(int var4 = 0; var4 < var3; ++var4) {
-            Group grp = var2[var4];
-            if (grp.getType() == groupType) {
+        for (Group grp : groups) {
+            if (grp.getType() == groupType)
                 return grp;
-            }
         }
-
         return null;
     }
 
@@ -80,8 +80,11 @@ public class Groups {
         if (this.groups != null && cust != null) {
             for(int i = this.groups.length - 1; i >= 0; --i) {
                 Parameter param = this.groups[i].getParam();
-                if (param != null && cust.getSpentTime() >= param.getMinimumSpentTime() && cust.getTotalPay() >= param.getMinimumTotalPay()) {
-                    return this.groups[i];
+                if (param != null) {
+                    if (cust.getSpentTime() >= param.getMinimumSpentTime()
+                            && cust.getTotalPay() >= param.getMinimumTotalPay()) {
+                        return this.groups[i];
+                    }
                 }
             }
 

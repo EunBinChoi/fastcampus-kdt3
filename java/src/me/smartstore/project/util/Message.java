@@ -1,7 +1,7 @@
 package me.smartstore.project.util;
 
 
-public class ErrorMessage {
+public class Message {
     public static final java.lang.String ERR_MSG_INVALID_INPUT_NULL = "Null Input. Please input something.";
     public static final java.lang.String ERR_MSG_INVALID_INPUT_EMPTY = "Empty Input. Please input something.";
     public static final java.lang.String ERR_MSG_INVALID_INPUT_RANGE = "Invalid Input. Please try again.";

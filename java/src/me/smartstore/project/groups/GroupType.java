@@ -5,7 +5,7 @@ public enum GroupType {
 
     String groupType = "";
 
-    private GroupType(String groupType) {
+    GroupType(String groupType) {
         this.groupType = groupType;
     }
 

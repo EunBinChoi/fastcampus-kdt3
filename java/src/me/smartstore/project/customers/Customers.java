@@ -1,13 +1,25 @@
 package me.smartstore.project.customers;
-import java.util.Arrays;
+
 import me.smartstore.project.groups.Group;
 import me.smartstore.project.groups.GroupType;
 import me.smartstore.project.groups.Groups;
 
+import java.util.Arrays;
+
 public class Customers {
+    private static Customers allCustomers;
+    private static final Groups allGroups = Groups.getInstance();
+
     public static int SIZE = 10;
     private int count;
     private Customer[] customers;
+
+    public static Customers getInstance() {
+        if (allCustomers == null) {
+            allCustomers = new Customers();
+        }
+        return allCustomers;
+    }
 
     public Customers() {
         this.customers = new Customer[SIZE];
@@ -28,7 +40,7 @@ public class Customers {
             ++realCount;
         }
 
-        return (Customer[])Arrays.copyOf(this.customers, realCount);
+        return Arrays.copyOf(this.customers, realCount);
     }
 
     public int length() {
@@ -53,12 +65,12 @@ public class Customers {
 
     }
 
-    public void insert(int index, Customer customer) {
+    public void add(int index, Customer customer) {
         if (index < this.count) {
             if (this.count < SIZE) {
                 Customer var10000 = this.customers[index];
 
-                for(int i = this.customers.length - 1; i >= index; --i) {
+                for (int i = this.customers.length - 1; i >= index; --i) {
                     this.customers[i + 1] = this.customers[i];
                 }
 
@@ -72,26 +84,22 @@ public class Customers {
     }
 
     public void extend(int index, Customer customer) {
-        Customer[] copy = (Customer[])Arrays.copyOf(this.customers, this.customers.length);
+        Customer[] copy = Arrays.copyOf(this.customers, this.customers.length);
         SIZE *= 2;
         this.customers = new Customer[SIZE];
 
-        for(int i = 0; i < copy.length; ++i) {
-            this.customers[i] = copy[i];
-        }
+        System.arraycopy(copy, 0, this.customers, 0, copy.length);
 
         this.count = copy.length;
-        this.insert(index, customer);
+        this.add(index, customer);
     }
 
     public void extend(Customer customer) {
-        Customer[] copy = (Customer[])Arrays.copyOf(this.customers, this.customers.length);
+        Customer[] copy = Arrays.copyOf(this.customers, this.customers.length);
         SIZE *= 2;
         this.customers = new Customer[SIZE];
 
-        for(int i = 0; i < copy.length; ++i) {
-            this.customers[i] = copy[i];
-        }
+        System.arraycopy(copy, 0, this.customers, 0, copy.length);
 
         this.count = copy.length;
         this.add(customer);
@@ -128,7 +136,7 @@ public class Customers {
         return i < this.count ? this.customers[i] : null;
     }
 
-    public void edit(int i, Customer customer) {
+    public void set(int i, Customer customer) {
         this.customers[i] = customer;
     }
 
@@ -169,7 +177,7 @@ public class Customers {
 
     public void refresh(Groups groups) {
         if (groups != null) {
-            for(int i = 0; i < this.count; ++i) {
+            for (int i = 0; i < this.count; ++i) {
                 Customer cust = this.customers[i];
                 cust.setGroup(groups.findGroupFor(cust));
             }
@@ -177,10 +185,29 @@ public class Customers {
         }
     }
 
+    public ClassifiedCustomersGroup classify() {
+        ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
+
+
+        for (int i = 0; i < allGroups.length(); ++i) {
+            Group grp = allGroups.get(i);
+            Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
+            System.out.println(Arrays.toString(customers));
+
+            ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
+            classifiedCustomers.setGroup(grp);
+            classifiedCustomers.setCustomers(customers);
+
+            System.out.println("classifiedCustomers = " + classifiedCustomers);
+            classifiedCustomersGroup.set(i, classifiedCustomers);
+        }
+        return classifiedCustomersGroup;
+    }
+
     public String toString() {
         String str = "";
 
-        for(int i = 0; i < this.count; ++i) {
+        for (int i = 0; i < this.count; ++i) {
             str = str + this.customers[i].toString() + "\n";
         }
 

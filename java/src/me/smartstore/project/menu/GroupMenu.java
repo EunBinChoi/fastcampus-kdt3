@@ -1,21 +1,31 @@
 package me.smartstore.project.menu;
 
-import java.util.InputMismatchException;
+import me.smartstore.project.customers.Customers;
 import me.smartstore.project.exception.InputEmptyException;
 import me.smartstore.project.exception.InputRangeException;
 import me.smartstore.project.groups.Group;
 import me.smartstore.project.groups.GroupType;
 import me.smartstore.project.groups.Groups;
 import me.smartstore.project.groups.Parameter;
+import me.smartstore.project.util.Message;
+
+import java.util.InputMismatchException;
 
 public class GroupMenu extends Menu {
-    public static Groups allGroups = new Groups();
+    private static GroupMenu groupMenu;
+    private final Groups allGroups = Groups.getInstance();
+    private final Customers allCustomers = Customers.getInstance();
 
-    public GroupMenu() {
+
+    public static GroupMenu getInstance() {
+        if (groupMenu == null) {
+            groupMenu = new GroupMenu();
+        }
+        return groupMenu;
     }
 
-    public static String chooseGroup() {
-        while(true) {
+    public String chooseGroup() {
+        while (true) {
             try {
                 System.out.println();
                 System.out.println("** Press 'end', if you want to exit! **");
@@ -29,29 +39,29 @@ public class GroupMenu extends Menu {
                     throw new InputEmptyException();
                 }
 
-                if (choice.equals("END")) {
+                if (choice.equals(Message.END_MSG)) {
                     return choice;
                 }
 
-                for(int i = 0; i < GroupType.values().length; ++i) {
+                for (int i = 0; i < GroupType.values().length; ++i) {
                     if (choice != null && choice.equals(GroupType.values()[i].toString())) {
                         return choice;
                     }
                 }
 
                 throw new InputRangeException();
-            } catch (NullPointerException var2) {
-                System.out.println("Null Input. Please input something.");
-            } catch (InputEmptyException var3) {
-                System.out.println("Empty Input. Please input something.");
-            } catch (InputRangeException var4) {
-                System.out.println("Invalid Input. Please try again.");
+            } catch (NullPointerException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
+            } catch (InputEmptyException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_EMPTY);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public static int dispManageParameterMenu() {
-        while(true) {
+    public int dispManageParameterMenu() {
+        while (true) {
             try {
                 System.out.println();
                 System.out.println("==============================");
@@ -67,16 +77,16 @@ public class GroupMenu extends Menu {
                 }
 
                 throw new InputRangeException();
-            } catch (NumberFormatException var1) {
-                System.out.println("Invalid Type for Input. Please try again.");
-            } catch (InputRangeException var2) {
-                System.out.println("Invalid Input. Please try again.");
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public static void manageParameter() {
-        while(true) {
+    public void manageParameter() {
+        while (true) {
             int choice = dispManageParameterMenu();
             if (choice == 1) {
                 setParameter();
@@ -84,28 +94,26 @@ public class GroupMenu extends Menu {
                 viewParameter();
             } else if (choice == 3) {
                 updateParameter();
+            } else if (choice == 4) {
+                break;
             } else {
-                if (choice == 4) {
-                    return;
-                }
-
-                System.out.println("\nInvalid Input. Please try again.");
+                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public static void setParameter() {
-        while(true) {
+    public void setParameter() {
+        while (true) {
             String strGroup = chooseGroup().toUpperCase();
-            if (strGroup.equals("END")) {
+            if (strGroup.equals(Message.END_MSG)) {
                 return;
             }
 
             GroupType groupType;
             try {
                 groupType = GroupType.valueOf(strGroup);
-            } catch (IllegalArgumentException var5) {
-                System.out.println("\nInvalid Input. Please try again.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                 continue;
             }
 
@@ -118,42 +126,39 @@ public class GroupMenu extends Menu {
 
                 while(true) {
                     try {
-                        int pchoice = setParameterMenu();
-                        if (pchoice == 1) {
+                        int choice = setParameterMenu();
+                        if (choice == 1) {
                             setParameterMinimumSpentTime(param);
-                        } else if (pchoice == 2) {
+                        } else if (choice == 2) {
                             setParameterMinimumTotalPay(param);
+                        } else if (choice == 3) {
+                            break;
                         } else {
-                            if (pchoice == 3) {
-                                break;
-                            }
-
-                            System.out.println("\nInvalid Input. Please try again.");
+                            System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                         }
-                    } catch (InputMismatchException var6) {
-                        System.out.println("\nInvalid Type for Input. Please try again.");
-                        Menu.scanner.next();
+                    } catch (InputMismatchException e) {
+                        System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_TYPE);
                     }
                 }
 
                 allGroups.add(new Group(groupType, param));
-                CustomerMenu.allCustomers.refresh(allGroups);
+                allCustomers.refresh(allGroups);
             }
         }
     }
 
-    public static void viewParameter() {
-        while(true) {
+    public void viewParameter() {
+        while (true) {
             String strGroup = chooseGroup().toUpperCase();
-            if (strGroup.equals("END")) {
+            if (strGroup.equals(Message.END_MSG)) {
                 return;
             }
 
             GroupType groupType;
             try {
                 groupType = GroupType.valueOf(strGroup);
-            } catch (IllegalArgumentException var3) {
-                System.out.println("\nInvalid Type for Input. Please try again.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_TYPE);
                 continue;
             }
 
@@ -163,19 +168,18 @@ public class GroupMenu extends Menu {
         }
     }
 
-    public static void updateParameter() {
-        while(true) {
+    public void updateParameter() {
+        while (true) {
             String strGroup = chooseGroup().toUpperCase();
-            if (strGroup.equals("END")) {
+            if (strGroup.equals(Message.END_MSG)) {
                 return;
             }
 
             GroupType groupType;
             try {
                 groupType = GroupType.valueOf(strGroup);
-            } catch (IllegalArgumentException var6) {
-                System.out.println("\nInvalid Input. Please try again.");
-                System.out.println(var6);
+            } catch (IllegalArgumentException e) {
+                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                 return;
             }
 
@@ -183,40 +187,35 @@ public class GroupMenu extends Menu {
             if (grp.getParam() == null) {
                 System.out.println("\nNo parameter. Set the parameter first.");
             } else {
-                System.out.println("\n" + grp.toString());
+                System.out.println("\n" + grp);
                 Parameter param = grp.getParam();
 
-                label41:
-                while(true) {
-                    while(true) {
-                        try {
-                            int pchoice = setParameterMenu();
-                            if (pchoice == 1) {
-                                setParameterMinimumSpentTime(param);
-                            } else if (pchoice != 2) {
-                                if (pchoice == 3) {
-                                    break label41;
-                                }
-
-                                System.out.println("\nInvalid Input. Please try again.");
-                            } else {
-                                setParameterMinimumTotalPay(param);
-                            }
-                        } catch (InputMismatchException var5) {
-                            System.out.println("\nInvalid Type for Input. Please try again.");
-                            Menu.scanner.next();
+                while (true) {
+                    try {
+                        int choice = setParameterMenu();
+                        if (choice == 1) {
+                            setParameterMinimumSpentTime(param);
+                        } else if (choice == 2) {
+                            setParameterMinimumTotalPay(param);
+                        } else if (choice == 3) {
+                            break;
+                        } else {
+                            System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                         }
+                    } catch (InputMismatchException e) {
+                        System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_TYPE);
                     }
                 }
 
-                CustomerMenu.allCustomers.refresh(allGroups);
-                System.out.println("\n" + grp.toString());
+
+                allCustomers.refresh(allGroups);
+                System.out.println("\n" + grp);
             }
         }
     }
 
-    public static int setParameterMenu() {
-        while(true) {
+    public int setParameterMenu() {
+        while (true) {
             try {
                 System.out.println();
                 System.out.println("==============================");
@@ -231,16 +230,16 @@ public class GroupMenu extends Menu {
                 }
 
                 throw new InputRangeException();
-            } catch (NumberFormatException var1) {
-                System.out.println("Invalid Type for Input. Please try again.");
-            } catch (InputRangeException var2) {
-                System.out.println("Invalid Input. Please try again.");
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public static void setParameterMinimumSpentTime(Parameter param) {
-        while(true) {
+    public void setParameterMinimumSpentTime(Parameter param) {
+        while (true) {
             try {
                 System.out.println();
                 System.out.print("Input Minimum Spent Time: ");
@@ -251,16 +250,16 @@ public class GroupMenu extends Menu {
 
                 param.setMinimumSpentTime(minimumSpentTime);
                 return;
-            } catch (NumberFormatException var2) {
-                System.out.println("Invalid Type for Input. Please try again.");
-            } catch (InputRangeException var3) {
-                System.out.println("Invalid Input. Please try again.");
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public static void setParameterMinimumTotalPay(Parameter param) {
-        while(true) {
+    public void setParameterMinimumTotalPay(Parameter param) {
+        while (true) {
             try {
                 System.out.println();
                 System.out.print("Input Minimum Total Pay: ");
@@ -271,10 +270,10 @@ public class GroupMenu extends Menu {
 
                 param.setMinimumTotalPay(minimumTotalPay);
                 return;
-            } catch (NumberFormatException var2) {
-                System.out.println("Invalid Type for Input. Please try again.");
-            } catch (InputRangeException var3) {
-                System.out.println("Invalid Input. Please try again.");
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
