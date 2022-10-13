@@ -39,7 +39,7 @@ public class Gifts<T extends Item> {
         }
     }
 
-    public boolean isNull(T element) {
+    private boolean isNull(T element) {
         return (element == null);
     }
 
@@ -88,7 +88,6 @@ public class Gifts<T extends Item> {
     }
 
     public void set(int i, T element) {
-        // TODO: set(int i, T element) method implementation
 
         if (isEmpty()) {
             System.out.println("Array is Empty.");
@@ -115,16 +114,16 @@ public class Gifts<T extends Item> {
     }
 
 
-    public void add(T element) {
+    public T add(T element) {
         if (isNull(element)) {
             System.out.println("Input element null. " + element);
-            return;
+            return null;
         }
 
         int duplicatedIdx = isKeyDuplicated(element);
         if (duplicatedIdx != -1) {
             System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
-            return;
+            return null;
         }
 
         if (count < size) {
@@ -136,28 +135,28 @@ public class Gifts<T extends Item> {
             gifts = Arrays.copyOf(origin, size); // {1, 2, 3, null, null, null}
             add(element);
         }
+        return element;
     }
 
-    public void add(int i, T element) {
-        // TODO: add(int i, T element) method implementation
+    public T add(int i, T element) {
         // {1, 2, 3, 4}
         // add(2, 100);
         // {1, 2, 100, 3, 4}
 
         if (!isIndexInRange(i , true)) {
             System.out.println("Input index [" + i + "] is too small or large." );
-            return;
+            return null;
         }
 
         if (isNull(element)) {
             System.out.println("Input element null. " + element);
-            return;
+            return null;
         }
 
         int duplicatedIdx = isKeyDuplicated(element);
         if (duplicatedIdx != -1) {
             System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
-            return;
+            return null;
         }
 
         if (count < size) { // {1, 2, 3, 4, null} => {1, 2, 100, 3, 4}
@@ -173,11 +172,10 @@ public class Gifts<T extends Item> {
             gifts = Arrays.copyOf(origin, size);
             add(i, element);
         }
-
+        return element;
     }
 
     public void clear() {
-        // TODO: clear() method implementation
         if (isEmpty()) {
             System.out.println("Array is Empty.");
             return;
@@ -188,7 +186,6 @@ public class Gifts<T extends Item> {
     }
 
     public T pop() {
-        // TODO: pop() method implementation
         if (isEmpty()) {
             System.out.println("Array is Empty.");
             return null;
@@ -200,39 +197,40 @@ public class Gifts<T extends Item> {
         return popNode;
     }
 
-    public void remove(int i) {
-        // TODO: remove(int i) method implementation
+    public T remove(int i) {
 
         if (isEmpty()) { // array empty
             System.out.println("Array is Empty.");
-            return;
+            return null;
         }
 
         if (!isIndexInRange(i , false)) { // 0 <= i < count
             System.out.println("Input index [" + i + "] is too small or large." );
-            return;
+            return null;
         }
 
         // {1, 2, 3, 4, 5} => {1, 2, 4, 4, 5} => {1, 2, 3, 4, 5, 5} => {1, 2, 3, 4, 5, null}
         // {1, 2, 4, 5}
+        T removeNode = gifts[i];
         gifts[i] = null;
         for (int j = i + 1; j < count; j++) {
             gifts[j - 1] = gifts[j];
         }
         gifts[count-1] = null;
         count--;
+        return removeNode;
     }
 
-    public void remove(T element) {
+    public T remove(T element) {
 
         if (isEmpty()) {
             System.out.println("Array is Empty.");
-            return;
+            return null;
         }
 
         if (isNull(element)) {
             System.out.println("Input element null. " + element);
-            return;
+            return null;
         }
 
         int elementIndex = -1;
@@ -255,6 +253,7 @@ public class Gifts<T extends Item> {
 
             System.out.println(element + " removed successfully.");
         }
+        return element;
     }
 
 

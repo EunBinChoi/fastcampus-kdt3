@@ -33,8 +33,12 @@ public class Groups {
         return this.groups.length;
     }
 
-    public boolean isNullOrEmpty() {
-        return this.groups == null || this.count == 0;
+    private boolean isNull() {
+        return groups == null;
+    }
+
+    public boolean isEmpty() {
+        return count == 0;
     }
 
     public void initialize() {

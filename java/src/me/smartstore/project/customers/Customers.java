@@ -51,7 +51,7 @@ public class Customers {
         return this.customers.length;
     }
 
-    public boolean isNull() {
+    private boolean isNull() {
         return this.customers == null;
     }
 
