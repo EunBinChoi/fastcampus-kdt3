@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Practice04 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter (new OutputStreamWriter(System.out));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(bufferedReader.readLine());
 
         for (int i = 0; i < N; i++) {

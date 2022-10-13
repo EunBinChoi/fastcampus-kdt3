@@ -45,6 +45,11 @@ public class Trapezoid extends Shape {
     }
 
     @Override
+    public void scale(int offset) { // 구현 제외.
+        return;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -67,5 +72,7 @@ public class Trapezoid extends Shape {
                 ", centerPoint=" + centerPoint +
                 '}';
     }
+
+
 }
 

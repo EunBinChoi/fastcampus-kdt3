@@ -2,7 +2,7 @@ package me.day09.practice.practice07;
 
 import java.util.Objects;
 
-public class Circle extends Shape implements GeometricController {
+public class Circle extends Shape {
     private int radius;
 
     public Circle() {
@@ -33,12 +33,6 @@ public class Circle extends Shape implements GeometricController {
     @Override
     public double calculateArea() {
         return Math.PI * radius * radius;
-    }
-
-    @Override
-    public void translate(int dx, int dy) {
-        centerPoint.x += dx;
-        centerPoint.y += dy;
     }
 
     @Override

@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Practice01 {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
 
         final int STUDENTS = 10;
@@ -57,7 +56,8 @@ public class Practice01 {
         for (int i = 0; i < scores.length; i++) {
             dev += Math.pow((scores[i]-avg), 2);
         }
-        return dev /= scores.length;
+        dev /= scores.length;
+        return dev;
     }
     public static double standard(int[] scores) {
         return Math.sqrt(derivation(scores));

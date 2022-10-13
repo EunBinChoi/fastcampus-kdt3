@@ -21,8 +21,7 @@ public class Practice05 {
 
         int max = -1;
         String popular = "";
-        int i = 0;
-        for (i = 0; i < counts.length; i++) {
+        for (int i = 0; i < counts.length; i++) {
             if (counts[i] > max) {
                 max = counts[i];
                 popular = Character.toString(alpha[i]).toUpperCase();
@@ -30,10 +29,7 @@ public class Practice05 {
                 popular = "?";
             }
         }
-        if (i == counts.length) {
-            bufferedWriter.write(popular);
-        }
-
+        bufferedWriter.write(popular);
         bufferedWriter.flush();
         bufferedWriter.close();
         bufferedReader.close();

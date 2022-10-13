@@ -2,7 +2,7 @@ package me.day09.practice.practice07;
 
 import java.util.Objects;
 
-public class Rectangle extends Shape implements GeometricController {
+public class Rectangle extends Shape {
     private int width;
     private int height;
 
@@ -44,12 +44,6 @@ public class Rectangle extends Shape implements GeometricController {
     @Override
     public double calculateArea() {
         return width * height;
-    }
-
-    @Override
-    public void translate(int dx, int dy) {
-        centerPoint.x += dx;
-        centerPoint.x += dy;
     }
 
     @Override

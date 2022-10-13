@@ -10,5 +10,7 @@ public class Practice03 {
         String sentence = bufferedReader.readLine().strip();
         StringTokenizer stringTokenizer = new StringTokenizer(sentence);
         System.out.println(stringTokenizer.countTokens());
+
+//        System.out.println(sentence.split(" ").length); // split()은 " " 토큰으로 인식
     }
 }

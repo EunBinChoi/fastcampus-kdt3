@@ -61,9 +61,9 @@ public class Practice03 {
     public static double[] calculateSubjectsAverage(int[][] scores2d) {
         double[] subjectAverage = new double[scores2d[0].length]; // 각 과목별 학생 성적 평균
 
-        for (int i = 0; i < scores2d[0].length; i++) {
+        for (int i = 0; i < scores2d[0].length; i++) { // COLUMN
             int sum = 0;
-            for (int j = 0; j < scores2d.length; j++) {
+            for (int j = 0; j < scores2d.length; j++) { // ROW
                 sum += scores2d[j][i];
             }
             subjectAverage[i] = (double) sum / scores2d.length;
@@ -74,9 +74,9 @@ public class Practice03 {
     public static double[] calculateStudentsAverage(int[][] scores2d) {
         double[] studentsAverage = new double[scores2d.length]; // 각 학생별 과목 성적 평균
 
-        for (int i = 0; i < scores2d.length; i++) {
+        for (int i = 0; i < scores2d.length; i++) { // ROW
             int sum = 0;
-            for (int j = 0; j < scores2d[i].length; j++) {
+            for (int j = 0; j < scores2d[i].length; j++) { // COLUMN
                 sum += scores2d[i][j];
             }
             studentsAverage[i] = (double) sum / scores2d[0].length;
@@ -90,10 +90,21 @@ public class Practice03 {
 
     public static void sort(double[] array, int[] index, String order) {
         int comp = compare(order);
+        // ascending : 1, descending: -1
+        // ascending : array[j] > array[j + 1] -> swap
+        //             array[j] - array[j + 1] > 0
 
-        for (int i = array.length - 1; i > 0; i--) {
+        // descending: array[j] < array[j + 1] -> swap
+        //             array[j] - array[j + 1] < 0
+
+        // (array[j] - array[j + 1]) * comp > 0
+        // -(array[j] - array[j + 1]) > 0
+        // -array[j] + array[j + 1] > 0
+        // 0 > array[j] - array[j + 1]
+
+
+        for (int i = array.length - 1; i > 0; i--) { // n 숫자 정렬시 반복해야하는 횟수 -> n - 1
             for (int j = 0; j < i; j++) {
-
                 if ((array[j] - array[j + 1]) * comp > 0) {
                     double value = array[j];
                     array[j] = array[j + 1];

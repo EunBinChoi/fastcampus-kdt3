@@ -39,7 +39,7 @@ class JsonTable {
                 "ROW_NUM=" + ROW_NUM +
                 ", COL_NUM=" + COL_NUM +
                 ", colnums=" + Arrays.toString(colnums) +
-                ", data=" + Arrays.toString(data) +
+                ", data=" + Arrays.deepToString(data) +
                 '}';
     }
 }
@@ -68,12 +68,12 @@ public class Practice07 {
 
         JsonTable jsonTable = parseJsonStringtoTable(JSON_STRING);
         jsonTable.print();
+        System.out.println("jsonTable = " + jsonTable);
     }
     public static JsonTable parseJsonStringtoTable(String JSON_STRING) {
         final int ROW_NUM = 3;
         final int COL_NUM = 4;
         JsonTable jsonTable = new JsonTable(ROW_NUM, COL_NUM);
-        System.out.println("jsonTable = " + jsonTable);
 
         int count = 0;
         String[] jsonStrings = JSON_STRING.split(",");

@@ -2,7 +2,7 @@ package me.day09.practice.practice07;
 
 import java.util.Objects;
 
-public abstract class Shape {
+public abstract class Shape implements GeometricController {
     protected Point centerPoint;
 
     public Shape() {
@@ -22,6 +22,12 @@ public abstract class Shape {
 
     public abstract void draw();
     public abstract double calculateArea();
+
+    @Override
+    public void translate(int dx, int dy) {
+        centerPoint.x += dx;
+        centerPoint.y += dy;
+    }
 
     @Override
     public boolean equals(Object o) {

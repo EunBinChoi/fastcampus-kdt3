@@ -2,7 +2,7 @@ package me.day09.practice.practice07;
 
 import java.util.Objects;
 
-public class Triangle extends Shape implements GeometricController {
+public class Triangle extends Shape {
     private int base;
     private int height;
 
@@ -46,12 +46,6 @@ public class Triangle extends Shape implements GeometricController {
         return base * height * 0.5;
     }
 
-
-    @Override
-    public void translate(int dx, int dy) {
-        centerPoint.x *= dx;
-        centerPoint.y *= dy;
-    }
 
     @Override
     public void scale(int offset) {

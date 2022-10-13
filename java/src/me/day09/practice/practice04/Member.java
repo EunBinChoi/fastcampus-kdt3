@@ -44,7 +44,7 @@ public class Member {
 
         if (current.length() != candi.length()) return false;
 
-        int[] diffs = new int[current.length()];
+        int[] diffs = new int[current.length()]; // 현재 핸드폰번호와 다른 인덱스를 저장
         int count = 0;
         for (int i = 0; i < current.length(); i++) {
             if (current.charAt(i) != candi.charAt(i)) {
