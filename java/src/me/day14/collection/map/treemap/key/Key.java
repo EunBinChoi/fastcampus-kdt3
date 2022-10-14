@@ -1,6 +1,6 @@
 package me.day14.collection.map.treemap.key;
 
-public class Key {
+public class Key implements Comparable<Key> {
     private String serialNo;
     private String productNo;
 
@@ -34,5 +34,10 @@ public class Key {
                 "serialNo='" + serialNo + '\'' +
                 ", productNo='" + productNo + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Key o) {
+        return serialNo.compareTo(o.serialNo) * -1;
     }
 }

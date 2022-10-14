@@ -14,7 +14,7 @@ public class Main {
         stringList.add("c");
         stringList.add("d");
 
-//        error(stringList);
+        //error(stringList);
         solution0(stringList);
 
     }
@@ -24,7 +24,7 @@ public class Main {
         System.out.println("stringList = " + stringList);
         for( String str : stringList ) {
             if ( str.equals("a") ) {
-                stringList.remove(str);
+                stringList.remove(str); // modCount++ (modificationCount++)
             }
         }
         System.out.println("stringList = " + stringList);

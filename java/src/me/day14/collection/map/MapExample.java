@@ -31,8 +31,7 @@ public class MapExample {
         System.out.println("streamMap2 = " + streamMap2);
         System.out.println();
 
-        Map<Integer, String> map = Map.of(
-                1, "a", 2, "b", 3, "c", 4, "d", 5, "e");
+        Map<Integer, String> map = Map.of(1, "a", 2, "b", 3, "c", 4, "d", 5, "e");
 
         // 원소 추가 => put()
         // 키 저장 순서가 유지되지 않을 수 있음

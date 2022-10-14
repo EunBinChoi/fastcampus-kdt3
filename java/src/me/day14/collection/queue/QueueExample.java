@@ -63,7 +63,7 @@ public class QueueExample {
 		System.out.println("===============================================================================");
 		System.out.println("\t\t\t\t2. 우선순위 큐");
 		System.out.println("===============================================================================");
-		// 우선순위가 존재하는 Queue (힙을 통해 구현)
+		// 우선순위가 존재하는 Queue (최소 힙 / 최대 힙을 통해 구현)
 		PriorityQueue<Student> priorityQueue = new PriorityQueue<>();
 
 

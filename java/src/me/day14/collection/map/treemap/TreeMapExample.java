@@ -16,7 +16,9 @@ public class TreeMapExample {
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 키 (**) 크기 순서가 유지될 수 있도록 만듦 (정렬됨)
         // 이진 탐색 트리 중 레드-블랙 트리로 구현되어있음 (개략적으로 balanced tree) (https://code-lab1.tistory.com/62)
         for (int i = 10; i >= 1 ; i--) {
-            treeMap.put(i, Character.toString((i-1) + 'a'));
+            if (!treeMap.containsKey(i)) {
+                treeMap.put(i, Character.toString((i - 1) + 'a'));
+            }
         }
         System.out.println("treeMap = " + treeMap);
         System.out.println("treeMap.size() = " + treeMap.size());
@@ -31,14 +33,18 @@ public class TreeMapExample {
 
         // 원소 접근 (키를 통해 접근)
         for (int key = 1; key <= 10; key++) {
-            System.out.println("treeMap.get(key) = " + treeMap.get(key));
+            if (treeMap.containsKey(key)) {
+                System.out.println("treeMap.get(key) = " + treeMap.get(key));
+            }
         }
         System.out.println();
 
 
         // 원소 수정 (키를 접근해서 다른 값을 넣어주면 수정) => put()
         for (int key = 1; key <= 10; key++) {
-            treeMap.put(key, treeMap.get(key).repeat(3));
+            if (treeMap.containsKey(key)) {
+                treeMap.put(key, treeMap.get(key).repeat(3));
+            }
         }
         System.out.println("treeMap = " + treeMap);
         System.out.println("treeMap.size() = " + treeMap.size());

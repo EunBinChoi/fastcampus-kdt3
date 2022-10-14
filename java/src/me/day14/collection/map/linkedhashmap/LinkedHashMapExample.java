@@ -15,7 +15,9 @@ public class LinkedHashMapExample {
         // 원소 추가 => put()
         // 키 저장 순서가 유지
         for (int i = 1; i <= 10 ; i++) {
-            linkedHashMap.put(i, Character.toString((i-1) + 'a'));
+            if (!linkedHashMap.containsKey(i)) {
+                linkedHashMap.put(i, Character.toString((i - 1) + 'a'));
+            }
         }
         System.out.println("linkedHashMap = " + linkedHashMap);
         System.out.println("linkedHashMap.size() = " + linkedHashMap.size());
@@ -30,7 +32,9 @@ public class LinkedHashMapExample {
 
         // 원소 접근 (키를 통해 접근)
         for (int key = 1; key <= 10; key++) {
-            System.out.println("linkedHashMap.get(key) = " + linkedHashMap.get(key));
+            if (linkedHashMap.containsKey(key)) {
+                System.out.println("linkedHashMap.get(key) = " + linkedHashMap.get(key));
+            }
         }
         System.out.println();
 
@@ -41,7 +45,9 @@ public class LinkedHashMapExample {
 
         // 원소 수정 (키를 접근해서 다른 값을 넣어주면 수정) => put()
         for (int key = 1; key <= 10; key++) {
-            linkedHashMap.put(key, linkedHashMap.get(key).repeat(3));
+            if (linkedHashMap.containsKey(key)) {
+                linkedHashMap.put(key, linkedHashMap.get(key).repeat(3));
+            }
         }
         System.out.println("linkedHashMap = " + linkedHashMap);
         System.out.println("linkedHashMap.size() = " + linkedHashMap.size());

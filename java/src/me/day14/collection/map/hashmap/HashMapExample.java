@@ -12,7 +12,9 @@ public class HashMapExample {
         // 원소 추가 => put()
         // 키 저장 순서가 유지되지 않을 수 있음
         for (int i = 1; i <= 10 ; i++) {
-            hashMap.put(i, Character.toString((i-1) + 'a'));
+            if (!hashMap.containsKey(i)) {
+                hashMap.put(i, Character.toString((i - 1) + 'a'));
+            }
         }
         System.out.println("hashMap = " + hashMap);
         System.out.println("hashMap.size() = " + hashMap.size());
@@ -27,9 +29,14 @@ public class HashMapExample {
 
         // 원소 접근 (키를 통해 접근)
         for (int key = 1; key <= 10; key++) {
-            System.out.println("hashMap.get(key) = " + hashMap.get(key));
+            if (hashMap.containsKey(key)) {
+                System.out.println("hashMap.get(key) = " + hashMap.get(key));
+            }
         }
         System.out.println();
+
+        // 저장되지 않은 원소 접근
+        System.out.println("hashMap.get(100) = " + hashMap.get(100)); // null
 
         // null이 키로 저장되어있기 때문에 통해 접근도 가능
         System.out.println("hashMap.get(null) = " + hashMap.get(null));
@@ -38,12 +45,15 @@ public class HashMapExample {
 
         // 원소 수정 (키를 접근해서 다른 값을 넣어주면 수정) => put()
         for (int key = 1; key <= 10; key++) {
-            hashMap.put(key, hashMap.get(key).repeat(3));
+            if (hashMap.containsKey(key)) {
+                hashMap.put(key, hashMap.get(key).repeat(3));
+            }
         }
         System.out.println("hashMap = " + hashMap);
         System.out.println("hashMap.size() = " + hashMap.size());
         System.out.println();
 
+        ////////////////////////////////////////////////////////
         // 원소 수정 => replace()
         hashMap.replace(-1, "a"); // -1과 같은 키는 없기 때문에 아무런 영향이 없음
         System.out.println("hashMap = " + hashMap);
@@ -76,6 +86,8 @@ public class HashMapExample {
             String value = entry.getValue();
             System.out.println( "key => " + key + ", value => " + value);
         }
+        // key 값들만 보기
+        System.out.println("hashMap.keySet() = " + hashMap.keySet());
         // value 값들만 보기
         System.out.println("hashMap.values() = " + hashMap.values());
 
@@ -109,8 +121,8 @@ public class HashMapExample {
         }
         System.out.println("hashMap1 = " + hashMap1);
 
-        Integer[] keys = hashMap1.keySet().toArray(new Integer[0]);
-        String[] values = hashMap1.values().toArray(new String[0]);
+        Integer[] keys = hashMap1.keySet().toArray(new Integer[hashMap1.size()]);
+        String[] values = hashMap1.values().toArray(new String[hashMap1.size()]);
         Object[] objects = hashMap1.entrySet().toArray();
         Map.Entry<Integer, String>[] entries = (Map.Entry<Integer, String>[]) hashMap1.entrySet().toArray(new Map.Entry[hashMap1.size()]);
         System.out.println("keys   = " + Arrays.toString(keys));
@@ -121,7 +133,5 @@ public class HashMapExample {
 
         Map<Integer, String> hashMap2 = new HashMap<>(Map.ofEntries(entries));
         System.out.println("hashMap2 = " + hashMap2);
-
-
     }
 }

@@ -12,7 +12,9 @@ public class HashTableExample {
         // 원소 추가 => put()
         // 키 저장 순서가 유지되지 않을 수 있음
         for (int i = 1; i <= 10 ; i++) {
-            hashTable.put(i, Character.toString((i-1) + 'a'));
+            if (!hashTable.containsKey(i)) {
+                hashTable.put(i, Character.toString((i - 1) + 'a'));
+            }
         }
         System.out.println("hashTable = " + hashTable);
         System.out.println("hashTable.size() = " + hashTable.size());
@@ -27,14 +29,18 @@ public class HashTableExample {
 
         // 원소 접근 (키를 통해 접근)
         for (int key = 1; key <= 10; key++) {
-            System.out.println("hashTable.get(key) = " + hashTable.get(key));
+            if (hashTable.containsKey(key)) {
+                System.out.println("hashTable.get(key) = " + hashTable.get(key));
+            }
         }
         System.out.println();
 
 
         // 원소 수정 (키를 접근해서 다른 값을 넣어주면 수정) => put()
         for (int key = 1; key <= 10; key++) {
-            hashTable.put(key, hashTable.get(key).repeat(3));
+            if (hashTable.containsKey(key)) {
+                hashTable.put(key, hashTable.get(key).repeat(3));
+            }
         }
         System.out.println("hashTable = " + hashTable);
         System.out.println("hashTable.size() = " + hashTable.size());
