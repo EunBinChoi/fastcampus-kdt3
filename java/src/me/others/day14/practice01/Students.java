@@ -1,24 +1,24 @@
 package me.others.day14.practice01;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Students {
-    private Map<String, Student> students;
+    private List<Student> students;
 
     public Students() {
-        students = new HashMap<>();
+        students = new ArrayList<>();
     }
 
-    public Students(Map<String, Student> students) {
+    public Students(List<Student> students) {
         this.students = students;
     }
 
-    public Map<String, Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Map<String, Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

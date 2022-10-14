@@ -1,6 +1,7 @@
 package me.others.day14.practice01;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -16,17 +17,15 @@ public class StudentDao {
     }
 
 
-    public Student select(String sNum) {
-        Students students = new Students();
+    public Student select(String key) {
         Iterator<String> iterator = map.keySet().iterator();
         while (iterator.hasNext()) {
             String num = iterator.next();
-            Student student = map.get(sNum);
+            Student student = map.get(num);
 
             if (num != null) {
-                if (num.equals(sNum)) {
-                    students.getStudents().put(num, student);
-                    return students.getStudents().get(num);
+                if (num.equals(key)) {
+                    return student;
                 }
             }
         }
@@ -43,7 +42,7 @@ public class StudentDao {
 
             if (condition != null) {
                 if (condition.test(student)) {
-                    students.getStudents().put(num, student);
+                    students.getStudents().add(student);
                 }
             }
         }
@@ -53,8 +52,13 @@ public class StudentDao {
 
 
     public Students select() {
-        return new Students(map);
+        Students studentAll = new Students();
+        for (Student student : map.values()) {
+            studentAll.getStudents().add(student);
+        }
+        return studentAll;
     }
+
 
 
     public Student insert(String key, Student student) {
@@ -66,18 +70,18 @@ public class StudentDao {
         return student;
     }
 
-    public int insert(Students students) {
+    public int insert(List<String> keys, Students students) {
         int count = 0;
-        Iterator<String> iterator = students.getStudents().keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            Student value = students.getStudents().get(key);
+
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            Student student = students.getStudents().get(i);
 
             if (map.containsKey(key)) {
                 System.out.println("duplicated key.");
-                break;
+                continue;
             }
-            map.put(key, value);
+            map.put(key, student);
             count++;
         }
         return count;
@@ -139,14 +143,14 @@ public class StudentDao {
         return count;
     }
 
-    public Student delete(String sNum) {
+    public Student delete(String key) {
 
         Iterator<String> iterator = map.keySet().iterator();
         while (iterator.hasNext()) {
             String num = iterator.next();
-            Student student = map.get(sNum);
+            Student student = map.get(key);
             if (num != null) {
-                if (num.equals(sNum)) {
+                if (num.equals(key)) {
                     iterator.remove();
                     return student;
                 }
