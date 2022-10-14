@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    private static List<Student> studentList = new ArrayList<>();
     public static void main(String[] args) {
-        List<Student> studentList = new ArrayList<>();
 
         studentList.add(new Student("20212222", "이순신", 85)); // 입학연도: 2021 + 들어간 순서: 1
         studentList.add(new Student("20211111", "자바킹", 100)); // 입학연도: 2021 + 들어간 순서: 2
