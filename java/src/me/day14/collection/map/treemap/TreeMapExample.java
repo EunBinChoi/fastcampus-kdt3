@@ -115,11 +115,11 @@ public class TreeMapExample {
         // 원소 추가
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 객체 크기 순서가 유지될 수 있도록 만듦 (정렬됨)
         // 이진 탐색 트리 중 레드-블랙 트리로 구현되어있음 (개략적으로 balanced tree) (https://code-lab1.tistory.com/62)
-        penMap.put(new Key("0001", "QS8879921031"), new Pen("0001", "파카", "red")); // ClassCastException
-        penMap.put(new Key("0002", "NS1230910000"), new Pen("0002", "빅", "black")); // ClassCastException
-        penMap.put(new Key("0003", "KS0000123123"), new Pen("0003", "파카", "blue")); // ClassCastException
-        penMap.put(new Key("0004", "SS1123124123"), new Pen("0004", "제브라", "red")); // ClassCastException
-//         TODO: ClassCastException 발생 이유와 해결 방안을 제시하시오.
+        // Comparable 인터페이스를 재정의하지 않으면 ClassCastException 발생 가능
+        penMap.put(new Key("0001", "QS8879921031"), new Pen("0001", "파카", "red"));
+        penMap.put(new Key("0002", "NS1230910000"), new Pen("0002", "빅", "black"));
+        penMap.put(new Key("0003", "KS0000123123"), new Pen("0003", "파카", "blue"));
+        penMap.put(new Key("0004", "SS1123124123"), new Pen("0004", "제브라", "red"));
 
         System.out.println("penMap = " + penMap);
         System.out.println("penMap.size() = " + penMap.size());

@@ -16,7 +16,6 @@ public class Main {
 
         //error(stringList);
         solution0(stringList);
-
     }
     public static void error(List<String> stringList) {
         // 순회 중 삭제되는 경우
