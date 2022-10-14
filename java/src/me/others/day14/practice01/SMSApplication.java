@@ -1,4 +1,4 @@
-package me.day14.practice.practice01;
+package me.others.day14.practice01;
 
 import java.util.List;
 import java.util.Map;
@@ -73,12 +73,9 @@ public class SMSApplication {
         System.out.println();
 
         Students students = new Students();
-        students.getStudents().addAll(List.of(
-                new Student("monkey2", "29899", "sally", 30, "W", "JSP"),
-                new Student("monkey3", "29899", "sally", 30, "W", "Servlet")));
-
-        List<String> keys = List.of("H39r8djakndfae88", "H39r8djakndfae00");
-        int count1 = studentDao.insert(keys, students);
+        students.getStudents().putAll(Map.of("H39r8djakndfae88", new Student("monkey2", "29899", "sally", 30, "W", "JSP"),
+                "H39r8djakndfae00", new Student("monkey3", "29899", "sally", 30, "W", "Servlet")));
+        int count1 = studentDao.insert(students);
         System.out.println("count1 = " + count1);
         System.out.println("studentDao = " + DataBase.getInstance().getTableList().get(0).getData());
         System.out.println();

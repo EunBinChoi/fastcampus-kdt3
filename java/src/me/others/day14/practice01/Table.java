@@ -1,9 +1,6 @@
-package me.day14.practice.practice01;
+package me.others.day14.practice01;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Table<K, V> {
     private List<Column> columnList;

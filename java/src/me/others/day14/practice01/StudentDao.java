@@ -1,7 +1,6 @@
-package me.day14.practice.practice01;
+package me.others.day14.practice01;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -17,12 +16,20 @@ public class StudentDao {
     }
 
 
-    /**
-     * @Param: Student key 값
-     * @return: select된 Student 반환
-     * */
-    public Student select(String key) {
-        // TODO: select 함수 구현
+    public Student select(String sNum) {
+        Students students = new Students();
+        Iterator<String> iterator = map.keySet().iterator();
+        while (iterator.hasNext()) {
+            String num = iterator.next();
+            Student student = map.get(sNum);
+
+            if (num != null) {
+                if (num.equals(sNum)) {
+                    students.getStudents().put(num, student);
+                    return students.getStudents().get(num);
+                }
+            }
+        }
         return null;
     }
 
@@ -36,7 +43,7 @@ public class StudentDao {
 
             if (condition != null) {
                 if (condition.test(student)) {
-                    students.getStudents().add(student);
+                    students.getStudents().put(num, student);
                 }
             }
         }
@@ -46,32 +53,34 @@ public class StudentDao {
 
 
     public Students select() {
-        Students studentAll = new Students();
-        for (Student student : map.values()) {
-            studentAll.getStudents().add(student);
-        }
-        return studentAll;
+        return new Students(map);
     }
 
 
-    /**
-     * @Param: Student key 값, Student 객체 1명
-     * @return: DB에 정상적으로 insert 된 객체 반환
-     * @exception: 현재 DB에 있는 객체들과 중복된 키를 가질 수 없음
-     * */
     public Student insert(String key, Student student) {
-        // TODO: insert 함수 구현
-        return null;
+        if (map.containsKey(key)) {
+            System.out.println("duplicated key.");
+            return null;
+        }
+        map.put(key, student);
+        return student;
     }
 
-    /**
-     * @Param: Students 들의 key 값들, Students 객체 (Student 객체 여러명 담을 수 있음)
-     * @return: Students 객체 중 DB에 정상적으로 insert 된 객체 수 반환
-     * @exception: 현재 DB에 있는 객체들과 중복된 키를 가질 수 없음
-     * */
-    public int insert(List<String> keys, Students students) {
-        // TODO: insert 함수 구현
-        return 0;
+    public int insert(Students students) {
+        int count = 0;
+        Iterator<String> iterator = students.getStudents().keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            Student value = students.getStudents().get(key);
+
+            if (map.containsKey(key)) {
+                System.out.println("duplicated key.");
+                break;
+            }
+            map.put(key, value);
+            count++;
+        }
+        return count;
     }
 
     public int update(Predicate<Student> condition, Column column, Object value) {
@@ -130,12 +139,19 @@ public class StudentDao {
         return count;
     }
 
-    /**
-     * @Param: Student key 값
-     * @return: 삭제된 Student 반환
-     * */
-    public Student delete(String key) {
-        // TODO: delete 함수 구현
+    public Student delete(String sNum) {
+
+        Iterator<String> iterator = map.keySet().iterator();
+        while (iterator.hasNext()) {
+            String num = iterator.next();
+            Student student = map.get(sNum);
+            if (num != null) {
+                if (num.equals(sNum)) {
+                    iterator.remove();
+                    return student;
+                }
+            }
+        }
         return null;
     }
 
