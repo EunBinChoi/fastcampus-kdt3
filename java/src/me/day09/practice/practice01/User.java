@@ -3,11 +3,12 @@ package me.day09.practice.practice01;
 import java.util.Objects;
 
 public class User {
-    protected Member memberInfo;
-    protected Electronic electronicDevice;
-    protected String paymentPolicy;
+    private Member memberInfo;
+    private Electronic electronicDevice;
+    private String paymentPolicy;
 
     // User는 모든 필드를 가져야만 생성 가능
+
     public User(Member memberInfo, Electronic electronicDevice, String paymentPolicy) {
         this.memberInfo = memberInfo;
         this.electronicDevice = electronicDevice;

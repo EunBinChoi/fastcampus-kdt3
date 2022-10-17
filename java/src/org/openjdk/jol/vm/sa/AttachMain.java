@@ -34,7 +34,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.*;
 
-import static org.openjdk.jol.vm.sa.Constants.*;
+import static org.openjdk.jol.vm.sa.Constants.HOTSPOT_AGENT_CLASSNAME;
+import static org.openjdk.jol.vm.sa.Constants.VM_CLASSNAME;
+
 
 class AttachMain {
 

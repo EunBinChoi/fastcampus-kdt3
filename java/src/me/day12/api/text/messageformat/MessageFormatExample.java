@@ -1,7 +1,5 @@
 package me.day12.api.text.messageformat;
 
-import me.day12.api.util.scanner.ScannerExample;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.MessageFormat;
@@ -12,9 +10,9 @@ public class MessageFormatExample {
     public static void main(String[] args) throws ParseException, FileNotFoundException {
         // From Person[] to Strings
         String pattern ="VALUES (\"{0}\",''{1}'',{2},''{3}'')";
-        Person[] people = { new Person("a", Gender.MALE, "971212", "971212-1234567"),
-                new Person("b", Gender.FEMALE, "990825", "990825-2001234"),
-                new Person("c", Gender.MALE, "930310", "930310-1001234") };
+        Person[] people = { new Person("a", Person.Gender.MALE, "971212", "971212-1234567"),
+                new Person("b", Person.Gender.FEMALE, "990825", "990825-2001234"),
+                new Person("c", Person.Gender.MALE, "930310", "930310-1001234") };
         String[] peopleString = new String[people.length];
 
         for (int i = 0; i < people.length; i++) {
@@ -28,7 +26,7 @@ public class MessageFormatExample {
         Person[] peopleParse = new Person[peopleString.length];
         for (int i = 0; i < peopleString.length; i++) {
             Object[] objects = messageFormat.parse(peopleString[i]);
-            peopleParse[i] = new Person((String) objects[0], Gender.valueOf((String) objects[1]), (String) objects[2], (String) objects[3]);
+            peopleParse[i] = new Person((String) objects[0], Person.Gender.valueOf((String) objects[1]), (String) objects[2], (String) objects[3]);
             System.out.println("i = " + i + ", peopleParse[i] = " + peopleParse[i]);
         }
         System.out.println();

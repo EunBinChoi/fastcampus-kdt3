@@ -3,6 +3,25 @@ package me.day12.api.text.messageformat;
 import java.util.Objects;
 
 public class Person implements Comparable<Person> {
+
+    enum Gender {
+        MALE("남성"), FEMALE("여성");
+        private String genderName;
+
+        Gender(String genderName) {
+            this.genderName = genderName;
+        }
+
+        public String getGenderName() {
+            return genderName;
+        }
+
+        public void setGenderName(String genderName) {
+            this.genderName = genderName;
+        }
+    }
+
+
     private String name;
     private Gender gender;
     private String birthdate;

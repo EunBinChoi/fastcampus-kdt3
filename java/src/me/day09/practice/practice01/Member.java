@@ -3,12 +3,12 @@ package me.day09.practice.practice01;
 import java.util.Objects;
 
 public class Member {
-    protected String serialNo; /* auto-generated */
-    protected String memberID;
-    protected String memberPassword;
-    protected String memberPhoneNumber;
-    protected String memberEmail;
-    protected String memberBirthDate;
+    private String serialNo; /* auto-generated */
+    private String memberID;
+    private String memberPassword;
+    private String memberPhoneNumber;
+    private String memberEmail;
+    private String memberBirthDate;
 
     private static int count = 0;
 

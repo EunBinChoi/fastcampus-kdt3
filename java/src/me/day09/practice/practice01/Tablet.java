@@ -12,7 +12,7 @@ public class Tablet extends MobileElectronic {
         this.hasPencil = hasPencil;
     }
 
-    public Tablet(CommuncationMethod communcationMethod, Integer weight, Boolean hasPencil) {
+    public Tablet(MobileElectronic.CommuncationMethod communcationMethod, Integer weight, Boolean hasPencil) {
         super(communcationMethod, weight);
         this.hasPencil = hasPencil;
     }

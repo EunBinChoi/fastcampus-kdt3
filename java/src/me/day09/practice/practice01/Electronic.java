@@ -24,8 +24,6 @@ public class Electronic {
         this.companyName = companyName;
         this.dateOfMade = dateOfMade;
         this.authMethod = authMethod;
-        generateKey();
-
     }
 
     private void generateKey() {
