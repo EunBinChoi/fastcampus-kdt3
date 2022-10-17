@@ -11,8 +11,8 @@ public class WriterWriteExample4 {
             String path = WriterWriteExample4.class.getResource("").getPath();
             Writer writer = new FileWriter(path + "output.txt");
             String str = "안녕하세요. 파일 입출력 예제입니다.";
-            writer.write(str);
-//            writer.write(str, 1, 12);
+//            writer.write(str);
+            writer.write(str, 1, 12);
             writer.flush();
             writer.close();
         } catch (FileNotFoundException e) {

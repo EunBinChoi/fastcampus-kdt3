@@ -42,12 +42,12 @@ public class MapExample {
 
         // 사람의 나이를 요소로 하는 새로운 스트림을 생성하고 나이를 출력
         personList.stream()
-                .mapToInt(Person :: getAge)
+                .mapToInt(p -> p.getAge())
                 .forEach(age -> System.out.println(age));
 
         // 사람의 나이를 요소로 하는 새로운 스트림을 생성하고 평균 나이 계산
         double average = personList.stream()
-                .mapToInt(Person :: getAge)
+                .mapToInt(p -> p.getAge())
                 .average().getAsDouble();
         System.out.println("평균 나이 = " + average);
 

@@ -9,8 +9,8 @@ public class InputStreamReadExample1 {
     public static void main(String[] args) {
         try {
             String path = InputStreamReadExample1.class.getResource("").getPath();
-//            InputStream inputStream = new FileInputStream(path + "input_kor.txt"); // 한국어 깨짐 (1 바이트씩 읽음)
-            InputStream inputStream = new FileInputStream(path + "input_eng.txt");
+            InputStream inputStream = new FileInputStream(path + "input_kor.txt"); // 한국어 깨짐 (1 바이트씩 읽음)
+//            InputStream inputStream = new FileInputStream(path + "input_eng.txt");
             int readByte;
 
             // 읽을 수 있는 마지막 바이트까지 루프를 돌며 한 바이트씩 읽음

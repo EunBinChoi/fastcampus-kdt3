@@ -33,7 +33,7 @@ public class FileExample {
         System.out.println();
 
         // 재귀적으로 디렉토리 탐색
-        searchFile(currDir);
+        searchFile(new File("./"));
 
 
         // OS가 무엇인지에 따라서 파일 구분자가 다름

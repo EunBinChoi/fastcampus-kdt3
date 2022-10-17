@@ -12,7 +12,7 @@ public class ReaderReadExample2 {
             Reader reader = new FileReader(path + "long.txt"); //  정상 출력
             int total = 0;
             int readCharNo = 0;
-            char[] cbuf = new char[2];
+            char[] cbuf = new char[100];
 
             // 입력 스트림으로부터 100개의 문자가 들어온다면 read() 메소드는 100번을 루핑해서 읽어들여야 함
             // 그러나 read(char[] cbuf) 메소드는 한 번 읽을 때 주어진 배열 길이만큼 읽기 때문에 루핑 횟수가 현저히 줄어듦

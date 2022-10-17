@@ -17,13 +17,13 @@ public class AggregateExample {
         double avg = Arrays.stream(new int[]{1, 2, 3, 4, 5})
                 .filter(n -> n % 2 == 0)
                 .average()
-                .getAsDouble();
+                .getAsDouble(); // OptionalDouble -> Double
         System.out.println("짝수의 평균: " + avg);
 
         int max = Arrays.stream(new int[]{1, 2, 3, 4, 5})
                 .filter(n -> n % 2 == 0)
                 .max()
-                .getAsInt();
+                .getAsInt(); // OptionalInt -> int
         System.out.println("짝수 중 최댓값: " + max);
 
 

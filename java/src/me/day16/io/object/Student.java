@@ -28,7 +28,11 @@ public class Student implements Serializable {
     private String name;
     private Gender gender;
     private Grade grade;
-    private transient String regNum;
+
+    private Integer age;
+
+    private static String staticVar; // 클래스에 포함. Serialize 제외
+    private transient String regNum; // 보안 정보. null 값으로 설정
 
     public Student() {
     }
@@ -64,6 +68,22 @@ public class Student implements Serializable {
         this.grade = grade;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public static String getStaticVar() {
+        return staticVar;
+    }
+
+    public static void setStaticVar(String staticVar) {
+        Student.staticVar = staticVar;
+    }
+
     public String getRegNum() {
         return regNum;
     }
@@ -78,6 +98,7 @@ public class Student implements Serializable {
                 "name='" + name + '\'' +
                 ", gender=" + gender +
                 ", grade=" + grade +
+                ", age=" + age +
                 ", regNum='" + regNum + '\'' +
                 '}';
     }

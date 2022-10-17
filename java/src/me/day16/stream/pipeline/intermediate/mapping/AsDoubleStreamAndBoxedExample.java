@@ -1,5 +1,6 @@
 package me.day16.stream.pipeline.intermediate.mapping;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -19,7 +20,7 @@ public class AsDoubleStreamAndBoxedExample {
         // int 요소를 Integer 객체로 박싱해서 Stream<Integer>를 생성
         intStream = Arrays.stream(intArray);
         intStream
-                .boxed()
+                .boxed() // int -> Integer
                 .forEach(obj -> System.out.println(obj.intValue()));
     }
 }

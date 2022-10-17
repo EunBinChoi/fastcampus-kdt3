@@ -9,7 +9,7 @@ public class ReaderReadExample3 {
             Reader reader = new FileReader(path + "long.txt"); //  정상 출력
             int total = 0;
             int readCharNo = 0;
-            char[] cbuf = new char[10];
+            char[] cbuf = new char[100];
 
             while ((readCharNo = reader.read(cbuf, 1, 5)) != -1) {
                 for (int i = 1; i < readCharNo; i++) {

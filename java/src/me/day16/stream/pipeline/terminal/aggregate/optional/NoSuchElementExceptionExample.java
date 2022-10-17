@@ -10,7 +10,7 @@ public class NoSuchElementExceptionExample {
         // 만약 아래 코드와 같이 컬렉션의 요소가 추가되지 않아 저장된 요소가 없을 경우
         List<Integer> list = new ArrayList<>();
 //        double avg = list.stream()
-//                .mapToInt(Integer :: intValue)
+//                .mapToInt(i-> Integer.valueOf(i))
 //                .average()
 //                .getAsDouble();
 //        System.out.println(avg);
@@ -30,11 +30,12 @@ public class NoSuchElementExceptionExample {
                 .average()
                 .orElse(0.0);
         System.out.println(avg);
-
+//
         // 3. ifPresent() 메소드로 평균값이 있을 경우에만 값을 이용하는 람다식 실행
         list.stream()
                 .mapToInt(Integer::intValue)
                 .average()
-                .ifPresent(System.out::println);
+                .ifPresent(System.out::println); // 메소드 참조
+        //      .ifPresent(s -> System.out.println(s))
     }
 }

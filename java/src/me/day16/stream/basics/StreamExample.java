@@ -69,7 +69,7 @@ public class StreamExample {
 
         // 스트림을 이용해서 짝수만 출력
         integerList.stream()
-                .mapToInt(i -> i)
+                .mapToInt(i -> Integer.valueOf(i))
                 .filter(i -> i % 2 == 0)
                 .forEach(i -> System.out.print(i + ", "));
         System.out.println('\n');

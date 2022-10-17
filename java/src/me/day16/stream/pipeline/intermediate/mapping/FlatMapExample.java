@@ -15,6 +15,7 @@ public class FlatMapExample {
         System.out.println();
 
         List<String> inputList2 = Arrays.asList("10, 20, 30", "40, 50, 60");
+        inputList2.stream().forEach(s -> System.out.println(s));
         inputList2.stream()
                 .flatMapToInt(data -> {
                     String[] strArr = data.split(",");
@@ -24,6 +25,6 @@ public class FlatMapExample {
                     }
                     return Arrays.stream(intArr);
                 })
-                .forEach(number -> System.out.println(number));
+                .forEach(number -> System.out.println(number + "\n"));
     }
 }

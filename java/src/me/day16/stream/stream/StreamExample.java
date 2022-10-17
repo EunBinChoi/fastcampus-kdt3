@@ -17,7 +17,7 @@ public class StreamExample {
         // streamFromStrArray();
         // streamFromIntArray();
         // streamFromIntRange();
-        // streamFromFile();
+//         streamFromFile();
         streamFromDirectory();
     }
 
@@ -59,6 +59,7 @@ public class StreamExample {
 
         List<Path> pathList = Files.walk(userPath) // 디렉토리 스트림 얻음
                 .collect(Collectors.toList());
+        //System.out.println(pathList);
 
         Path path = pathList.stream()
                 .filter(p -> p.toFile().isFile())

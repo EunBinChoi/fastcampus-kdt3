@@ -1,9 +1,8 @@
 package me.day12.exception.close.finallys;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FinallyCloseExample {
     public static void main(String[] args) {
