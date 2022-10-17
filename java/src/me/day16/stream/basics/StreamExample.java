@@ -1,7 +1,6 @@
-package me.day15.stream.basics;
+package me.day16.stream.basics;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +21,10 @@ class Student {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Integer getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
 
     @Override
     public String toString() {
@@ -46,12 +38,12 @@ class Student {
 public class StreamExample {
     public static void main(String[] args) {
 
-        example1();
-        example2();
-        example3();
+        evenNum();
+        concat();
+        average();
 
     }
-    public static void example1() {
+    public static void evenNum() {
         //////////////////////////////////////////////////////////
         // List<Integer>
         List<Integer> integerList = new ArrayList<>(List.of(1, 2, 3, 4));
@@ -82,7 +74,7 @@ public class StreamExample {
                 .forEach(i -> System.out.print(i + ", "));
         System.out.println('\n');
     }
-    public static void example2() {
+    public static void concat() {
         //////////////////////////////////////////////////////////
         // List<String>
         List<String> stringList = List.of("a", "b", "c", "d", "e");
@@ -110,7 +102,7 @@ public class StreamExample {
 
         System.out.println();
     }
-    public static void example3() {
+    public static void average() {
         //////////////////////////////////////////////////////////
         // List<Member>
         final int STUDENT_NUM = 10;
