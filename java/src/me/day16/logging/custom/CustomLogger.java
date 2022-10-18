@@ -7,14 +7,14 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class CustomLogger {
-    private Logger logger = Logger.getLogger("customerLogger");
+    private Logger logger = Logger.getLogger("customLogger");
     private static CustomLogger customLogger;
     private FileHandler infoFileHandler;
     private FileHandler warnFileHandler;
     private FileHandler severeFileHandler;
 
     private static final String path = CustomLogger.class.getResource("").getPath();
-    private static final String infoFileName = path +  "info.log";
+    private static final String infoFileName = path + "info.log";
     private static final String warnFileName = path + "warn.log";
     private static final String severeFileName = path + "severe.log";
 
@@ -37,7 +37,7 @@ public class CustomLogger {
             warnFileHandler.setFormatter(new SimpleFormatter());
             severeFileHandler.setFormatter(new SimpleFormatter());
 
-            logger.setLevel(Level.WARNING); // root logger
+            logger.setLevel(Level.INFO); // root logger
 
             infoFileHandler.setLevel(Level.INFO);
             warnFileHandler.setLevel(Level.WARNING);

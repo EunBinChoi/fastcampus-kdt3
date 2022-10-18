@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class InputMoneyTest {
@@ -17,7 +18,7 @@ public class InputMoneyTest {
     }
 
     @Test
-    public void inputMoneyTest_손님이_넣은_금액이_0이하일수없다() throws Exception{
+    public void inputMoneyTest_손님이_넣은_금액이_0이하일수없다() throws Exception {
         VendingMachine vm = new VendingMachine();
 //      vm.setInputMoney(-1);
         vm.setInputMoney(1000);
@@ -27,7 +28,7 @@ public class InputMoneyTest {
 
 
     @Test
-    public void changeMoneyTest_손님이_선택한_물품의_가격을확인한다() throws Exception{
+    public void changeMoneyTest_손님이_선택한_물품의_가격을확인한다() throws Exception {
         VendingMachine vm = new VendingMachine();
         vm.setSelectedProduct(650);
 
@@ -35,7 +36,7 @@ public class InputMoneyTest {
     }
 
     @Test
-    public void changeMoneyTest_손님이_선택한_물품가격을_투입금액에서_차감한다() throws Exception{
+    public void changeMoneyTest_손님이_선택한_물품가격을_투입금액에서_차감한다() throws Exception {
         VendingMachine vm = new VendingMachine();
         vm.setInputMoney(1000);
         vm.setSelectedProduct(650);
@@ -43,8 +44,9 @@ public class InputMoneyTest {
 
         assertEquals(350, vm.getMoney(), "손님이 선택한 물품 가격을 투입 금액에서 차감한다");
     }
+
     @Test
-    public void changeMoneyTest_손님에게_거스름돈을_반환한다() throws Exception{
+    public void changeMoneyTest_손님에게_거스름돈을_반환한다() throws Exception {
         VendingMachine vm = new VendingMachine();
         vm.setInputMoney(1000);
         vm.setSelectedProduct(650);

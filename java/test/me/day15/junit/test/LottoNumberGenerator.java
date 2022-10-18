@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 // 1000원을 주면 1개의 로또를 생성해주는 클래스
-public class LottoNumberGenerator {
+public class LottoNumberGenerator { // 1 ~ 45번 6개
     public List<Integer> generate(final int money) {
         if (!isValidMoney(money)) {
             throw new RuntimeException("올바른 금액이 아닙니다.");
@@ -26,9 +26,9 @@ public class LottoNumberGenerator {
     private List<Integer> generate() {
         return new Random()
                 .ints(1, 45 + 1)
-                .distinct()
-                .limit(6)
-                .boxed()
+                .distinct() // 중복 제거
+                .limit(6) // 6개까지 만들겠다!
+                .boxed() // int -> Integer
                 .collect(Collectors.toList());
     }
 
@@ -74,7 +74,9 @@ public class LottoNumberGenerator {
         final int price = 2000;
 
         // when
-        final RuntimeException exception = assertThrows(RuntimeException.class, () -> lottoNumberGenerator.generate(price));
+        final RuntimeException exception = assertThrows(
+                RuntimeException.class,
+                () -> lottoNumberGenerator.generate(price));
 
         // then
         assertEquals(exception.getMessage(), "올바른 금액이 아닙니다.");

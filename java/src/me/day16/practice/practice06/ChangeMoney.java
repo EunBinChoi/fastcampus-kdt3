@@ -8,7 +8,7 @@ public class ChangeMoney {
         changeMoneys = new int[4];
     }
 
-    public void setChangeMoney(int money) {
+    public void setChangeMoney(int money) { 
         int temp = 0;
         changeMoneys[0] = money / 500;
         temp = money % 500;
