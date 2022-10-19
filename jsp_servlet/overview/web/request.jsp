@@ -20,7 +20,7 @@
 <main>
   <h1>REQUEST</h1>
   <div>
-    <form method="get" action="response.jsp">
+    <form method="post" action="response.jsp">
       <div class="form__list">
         <label for="name">input your name:</label>
         <input type="text" id="name" name="name">
