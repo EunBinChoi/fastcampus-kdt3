@@ -1,0 +1,150 @@
+@charset "utf-8";
+
+body {
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 9pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+main {
+    width: 100vw;
+    height: 90vh;
+    margin: 0px;
+    padding: 0px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+main h1, h2, h3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+main select {
+    font-size: 9pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+main div {
+    font-size: 15pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+
+    height: auto;
+}
+
+main p {
+    padding: 0px;
+    margin: 0px;
+}
+
+main form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 15pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+
+main label {
+    width: 100px;
+}
+
+main .form__list {
+    height: auto;
+}
+
+main form input[type=submit] {
+    height: 30px;
+    width: 100px;
+    background-color: beige;
+    margin: 10px;
+}
+
+main textarea {
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    border-left: 1px solid #999999 ;
+    border-bottom: 1px solid #999999;
+
+    font-size: 9pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: white
+}
+
+main fieldset {
+    height: 180px;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+main input[type=text], main input[type=tel], main input[type=password] {
+    height: 30px;
+    width: 200px;
+    margin: 5px;
+    padding: 5px;
+
+    justify-content: space-evenly;
+
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    border-left: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+
+    font-size: 9pt;
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: white
+}
+
+main input[type=radio] {
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+main a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.main__memberList {
+    height: auto;
+    font-size: medium;
+}
+
+.main__memberList ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.main__nav__next {
+    font-size: 20px;
+}
+
+.main__nav__next a {
+    color: indianred;
+}

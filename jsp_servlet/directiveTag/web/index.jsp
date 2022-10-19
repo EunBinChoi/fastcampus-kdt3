@@ -1,5 +1,7 @@
+<%@ page info="Directive Tag Description Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.*, java.time.*, java.time.format.*, member.Member" %>
+<%@ page session="true" %>
 <%-- 지시자 (jsp 페이지가 실행될 떄 필요한 정보를 jsp 컨테이너 (catalina)에게 알리는 역할) --%>
 <html>
 <head>
@@ -72,9 +74,11 @@
         %>
     </div>
 
-        <nav class="main__nav__next">
-            👉🏻<a href="request.jsp"><b> 다음 예제로 이동</b></a>
-        </nav>
+        <ul class="main__nav__next">
+            <li>👉🏻<a href="request.jsp"><b> ErrorPage 예제로 이동</b></a></li>
+            <li>👉🏻<a href="includeDirective.jsp"><b> include 지시자 예제로 이동</b></a></li>
+            <li>👉🏻<a href="includeActionTag.jsp"><b> include 액션태그 예제로 이동</b></a></li>
+        </ul>
 
 </main>
 
