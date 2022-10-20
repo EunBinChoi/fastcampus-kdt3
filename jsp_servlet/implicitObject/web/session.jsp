@@ -1,4 +1,8 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <html>
 <head>
   <meta charset="UTF-8">
@@ -9,6 +13,7 @@
 <header>
   <jsp:include page="header.jsp"/>
 </header>
+
 
 <%
   request.setCharacterEncoding("UTF-8");
@@ -32,6 +37,7 @@
 <main>
   <h1>SURVEY</h1>
   <div>Hello! "<%=uId%>"</div>
+  <div></div>
   <div>Please complete the survey below 👇🏻</div>
   <div>
     <form method="post" action="surveyResult.jsp">
