@@ -17,9 +17,14 @@
 %>
             <script>alert("Login Fail!")</script>
 <%
-            session.removeAttribute("login");
 
+        } else if(session.getAttribute("login") == Status.NULL) {
+
+%>
+            <script>alert("Sign Up First.")</script>
+<%
         }
+        session.removeAttribute("login");
     }
 %>
 
@@ -36,6 +41,8 @@
         session.removeAttribute("signup");
     }
 %>
+
+
 
 
 <main>

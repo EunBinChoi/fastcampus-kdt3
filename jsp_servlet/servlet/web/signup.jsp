@@ -10,19 +10,7 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-<%
 
-    if (session.getAttribute("login") != null) {
-
-        if(session.getAttribute("login") == Status.NULL) {
-
-%>
-        <script>alert("Sign Up First.")</script>
-<%
-        }
-        session.removeAttribute("login");
-    }
-%>
 
 <%
 

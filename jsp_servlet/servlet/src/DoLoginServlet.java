@@ -49,7 +49,7 @@ public class DoLoginServlet extends HttpServlet {
             }
         } else {
             session.setAttribute("login", Status.NULL);
-            response.sendRedirect("./signup.jsp");
+            response.sendRedirect("./login.jsp");
         }
 
     }
