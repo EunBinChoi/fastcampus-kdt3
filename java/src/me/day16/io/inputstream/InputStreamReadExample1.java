@@ -8,7 +8,7 @@ import java.io.InputStream;
 public class InputStreamReadExample1 {
     public static void main(String[] args) {
         try {
-            String path = InputStreamReadExample1.class.getResource("").getPath();
+            final String path = InputStreamReadExample1.class.getResource("").getPath();
             InputStream inputStream = new FileInputStream(path + "input_kor.txt"); // 한국어 깨짐 (1 바이트씩 읽음)
 //            InputStream inputStream = new FileInputStream(path + "input_eng.txt");
             int readByte;

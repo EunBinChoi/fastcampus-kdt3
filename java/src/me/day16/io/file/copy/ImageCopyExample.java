@@ -1,11 +1,13 @@
 package me.day16.io.file.copy;
 
+import me.day16.io.data.DataStreamExample;
 import me.day16.io.file.outputstream.FileOutputStreamExample;
 
 import java.io.*;
 
 public class ImageCopyExample {
     public static void main(String[] args) {
+        // out directory absolute path
         final String path = ImageCopyExample.class.getResource("").getPath();
         final String original = "dog.jpg";
         final String copy = "dog_copy.jpg";

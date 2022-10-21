@@ -1,5 +1,7 @@
 package me.day12.exception.close.finallys;
 
+import me.day12.api.util.scanner.ScannerExample;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +11,7 @@ public class FinallyCloseExample {
         FileInputStream fileInputStream = null;
         BufferedInputStream bufferedInputStream = null;
 
+        // out directory absolute path
         final String PATH = FinallyCloseExample.class.getResource("").getPath();
         final String FILENAME = "input.txt";
         try {

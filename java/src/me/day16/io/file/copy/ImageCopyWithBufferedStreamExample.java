@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 public class ImageCopyWithBufferedStreamExample {
     public static void main(String[] args) throws IOException {
         final String path = ImageCopyWithBufferedStreamExample.class.getResource("").getPath();
+
         final String fileName = "dog.jpg";
 
         StringTokenizer stringTokenizer = new StringTokenizer(fileName, ".");

@@ -8,9 +8,9 @@ import java.io.OutputStream;
 public class OutputStreamWriteExample2 {
     public static void main(String[] args) {
         try {
-            String path = OutputStreamWriteExample2.class.getResource("").getPath();
+            final String path = OutputStreamWriteExample2.class.getResource("").getPath();
             OutputStream outputStream = new FileOutputStream(path + "output.txt");
-            byte[] data = "a b c d e f g h i j k".getBytes(); // "a b c d e f g h i j k"을 한꺼번에 출력
+            final byte[] data = "a b c d e f g h i j k".getBytes(); // "a b c d e f g h i j k"을 한꺼번에 출력
             outputStream.write(data);
             outputStream.flush();
             outputStream.close();

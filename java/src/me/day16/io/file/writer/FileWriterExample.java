@@ -5,7 +5,7 @@ import java.io.*;
 public class FileWriterExample {
     public static void main(String[] args) {
         final String path = FileWriterExample.class.getResource("").getPath();
-        String[] sentences = {":(\n", ":)\n", "TT\n", "^^\n"};
+        final String[] sentences = {":(\n", ":)\n", "TT\n", "^^\n"};
 
         try (Writer writer = new FileWriter(path + "output.txt", true)) {
             // 파일이 없을 경우 파일을 생성

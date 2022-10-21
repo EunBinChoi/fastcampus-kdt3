@@ -8,7 +8,7 @@ import java.io.Reader;
 public class ReaderReadExample2 {
     public static void main(String[] args) {
         try {
-            String path = ReaderReadExample2.class.getResource("").getPath();
+            final String path = ReaderReadExample2.class.getResource("").getPath();
             Reader reader = new FileReader(path + "long.txt"); //  정상 출력
             int total = 0;
             int readCharNo = 0;

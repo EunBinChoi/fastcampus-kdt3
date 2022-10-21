@@ -1,12 +1,12 @@
 package me.day12.exception.close.resources;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import me.day12.exception.close.finallys.FinallyCloseExample;
+
+import java.io.*;
 
 public class TryWithResourceCloseExample {
     public static void main(String[] args) {
+        // out directory absolute path
         final String PATH = TryWithResourceCloseExample.class.getResource("").getPath();
         final String FILENAME = "input.txt";
 

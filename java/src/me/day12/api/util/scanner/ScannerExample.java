@@ -1,5 +1,7 @@
 package me.day12.api.util.scanner;
 
+import me.day16.io.reader.ReaderReadExample1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
@@ -41,7 +43,9 @@ public class ScannerExample {
 //        System.out.println();
 //        scanner.close();
 
+        // out directory absolute path
         final String PATH = ScannerExample.class.getResource("").getPath();
+
         final String FILENAME = "input.txt";
         Scanner scanner1 = new Scanner(new File(PATH + FILENAME));
         

@@ -1,13 +1,14 @@
 package me.day16.io.buffered;
 
+import me.day12.exception.close.resources.TryWithResourceCloseExample;
 import me.day16.io.file.writer.FileWriterExample;
 
 import java.io.*;
 
 public class BufferedStreamExample {
     public static void main(String[] args) {
+        // out directory absolute path
         final String path = BufferedStreamExample.class.getResource("").getPath();
-
         /*
             Buffer 입출력 스트림: 입력/출력 성능 향상
 

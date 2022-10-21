@@ -11,7 +11,7 @@ public class FileOutputStreamExample {
     public static void main(String[] args) {
         final String path = FileOutputStreamExample.class.getResource("").getPath();
 
-        byte[] bytes = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
+        final byte[] bytes = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
 
         try (OutputStream os = new FileOutputStream(path + "output.txt")) {
             // 파일이 없을 경우 파일을 생성

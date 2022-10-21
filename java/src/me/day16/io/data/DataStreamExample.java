@@ -1,10 +1,15 @@
 package me.day16.io.data;
 
+import me.day16.io.buffered.BufferedStreamExample;
+
 import java.io.*;
 
 public class DataStreamExample {
     public static void main(String[] args) {
+
+        // out directory absolute path
         final String path = DataStreamExample.class.getResource("").getPath();
+
         try (
                 OutputStream fos = new FileOutputStream(path + "input.dat"); // 이진 파일
                 DataOutputStream dos = new DataOutputStream(fos);

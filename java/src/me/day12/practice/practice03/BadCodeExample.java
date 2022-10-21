@@ -1,15 +1,16 @@
 package me.day12.practice.practice03;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import me.day12.exception.close.resources.TryWithResourceCloseExample;
+
+import java.io.*;
 
 public class BadCodeExample {
     public static void main(String[] args) {
         FileInputStream fileInputStream = null;
         BufferedInputStream bufferedInputStream = null;
 
+
+        // out directory absolute path
         final String PATH = BadCodeExample.class.getResource("").getPath();
         final String FILENAME = "input.txt";
         try {

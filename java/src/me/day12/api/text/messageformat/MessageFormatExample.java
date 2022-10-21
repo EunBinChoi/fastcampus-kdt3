@@ -2,12 +2,14 @@ package me.day12.api.text.messageformat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class MessageFormatExample {
-    public static void main(String[] args) throws ParseException, FileNotFoundException {
+    public static void main(String[] args) throws ParseException, IOException {
         // From Person[] to Strings
         String pattern ="VALUES (\"{0}\",''{1}'',{2},''{3}'')";
         Person[] people = { new Person("a", Person.Gender.MALE, "971212", "971212-1234567"),
@@ -34,7 +36,10 @@ public class MessageFormatExample {
         /////////////////////////////////////////////////////
         /////////////////////////////////////////////////////
         // 파일에서 읽어오기
+        // out directory absolute path
         final String PATH = MessageFormatExample.class.getResource("").getPath();
+        System.out.println(PATH);
+
         final String FILENAME = "input.txt";
         String pattern2 = "name: {0}, age: {1}";
         Scanner scanner = new Scanner(new File(PATH + FILENAME));

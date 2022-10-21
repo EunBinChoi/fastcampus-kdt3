@@ -1,15 +1,13 @@
 package me.day12.exception.close.finallys;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class FinallyCloseExample2 implements Close {
     public static void main(String[] args) {
         FileInputStream fileInputStream = null;
         BufferedInputStream bufferedInputStream = null;
 
+        // out directory absolute path
         final String PATH = FinallyCloseExample2.class.getResource("").getPath();
         final String FILENAME = "input.txt";
         try {

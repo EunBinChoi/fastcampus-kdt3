@@ -8,7 +8,7 @@ import java.io.InputStream;
 public class InputStreamReadExample3 {
     public static void main(String[] args) {
         try {
-            String path = InputStreamReadExample3.class.getResource("").getPath();
+            final String path = InputStreamReadExample3.class.getResource("").getPath();
             InputStream inputStream = new FileInputStream(path + "long.txt");
             int total = 0;
             int readByteNo = 0;
