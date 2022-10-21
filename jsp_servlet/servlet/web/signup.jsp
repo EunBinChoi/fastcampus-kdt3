@@ -11,7 +11,6 @@
     <jsp:include page="header.jsp"/>
 </header>
 
-
 <%
 
     if (session.getAttribute("signup") != null) {
