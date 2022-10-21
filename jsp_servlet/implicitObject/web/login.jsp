@@ -10,14 +10,6 @@
   <jsp:include page="header.jsp"/>
 </header>
 
-<%
-  if (session.getAttribute("uId") != null) {
-    response.sendRedirect("./session.jsp?uId=" + session.getAttribute("uId"));
-    // redirect: 요청을 다시 만듦 (기촌 요청이 삭제되고 새로운 요청을 만듦)
-    // login.jsp --- (기존에 request 사라짐) ----> session.jsp
-  }
-%>
-
 <main>
   <h1>LOGIN</h1>
   <div>

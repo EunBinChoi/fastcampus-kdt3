@@ -13,7 +13,6 @@
 </header>
 
 <%
-
   request.setCharacterEncoding("UTF-8");
   String uId = "";
   if (session.getAttribute("uId") != null) {
