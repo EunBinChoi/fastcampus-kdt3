@@ -22,6 +22,7 @@ public class Servlet extends HttpServlet {
         out.write("  <title>JSP Title</title>\n");
         out.write("</head>\n");
         out.write("<body>\n");
+        out.write("<main>\n");
         out.write("\n");
         out.write("<!-- html 주석 -->\n");
         out.write("<h2>Static Part</h2>\n");
@@ -53,6 +54,7 @@ public class Servlet extends HttpServlet {
         out.write("</h2>\n");
         out.write("\n");
         out.write("\n");
+        out.write("</main>\n");
         out.write("</body>\n");
         out.write("</html>");
     }

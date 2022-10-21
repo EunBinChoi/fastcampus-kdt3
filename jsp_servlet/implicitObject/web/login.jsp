@@ -10,12 +10,21 @@
   <jsp:include page="header.jsp"/>
 </header>
 
+<%
+  if (session.getAttribute("uId") != null) {
+    response.sendRedirect("./session.jsp?uId=" + session.getAttribute("uId"));
+    // redirect: 요청을 다시 만듦 (기촌 요청이 삭제되고 새로운 요청을 만듦)
+    // login.jsp --- (기존에 request 사라짐) ----> session.jsp
+  }
+%>
+
 <main>
   <h1>LOGIN</h1>
   <div>
     <form method="post" action="session.jsp">
       <div class="form__list">
         <label for="uId">ID: </label>
+        <%-- key-value (name-value)   --%>
         <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID" pattern="[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}" required/>
       </div>
 
