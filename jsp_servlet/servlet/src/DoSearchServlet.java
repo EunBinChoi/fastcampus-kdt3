@@ -34,7 +34,7 @@ public class DoSearchServlet extends HttpServlet {
 
         String keyword = "";
         int count = 0;
-        if (!request.getParameter("search").equals("")) {
+        if (request.getParameter("search") != null) {
             keyword = request.getParameter("search");
 
             Iterator<String> iterator = database.getData().keySet().iterator();
