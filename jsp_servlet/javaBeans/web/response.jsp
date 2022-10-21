@@ -7,11 +7,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+  request.setCharacterEncoding("UTF-8");
+%>
+
+<%--SimpleBeans simple = new SimpleBeans();--%>
 <jsp:useBean id="simple" class="simple.SimpleBeans" type="simple.SimpleBeans" scope="page"/>
+<%-- 디폴트 생성자를 호출해서 빈을 생성 --%>
 
 <%--<jsp:setProperty name="simple" property="name" param="name"/>--%>
 <%--<jsp:setProperty name="simple" property="value" param="value"/>--%>
+
+<%--<jsp:setProperty name="simple" property="name"/>--%>
+<%--<jsp:setProperty name="simple" property="value"/>--%>
 <jsp:setProperty name="simple" property="*"/>
+<%-- simple.setName("사용자가 입력한 값"), simple.setValue("사용자가 입력한 값") --%>
 
 <html>
 <head>

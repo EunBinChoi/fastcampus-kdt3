@@ -1,25 +1,16 @@
 package member;
 
 public class Member {
-    private String uId;
+//    private String uId;
     private String uPw;
     private String uEmail;
 
     public Member() {
     }
 
-    public Member(String uId, String uPw, String uEmail) {
-        this.uId = uId;
+    public Member(String uPw, String uEmail) {
         this.uPw = uPw;
         this.uEmail = uEmail;
-    }
-
-    public String getuId() {
-        return uId;
-    }
-
-    public void setuId(String uId) {
-        this.uId = uId;
     }
 
     public String getuPw() {
@@ -38,12 +29,10 @@ public class Member {
         this.uEmail = uEmail;
     }
 
-
     @Override
     public String toString() {
         return "Member{" +
-                "uId='" + uId + '\'' +
-                ", uPw='" + uPw + '\'' +
+                "uPw='" + uPw + '\'' +
                 ", uEmail='" + uEmail + '\'' +
                 '}';
     }

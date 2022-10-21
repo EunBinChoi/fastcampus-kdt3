@@ -22,7 +22,7 @@ public class DoLogoutServlet extends HttpServlet {
         if (session.getAttribute("uId") != null) {
             session.removeAttribute("uId");
         }
-        session.invalidate();
+        session.invalidate(); // 세션 객체에 살고 있는 속성 값들 다 삭제 (세션 무효화)
         resp.sendRedirect("./login.jsp");
     }
 }

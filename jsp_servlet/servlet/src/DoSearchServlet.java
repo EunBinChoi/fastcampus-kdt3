@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 
+
 @WebServlet(name = "DoSearchServlet", value = "/DoSearchServlet")
 public class DoSearchServlet extends HttpServlet {
 
@@ -33,7 +34,7 @@ public class DoSearchServlet extends HttpServlet {
 
         String keyword = "";
         int count = 0;
-        if (request.getParameter("search") != null) {
+        if (!request.getParameter("search").equals("")) {
             keyword = request.getParameter("search");
 
             Iterator<String> iterator = database.getData().keySet().iterator();

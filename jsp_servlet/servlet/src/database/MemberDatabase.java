@@ -21,11 +21,11 @@ public class MemberDatabase {
     private MemberDatabase() {}
 
     private void initialize() {
-        data.put("a", new Member("sally","a1234", "qweqwe@naver.com"));
-        data.put("b", new Member("kelly","b1234", "b1sad@gmail.com"));
-        data.put("c", new Member("john","c1234", "ccasq@gmail.com"));
-        data.put("d", new Member("smith","d1234", "basdya@yahoo.com"));
-        data.put("e", new Member("philip","e1234", "eeadwe@gmail.com"));
+        data.put("a", new Member("a1234", "qweqwe@naver.com"));
+        data.put("b", new Member("b1234", "b1sad@gmail.com"));
+        data.put("c", new Member("c1234", "ccasq@gmail.com"));
+        data.put("d", new Member("d1234", "basdya@yahoo.com"));
+        data.put("e", new Member("e1234", "eeadwe@gmail.com"));
     }
 
     public Member select(String key) {
