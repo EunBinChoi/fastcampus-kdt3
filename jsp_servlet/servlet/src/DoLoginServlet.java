@@ -41,8 +41,12 @@ public class DoLoginServlet extends HttpServlet {
                 session.setAttribute("uId", uId);
                 session.setMaxInactiveInterval(1800);
 
-                session.setAttribute("login", Status.SUCCESS);
+//                request.setAttribute("login", Status.SUCCESS); // request 저장소에 넣는다면 ?
+                session.setAttribute("login", Status.SUCCESS); //
                 response.sendRedirect("./survey.jsp");
+                // redirect (URL 변경됨, request 사라짐)
+                // forward (URL 변경되지 않고 기존의 request 전달)
+
             } else {
                 session.setAttribute("login", Status.FAIL);
                 response.sendRedirect("./login.jsp");

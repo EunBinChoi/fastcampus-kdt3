@@ -10,32 +10,15 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-<%
-
-    if (session.getAttribute("login") != null) {
-        if (session.getAttribute("login") == Status.FAIL) {
-%>
-            <script>alert("Login Fail!")</script>
-<%
-
-        } else if(session.getAttribute("login") == Status.NULL) {
-
-%>
-            <script>alert("Sign Up First.")</script>
-<%
-        }
-        session.removeAttribute("login");
-    }
-%>
 
 <%
 
     if (session.getAttribute("signup") != null) {
 
-        if(session.getAttribute("signup") == Status.SUCCESS) {
+        if(session.getAttribute("signup") == Status.FAIL) {
 
 %>
-            <script>alert("Sign Up Success!")</script>
+        <script>alert("Input ID can't be used.")</script>
 <%
         }
         session.removeAttribute("signup");
@@ -46,20 +29,32 @@
 
 
 <main>
-    <h1>LOGIN</h1>
+    <h1>SIGN UP</h1>
     <div>
-        <form method="post" action="./DoLoginServlet">
+        <form method="post" action="./DoSignupServlet">
+
+            <div class="form__list">
+                <label for="uEmail">EMAIL: </label>
+                <input type="email" id="uEmail" name="uEmail" placeholder="INPUT YOUR EMAIL"
+                       pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required/>
+            </div>
+
+
             <div class="form__list">
                 <label for="uId">ID: </label>
                 <%-- key-value (name-value)   --%>
-                <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID" required/>
+                <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID"
+                       pattern="[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}" required/>
             </div>
+
 
             <div class="form__list">
                 <label for="uPw">PASSWORD: </label>
-                <%-- key-value (name-value)   --%>
-                <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD" required/>
+                <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD"
+                       pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" required/>
             </div>
+
+
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>

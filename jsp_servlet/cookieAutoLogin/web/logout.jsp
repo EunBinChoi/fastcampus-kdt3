@@ -12,19 +12,20 @@
 
 <%
     String uId = "";
-    if (session.getAttribute("uId") != null) {
-        uId = (String) session.getAttribute("uId");
+    if (session.getAttribute("SESSION_ID") != null) {
+        uId = (String) session.getAttribute("SESSION_ID");
     } else {
         response.sendRedirect("./login.jsp");
     }
 %>
 
+
 <main>
     <h1>LOGOUT</h1>
     <div>Hello! "<%=uId%>"</div>
     <script>
-        const val = confirm("Logout?");
-        if (val) {
+        const isLogout = confirm("Logout ?");
+        if (isLogout) {
             location.href = "./DoLogoutServlet";
         } else {
             location.href = "./index.jsp";
