@@ -22,14 +22,7 @@
     <link rel="icon" href="./icon/favicon-16x16.png" sizes="16x16">
     <link rel="icon" href="./icon/favicon-32x32.png" sizes="32x32">
     <link rel="icon" href="./icon/favicon-96x96.png" sizes="96x96">
-
-
-    <script src="./js/header.js" defer></script>
-    <!-- defer: html 요소가 모두 호출된 후에 스크립트 실행
-         async: html 요소가 끝나지 않아도 스크립트 실행
-               (스크립트 로드 완료되면)
-    -->
-
+    
 </head>
 <body>
 <header class="header">

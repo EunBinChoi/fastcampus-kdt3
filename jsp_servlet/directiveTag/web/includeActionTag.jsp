@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>JSP Title</title>
+    <title>JSP</title>
     <link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 
