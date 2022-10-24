@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>JSP</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>

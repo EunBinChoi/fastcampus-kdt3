@@ -18,7 +18,7 @@
 </header>
 
 <main>
-  <h1>REQUEST</h1>
+  <h1>JSP</h1>
   <div>
     <form method="post" action="response.jsp">
       <div class="form__list">
