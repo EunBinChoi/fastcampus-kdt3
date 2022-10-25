@@ -41,8 +41,8 @@ public class DoLoginServlet extends HttpServlet {
 
 
         Member member = database.select(uId);
-        System.out.println("member = " + member);
-        System.out.println("======================\n\n");
+//        System.out.println("member = " + member);
+//        System.out.println("======================\n\n");
         if (member != null) {
             if (member.getuPw().getPassword().equals(uPw)) {
                 session.setAttribute("SESSION_ID", uId);
