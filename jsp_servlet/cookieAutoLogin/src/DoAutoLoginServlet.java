@@ -37,6 +37,9 @@ public class DoAutoLoginServlet extends HttpServlet {
                 }
             }
         }
+        System.out.println("uId = " + uId); // ""
+        System.out.println("uPw = " + uPw);
+        System.out.println("uHashPw = " + uHashPw);
 
         // 중간에 쿠키 만료기한이 지날 수 있음
         // 중간에 쿠키 만료기한이 지나면 uId, uPw, uHashPW "" 문자열

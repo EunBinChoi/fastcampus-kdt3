@@ -18,7 +18,34 @@
         response.sendRedirect("./index.jsp");
     }
 
+
+    String[] mustCookies = {"COOKIE_ID", "COOKIE_PW", "COOKIE_HASH_PW"};
     Cookie[] cookies = request.getCookies();
+    boolean isMustCookies = true;
+    for (int i = 0; i < mustCookies.length; i++) {
+        if (cookies != null) {
+            for (Cookie cookie: cookies) {
+                if (cookie.getName() != null) {
+                    if (!cookie.getName().equals(mustCookies[i])) {
+                        isMustCookies = false;
+                        break;
+                    }
+                }
+            }
+            if (!isMustCookies) break;
+        }
+    }
+
+    if (!isMustCookies) {
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("AUTO_LOGIN")) {
+                cookies[i].setValue("false");
+                response.addCookie(cookies[i]);
+            }
+        }
+    }
+
+
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName() != null) {

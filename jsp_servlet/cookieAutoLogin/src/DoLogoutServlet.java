@@ -17,19 +17,39 @@ public class DoLogoutServlet extends HttpServlet {
 
         session.invalidate(); // 세션 객체에 살고 있는 속성 값들 다 삭제 (세션 무효화)
 
-        ///////////////// 쿠키 중 AUTO_LOGIN 값 변경 /////////////////
+        ///////////////// 기존 쿠키값 삭제할 수 있도록 변경 //////////////
         Cookie[] cookies = req.getCookies();
+//        String[] mustCookies = {"COOKIE_ID", "COOKIE_PW", "COOKE_HASH_PW", "AUTO_LOGIN"};
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName() != null) {
-                    if (cookie.getName().equals("AUTO_LOGIN")) {
-                        cookie.setValue("false");
+                    if (cookie.getName().equals("COOKIE_ID") ||
+                    cookie.getName().equals("COOKIE_PW") ||
+                    cookie.getName().equals("COOKIE_HASH_PW") ||
+                    cookie.getName().equals("AUTO_LOGIN")) {
+                        cookie.setMaxAge(0);
+                        cookie.setPath("/");
                         resp.addCookie(cookie);
                     }
                 }
             }
         }
+
+
+        ///////////////// 쿠키 중 AUTO_LOGIN 값 변경 /////////////////
+//        Cookie[] cookies = req.getCookies();
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName() != null) {
+//                    if (cookie.getName().equals("AUTO_LOGIN")) {
+//                        cookie.setValue("false");
+//                        resp.addCookie(cookie);
+//                    }
+//                }
+//            }
+//        }
         resp.sendRedirect("./login.jsp");
     }
 }
