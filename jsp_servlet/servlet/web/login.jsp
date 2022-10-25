@@ -10,6 +10,13 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
+
+<%
+    if (session.getAttribute("uId") != null) {
+        response.sendRedirect("./index.jsp");
+    }
+%>
+
 <%
 
     if (session.getAttribute("login") != null) {

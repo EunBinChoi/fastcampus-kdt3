@@ -41,7 +41,7 @@
     </div>
 
         <ul class="main__nav__next">
-            <li>👉🏻<a href="./Servlet"><b>Servlet Life Cycle 예제로 이동</b></a></li>
+            <li>👉🏻<a href="./Servlet"><b>java.Servlet Life Cycle 예제로 이동</b></a></li>
             <li>👉🏻<a href="search.jsp"><b>doGet() 예제로 이동</b></a></li>
             <li>👉🏻<a href="login.jsp"><b>doPost() 예제로 이동</b></a></li>
         </ul>

@@ -37,16 +37,16 @@
 
     <ul class="header__nav">
         <!-- block 구조여서 수직적 중앙이 맞음 -->
-        <li><a href="#">Home</a></li>
+        <li><a href="index.jsp">Home</a></li>
         <li><a href="#">Board</a></li>
-        <li><a href="#">Survey</a></li>
+        <li><a href="survey.jsp">Survey</a></li>
     </ul>
 
     <ul class="header__icons">
 
     <%
         if (session.getAttribute("SESSION_ID") != null) { %>
-            <li><a href="cookie.jsp"><i class="fas fa-user"></i></a></li>
+            <li><a href="private.jsp"><i class="fas fa-user"></i></a></li>
             <li><a href="logout.jsp"><i class="fas fa-toggle-on"></i></a></li>
 
     <%

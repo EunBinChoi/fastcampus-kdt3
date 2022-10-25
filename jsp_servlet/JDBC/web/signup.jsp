@@ -1,4 +1,4 @@
-<%@ page import="util.Status" %>
+<%@ page import="me.web.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,17 +15,15 @@
 
     if (session.getAttribute("signup") != null) {
 
-        if(session.getAttribute("signup") == Status.FAIL) {
+        if (session.getAttribute("signup") == Status.FAIL) {
 
 %>
-        <script>alert("Input ID can't be used.")</script>
+<script>alert("Input ID can't be used.")</script>
 <%
         }
         session.removeAttribute("signup");
     }
 %>
-
-
 
 
 <main>

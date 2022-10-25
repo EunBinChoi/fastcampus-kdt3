@@ -1,4 +1,4 @@
-package simple;
+package me.web.simple;
 
 import java.io.Serializable;
 

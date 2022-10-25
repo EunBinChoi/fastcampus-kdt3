@@ -37,7 +37,7 @@
 
 <%
     // pageContext 저장소에 배열 저장
-    List<String> stringList = List.of("JSP", "Servlet", "Spring");
+    List<String> stringList = List.of("JSP", "java.Servlet", "Spring");
     pageContext.setAttribute("stringList", stringList);
 
 %>

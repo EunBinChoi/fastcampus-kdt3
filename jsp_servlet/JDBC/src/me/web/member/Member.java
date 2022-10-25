@@ -1,49 +1,51 @@
-package member;
+package me.web.member;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
-public class Password {
-    private String password;
-    private String hashPassword;
+public class Member {
+    private String uId = "";
+    private String uPw = "";
+    private String uEmail = "";
 
-    public Password(String password) {
-        this(password, true);
+    public Member() {
     }
 
-    public Password(String password, boolean needHash) {
-        if (needHash) {
-            this.password = password;
-            this.hashPassword = sha256(password);
-        } else {
-            this.password = "";
-            this.hashPassword = password;
-        }
+    public Member(String uId, String uPw) {
+        this.uId = uId;
+        this.uPw = uPw;
     }
 
-
-    public String getPassword() {
-        return password;
+    public Member(String uId, String uPw, String uEmail) {
+        this.uId = uId;
+        this.uPw = uPw;
+        this.uEmail = uEmail;
     }
 
-    public void setPassword(String password, boolean needHash) {
-        if (needHash) {
-            this.password = password;
-            this.hashPassword = sha256(password);
-        } else {
-            this.password = "";
-            this.hashPassword = password;
-        }
+    public String getuId() {
+        return uId;
     }
 
-    public String getHashPassword() {
-        return hashPassword;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
+    public String getuPw() {
+        return uPw;
+    }
+
+    public void setuPw(String uPw) {
+        this.uPw = uPw;
+    }
+
+    public String getuEmail() {
+        return uEmail;
+    }
+
+    public void setuEmail(String uEmail) {
+        this.uEmail = uEmail;
     }
 
     /**
@@ -84,24 +86,29 @@ public class Password {
 
     }
 
+    public boolean isIdPwdEquals(Member member) {
+        return uId.equals(member.uId) && uPw.equals(member.uPw);
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Password password = (Password) o;
-        return hashPassword.equals(password.hashPassword);
+        Member member = (Member) o;
+        return uId.equals(member.uId) && uPw.equals(member.uPw) && uEmail.equals(member.uEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hashPassword);
+        return Objects.hash(uId, uPw, uEmail);
     }
 
     @Override
     public String toString() {
-        return "Password{" +
-                "hashPassword='" + hashPassword + '\'' +
+        return "Member{" +
+                "uId='" + uId + '\'' +
+                ", uPw='" + uPw + '\'' +
+                ", uEmail='" + uEmail + '\'' +
                 '}';
     }
 }

@@ -39,7 +39,7 @@
         <!-- block 구조여서 수직적 중앙이 맞음 -->
         <li><a href="#">Home</a></li>
         <li><a href="#">Board</a></li>
-        <li><a href="#">Survey</a></li>
+        <li><a href="survey.jsp">Survey</a></li>
     </ul>
 
     <ul class="header__icons">

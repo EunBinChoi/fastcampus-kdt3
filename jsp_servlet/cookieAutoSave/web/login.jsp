@@ -11,6 +11,45 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
+
+<%
+    if (session.getAttribute("SESSION_ID") != null) {
+        response.sendRedirect("./index.jsp");
+    }
+%>
+
+<%-- 쿠키를 통해 자동 저장 시도 --%>
+<%
+
+    String uId = "";
+    String uPw = "";
+    String uHashPw = "";
+
+    Cookie[] cookies = request.getCookies();
+    boolean isCookieValue = false;
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName() != null) {
+                if (cookie.getName().equals("COOKIE_ID")) {
+                    uId = cookie.getValue();
+                } else if (cookie.getName().equals("COOKIE_PW")) {
+                    uPw = cookie.getValue();
+                } else if (cookie.getName().equals("COOKIE_HASH_PW")) {
+                    uHashPw = cookie.getValue();
+                    isCookieValue = true;
+                }
+            }
+        }
+    }
+
+    String uPwView = "";
+    if (isCookieValue) { // a, a1234 -> *****
+        uPwView = uPw;
+    }
+
+%>
+
+
 <%
 
     if (session.getAttribute("login") != null) {
@@ -43,36 +82,7 @@
     }
 %>
 
-<%-- 쿠키를 통해 자동 로그인 시도 --%>
-<%
 
-    String uId = "";
-    String uPw = "";
-    String uHashPw = "";
-
-    Cookie[] cookies = request.getCookies();
-    boolean isCookieValue = false;
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName() != null) {
-                if (cookie.getName().equals("COOKIE_ID")) {
-                    uId = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_PW")) {
-                    uPw = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_HASH_PW")) {
-                    uHashPw = cookie.getValue();
-                    isCookieValue = true;
-                }
-            }
-        }
-    }
-
-    String uPwView = "";
-    if (isCookieValue) { // a, a1234 -> *****
-        uPwView = uPw;
-    }
-
-%>
 
 <script>
     // input tag에 새로운 입력이 생기면 #isChanged value => "true"
@@ -105,7 +115,7 @@
             </div>
 
             <div class="checkbox__form">
-                <label for="save">AUTO LOGIN: </label>
+                <label for="save">AUTO SAVE: </label>
                 <input id="save" type="checkbox" name="save"/>
             </div>
             <input id="submit" type="submit" name="submit" value="Submit">

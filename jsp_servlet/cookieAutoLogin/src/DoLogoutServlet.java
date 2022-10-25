@@ -14,25 +14,17 @@ public class DoLogoutServlet extends HttpServlet {
         if (session.getAttribute("SESSION_ID") != null) {
             session.removeAttribute("SESSION_ID");
         }
+
         session.invalidate(); // 세션 객체에 살고 있는 속성 값들 다 삭제 (세션 무효화)
 
-        ////////////////////////// 쿠키 삭제 ///////////////////////
+        ///////////////// 쿠키 중 AUTO_LOGIN 값 변경 /////////////////
         Cookie[] cookies = req.getCookies();
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName() != null) {
-                    if (cookie.getName().equals("COOKIE_ID")) {
-                        cookie.setMaxAge(0);
-                        cookie.setPath("/");
-                        resp.addCookie(cookie);
-                    } else if (cookie.getName().equals("COOKIE_PW")) {
-                        cookie.setMaxAge(0);
-                        cookie.setPath("/");
-                        resp.addCookie(cookie);
-                    }  else if (cookie.getName().equals("COOKIE_HASH_PW")) {
-                        cookie.setMaxAge(0);
-                        cookie.setPath("/");
+                    if (cookie.getName().equals("AUTO_LOGIN")) {
+                        cookie.setValue("false");
                         resp.addCookie(cookie);
                     }
                 }

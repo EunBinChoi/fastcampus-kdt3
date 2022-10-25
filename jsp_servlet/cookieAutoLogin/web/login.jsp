@@ -1,4 +1,5 @@
 <%@ page import="util.Status" %>
+<%@ page import="java.util.Arrays" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,6 +12,33 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
+
+<%
+    if (session.getAttribute("SESSION_ID") != null) {
+        response.sendRedirect("./index.jsp");
+    }
+
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName() != null) {
+                if (cookie.getName().equals("AUTO_LOGIN")) {
+                    String value = cookie.getValue();
+                    if (value.equals("true")) {
+%>
+<script>
+    location.href = "./DoAutoLoginServlet";
+</script>
+<%
+                    }
+                }
+            }
+        }
+    }
+%>
+
+
+
 <%
 
     if (session.getAttribute("login") != null) {
@@ -43,34 +71,7 @@
     }
 %>
 
-<%-- 쿠키를 통해 자동 로그인 시도 --%>
-<%
 
-    String uId = "";
-    String uPw = "";
-    String uHashPw = "";
-
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName() != null) {
-                if (cookie.getName().equals("COOKIE_ID")) {
-                    uId = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_PW")) {
-                    uPw = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_HASH_PW")) {
-                    uHashPw = cookie.getValue();
-                }
-            }
-        }
-    }
-
-    if (!uId.equals("") && !uPw.equals("") && !uHashPw.equals("")) {
-        response.sendRedirect("./DoAutoLoginServlet");
-    }
-
-
-%>
 
 <main>
     <h1>LOGIN</h1>

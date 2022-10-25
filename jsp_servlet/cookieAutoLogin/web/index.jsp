@@ -9,8 +9,13 @@
 </head>
 
 
+
+
 <body>
 <header><jsp:include page="header.jsp"/></header>
+
+
+
 <main>
     <%-- JSP 주석 --%>
     <!-- html 주석 -->

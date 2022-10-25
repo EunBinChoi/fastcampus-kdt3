@@ -47,6 +47,7 @@ public class DoAutoLoginServlet extends HttpServlet {
                 session.setAttribute("SESSION_ID", uId);
                 session.setMaxInactiveInterval(1800); // 30분
 
+
 //                session.setAttribute("login", Status.SUCCESS);
                 response.sendRedirect("./survey.jsp");
             } else {

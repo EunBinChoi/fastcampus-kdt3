@@ -1,3 +1,5 @@
+package me.web;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@WebServlet(name = "Servlet", value = "/Servlet")
+@WebServlet(name = "java.Servlet", value = "/java.Servlet")
 public class Servlet extends HttpServlet {
     static final String CURRENT_FILE = Servlet.class.getName();
 

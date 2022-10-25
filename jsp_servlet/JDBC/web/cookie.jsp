@@ -1,4 +1,4 @@
-<%@ page import="util.Status" %>
+<%@ page import="me.web.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,13 +20,13 @@
 <script>alert("Cookie Delete Success!")</script>
 <%
 
-} else if (session.getAttribute("cookie") == Status.NULL) {
+} else if (session.getAttribute("cookie") == Status.FAIL) {
 
 %>
-<script>alert("Nothing to Delete.")</script>
+<script>alert("Cookie Delete Fail!")</script>
 <%
         }
-        session.removeAttribute("cookie");
+        session.removeAttribute("java/cookie");
     }
 %>
 

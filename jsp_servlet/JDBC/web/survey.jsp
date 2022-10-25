@@ -1,6 +1,6 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="util.Status" %>
+<%@ page import="me.web.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>

@@ -13,6 +13,15 @@
 </header>
 
 <%
+    String uId = "";
+    if (session.getAttribute("SESSION_ID") != null) {
+        uId = (String) session.getAttribute("SESSION_ID");
+    } else {
+        response.sendRedirect("./login.jsp");
+    }
+%>
+
+<%
 
     if (session.getAttribute("cookie") != null) {
         if (session.getAttribute("cookie") == Status.SUCCESS) {
@@ -31,14 +40,6 @@
 %>
 
 
-<%
-    String uId = "";
-    if (session.getAttribute("SESSION_ID") != null) {
-        uId = (String) session.getAttribute("SESSION_ID");
-    } else {
-        response.sendRedirect("./login.jsp");
-    }
-%>
 
 <main>
     <h1>COOKIE PAGE</h1>

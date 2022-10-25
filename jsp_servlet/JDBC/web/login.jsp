@@ -1,4 +1,4 @@
-<%@ page import="util.Status" %>
+<%@ page import="me.web.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,6 +11,33 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
+
+
+<%
+    if (session.getAttribute("SESSION_ID") != null) {
+        response.sendRedirect("./index.jsp");
+    }
+
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName() != null) {
+                if (cookie.getName().equals("AUTO_LOGIN")) {
+                    String value = cookie.getValue();
+                    if (value.equals("true")) {
+%>
+<script>
+    location.href = "./DoAutoLoginServlet";
+</script>
+<%
+                    }
+                }
+            }
+        }
+    }
+%>
+
+
 <%
 
     if (session.getAttribute("login") != null) {
@@ -18,15 +45,10 @@
 %>
 <script>alert("Login Fail!")</script>
 <%
-
-} else if (session.getAttribute("login") == Status.NULL) {
-
-%>
-<script>alert("Sign Up First.")</script>
-<%
-        }
-        session.removeAttribute("login");
     }
+    session.removeAttribute("login");
+
+}
 %>
 
 <%
@@ -43,44 +65,20 @@
     }
 %>
 
-<%-- 쿠키를 통해 자동 로그인 시도 --%>
 <%
 
-    String uId = "";
-    String uPw = "";
-    String uHashPw = "";
+    if (session.getAttribute("withdraw") != null) {
 
-    Cookie[] cookies = request.getCookies();
-    boolean isCookieValue = false;
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName() != null) {
-                if (cookie.getName().equals("COOKIE_ID")) {
-                    uId = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_PW")) {
-                    uPw = cookie.getValue();
-                } else if (cookie.getName().equals("COOKIE_HASH_PW")) {
-                    uHashPw = cookie.getValue();
-                    isCookieValue = true;
-                }
-            }
-        }
-    }
-
-    String uPwView = "";
-    if (isCookieValue) {
-        uPwView = uPw;
-    }
+        if (session.getAttribute("withdraw") == Status.SUCCESS) {
 
 %>
+<script>alert("Membership Cancellation Success!")</script>
+<%
+        }
+        session.removeAttribute("withdraw");
+    }
+%>
 
-<script>
-    $(() => {
-        $("#uPwView").change(() => {
-            $("#isChanged").val("true");
-        });
-    });
-</script>
 
 <main>
     <h1>LOGIN</h1>
@@ -89,20 +87,17 @@
             <div class="form__list">
                 <label for="uId">ID: </label>
                 <%-- key-value (name-value)   --%>
-                <input type="text" id="uId" name="uId" value="<%=uId%>" placeholder="INPUT YOUR ID" required/>
+                <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID" required/>
             </div>
 
             <div class="form__list">
-                <label for="uPwView">PASSWORD: </label>
-                <input type="password" id="uPwView" name="uPwView" value="<%=uPwView%>" placeholder="INPUT YOUR PASSWORD" required/>
-                <input type="hidden" id="uHashPw" name="uHashPw" value="<%=uHashPw%>"/>
-                <input type="hidden" id="isCookieValue" name="isCookieValue" value="<%=isCookieValue%>"/>
-                <input type="hidden" id="isChanged" name="isChanged" value="false"/>
+                <label for="uPw">PASSWORD: </label>
+                <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD" required/>
             </div>
 
             <div class="checkbox__form">
                 <label for="save">AUTO LOGIN: </label>
-                <input id="auto__login" type="checkbox" id="save" name="save"/>
+                <input id="save" type="checkbox" name="save"/>
             </div>
             <input id="submit" type="submit" name="submit" value="Submit">
         </form>

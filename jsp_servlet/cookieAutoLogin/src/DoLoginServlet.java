@@ -34,10 +34,10 @@ public class DoLoginServlet extends HttpServlet {
             save = request.getParameter("save");
         }
 
-        System.out.println("uId = " + uId);
-        System.out.println("uPw = " + uPw);
-        System.out.println("save = " + save);
-        System.out.println("new Password(uPw) = " + new Password(uPw));
+//        System.out.println("uId = " + uId);
+//        System.out.println("uPw = " + uPw);
+//        System.out.println("save = " + save);
+//        System.out.println("new Password(uPw) = " + new Password(uPw));
 
 
         Member member = database.select(uId);
@@ -60,14 +60,20 @@ public class DoLoginServlet extends HttpServlet {
                         cookiePw.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
                         cookiePw.setPath("/"); // / 경로 이하에 모두 쿠키 전달
 
-                        Cookie cookiePwLen = new Cookie("COOKIE_HASH_PW", member.getuPw().getHashPassword());
-                        cookiePwLen.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
-                        cookiePwLen.setPath("/"); // / 경로 이하에 모두 쿠키 전달
+                        Cookie cookieHashPw = new Cookie("COOKIE_HASH_PW", member.getuPw().getHashPassword());
+                        cookieHashPw.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
+                        cookieHashPw.setPath("/"); // / 경로 이하에 모두 쿠키 전달
+
+                        Cookie autoLogin = new Cookie("AUTO_LOGIN", "true");
+                        autoLogin.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
+                        autoLogin.setPath("/"); // / 경로 이하에 모두 쿠키 전달
+
 
                         // 서버 단에서 사용자가 맞는지 확인 후 클라이언트에게 전달
                         response.addCookie(cookieId);
                         response.addCookie(cookiePw);
-                        response.addCookie(cookiePwLen);
+                        response.addCookie(cookieHashPw);
+                        response.addCookie(autoLogin);
                     }
                 }
                 session.setAttribute("login", Status.SUCCESS);

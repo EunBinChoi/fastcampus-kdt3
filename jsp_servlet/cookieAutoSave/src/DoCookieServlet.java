@@ -1,6 +1,3 @@
-import database.MemberDatabase;
-import member.Member;
-import member.Password;
 import util.Status;
 
 import javax.servlet.ServletException;
@@ -39,11 +36,13 @@ public class DoCookieServlet extends HttpServlet {
         }
         if (count > 0) {
             session.setAttribute("cookie", Status.SUCCESS);
+            response.sendRedirect("./cookie.jsp");
         } else {
             session.setAttribute("cookie", Status.NULL);
+            response.sendRedirect("./cookie.jsp");
         }
 
-        response.sendRedirect("./cookie.jsp");
+
 
     }
 }

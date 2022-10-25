@@ -35,7 +35,7 @@
 
     <ul class="header__nav">
         <!-- block 구조여서 수직적 중앙이 맞음 -->
-        <li><a href="#">Home</a></li>
+        <li><a href="index.jsp">Home</a></li>
         <li><a href="#">Board</a></li>
         <li><a href="#">Survey</a></li>
     </ul>
