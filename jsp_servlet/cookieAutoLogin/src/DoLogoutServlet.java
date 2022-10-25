@@ -19,18 +19,15 @@ public class DoLogoutServlet extends HttpServlet {
 
         ///////////////// 기존 쿠키값 삭제할 수 있도록 변경 //////////////
         Cookie[] cookies = req.getCookies();
-//        String[] mustCookies = {"COOKIE_ID", "COOKIE_PW", "COOKE_HASH_PW", "AUTO_LOGIN"};
+        String[] mustCookies = {"COOKIE_ID", "COOKIE_PW", "COOKE_HASH_PW", "AUTO_LOGIN"};
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName() != null) {
-                    if (cookie.getName().equals("COOKIE_ID") ||
-                    cookie.getName().equals("COOKIE_PW") ||
-                    cookie.getName().equals("COOKIE_HASH_PW") ||
-                    cookie.getName().equals("AUTO_LOGIN")) {
-                        cookie.setMaxAge(0);
-                        cookie.setPath("/");
-                        resp.addCookie(cookie);
+        for (int i = 0; i < mustCookies.length; i++) {
+            if (cookies != null) {
+                for (int j = 0; j < cookies.length; j++) {
+                    if (mustCookies[i].equals(cookies[j].getName())) {
+                        cookies[j].setMaxAge(0);
+                        cookies[j].setPath("/");
+                        resp.addCookie(cookies[j]);
                     }
                 }
             }
