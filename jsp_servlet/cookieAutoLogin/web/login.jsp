@@ -36,11 +36,20 @@
         }
     }
 
+
     if (!isMustCookies) {
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("AUTO_LOGIN")) {
-                cookies[i].setValue("false");
-                response.addCookie(cookies[i]);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName() != null) {
+                    if (cookie.getName().equals("COOKIE_ID") ||
+                            cookie.getName().equals("COOKIE_PW") ||
+                            cookie.getName().equals("COOKIE_HASH_PW") ||
+                            cookie.getName().equals("AUTO_LOGIN")) {
+                        cookie.setMaxAge(0);
+                        cookie.setPath("/");
+                        response.addCookie(cookie);
+                    }
+                }
             }
         }
     }

@@ -85,7 +85,7 @@
         <fieldset class="color__fieldset">
             <legend>FAVORITE COLOR</legend>
             <div class="form__list">
-                <label for="uName">Name</label>
+                <label for="uName">NAME</label>
                 <input type="text" id="uName" name="uName" size="10">
             </div>
 
