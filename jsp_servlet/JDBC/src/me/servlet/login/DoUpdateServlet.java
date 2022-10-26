@@ -1,10 +1,10 @@
-package me.web;
+package me.servlet.login;
 
-import me.web.cookie.CookieMgr;
-import me.web.member.Member;
-import me.web.member.MemberDAO;
-import me.web.session.SessionMgr;
-import me.web.util.Status;
+import me.java.cookie.CookieMgr;
+import me.java.member.Member;
+import me.java.member.MemberDAO;
+import me.java.session.SessionMgr;
+import me.java.util.Status;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,14 +45,14 @@ public class DoUpdateServlet extends HttpServlet {
         Status respStatus = Status.FAIL;
         Member member = memberDAO.select(sessionId);
         if (member != null) {
-            if (member.isIdPwdEquals(new Member(sessionId, uPw))) {
+            if (member.getuPw().equals(uPw)) {
                 int res = memberDAO.update(sessionId, uNewPw);
 
                 if (res > 0) {
                     cookieMgr.set(request, response, "COOKIE_PW", uNewPw);
 
                     respStatus = Status.SUCCESS;
-                    redirectURL = "./private.jsp";
+                    redirectURL = "./login/private.jsp";
                 }
             }
         }

@@ -1,4 +1,4 @@
-package me.web.database;
+package me.java.database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

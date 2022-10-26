@@ -1,7 +1,7 @@
-package me.web;
+package me.servlet.login;
 
-import me.web.cookie.CookieMgr;
-import me.web.session.SessionMgr;
+import me.java.cookie.CookieMgr;
+import me.java.session.SessionMgr;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +16,13 @@ public class DoLogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //////////////////////// 쿠키 삭제 ////////////////////////
+        cookieMgr.delete(req, resp);
+
         ////////////////////////// 세션 삭제 ///////////////////////
         HttpSession session = req.getSession();
         sessionMgr.delete(session);
 
-        ///////////////// 쿠키 중 AUTO_LOGIN 값 변경 /////////////////
-        cookieMgr.set(req, resp, "AUTO_LOGIN", "false");
-
-        resp.sendRedirect("./login.jsp");
+        resp.sendRedirect("./non-login/login.jsp");
     }
 }

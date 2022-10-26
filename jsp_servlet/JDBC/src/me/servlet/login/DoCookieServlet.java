@@ -1,7 +1,7 @@
-package me.web;
+package me.servlet.login;
 
-import me.web.cookie.CookieMgr;
-import me.web.util.Status;
+import me.java.cookie.CookieMgr;
+import me.java.util.Status;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +33,7 @@ public class DoCookieServlet extends HttpServlet {
             session.setAttribute("cookie", Status.FAIL);
         }
 
-        response.sendRedirect("./cookie.jsp");
+        response.sendRedirect("./login/cookie.jsp");
 
     }
 }

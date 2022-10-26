@@ -1,4 +1,4 @@
-package me.web.session;
+package me.java.session;
 
 import javax.servlet.http.HttpSession;
 

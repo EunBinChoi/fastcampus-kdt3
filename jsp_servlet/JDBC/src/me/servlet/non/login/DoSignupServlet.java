@@ -1,8 +1,8 @@
-package me.web;
+package me.servlet.non.login;
 
-import me.web.member.Member;
-import me.web.util.Status;
-import me.web.member.MemberDAO;
+import me.java.member.Member;
+import me.java.util.Status;
+import me.java.member.MemberDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,10 +42,10 @@ public class DoSignupServlet extends HttpServlet {
 
         if (result > 0) {
             session.setAttribute("signup", Status.SUCCESS);
-            response.sendRedirect("./login.jsp");
+            response.sendRedirect("./non-login/login.jsp");
         } else {
             session.setAttribute("signup", Status.FAIL);
-            response.sendRedirect("./signup.jsp");
+            response.sendRedirect("./non-login/signup.jsp");
         }
     }
 }

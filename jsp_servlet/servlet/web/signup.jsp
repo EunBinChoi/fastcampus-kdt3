@@ -12,6 +12,12 @@
 </header>
 
 <%
+    if (session.getAttribute("uId") != null) {
+        response.sendRedirect("./index.jsp");
+    }
+%>
+
+<%
 
     if (session.getAttribute("signup") != null) {
 

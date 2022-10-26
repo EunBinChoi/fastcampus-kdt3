@@ -1,4 +1,4 @@
-package me.web.util;
+package me.java.util;
 
 public enum Status {
     SUCCESS, FAIL, NULL;

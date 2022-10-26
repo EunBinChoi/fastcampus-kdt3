@@ -1,15 +1,24 @@
-<%@ page import="me.web.util.Status" %>
+<%@ page import="me.java.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>JSP</title>
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../layout/header.jsp"/>
 </header>
+
+
+<%--<%--%>
+<%--    if (session.getAttribute("SESSION_ID") != null) {--%>
+<%--        response.sendRedirect("../index.jsp");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%@ include file="nonLoginFilter.jsp"%>
 
 <%
 
@@ -29,7 +38,7 @@
 <main>
     <h1>SIGN UP</h1>
     <div>
-        <form method="post" action="./DoSignupServlet">
+        <form method="post" action="../DoSignupServlet">
 
             <div class="form__list">
                 <label for="uEmail">EMAIL: </label>
@@ -59,7 +68,7 @@
 </main>
 
 <footer class="main__nav__next">
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../layout/footer.jsp"/>
 </footer>
 </body>
 </html>

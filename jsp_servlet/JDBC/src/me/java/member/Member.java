@@ -1,4 +1,4 @@
-package me.web.member;
+package me.java.member;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

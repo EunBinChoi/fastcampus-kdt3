@@ -1,42 +1,44 @@
-<%@ page import="me.web.util.Status" %>
+<%@ page import="me.java.util.Status" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="me.java.session.SessionMgr" %>
+<%@ page import="me.java.cookie.CookieMgr" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>JSP</title>
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../layout/header.jsp"/>
 </header>
 
 
-<%
-    if (session.getAttribute("SESSION_ID") != null) {
-        response.sendRedirect("./index.jsp");
-    }
+<%--<%--%>
+<%--    if (session.getAttribute("SESSION_ID") != null) {--%>
+<%--        response.sendRedirect("../index.jsp");--%>
+<%--    }--%>
 
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName() != null) {
-                if (cookie.getName().equals("AUTO_LOGIN")) {
-                    String value = cookie.getValue();
-                    if (value.equals("true")) {
-%>
-<script>
-    location.href = "./DoAutoLoginServlet";
-</script>
+<%--%>--%>
+
+<%@ include file="nonLoginFilter.jsp"%>
+
 <%
-                    }
-                }
-            }
+    // 자동 로그인
+    SessionMgr sessionMgr = SessionMgr.getInstance();
+    CookieMgr cookieMgr = CookieMgr.getInstance();
+
+    String uId = cookieMgr.get(request, "COOKIE_ID");
+    String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
+
+    if (autoLogin != null) {
+        if (autoLogin.equals("true")) {
+            sessionMgr.create(session, uId);
+            response.sendRedirect("../login/survey.jsp");
         }
     }
 %>
-
 
 <%
 
@@ -45,10 +47,10 @@
 %>
 <script>alert("Login Fail!")</script>
 <%
-    }
-    session.removeAttribute("login");
+        }
+        session.removeAttribute("login");
 
-}
+    }
 %>
 
 <%
@@ -83,7 +85,7 @@
 <main>
     <h1>LOGIN</h1>
     <div>
-        <form id="login__form" method="post" action="./DoLoginServlet">
+        <form id="login__form" method="post" action="../DoLoginServlet">
             <div class="form__list">
                 <label for="uId">ID: </label>
                 <%-- key-value (name-value)   --%>
@@ -105,7 +107,7 @@
 </main>
 
 <footer class="main__nav__next">
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../layout/footer.jsp"/>
 </footer>
 </body>
 </html>

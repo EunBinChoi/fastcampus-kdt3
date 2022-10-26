@@ -1,10 +1,10 @@
-package me.web;
+package me.servlet.login;
 
-import me.web.cookie.CookieMgr;
-import me.web.member.Member;
-import me.web.session.SessionMgr;
-import me.web.util.Status;
-import me.web.member.MemberDAO;
+import me.java.cookie.CookieMgr;
+import me.java.member.Member;
+import me.java.session.SessionMgr;
+import me.java.util.Status;
+import me.java.member.MemberDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,34 +38,38 @@ public class DoWithdrawServlet extends HttpServlet {
         if (req.getParameter("agree") != null) {
             agreement = req.getParameter("agree");
         }
-        System.out.println("agreement = " + agreement);
 
-        String redirectURL = resp.getHeader("referer"); // 해당 서블릿을 요청한 페이지 (이전 페이지)
+        String redirectURL = req.getHeader("referer"); // 해당 서블릿을 요청한 페이지 (이전 페이지)
         Status respStatus = Status.FAIL;
         Member member = null;
         if (agreement.equals("yes")) {
             member = memberDAO.select(sessionId); // database에 저장된 객체
 
             if (member != null) {
-                if (member.isIdPwdEquals(new Member(sessionId, requestPw))) {
+                if (member.getuPw().equals(requestPw)) {
                     int res = memberDAO.delete(sessionId);
 
                     if (res > 0) {
 
-                        ////////////////////////// 세션 삭제 ///////////////////////
-                        sessionMgr.delete(session);
-
                         ///////////////////////// 쿠키 삭제 ///////////////////////
                         cookieMgr.delete(req, resp);
 
+                        ////////////////////////// 세션 삭제 ///////////////////////
+                        sessionMgr.delete(session);
+                        session = req.getSession(); // 새로운 세션 생성 (새로운 세션 만들어 redirect 하기 위함)
+
                         respStatus = Status.SUCCESS;
-                        redirectURL = "./login.jsp";
+                        redirectURL = "./non-login/login.jsp";
                     }
                 }
             }
 
         }
-        session.setAttribute("withdraw", respStatus);
-        resp.sendRedirect(redirectURL);
+
+
+        if (session != null) {
+            session.setAttribute("withdraw", respStatus);
+            resp.sendRedirect(redirectURL);
+        }
     }
 }

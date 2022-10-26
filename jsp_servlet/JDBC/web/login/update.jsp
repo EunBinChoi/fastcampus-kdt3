@@ -1,24 +1,26 @@
-<%@ page import="me.web.util.Status" %>
+<%@ page import="me.java.util.Status" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>JSP</title>
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../layout/header.jsp"/>
 </header>
 
-<%
-    String uId = "";
-    if (session.getAttribute("SESSION_ID") != null) {
-        uId = (String) session.getAttribute("SESSION_ID");
-    } else {
-        response.sendRedirect("./login.jsp");
-    }
-%>
+<%--<%--%>
+<%--    String uId = "";--%>
+<%--    if (session.getAttribute("SESSION_ID") != null) {--%>
+<%--        uId = (String) session.getAttribute("SESSION_ID");--%>
+<%--    } else {--%>
+<%--        response.sendRedirect("../non-login/login.jsp");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%@ include file="loginFilter.jsp"%>
 
 <%
 
@@ -39,7 +41,7 @@
 <main>
     <h1>UPDATE</h1>
     <div>
-        <form method="post" action="./DoUpdateServlet">
+        <form method="post" action="../DoUpdateServlet">
             <div class="form__list">
                 <label for="uPw">CURRENT PASSWORD: </label>
                 <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD" required/>
@@ -59,7 +61,7 @@
 </main>
 
 <footer class="main__nav__next">
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../layout/footer.jsp"/>
 </footer>
 </body>
 </html>

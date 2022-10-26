@@ -1,10 +1,10 @@
-package me.web;
+package me.servlet.non.login;
 
-import me.web.cookie.CookieMgr;
-import me.web.member.Member;
-import me.web.session.SessionMgr;
-import me.web.util.Status;
-import me.web.member.MemberDAO;
+import me.java.cookie.CookieMgr;
+import me.java.member.Member;
+import me.java.session.SessionMgr;
+import me.java.util.Status;
+import me.java.member.MemberDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -50,12 +50,12 @@ public class DoLoginServlet extends HttpServlet {
 
                 if (save != null) {
                     if (save.equals("on")) {
-                        cookieMgr.create(response, new String[]{uId, uPw, "true"});
+                        cookieMgr.create(response, new String[]{uId, "true"});
                     }
                 }
 
                 respStatus = Status.SUCCESS;
-                redirectURL = "./survey.jsp";
+                redirectURL = "./login/survey.jsp";
             }
         }
 

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <html>
-<head><link rel="stylesheet" href="./css/footer.css"></head>
+<head><link rel="stylesheet" href="../css/footer.css"></head>
 <footer class="footer">
     <div></div>
     <div><p>FOOTER</p></div>

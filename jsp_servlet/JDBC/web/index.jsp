@@ -10,7 +10,7 @@
 
 
 <body>
-<header><jsp:include page="header.jsp"/></header>
+<header><jsp:include page="layout/header.jsp"/></header>
 <main>
     <%-- JSP 주석 --%>
     <!-- html 주석 -->
@@ -41,13 +41,13 @@
     </div>
 
         <ul class="main__nav__next">
-            <li>👉🏻<a href="login.jsp"><b>cookie() 예제로 이동</b></a></li>
+            <li>👉🏻<a href="non-login/login.jsp"><b>JDBC 예제로 이동</b></a></li>
         </ul>
 
 </main>
 
 <footer>
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="layout/footer.jsp"/>
 </footer>
 </body>
 </html>

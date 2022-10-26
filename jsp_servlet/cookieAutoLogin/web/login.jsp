@@ -20,6 +20,9 @@
         response.sendRedirect("./index.jsp");
     }
 
+%>
+
+<%
 
     ///////////////// 쿠키 값 중 로그인하기 위해서 무조건 있어야하는 값이 없는지 확인 //////////////////
     String[] mustCookies = {"COOKIE_ID", "COOKIE_PW", "COOKIE_HASH_PW", "AUTO_LOGIN"};
@@ -54,9 +57,10 @@
             }
         }
     }
+%>
 
-
-
+<%
+    //////////////////////////// 자동 로그인 시도 ///////////////////////////
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName() != null) {
