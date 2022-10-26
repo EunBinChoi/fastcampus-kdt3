@@ -53,7 +53,7 @@
      --%>
 
     <ul class="main__nav__next">
-        <li>👉🏻<a href="formatTagsProperty.jsp"><b>formatTagsDate.jsp 예제로 이동</b></a></li>
+        <li>👉🏻<a href="formatTagsDate.jsp"><b>formatTagsDate.jsp 예제로 이동</b></a></li>
     </ul>
 </main>
 

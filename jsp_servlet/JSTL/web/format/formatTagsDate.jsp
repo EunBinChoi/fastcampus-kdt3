@@ -48,7 +48,7 @@
 
 
     <ul class="main__nav__next">
-        <li>👉🏻<a href="formatTagsNumber.jsp"><b>FormatTagsNumber.jsp 예제로 이동</b></a></li>
+        <li>👉🏻<a href="formatTagsProperty.jsp"><b>formatTagsProperty.jsp 예제로 이동</b></a></li>
     </ul>
 </main>
 

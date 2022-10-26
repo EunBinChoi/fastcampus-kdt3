@@ -18,7 +18,8 @@
     <h1>FORMAT TAGS</h1>
 
     <%-- ko 국가코드, kr 언어코드 (국제 표준화 기구 (iso에서 정함)) --%>
-    <fmt:setLocale value="ko_kr"/>
+<%--    <fmt:setLocale value="ko_kr"/>--%>
+    <fmt:setLocale value="en_us"/>
     <fmt:requestEncoding value="UTF-8"/>
 
     <fieldset class="format__fieldset">
