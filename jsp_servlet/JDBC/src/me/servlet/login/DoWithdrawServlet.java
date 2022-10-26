@@ -66,7 +66,6 @@ public class DoWithdrawServlet extends HttpServlet {
 
         }
 
-
         if (session != null) {
             session.setAttribute("withdraw", respStatus);
             resp.sendRedirect(redirectURL);

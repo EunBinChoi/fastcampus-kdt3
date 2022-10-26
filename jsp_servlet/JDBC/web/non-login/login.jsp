@@ -40,46 +40,56 @@
     }
 %>
 
+
+<%--<%--%>
+
+<%--    if (session.getAttribute("login") != null) {--%>
+<%--        if (session.getAttribute("login") == Status.FAIL) {--%>
+<%--%>--%>
+<%--<script>alert("Login Fail!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("login");--%>
+
+<%--    }--%>
+<%--%>--%>
+
+<%--<%--%>
+
+<%--    if (session.getAttribute("signup") != null) {--%>
+
+<%--        if (session.getAttribute("signup") == Status.SUCCESS) {--%>
+
+<%--%>--%>
+<%--<script>alert("Sign Up Success!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("signup");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%--<%--%>
+
+<%--    if (session.getAttribute("withdraw") != null) {--%>
+
+<%--        if (session.getAttribute("withdraw") == Status.SUCCESS) {--%>
+
+<%--%>--%>
+<%--<script>alert("Membership Cancellation Success!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("withdraw");--%>
+<%--    }--%>
+<%--%>--%>
+
+
+<%@include file="../message/showMessage.jsp"%>
 <%
-
-    if (session.getAttribute("login") != null) {
-        if (session.getAttribute("login") == Status.FAIL) {
-%>
-<script>alert("Login Fail!")</script>
-<%
-        }
-        session.removeAttribute("login");
-
-    }
+    showMessage(request, response, "login", Status.FAIL);
+    showMessage(request, response, "signup", Status.SUCCESS);
+    showMessage(request, response, "withdraw", Status.SUCCESS);
 %>
 
-<%
-
-    if (session.getAttribute("signup") != null) {
-
-        if (session.getAttribute("signup") == Status.SUCCESS) {
-
-%>
-<script>alert("Sign Up Success!")</script>
-<%
-        }
-        session.removeAttribute("signup");
-    }
-%>
-
-<%
-
-    if (session.getAttribute("withdraw") != null) {
-
-        if (session.getAttribute("withdraw") == Status.SUCCESS) {
-
-%>
-<script>alert("Membership Cancellation Success!")</script>
-<%
-        }
-        session.removeAttribute("withdraw");
-    }
-%>
 
 
 <main>

@@ -36,6 +36,12 @@ public class DoFileUploadServlet extends HttpServlet {
         String uploadFolder = "upload";
         String fullPath = uploadPath + File.separator + uploadFolder;
 
+        // upload 디렉토리 생성
+        File dir = new File(fullPath);
+        if (!dir.exists()) {
+            dir.mkdir(); // make directory
+        }
+
         String encType = "UTF-8";
         int maxSize = 5 * 1024 * 1024; // 5mb (업로드할 파일 최대 크기)
 

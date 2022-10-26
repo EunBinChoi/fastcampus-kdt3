@@ -51,7 +51,7 @@ public class CookieMgr {
         if (cookies == null) return null;
 
         for (int i = 0; i < names.length; i++) {
-            if (names[i] == null) continue;
+            if (names[i] == null) continue; 
 
             for (Cookie cookie: cookies) {
                 if (cookie.getName() == null) continue;
@@ -95,14 +95,14 @@ public class CookieMgr {
         return delete(request, response, mustCookiesWhenLogin);
     }
 
-    public int delete(HttpServletRequest request, HttpServletResponse response, String[] values) {
+    public int delete(HttpServletRequest request, HttpServletResponse response, String[] names) {
         Cookie[] cookies = request.getCookies();
 
         int count = 0;
         for (Cookie cookie: cookies) {
-            if (values != null) {
-                for (int i = 0; i < values.length; i++) {
-                    if (cookie.getName().equals(values[i])) {
+            if (names != null) {
+                for (int i = 0; i < names.length; i++) {
+                    if (cookie.getName().equals(names[i])) {
                         count++;
                         cookie.setMaxAge(0);
                         cookie.setPath("/");

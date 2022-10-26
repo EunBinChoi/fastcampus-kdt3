@@ -26,16 +26,21 @@
 
 <%@ include file="loginFilter.jsp"%>
 
-<%
+<%--<%--%>
 
-    if (session.getAttribute("login") != null) {
-        if (session.getAttribute("login") == Status.SUCCESS) {
-%>
-<script>alert("Login Success!")</script>
+<%--    if (session.getAttribute("login") != null) {--%>
+<%--        if (session.getAttribute("login") == Status.SUCCESS) {--%>
+<%--%>--%>
+<%--<script>alert("Login Success!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("login");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%@include file="../message/showMessage.jsp"%>
 <%
-        }
-        session.removeAttribute("login");
-    }
+    showMessage(request, response, "login", Status.SUCCESS);
 %>
 
 <main>

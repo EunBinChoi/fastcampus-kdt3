@@ -20,18 +20,25 @@
 
 <%@ include file="nonLoginFilter.jsp"%>
 
+
+
+<%--<%--%>
+
+<%--    if (session.getAttribute("signup") != null) {--%>
+
+<%--        if (session.getAttribute("signup") == Status.FAIL) {--%>
+
+<%--%>--%>
+<%--<script>alert("Input ID can't be used.")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("signup");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%@include file="../message/showMessage.jsp"%>
 <%
-
-    if (session.getAttribute("signup") != null) {
-
-        if (session.getAttribute("signup") == Status.FAIL) {
-
-%>
-<script>alert("Input ID can't be used.")</script>
-<%
-        }
-        session.removeAttribute("signup");
-    }
+    showMessage(request, response, "signup", Status.FAIL);
 %>
 
 

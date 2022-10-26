@@ -49,7 +49,9 @@ public class DoUpdateServlet extends HttpServlet {
                 int res = memberDAO.update(sessionId, uNewPw);
 
                 if (res > 0) {
-                    cookieMgr.set(request, response, "COOKIE_PW", uNewPw);
+                    // cookie 에는 COOKIE_ID, AUTO_LOGIN 만 저장
+                    // COOKIE_PW 는 저장할 필요 없음
+                    //cookieMgr.set(request, response, "COOKIE_PW", uNewPw);
 
                     respStatus = Status.SUCCESS;
                     redirectURL = "./login/private.jsp";

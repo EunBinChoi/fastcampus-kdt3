@@ -22,20 +22,24 @@
 
 <%@ include file="loginFilter.jsp"%>
 
+<%--<%--%>
+
+<%--    if (session.getAttribute("update") != null) {--%>
+
+<%--        if (session.getAttribute("update") == Status.FAIL) {--%>
+
+<%--%>--%>
+<%--<script>alert("Member Information Update Fail!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("update");--%>
+<%--    }--%>
+<%--%>--%>
+
+<%@include file="../message/showMessage.jsp"%>
 <%
-
-    if (session.getAttribute("update") != null) {
-
-        if (session.getAttribute("update") == Status.FAIL) {
-
+    showMessage(request, response, "update", Status.FAIL);
 %>
-<script>alert("Member Information Update Fail!")</script>
-<%
-        }
-        session.removeAttribute("update");
-    }
-%>
-
 
 
 <main>

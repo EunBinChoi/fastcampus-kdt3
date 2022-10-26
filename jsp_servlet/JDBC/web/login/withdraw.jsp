@@ -20,21 +20,27 @@
 <%--    }--%>
 <%--%>--%>
 <%@ include file="loginFilter.jsp"%>
+<%--jsp:include vs include directive--%>
 
+<%--<%--%>
+
+<%--    if (session.getAttribute("withdraw") != null) {--%>
+
+<%--        if (session.getAttribute("withdraw") == Status.FAIL) {--%>
+
+<%--%>--%>
+<%--<script>alert("Membership Cancellation Fail!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("withdraw");--%>
+<%--    }--%>
+<%--%>--%>
+
+
+<%@include file="../message/showMessage.jsp"%>
 <%
-
-    if (session.getAttribute("withdraw") != null) {
-
-        if (session.getAttribute("withdraw") == Status.FAIL) {
-
+    showMessage(request, response, "withdraw", Status.FAIL);
 %>
-<script>alert("Membership Cancellation Fail!")</script>
-<%
-        }
-        session.removeAttribute("withdraw");
-    }
-%>
-
 
 <main>
     <h1>WITHDRAW</h1>

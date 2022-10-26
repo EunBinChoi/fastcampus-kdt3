@@ -25,22 +25,27 @@
 <%@ include file="loginFilter.jsp"%>
 
 
-<%
+<%--<%--%>
 
-    if (session.getAttribute("cookie") != null) {
-        if (session.getAttribute("cookie") == Status.SUCCESS) {
-%>
-<script>alert("Cookie Delete Success!")</script>
-<%
+<%--    if (session.getAttribute("cookie") != null) {--%>
+<%--        if (session.getAttribute("cookie") == Status.SUCCESS) {--%>
+<%--%>--%>
+<%--<script>alert("Cookie Delete Success!")</script>--%>
+<%--<%--%>
 
-} else if (session.getAttribute("cookie") == Status.FAIL) {
+<%--} else if (session.getAttribute("cookie") == Status.FAIL) {--%>
 
-%>
-<script>alert("Cookie Delete Fail!")</script>
+<%--%>--%>
+<%--<script>alert("Cookie Delete Fail!")</script>--%>
+<%--<%--%>
+<%--        }--%>
+<%--        session.removeAttribute("cookie");--%>
+<%--    }--%>
+<%--%>--%>
+<%@include file="../message/showMessage.jsp"%>
 <%
-        }
-        session.removeAttribute("cookie");
-    }
+    showMessage(request, response, "cookie", Status.SUCCESS);
+    showMessage(request, response, "cookie", Status.FAIL);
 %>
 
 

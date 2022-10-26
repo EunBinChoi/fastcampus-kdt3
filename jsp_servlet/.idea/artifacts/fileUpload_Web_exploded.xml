@@ -7,6 +7,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="fileUpload" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../apache-tomcat-9.0.68/lib/jasper.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../jar/cos.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../h2/bin/h2-2.1.214.jar" />
+        </element>
       </element>
     </root>
   </artifact>

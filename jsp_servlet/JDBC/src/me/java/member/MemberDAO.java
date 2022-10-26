@@ -17,8 +17,8 @@ public class MemberDAO {
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
 
-    private static final String MEMBER_SELECT_ALL = "select * from member";
-    private static final String MEMBER_SELECT = "select * from member where uId = ?";
+    private static final String MEMBER_SELECT_ALL = "select * from member"; // 행 여러개
+    private static final String MEMBER_SELECT = "select * from member where uId = ?"; // 행 1개
     private static final String MEMBER_INSERT = "insert into member values(?, ?, ?)";
     private static final String MEMBER_PASSWORD_UPDATE = "update member set uPw = ? where uId = ?";
     private static final String MEMBER_DELETE = "delete member where uId = ?";
@@ -33,6 +33,7 @@ public class MemberDAO {
     }
 
 
+    // "select * from member where uId = ?" (prepareStatement: 해당 SQL 문을 미리 컴파일, 성능 향상)
     public Member select(String uId) {
         Member member = null;
         try {
@@ -40,19 +41,18 @@ public class MemberDAO {
             stmt = conn.prepareStatement(MEMBER_SELECT);
             stmt.setString(1, uId);
 
-            rs = stmt.executeQuery();
+            rs = stmt.executeQuery(); // executeQuery() => ResultSet => select 문에서 사용
 
-            if (rs.next()) {
+            if (rs.next()) { // uId (Primary Key, 중복 불가) => 객체가 하나만 검색
                 String mId = rs.getString("uId");
                 String mPw = rs.getString("uPw");
                 String mEmail = rs.getString("uEmail");
                 member = new Member(mId, mPw, mEmail);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            JDBCMgr.close(rs, stmt, conn);
         }
         return member;
     }
@@ -71,15 +71,15 @@ public class MemberDAO {
 
                 memberList.add(new Member(uId, uPw, uEmail));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            JDBCMgr.close(rs, stmt, conn);
         }
         return memberList;
     }
 
+    // "insert into member values(?, ?, ?)"
     public int insert(Member member) {
         int res = 0;
         try {
@@ -97,7 +97,8 @@ public class MemberDAO {
         return res;
     }
 
-    public int update(String uId, String uPw) {
+    // "update member set uPw = ? where uId = ?"
+    public int update(String uId, String uPw) { // uPw
         int res = 0;
         try {
             conn = JDBCMgr.getConnection();
@@ -113,6 +114,7 @@ public class MemberDAO {
         return res;
     }
 
+    // "delete member where uId = ?"
     public int delete(String uId) {
         int res = 0;
         try {
@@ -127,4 +129,5 @@ public class MemberDAO {
         }
         return res;
     }
+
 }
