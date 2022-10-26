@@ -13,11 +13,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Responsive Header</title>
-
-
 </head>
 <body>
+
+<script>
+    function random_bg_color() {
+        const x = Math.floor(Math.random() * 256);
+        const y = Math.floor(Math.random() * 256);
+        const z = Math.floor(Math.random() * 256);
+        const a = Math.random();
+        const bgColor = "rgba(" + x + "," + y + "," + z + "," + a + ")";
+        console.log(bgColor);
+
+        $('.header').css("background-color", bgColor);
+    }
+
+    $(() => {
+        random_bg_color();
+    });
+
+</script>
+
 <header class="header">
     <div class="header__logo">
         <!-- inline 구조여서 수직적 중앙이 맞지 않음 -->
