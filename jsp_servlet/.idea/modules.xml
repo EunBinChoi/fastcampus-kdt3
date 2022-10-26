@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/cookieAutoLogin/cookieAutoLogin.iml" filepath="$PROJECT_DIR$/cookieAutoLogin/cookieAutoLogin.iml" />
       <module fileurl="file://$PROJECT_DIR$/cookieAutoSave/cookieAutoSave.iml" filepath="$PROJECT_DIR$/cookieAutoSave/cookieAutoSave.iml" />
       <module fileurl="file://$PROJECT_DIR$/directiveTag/directiveTag.iml" filepath="$PROJECT_DIR$/directiveTag/directiveTag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fileUpload/fileUpload.iml" filepath="$PROJECT_DIR$/fileUpload/fileUpload.iml" />
       <module fileurl="file://$PROJECT_DIR$/forwardRedirect/forwardRedirect.iml" filepath="$PROJECT_DIR$/forwardRedirect/forwardRedirect.iml" />
       <module fileurl="file://$PROJECT_DIR$/implicitObject/implicitObject.iml" filepath="$PROJECT_DIR$/implicitObject/implicitObject.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaBeans/javaBeans.iml" filepath="$PROJECT_DIR$/javaBeans/javaBeans.iml" />
