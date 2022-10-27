@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+.header__logo a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgba(0, 100, 0, 0.467);
+    padding: 0px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.header__logo {
+    width: 100px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+.header__logo a {
+    padding: 0px 2px;
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 20px;
+    color: white;
+    /* justify-content: space-evenly; */
+    /*
+        .header: flexbox
+        .header .header__nav: flexbox
+        (안쪽 flexbox의 정렬 속성이 없어짐)
+    */
+
+    padding-left: 0px;
+
+    /* ul 태그 안에 왼쪽 기본 패딩값이 존재 */
+}
+
+.header__nav li {
+    list-style: none;
+    color: white;
+    padding: 8px 12px;
+}
+
+.header__nav li:hover {
+    background-color: rgb(179, 206, 179);
+    border-radius: 4px;
+}
+
+
+.header__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+    padding-left: 5px;
+
+    /* ul 태그 안에 왼쪽 기본 패딩값이 존재 */
+
+    font-size: 20px;
+}
+
+.header__icons li {
+    list-style: none;
+    padding: 0px 5px;
+}
+
