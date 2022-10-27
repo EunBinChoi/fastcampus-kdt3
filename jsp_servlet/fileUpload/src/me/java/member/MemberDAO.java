@@ -52,7 +52,7 @@ public class MemberDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            JDBCMgr.close(rs, stmt, conn);
         }
         return member;
     }
@@ -75,7 +75,7 @@ public class MemberDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            JDBCMgr.close(rs, stmt, conn);
         }
         return memberList;
     }

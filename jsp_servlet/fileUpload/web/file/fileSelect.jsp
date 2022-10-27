@@ -26,12 +26,10 @@
     </div>
     <div>
         <form method="post" enctype="multipart/form-data" accept-charset="UTF-8" action="../DoFileUploadServlet">
-
             <div class="form__list">
                 <label for="title">TITLE</label>
                 <input type="text" id="title" name="title" required>
             </div>
-
             <div class="form__list">
                 <label for="file">FILE</label>
                 <input type="file" id="file" name="file" required>

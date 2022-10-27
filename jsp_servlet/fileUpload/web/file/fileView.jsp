@@ -55,6 +55,7 @@
                     %>
                     <p>[ <%=fileList.get(0).getFileName()%> ]</p>
                     <iframe src="<%=fileList.get(0).getFileLocation()%>" width="500px"/>
+                    <p><a href="<%=fileList.get(0).getFileLocation()%>" download>DOWNLOAD</a></p>
                 <%
                 }
             }

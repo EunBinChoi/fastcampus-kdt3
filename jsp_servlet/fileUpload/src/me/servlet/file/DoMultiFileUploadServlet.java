@@ -4,6 +4,7 @@ import com.oreilly.servlet.MultipartRequest;
 import me.java.file.FileInfo;
 import me.java.file.FilePost;
 import me.java.file.CustomRenamePolicy;
+import me.java.file.FilePostDAO;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +39,12 @@ public class DoMultiFileUploadServlet extends HttpServlet {
         String uploadPath = servletContext.getRealPath("."); // 현재 서버가 실행 중인 위치
         String uploadFolder = "upload";
         String fullPath = uploadPath + File.separator + uploadFolder;
+
+        // upload 디렉토리 생성
+        File dir = new File(fullPath);
+        if (!dir.exists()) {
+            dir.mkdir(); // make directory
+        }
 
         String encType = "UTF-8";
         int maxSize = 500 * 1024 * 1024; // 500mb (업로드할 파일 최대 크기)
@@ -65,7 +73,7 @@ public class DoMultiFileUploadServlet extends HttpServlet {
             Enumeration<?> files = multipartRequest.getFileNames();
             while (files.hasMoreElements()) {
 
-                String name = (String)files.nextElement();
+                String name = (String) files.nextElement();
                 String filename = multipartRequest.getFilesystemName(name);
                 // 서버에 저장된 file 이름 반환
                 // 만약에 중복된 이름이 서버에 저장이 되어있을 경우에는 DefaultFileRenamePolicy에 의해 변경된 파일 이름 반환
@@ -87,9 +95,14 @@ public class DoMultiFileUploadServlet extends HttpServlet {
             filePost.setTitle(title);
             filePost.setFiles(fileInfoList);
 
-            session.setAttribute("filePost", filePost);
-            response.sendRedirect("./file/multiFileView.jsp");
-
+            FilePostDAO filePostDAO = FilePostDAO.getInstance();
+            int res = filePostDAO.insert(filePost);
+            if (res > 0) {
+                session.setAttribute("filePost", filePost);
+                response.sendRedirect("./file/multiFileView.jsp");
+            } else {
+                response.sendRedirect("./file/multiFileSelect.jsp");
+            }
         } catch (FileNotFoundException e) {
             new RuntimeException();
         } catch (IOException e) {

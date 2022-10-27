@@ -1,9 +1,11 @@
 package me.servlet.file;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import me.java.file.FileInfo;
 import me.java.file.FilePost;
 import me.java.file.CustomRenamePolicy;
+import me.java.file.FilePostDAO;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @WebServlet(name = "DoFileUploadServlet", value = "/DoFileUploadServlet")
@@ -48,8 +51,9 @@ public class DoFileUploadServlet extends HttpServlet {
 
         try {
             MultipartRequest multipartRequest
-                    = new MultipartRequest(request, fullPath, maxSize, encType, new CustomRenamePolicy(fullPath));
-                    //new DefaultFileRenamePolicy()); // a.txt, a1.txt, a2.txt
+                    = new MultipartRequest(request, fullPath, maxSize, encType,
+                    new CustomRenamePolicy(fullPath));
+//                    new DefaultFileRenamePolicy()); // a.txt, a1.txt, a2.txt
 
 
             FilePost filePost = new FilePost();
@@ -90,9 +94,14 @@ public class DoFileUploadServlet extends HttpServlet {
             filePost.setTitle(title);
             filePost.setFiles(fileInfoList);
 
-            session.setAttribute("filePost", filePost);
-            response.sendRedirect("./file/fileView.jsp");
-
+            FilePostDAO filePostDAO = FilePostDAO.getInstance();
+            int res = filePostDAO.insert(filePost);
+            if (res > 0) {
+                session.setAttribute("filePost", filePost);
+                response.sendRedirect("./file/fileView.jsp");
+            } else {
+                response.sendRedirect("./file/fileSelect.jsp");
+            }
         } catch (FileNotFoundException e) {
             new RuntimeException();
         } catch (IOException e) {

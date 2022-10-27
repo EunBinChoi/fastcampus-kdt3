@@ -57,6 +57,7 @@
                     %>
                     <div style="margin: 10px">
                         <iframe src="<%=fileList.get(i).getFileLocation()%>" height="100px" width="350px"/>
+                        <p><a href="<%=fileList.get(i).getFileLocation()%>" download>DOWNLOAD</a></p>
                     </div>
                     <%
                 }
