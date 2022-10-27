@@ -40,14 +40,14 @@
 <header class="header">
     <div class="header__logo">
         <!-- inline 구조여서 수직적 중앙이 맞지 않음 -->
-        <a href="index.jsp"><i class="fas fa-camera"></i></a>
-        <a href="index.jsp">Sallys</a>
+        <a href="/"><i class="fas fa-camera"></i></a>
+        <a href="/">Sallys</a>
     </div>
 
 
     <ul class="header__nav">
         <!-- block 구조여서 수직적 중앙이 맞음 -->
-        <li><a href="index.jsp">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="#">Board</a></li>
         <li><a href="#">Survey</a></li>
     </ul>
@@ -56,8 +56,6 @@
         <li><a href="#"><i class="fas fa-user-plus"></i></a></li>
         <li><a href="#"><i class="fas fa-toggle-off"></i></a></li>
     </ul>
-
-
 </header>
 </body>
 </html>
