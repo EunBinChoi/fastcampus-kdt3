@@ -3,6 +3,7 @@ package me.java.file;
 import me.java.database.JDBCMgr;
 import me.java.member.Member;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +56,12 @@ public class FilePostDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         } finally {
             JDBCMgr.close(rs, stmt, conn);
         }
@@ -81,6 +88,12 @@ public class FilePostDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         } finally {
             JDBCMgr.close(rs, stmt, conn);
         }
@@ -119,9 +132,10 @@ public class FilePostDAO {
         return res;
     }
 
-    public List<FileInfo> parseStringToFileInfoList(String string) {
+    public List<FileInfo> parseStringToFileInfoList(String string) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         List<FileInfo> fileInfoLinkedList = new LinkedList<>();
         List<String> tokens = new LinkedList<>(); // 4개가 찼다!
+        String[] methods = {"setFileName", "setChangedFileName", "setFileType", "setFileLocation"};
 
         StringTokenizer stringTokenizer = new StringTokenizer(string, "\'");
         int count = 0;
@@ -132,12 +146,15 @@ public class FilePostDAO {
 
             tokens.add(str);
             FileInfo fileInfo = null;
-            if (tokens.size() == 4) {
+            if (tokens.size() == FileInfo.class.getDeclaredFields().length) {
                 fileInfo = new FileInfo();
-                fileInfo.setFileName(tokens.get(0));
-                fileInfo.setChangedFileName(tokens.get(1));
-                fileInfo.setFileType(tokens.get(2));
-                fileInfo.setFileLocation(tokens.get(3));
+                for (int i = 0; i < fileInfo.getClass().getDeclaredFields().length; i++) {
+                    fileInfo.getClass().getMethod(methods[i]).invoke(tokens.get(i));
+                }
+//                fileInfo.setFileName(tokens.get(0));
+//                fileInfo.setChangedFileName(tokens.get(1));
+//                fileInfo.setFileType(tokens.get(2));
+//                fileInfo.setFileLocation(tokens.get(3));
 
                 tokens.clear();
                 fileInfoLinkedList.add(fileInfo);
