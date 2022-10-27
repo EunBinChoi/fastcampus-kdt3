@@ -1,0 +1,13 @@
+DROP TABLE FILEPOST;
+
+
+CREATE TABLE FILEPOST (
+          postNo LONG AUTO_INCREMENT NOT NULL,
+          uId VARCHAR(255),
+          title VARCHAR(255),
+          fileInfo VARCHAR(10000),
+          PRIMARY KEY (postNo)
+);
+
+
+SELECT * FROM FILEPOST;
