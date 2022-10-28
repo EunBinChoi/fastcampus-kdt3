@@ -43,8 +43,6 @@ public class JDBCMgr { // h2 DB 연결
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         close(stmt, conn);
-
     }
 }

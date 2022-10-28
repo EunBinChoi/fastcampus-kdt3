@@ -1,6 +1,7 @@
 package me.servlet.file;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import me.java.file.FileInfo;
 import me.java.file.FilePost;
 import me.java.file.CustomRenamePolicy;
