@@ -4,10 +4,7 @@ import me.java.database.JDBCMgr;
 import me.java.member.Member;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -18,12 +15,13 @@ public class FilePostDAO {
 
     private Connection conn = null;
     private PreparedStatement stmt = null;
+    private Statement stmt2 = null;
     private ResultSet rs = null;
 
-    private static final String FILEPOST_SELECT_ALL = "select * from filePost";
-    private static final String FILEPOST_SELECT = "select * from filePost where uId = ?";
-    private static final String FILEPOST_INSERT = "insert into filePost(uId, title, fileInfo) values(?, ?, ?)";
-    private static final String FILEPOST_DELETE = "delete filePost where uId = ?";
+    private static final String FILE_POST_SELECT_ALL = "select * from filePost";
+    private static final String FILE_POST_SELECT = "select * from filePost where uId = ?";
+    private static final String FILE_POST_INSERT = "insert into filePost(uId, title, fileInfo) values(?, ?, ?)";
+    private static final String FILE_POST_DELETE = "delete filePost where uId = ?";
 
     private FilePostDAO() {}
 
@@ -40,11 +38,10 @@ public class FilePostDAO {
 
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(FILEPOST_SELECT);
+            stmt = conn.prepareStatement(FILE_POST_SELECT);
             stmt.setString(1, uId);
 
             rs = stmt.executeQuery();
-
             if (rs.next()) {
                 String mId = rs.getString("uId");
                 String title = rs.getString("title");
@@ -53,7 +50,6 @@ public class FilePostDAO {
 
                 filePost = new FilePost(mId, title, fileInfoList);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -73,7 +69,8 @@ public class FilePostDAO {
         FilePost filePost = null;
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(FILEPOST_SELECT_ALL);
+            stmt = conn.prepareStatement(FILE_POST_SELECT_ALL);
+
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -104,7 +101,8 @@ public class FilePostDAO {
         int res = 0;
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(FILEPOST_INSERT);
+            stmt = conn.prepareStatement(FILE_POST_INSERT);
+
             stmt.setString(1, filePost.getUserId());
             stmt.setString(2, filePost.getTitle());
             stmt.setString(3, filePost.getFiles().toString());
@@ -121,7 +119,7 @@ public class FilePostDAO {
         int res = 0;
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(FILEPOST_DELETE);
+            stmt = conn.prepareStatement(FILE_POST_DELETE);
             stmt.setString(1, uId);
             res = stmt.executeUpdate();
         } catch (SQLException e) {
