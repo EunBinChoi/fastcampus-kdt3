@@ -13,9 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
-    <title>Responsive Header</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <title>Responsive Header</title>
 </head>
 <body>
 
@@ -48,14 +47,29 @@
     <ul class="header__nav">
         <!-- block 구조여서 수직적 중앙이 맞음 -->
         <li><a href="/">Home</a></li>
-        <li><a href="#">Board</a></li>
-        <li><a href="#">Survey</a></li>
+        <li><a href="/members/search">Search</a></li>
+        <li><a href="/members/survey">Survey</a></li>
     </ul>
 
     <ul class="header__icons">
-        <li><a href="#"><i class="fas fa-user-plus"></i></a></li>
-        <li><a href="#"><i class="fas fa-toggle-off"></i></a></li>
+
+        <%
+            if (session.getAttribute("SESSION_ID") != null) { %>
+        <li><a href="/members/private"><i class="fas fa-user"></i></a></li>
+        <li><a href="/members/logout"><i class="fas fa-toggle-on"></i></a></li>
+
+        <%
+        } else { %>
+        <li><a href="/members/signup"><i class="fas fa-user-plus"></i></a></li>
+        <li><a href="/members/login"><i class="fas fa-toggle-off"></i></a></li>
+        <%
+            }
+        %>
+
+
     </ul>
+
+
 </header>
 </body>
 </html>

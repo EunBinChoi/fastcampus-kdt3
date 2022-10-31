@@ -22,7 +22,7 @@ public class DoSearchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String keyword = request.getParameter("q");
         System.out.println("keyword = " + keyword);
-        response.getWriter().write(getJSON(keyword));
+        response.getWriter().write(getJSON(keyword)); // search.jsp write
     }
 
     public String getJSON(String keyword) {
@@ -30,16 +30,22 @@ public class DoSearchServlet extends HttpServlet {
 
         MemberDAO memberDAO = MemberDAO.getInstance();
         List<Member> list = memberDAO.search(keyword);
+        // [Member{uId='a', uEmail='a'}, Member{uId='b', uEmail='b'}, Member{uId='c', uEmail='c'}]
+        // 0: {"uId"='a', "uEmail"='a'} => Map
+        // 1: {"uId"='b', "uEmail"='b'} => Map
+        // 2: {"uId"='c', "uEmail"='c'} => Map
+        // JSONArray => ArrayList<HashMap>
+        // HashMap => JSONObject
 
         JSONArray jsonArray = new JSONArray(); // List<Map<>>
-        for(int i = 0; i < list.size(); i ++) {
+        for (int i = 0; i < list.size(); i++) {
             Map<String, String> map = new HashMap<>();
-            map.put("uId",   list.get(i).getuId());
+            map.put("uId", list.get(i).getuId());
             map.put("uEmail", list.get(i).getuEmail());
 
-            JSONObject jsonObject = new JSONObject(map);
+            JSONObject jsonObject = new JSONObject(map); // HashMap -> JSONObject
             jsonArray.add(jsonObject);
         }
-        return jsonArray.toJSONString();
+        return jsonArray.toJSONString(); // "[{}, {}, {}]"
     }
 }

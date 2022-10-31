@@ -21,5 +21,3 @@ INSERT INTO MEMBER VALUES ('abcdef', 'a1234', 'a@gmail.com');
 
 
 SELECT * FROM MEMBER;
-
-COMMIT;

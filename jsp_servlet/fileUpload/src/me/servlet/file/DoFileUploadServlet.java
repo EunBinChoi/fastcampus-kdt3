@@ -98,9 +98,9 @@ public class DoFileUploadServlet extends HttpServlet {
             int res = filePostDAO.insert(filePost);
             if (res > 0) {
                 session.setAttribute("filePost", filePost);
-                //response.sendRedirect("./file/fileView.jsp");
+                response.sendRedirect("./file/fileView.jsp");
             } else {
-                //response.sendRedirect("./file/fileSelect.jsp");
+                response.sendRedirect("./file/fileSelect.jsp");
             }
         } catch (FileNotFoundException e) {
             new RuntimeException();

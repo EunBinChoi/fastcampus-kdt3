@@ -146,6 +146,8 @@ public class FilePostDAO {
             FileInfo fileInfo = null;
             if (tokens.size() == FileInfo.class.getDeclaredFields().length) {
                 fileInfo = new FileInfo();
+
+                // String[] methods = {"setFileName", "setChangedFileName", "setFileType", "setFileLocation"};
                 for (int i = 0; i < fileInfo.getClass().getDeclaredFields().length; i++) {
                     fileInfo.getClass().getMethod(methods[i]).invoke(tokens.get(i));
                 }

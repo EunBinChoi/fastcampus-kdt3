@@ -5,7 +5,7 @@
          version="4.0">
 
 
-    <!-- applicationContext 등록  -->
+    <!-- ApplicationContext  -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
@@ -17,9 +17,6 @@
 
 
     <!-- DispatcherServlet -->
-    <!-- 1. Spring Container 생성 (Spring Container: Controller lifecycle 관리) -->
-    <!-- 2. 클라이언트의 요청을 처음으로 받는 클래스 (Spring에서 제공) -->
-    <!-- 3. 클라이언트의 요청을 Handler (Controller)에 보냄 -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -76,4 +73,17 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/**</url-pattern>
     </filter-mapping>
+
+
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <!-- 필터 맵핑 /** 는 모든 경로의 파일을 말함 -->
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <url-pattern>/**</url-pattern>
+    </filter-mapping>
+
 </web-app>
