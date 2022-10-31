@@ -12,5 +12,8 @@
   </head>
   <body>
   ${now}
+  <%
+    request.getAttribute("now");
+  %>
   </body>
 </html>

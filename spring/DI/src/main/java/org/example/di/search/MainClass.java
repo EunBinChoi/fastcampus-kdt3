@@ -8,6 +8,7 @@ public class MainClass {
         // 등록된 스프링 컨테이너 검색
         AnnotationConfigApplicationContext ctx  = new AnnotationConfigApplicationContext(Transportation.class);
 
+        // Transportation transportation = new Transportation()
         Transportation transportation1 = ctx.getBean("transportation",  Transportation.class);
 
         transportation1.move();

@@ -7,6 +7,7 @@ import org.example.di.overview.battery.OtherBattery;
 import org.example.di.overview.toy.CBToy;
 import org.example.di.overview.toy.NBToy;
 
+// 스프링 컨테이너
 public class MainClass {
     public static void main(String[] args) {
         CBToy cbToy = new CBToy();
