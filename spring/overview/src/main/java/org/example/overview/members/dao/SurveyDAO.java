@@ -3,6 +3,7 @@ package org.example.overview.members.dao;
 import org.example.overview.members.database.JDBCMgr;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.Survey;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class SurveyDAO implements ISurveyDAO {
     private static SurveyDAO surveyDAO  = null;
 

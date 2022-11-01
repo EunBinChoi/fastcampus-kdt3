@@ -7,10 +7,12 @@ import org.example.overview.members.dto.Password;
 import org.example.overview.members.dto.SurveyDTO;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.Survey;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class SurveyService implements ISurveyService {
 
     private SurveyDAO surveyDAO = SurveyDAO.getInstance();
