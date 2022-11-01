@@ -2,6 +2,7 @@ package org.example.overview.members.dao;
 
 import org.example.overview.members.database.JDBCMgr;
 import org.example.overview.members.entity.Member;
+import org.h2.jdbc.JdbcSQLNonTransientException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

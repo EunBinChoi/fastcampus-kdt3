@@ -24,17 +24,17 @@ public class LogoutController { // 로그아웃 컨트롤러
     @GetMapping("/logout")
     public String doLogout(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         String view = "redirect:/";
-        Status respStatus = Status.FAIL;
 
-        if (session.getAttribute("SESSION_ID") != null) {
-            cookieMgr.delete(request, response);
-            sessionMgr.delete(session);
-
-            session = request.getSession(); // 새로운 세션 생성 (새로운 세션 만들어 redirect 하기 위함)
-            respStatus = Status.SUCCESS;
+        if (session.getAttribute("SESSION_ID") == null) {
+            session.setAttribute("logout", Status.FAIL);
+            return view;
         }
 
-        session.setAttribute("logout", respStatus);
+        cookieMgr.delete(request, response);
+        sessionMgr.delete(session);
+
+        session = request.getSession(); // 새로운 세션 생성 (새로운 세션 만들어 redirect 하기 위함)
+        session.setAttribute("logout", Status.SUCCESS);
 
         return view;
     }

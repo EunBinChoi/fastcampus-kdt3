@@ -21,9 +21,9 @@ public interface IMemberService {
 
     List<MemberDTO> getAllUsers();
 
-    boolean updateUserPassword(String uId, Password uPw);
+    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
 
-    boolean removeByUserId(String uId);
+    boolean removeByUserId(String uId, Password uPw);
 
     boolean removeUsers();
 

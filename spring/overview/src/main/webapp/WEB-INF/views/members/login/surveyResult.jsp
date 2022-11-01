@@ -12,6 +12,10 @@
     <jsp:include page="../../layout/header.jsp"/>
 </header>
 
+<%@include file="../../messages/showMessage.jsp"%>
+<%
+    showMessage(request, response, "survey", Status.SUCCESS);
+%>
 
 <main>
     <h1>SURVEY RESULT</h1>

@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class Password {
-    private static Password password = null;
     private String uPw = "";
 
     private Password() {}
@@ -15,17 +14,16 @@ public class Password {
         uPw = sha256(uPw);
     }
 
-    public static Password getInstance() {
-        if (password == null) {
-            password = new Password();
-        }
+
+    public static Password of(String uPw) {
+        Password password = new Password();
+        password.setuPw(password.sha256(uPw));
+
         return password;
     }
 
     public static Password of(String uPw, boolean needEncode) {
-        if (password == null) {
-            password = new Password();
-        }
+        Password password = new Password();
 
         if (needEncode) {
             password.setuPw(password.sha256(uPw));

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>JSP</title>
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
@@ -24,7 +24,7 @@
         <h3>Notice for deleting your information.</h3>
         <p>Please read the introduction for membership cancellation.</p>
     </div>
-    <form id="login__form" method="post" action="/members/private/withdraw/${uId}">
+    <form id="login__form" method="post" action="/members/private/rm/${uId}">
 
         <div class="form__list">
             <label for="uPw">PASSWORD: </label>

@@ -16,7 +16,6 @@
 <%
     showMessage(request, response, "login", Status.FAIL);
     showMessage(request, response, "signup", Status.SUCCESS);
-    showMessage(request, response, "withdraw", Status.SUCCESS);
 %>
 
 <main>

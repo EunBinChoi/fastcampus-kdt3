@@ -49,6 +49,7 @@ public class SignupController {
             respStatus = Status.SUCCESS;
         }
 
+        session.setAttribute("signup", respStatus);
         return view;
     }
 

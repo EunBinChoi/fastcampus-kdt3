@@ -13,6 +13,7 @@
 <%@include file="./messages/showMessage.jsp"%>
 <%
     showMessage(request, response, "logout", Status.SUCCESS);
+    showMessage(request, response, "withdraw", Status.SUCCESS);
 %>
 
 <main>

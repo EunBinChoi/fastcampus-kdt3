@@ -29,10 +29,8 @@ public class SurveyService implements ISurveyService {
     public boolean save(String uId, String season, String fruit) {
         if (uId == null || season == null || fruit == null) return false;
 
-        Member member = memberDAO.select(uId);
-        if (member == null) return false;
-
-        Survey survey = new Survey(member.getuId(), season, fruit);
+        Survey survey = new Survey(uId, season, fruit);
+        System.out.println(survey);
         int res = surveyDAO.insert(survey);
         return res > 0;
     }
@@ -42,6 +40,8 @@ public class SurveyService implements ISurveyService {
         if (uId == null) return null;
 
         Survey survey = surveyDAO.select(uId);
+        if (survey == null) return null;
+
         return survey.toDTO();
     }
 

@@ -25,12 +25,11 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
     public String surveyPage(Model model, HttpSession session) {
         String view = "members/login/survey";
 
-        String uId = "";
-        if (session.getAttribute("SESSION_ID") != null) {
-            uId = sessionMgr.get(session);
-            model.addAttribute("uId", uId);
+        if (session.getAttribute("SESSION_ID") == null) {
+            return "redirect:/";
         }
 
+        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 
@@ -38,53 +37,59 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
     public String surveyResPage(Model model, HttpSession session) {
         String view = "members/login/surveyResult";
 
-        if (session.getAttribute("SESSION_ID") != null) {
-            model.addAttribute("uId", sessionMgr.get(session));
-        } else {
-            view = "redirect:/";
+        if (session.getAttribute("SESSION_ID") == null) {
+            return "redirect:/";
         }
 
+        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 
 
-    @PostMapping("/survey/res")
-    public String doSurvey(@RequestParam String season, @RequestParam String fruit,
+    @PostMapping("/survey/res/{uId}")
+    public String doSurvey(@PathVariable String uId, @RequestParam String season, @RequestParam String fruit,
                            Model model, HttpSession session) {
-        String view = surveyResPage(model, session);
+        String view = surveyPage(model, session);
+        Status respStatus = Status.FAIL;
 
-        String uId = "";
-        if (session.getAttribute("SESSION_ID") != null) {
-            uId = sessionMgr.get(session);
-            SurveyDTO surveyDTO = surveyService.getByUserId(uId);
-
-            if (surveyDTO == null) {
-                surveyService.save(uId, season, fruit);
-            } else {
-                surveyService.updateSeason(uId, season);
-                surveyService.updateFruit(uId, fruit);
-            }
-
-            model.addAttribute("survey", new SurveyVO(season, fruit));
-        } else {
-            view = "redirect:/";
+        if (uId == null || uId.equals("")) return view;
+        if (!session.getAttribute("SESSION_ID").equals(uId)) {
+            session.setAttribute("survey", respStatus);
+            return view;
         }
 
-        return view;
+        uId = sessionMgr.get(session);
+        SurveyDTO surveyDTO = surveyService.getByUserId(uId);
+
+        if (surveyDTO == null) {
+            surveyService.save(uId, season, fruit);
+        } else {
+            surveyService.updateSeason(uId, season);
+            surveyService.updateFruit(uId, fruit);
+        }
+
+        model.addAttribute("survey", new SurveyVO(season, fruit));
+        respStatus = Status.SUCCESS;
+
+        session.setAttribute("survey", respStatus);
+        return "members/login/surveyResult";
     }
 
     @GetMapping("/survey/res/{uId}")
     public String getSurveyResultByUserId(@PathVariable String uId, Model model, HttpSession session) {
         String view = surveyPage(model, session);
-        Status respStatus = Status.FAIL;
 
-        SurveyDTO surveyDTO = surveyService.getByUserId(uId);
-        if (surveyDTO != null) {
-            model.addAttribute("survey", surveyDTO.toVO());
-            respStatus = Status.SUCCESS;
+        if (uId == null || uId.equals("")) return view;
+        if (!session.getAttribute("SESSION_ID").equals(uId)) {
+            return view;
         }
 
-        return view;
+        SurveyDTO surveyDTO = surveyService.getByUserId(uId);
+        if (surveyDTO == null) return view;
+
+        model.addAttribute("survey", surveyDTO.toVO());
+
+        return "members/login/surveyResult";
     }
 
 }

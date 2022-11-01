@@ -27,15 +27,16 @@ public class LoginController {
         String view = "members/nonlogin/login";
 
         if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
-            view = "redirect:/";
+            return "redirect:/";
         }
 
         String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
-        String cookieID = cookieMgr.get(request, "COOKIE_ID");
+        String cookieId = cookieMgr.get(request, "COOKIE_ID");
 
-        if (autoLogin != null && cookieID != null) {
-            if (memberService.autoLogin(autoLogin, cookieID)) {
-                sessionMgr.create(session, cookieID);
+
+        if (autoLogin != null && cookieId != null) {
+            if (memberService.autoLogin(autoLogin, cookieId)) {
+                sessionMgr.create(session, cookieId);
                 view = "redirect:/";
             }
         }

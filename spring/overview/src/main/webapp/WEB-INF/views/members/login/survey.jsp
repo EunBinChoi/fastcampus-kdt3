@@ -14,12 +14,17 @@
     <jsp:include page="../../layout/header.jsp"/>
 </header>
 
+<%@include file="../../messages/showMessage.jsp"%>
+<%
+    showMessage(request, response, "survey", Status.FAIL);
+%>
+
 <main>
     <h1>SURVEY</h1>
     <div>Hello! ${uId}</div>
     <div>Please complete the survey below 👇🏻</div>
     <div>
-        <form method="post" action="/members/survey/res">
+        <form method="post" action="/members/survey/res/${uId}">
             <fieldset>
                 <legend>1. Favorite Season ?</legend>
 

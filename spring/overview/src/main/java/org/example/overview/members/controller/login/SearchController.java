@@ -28,10 +28,12 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
 
         String view = "members/login/search";
 
+        if (session.getAttribute("SESSION_ID") == null) {
+            return "redirect:/";
+        }
+
         if (session.getAttribute("SESSION_ID") != null) {
             model.addAttribute("uId", sessionMgr.get(session));
-        } else {
-            view = "redirect:/";
         }
 
         return view;
@@ -41,30 +43,33 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
     @PostMapping("/search")
     @ResponseBody
     public String findByUserIdOrEmail(@RequestParam String q, HttpSession session) {
+
+        if (session.getAttribute("SESSION_ID") == null) {
+            return "redirect:/";
+        }
+
         if (q == null || q.equals("")) {
             return getAllUsers(session);
         }
 
-        if (session.getAttribute("SESSION_ID") != null) {
-            List<MemberDTO> memberDTOList = memberService.findByUserIdOrEmail(q);
+        List<MemberDTO> memberDTOList = memberService.findByUserIdOrEmail(q);
 
-            if (memberDTOList != null) {
-                return parseListToJSONArrayString(memberDTOList);
-            }
+        if (memberDTOList != null) {
+            return parseListToJSONArrayString(memberDTOList);
         }
-        return null;
+        return "";
     }
 
 
 
     public String getAllUsers(HttpSession session) {
-        if (session.getAttribute("SESSION_ID") != null) {
-            List<MemberDTO> memberDTOList = memberService.getAllUsers();
-            if (memberDTOList != null) {
-                return parseListToJSONArrayString(memberDTOList);
-            }
+
+        List<MemberDTO> memberDTOList = memberService.getAllUsers();
+        if (memberDTOList != null) {
+            return parseListToJSONArrayString(memberDTOList);
         }
-        return null;
+
+        return "";
     }
 
     public String parseListToJSONArrayString(List<MemberDTO> memberDTOList) {
