@@ -1,0 +1,10 @@
+DROP TABLE SURVEY;
+
+CREATE TABLE SURVEY (
+        uId VARCHAR(255),
+        season VARCHAR(255),
+        fruit VARCHAR(255),
+        PRIMARY KEY (uId)
+);
+
+SELECT * FROM SURVEY;
