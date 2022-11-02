@@ -5,6 +5,7 @@ import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,16 @@ import java.util.Map;
 @Controller
 @RequestMapping("/members")
 public class SearchController { // 유저 검색 페이지 컨트롤러
-    private MemberService memberService = MemberService.getInstance();
+    private MemberService memberService; // = MemberService.getInstance();
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
+    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
 
+
+    @Autowired
+    public SearchController(MemberService memberService, SessionMgr sessionMgr) {
+        this.memberService = memberService;
+        this.sessionMgr = sessionMgr;
+    }
 
     @GetMapping("/search")
     public String searchPage(Model model, HttpSession session) {

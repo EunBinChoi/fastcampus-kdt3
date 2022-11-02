@@ -15,7 +15,6 @@
 <%@include file="../../messages/showMessage.jsp"%>
 <%
     showMessage(request, response, "login", Status.FAIL);
-    showMessage(request, response, "signup", Status.SUCCESS);
 %>
 
 <main>

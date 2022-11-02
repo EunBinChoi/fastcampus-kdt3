@@ -5,6 +5,7 @@ import org.example.overview.members.dto.MemberDTO;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/members")
 public class SignupController {
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
-    private CookieMgr cookieMgr = CookieMgr.getInstance();
-    private MemberService memberService = MemberService.getInstance();
+    private SessionMgr sessionMgr; //= SessionMgr.getInstance();
+    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
+    private MemberService memberService; // = MemberService.getInstance();
 
+
+    @Autowired
+    public SignupController(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
+        this.sessionMgr = sessionMgr;
+        this.cookieMgr = cookieMgr;
+        this.memberService = memberService;
+    }
 
     @GetMapping("/signup")
     public String signupPage(HttpSession session) {

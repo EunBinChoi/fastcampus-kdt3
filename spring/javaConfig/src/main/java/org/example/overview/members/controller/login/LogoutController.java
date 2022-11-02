@@ -4,6 +4,7 @@ import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,17 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/members")
 public class LogoutController { // 로그아웃 컨트롤러
-    private MemberService memberService = MemberService.getInstance();
+    private MemberService memberService; // = MemberService.getInstance();
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
-    private CookieMgr cookieMgr = CookieMgr.getInstance();
+    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
+    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
 
+    @Autowired
+    public LogoutController(MemberService memberService, SessionMgr sessionMgr, CookieMgr cookieMgr) {
+        this.memberService = memberService;
+        this.sessionMgr = sessionMgr;
+        this.cookieMgr = cookieMgr;
+    }
 
     @GetMapping("/logout")
     public String doLogout(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {

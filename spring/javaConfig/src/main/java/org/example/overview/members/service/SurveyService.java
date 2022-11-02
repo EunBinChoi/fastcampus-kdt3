@@ -7,6 +7,7 @@ import org.example.overview.members.dto.Password;
 import org.example.overview.members.dto.SurveyDTO;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.Survey;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,17 +16,22 @@ import java.util.stream.Collectors;
 @Service
 public class SurveyService implements ISurveyService {
 
-    private SurveyDAO surveyDAO = SurveyDAO.getInstance();
-    private MemberDAO memberDAO = MemberDAO.getInstance();
-    private static SurveyService surveyService = null;
+    private SurveyDAO surveyDAO; // = SurveyDAO.getInstance();
+    private MemberDAO memberDAO; // = MemberDAO.getInstance();
+//    private static SurveyService surveyService = null;
 
-    public static SurveyService getInstance() {
-        if (surveyService == null) {
-            surveyService = new SurveyService();
-        }
-        return surveyService;
+//    public static SurveyService getInstance() {
+//        if (surveyService == null) {
+//            surveyService = new SurveyService();
+//        }
+//        return surveyService;
+//    }
+
+    @Autowired
+    public SurveyService(SurveyDAO surveyDAO, MemberDAO memberDAO) {
+        this.surveyDAO = surveyDAO;
+        this.memberDAO = memberDAO;
     }
-
 
     @Override
     public boolean save(String uId, String season, String fruit) {

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MemberDAO implements IMemberDAO {
-    private static MemberDAO memberDAO = null;
+//    private static MemberDAO memberDAO = null;
 
     private Connection conn = null;
     private PreparedStatement stmt = null;
@@ -30,12 +30,16 @@ public class MemberDAO implements IMemberDAO {
     private static final String MEMBER_DELETE = "delete member where uId = ?";
     private static final String MEMBER_DELETE_ALL = "delete member";
 
-    public static MemberDAO getInstance() {
-        if (memberDAO == null) {
-            memberDAO = new MemberDAO();
-        }
-        return memberDAO;
+    public MemberDAO () {
+        System.out.println("MemberDAO()");
     }
+
+//    public static MemberDAO getInstance() {
+//        if (memberDAO == null) {
+//            memberDAO = new MemberDAO();
+//        }
+//        return memberDAO;
+//    }
 
     @Override
     public List<Member> search(String q) { // 이름이나 이메일로 검색
@@ -133,7 +137,7 @@ public class MemberDAO implements IMemberDAO {
 
     @Override
     public int insertAll(List<Member> members) {
-        return members.stream().map(m -> memberDAO.insert(m)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
+        return members.stream().map(m -> insert(m)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
     }
 
     @Override

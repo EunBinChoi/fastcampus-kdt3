@@ -14,6 +14,7 @@
 <%
     showMessage(request, response, "logout", Status.SUCCESS);
     showMessage(request, response, "withdraw", Status.SUCCESS);
+    showMessage(request, response, "signup", Status.SUCCESS); // 위치 수정
 %>
 
 <main>

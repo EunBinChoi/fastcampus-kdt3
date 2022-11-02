@@ -1,6 +1,7 @@
 package org.example.overview.members.controller;
 
 import org.example.overview.sessions.SessionMgr;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,12 @@ import java.util.Locale;
 @Controller
 public class IndexController {
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
+    private SessionMgr sessionMgr; //= SessionMgr.getInstance();
+
+    @Autowired
+    public IndexController(SessionMgr sessionMgr) {
+        this.sessionMgr = sessionMgr;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(Locale locale, Model model, HttpServletRequest request, HttpSession session) {

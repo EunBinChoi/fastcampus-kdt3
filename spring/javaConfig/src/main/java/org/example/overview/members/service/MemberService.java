@@ -5,6 +5,7 @@ import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.MemberDTO;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +15,26 @@ import java.util.stream.Collectors;
 @Service
 public class MemberService implements IMemberService {
 
-    private CookieMgr cookieMgr = CookieMgr.getInstance();
-    private MemberDAO memberDAO = MemberDAO.getInstance();
-    private static MemberService memberService = null;
+    private MemberDAO memberDAO; // = MemberDAO.getInstance(); // 객체 생성
+//    private static MemberService memberService = null;
 
-    public static MemberService getInstance() {
-        if (memberService == null) {
-            memberService = new MemberService();
-        }
-        return memberService;
+
+    public MemberService() {
+        System.out.println("MemberService()");
     }
+
+    @Autowired
+    public MemberService(MemberDAO memberDAO) {
+        this.memberDAO = memberDAO;
+    }
+
+
+    //    public static MemberService getInstance() {
+//        if (memberService == null) {
+//            memberService = new MemberService();
+//        }
+//        return memberService;
+//    }
 
     @Override
     public List<MemberDTO> findByUserIdOrEmail(String q) {
@@ -38,8 +49,8 @@ public class MemberService implements IMemberService {
         if (autoLogin == null || cookieId == null) return false;
 
         if (autoLogin.equals("true")) {
-            if (memberService.getByUserId(cookieId) != null) {
-                MemberDTO memberDTO = memberService.login(cookieId);
+            if (getByUserId(cookieId) != null) {
+                MemberDTO memberDTO = login(cookieId);
                 return memberDTO != null;
             }
         }

@@ -5,6 +5,7 @@ import org.example.overview.members.service.SurveyService;
 import org.example.overview.members.vo.SurveyVO;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/members")
 public class SurveyController { // 개인 설정 페이지 컨트롤러
 
-    private SurveyService surveyService = SurveyService.getInstance();
+    private SurveyService surveyService; // = SurveyService.getInstance();
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
+    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
+
+    @Autowired
+    public SurveyController(SurveyService surveyService, SessionMgr sessionMgr) {
+        this.surveyService = surveyService;
+        this.sessionMgr = sessionMgr;
+    }
 
     @GetMapping("/survey")
     public String surveyPage(Model model, HttpSession session) {

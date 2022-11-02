@@ -3,6 +3,8 @@ package org.example.overview.members.controller.login;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/members")
 public class CookieController { // 쿠키 컨트롤러
+    private final SessionMgr sessionMgr; // = SessionMgr.getInstance();
+    private final CookieMgr cookieMgr; // = CookieMgr.getInstance();
 
-    private SessionMgr sessionMgr = SessionMgr.getInstance();
-    private CookieMgr cookieMgr = CookieMgr.getInstance();
+    @Autowired
+    public CookieController(SessionMgr sessionMgr, CookieMgr cookieMgr) {
+        this.sessionMgr = sessionMgr;
+        this.cookieMgr = cookieMgr;
+    }
 
     @GetMapping("/cookies")
     public String cookiePage(Model model, HttpServletRequest request, HttpSession session) {

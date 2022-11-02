@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class SurveyDAO implements ISurveyDAO {
-    private static SurveyDAO surveyDAO  = null;
+//    private static SurveyDAO surveyDAO  = null;
 
     private Connection conn = null;
     private PreparedStatement stmt = null;
@@ -29,12 +29,12 @@ public class SurveyDAO implements ISurveyDAO {
     private static final String SURVEY_DELETE = "delete survey where uId = ?";
     private static final String SURVEY_DELETE_ALL = "delete survey";
 
-    public static SurveyDAO getInstance() {
-        if (surveyDAO == null) {
-            surveyDAO = new SurveyDAO();
-        }
-        return surveyDAO;
-    }
+//    public static SurveyDAO getInstance() {
+//        if (surveyDAO == null) {
+//            surveyDAO = new SurveyDAO();
+//        }
+//        return surveyDAO;
+//    }
 
     @Override
     public Survey select(String uId) {
@@ -105,7 +105,7 @@ public class SurveyDAO implements ISurveyDAO {
 
     @Override
     public int insertAll(List<Survey> surveys) {
-        return surveys.stream().map(s -> surveyDAO.insert(s)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
+        return surveys.stream().map(s -> insert(s)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
     }
 
     @Override
