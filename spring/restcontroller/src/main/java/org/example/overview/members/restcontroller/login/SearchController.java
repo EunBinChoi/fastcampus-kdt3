@@ -34,7 +34,6 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
     @PostMapping(value = "/search",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public List<MemberDTO> findByUserIdOrEmail(@RequestParam String q, HttpSession session) {
         if (q == null || q.equals("")) {
             return memberService.getAllUsers();

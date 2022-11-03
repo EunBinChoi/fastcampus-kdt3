@@ -7,6 +7,7 @@ import org.example.overview.valid.TestValidationGroup;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 public class MemberDTO {
 
@@ -31,6 +32,11 @@ public class MemberDTO {
         this.uId = uId;
     }
 
+    public MemberDTO(String uId, String uEmail) {
+        this.uId = uId;
+        this.uEmail = uEmail;
+    }
+
     public MemberDTO(String uId, String uPw, boolean needEncode) {
         this.uId = uId;
         this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
@@ -41,15 +47,35 @@ public class MemberDTO {
         this.uPw = uPw;
     }
 
+    public MemberDTO(String uId, Password uPw, Password uNewPw) {
+        this.uId = uId;
+        this.uPw = uPw;
+        this.uNewPw = uNewPw;
+    }
+
     public MemberDTO(String uId, String uPw, String uEmail, boolean needEncode) {
         this.uId = uId;
         this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
         this.uEmail = uEmail;
     }
 
+    public MemberDTO(String uId, String uPw, String uNewPw, String uEmail, boolean needEncode) {
+        this.uId = uId;
+        this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
+        this.uNewPw = needEncode ? Password.of(uNewPw, true) : Password.of(uNewPw, false);
+        this.uEmail = uEmail;
+    }
+
     public MemberDTO(String uId, Password uPw, String uEmail) {
         this.uId = uId;
         this.uPw = uPw;
+        this.uEmail = uEmail;
+    }
+
+    public MemberDTO(String uId, Password uPw, Password uNewPw, String uEmail) {
+        this.uId = uId;
+        this.uPw = uPw;
+        this.uNewPw = uNewPw;
         this.uEmail = uEmail;
     }
 
@@ -77,6 +103,7 @@ public class MemberDTO {
         return uPw.getuPw();
     }
 
+
     public void setuPw(Password uPw) {
         this.uPw = uPw;
     }
@@ -84,9 +111,12 @@ public class MemberDTO {
     public Password getuNewPw() {
         return uNewPw;
     }
+
     public String getuNewPwStr() {
         return uNewPw.getuPw();
     }
+
+
 
     public void setuNewPw(Password uNewPw) {
         this.uNewPw = uNewPw;
@@ -99,7 +129,6 @@ public class MemberDTO {
     public void setuEmail(String uEmail) {
         this.uEmail = uEmail;
     }
-
 
     @Override
     public String toString() {

@@ -53,7 +53,7 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String doSignup(@ModelAttribute @Validated(GeneralValidationGroup.class) MemberDTO memberDTO,
+    public String doSignup(@ModelAttribute MemberDTO memberDTO,
                            BindingResult bindingResult,
                            HttpSession session) {
 
@@ -82,7 +82,7 @@ public class SignupController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Status checkDuplicateId(@RequestParam String uId) {
+    public Status checkDuplicateId(@RequestParam(required = false) String uId) {
         if (uId == null || uId.equals("")) return Status.NULL;
 
         MemberDTO memberDTO = memberService.getByUserId(uId);

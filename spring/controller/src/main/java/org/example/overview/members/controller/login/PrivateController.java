@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/members")
@@ -85,19 +86,15 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Status checkPassword(@RequestBody MemberDTO memberDTO) { // uId, uPw
-        System.out.println("memberDTO = " + memberDTO);
-        if (memberDTO == null) return Status.NULL;
+    public Status checkPassword(@RequestBody Map<String, String> map) { // uId, uPw
+        if (map.get("uId") == null || map.get("uPw") == null) return Status.NULL;
+        if (map.get("uId").equals("") || map.get("uPw").equals("")) return Status.NULL;
 
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setuId(map.get("uId"));
+        memberDTO.setuPw(Password.of(map.get("uPw")));
 
-        boolean res = memberService.checkPassword(memberDTO.getuId(), Password.of(memberDTO.getuPwStr()));
-        Status status = Status.FAIL;
-
-        if (res) {
-            status = Status.SUCCESS;
-        }
-
-        System.out.println("res = " + res);
+        Status status = memberService.checkPassword(memberDTO.getuId(), memberDTO.getuPw()) ? Status.SUCCESS : Status.FAIL;
         return status;
     }
 
@@ -105,19 +102,15 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
             consumes = MediaType.APPLICATION_JSON_VALUE, // "{"uId": "", "uNewPw": ""}"
             produces = MediaType.APPLICATION_JSON_VALUE) // "SUCCESS", "FAIL"
     @ResponseBody
-    public Status checkNewPassword(@RequestBody MemberDTO memberDTO) { // uId, uNewPw
-        System.out.println("memberDTO = " + memberDTO);
-        if (memberDTO == null) return Status.NULL;
+    public Status checkNewPassword(@RequestBody Map<String, String> map) { // uId, uNewPw
+        if (map.get("uId") == null || map.get("uNewPw") == null) return Status.NULL;
+        if (map.get("uId").equals("") || map.get("uNewPw").equals("")) return Status.NULL;
 
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setuId(map.get("uId"));
+        memberDTO.setuNewPw(Password.of(map.get("uNewPw")));
 
-        boolean res = memberService.checkNewPassword(memberDTO.getuId(), Password.of(memberDTO.getuNewPwStr()));
-        Status status = Status.FAIL;
-
-        if (res) {
-            status = Status.SUCCESS;
-        }
-
-        System.out.println("res = " + res);
+        Status status = memberService.checkNewPassword(memberDTO.getuId(), memberDTO.getuNewPw()) ? Status.SUCCESS : Status.FAIL;
         return status;
     }
 

@@ -28,6 +28,7 @@
         checkIdRequest.onreadystatechange = () => {
             if (checkIdRequest.readyState == 4 && checkIdRequest.status == 200) {
                 console.log(checkIdRequest.responseText);
+
                 const result = $("#res");
                 const responseText = JSON.parse(checkIdRequest.responseText);
 
@@ -72,11 +73,11 @@
                     result.css("color", "red");
                     result.text("you can't use.");
                 } else {
-                    result.css("display");
+                    result.css("display", "none");
                 }
             },
             error: (data) => {
-                console.log("errpr", data);
+                console.log("error", data);
             }
 
         });
@@ -98,7 +99,7 @@
 
             <div class="form__list">
                 <label for="uId">ID: </label>
-                <input type="text" id="uId" name="uId" onkeyup="duplicateIdWithJQuery()" placeholder="INPUT YOUR ID"
+                <input type="text" id="uId" name="uId" onkeyup="duplicateId()" placeholder="INPUT YOUR ID"
                        pattern="^[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}$" required/>
                 <p id="res"></p>
             </div>

@@ -1,4 +1,4 @@
-package org.example.overview.members.restcontroller.login;
+package org.example.overview.members.controller.login;
 
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.service.MemberService;
@@ -16,18 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/members")
 public class LogoutController { // 로그아웃 컨트롤러
-    private MemberService memberService; // = MemberService.getInstance();
 
     private SessionMgr sessionMgr; // = SessionMgr.getInstance();
     private CookieMgr cookieMgr; // = CookieMgr.getInstance();
 
 
     @Autowired
-    public LogoutController(MemberService memberService, SessionMgr sessionMgr, CookieMgr cookieMgr) {
-        this.memberService = memberService;
+    public LogoutController(SessionMgr sessionMgr, CookieMgr cookieMgr) {
         this.sessionMgr = sessionMgr;
         this.cookieMgr = cookieMgr;
     }

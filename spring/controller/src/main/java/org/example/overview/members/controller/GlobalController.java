@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 // 보통 공통적인 예외처리나 로깅 찍을 때 사용
 public class GlobalController {
 
-    @ModelAttribute("serverTime") // model.addAttribute("serverTime", getServerTIme())
-    public String getServerTime() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println(localDateTime);
-        return localDateTime.toString();
-    }
+//    @ModelAttribute("serverTime") // model.addAttribute("serverTime", getServerTIme())
+//    public String getServerTime() {
+//        LocalDateTime localDateTime = LocalDateTime.now();
+//        System.out.println(localDateTime);
+//        return localDateTime.toString();
+//    }
 
 }

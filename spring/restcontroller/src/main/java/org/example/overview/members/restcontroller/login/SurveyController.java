@@ -6,6 +6,8 @@ import org.example.overview.members.vo.SurveyVO;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,29 +21,15 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
 
     private SurveyService surveyService; // = SurveyService.getInstance();
 
-    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
-
     @Autowired
-    public SurveyController(SurveyService surveyService, SessionMgr sessionMgr) {
+    public SurveyController(SurveyService surveyService) {
         this.surveyService = surveyService;
-        this.sessionMgr = sessionMgr;
     }
 
 
     @PostMapping("/survey/res/{uId}")
-    public String doSurvey(@PathVariable String uId, @RequestParam String season, @RequestParam String fruit,
+    public ResponseEntity doSurvey(@PathVariable String uId, @RequestParam String season, @RequestParam String fruit,
                            Model model, HttpSession session) {
-        String view = surveyPage(model, session);
-        Status respStatus = Status.FAIL;
-
-
-        if (uId == null || uId.equals("")) return view;
-        if (!session.getAttribute("SESSION_ID").equals(uId)) {
-            session.setAttribute("survey", respStatus);
-            return view;
-        }
-
-        uId = sessionMgr.get(session);
         SurveyDTO surveyDTO = surveyService.getByUserId(uId);
 
         if (surveyDTO == null) {
@@ -50,32 +38,13 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
             surveyService.updateSeason(uId, season);
             surveyService.updateFruit(uId, fruit);
         }
-
-        model.addAttribute("survey", new SurveyVO(season, fruit));
-//        model.addAttribute("season", season);
-//        model.addAttribute("fruit", fruit);
-
-        respStatus = Status.SUCCESS;
-
-        session.setAttribute("survey", respStatus);
-        return "members/login/surveyResult";
+        return new ResponseEntity(surveyDTO, HttpStatus.OK);
     }
 
     @GetMapping("/survey/res/{uId}")
-    public String getSurveyResultByUserId(@PathVariable String uId, Model model, HttpSession session) {
-        String view = surveyPage(model, session);
-
-        if (uId == null || uId.equals("")) return view;
-        if (!session.getAttribute("SESSION_ID").equals(uId)) {
-            return view;
-        }
-
+    public ResponseEntity getSurveyResultByUserId(@PathVariable String uId, Model model, HttpSession session) {
         SurveyDTO surveyDTO = surveyService.getByUserId(uId);
-        if (surveyDTO == null) return view;
-
-        model.addAttribute("survey", surveyDTO.toVO());
-
-        return "members/login/surveyResult";
+        return new ResponseEntity(surveyDTO, HttpStatus.OK);
     }
 
 }
