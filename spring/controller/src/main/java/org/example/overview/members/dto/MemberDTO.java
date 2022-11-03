@@ -10,15 +10,17 @@ import javax.validation.constraints.*;
 
 public class MemberDTO {
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
-    @Pattern(regexp = "[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}", groups = GeneralValidationGroup.class)
+//    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+//    @Pattern(regexp = "[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}", groups = GeneralValidationGroup.class)
     private String uId = "";
 
-    @NotNull(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+//    @NotNull(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private Password uPw = null;
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
-    @Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", groups = GeneralValidationGroup.class)
+    private Password uNewPw = null;
+
+//    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+//    @Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", groups = GeneralValidationGroup.class)
     private String uEmail = "";
 
 
@@ -79,6 +81,17 @@ public class MemberDTO {
         this.uPw = uPw;
     }
 
+    public Password getuNewPw() {
+        return uNewPw;
+    }
+    public String getuNewPwStr() {
+        return uNewPw.getuPw();
+    }
+
+    public void setuNewPw(Password uNewPw) {
+        this.uNewPw = uNewPw;
+    }
+
     public String getuEmail() {
         return uEmail;
     }
@@ -88,12 +101,12 @@ public class MemberDTO {
     }
 
 
-
     @Override
     public String toString() {
         return "MemberDTO{" +
                 "uId='" + uId + '\'' +
                 ", uPw=" + uPw +
+                ", uNewPw=" + uNewPw +
                 ", uEmail='" + uEmail + '\'' +
                 '}';
     }

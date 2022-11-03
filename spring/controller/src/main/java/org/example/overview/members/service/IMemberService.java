@@ -23,6 +23,10 @@ public interface IMemberService {
 
     boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
 
+    boolean checkPassword(String uId, Password uPw);
+
+    boolean checkNewPassword(String uId, Password uNewPw);
+
     boolean removeByUserId(String uId, Password uPw);
 
     boolean removeUsers();

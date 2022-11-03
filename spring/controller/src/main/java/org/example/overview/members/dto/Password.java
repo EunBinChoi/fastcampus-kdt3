@@ -13,8 +13,8 @@ import java.util.Objects;
 
 public class Password {
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
-    @Pattern(regexp = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}", groups = GeneralValidationGroup.class)
+    //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    //@Pattern(regexp = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}", groups = GeneralValidationGroup.class)
     private String uPw;
 
     private Password() {}

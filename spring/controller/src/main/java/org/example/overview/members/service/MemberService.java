@@ -109,10 +109,35 @@ public class MemberService implements IMemberService {
         Member member = memberDAO.select(uId);
         if (member == null || member.getuPw() == null) return false;
         if (!member.getuPw().equals(uPw.getuPw())) return false;
+        if (member.getuPw().equals(uNewPw.getuPw())) return false; // DB PWD == New PWD
 
         int res = memberDAO.update(uId, uNewPw.getuPw());
         return res > 0;
     }
+
+    @Override
+    public boolean checkPassword(String uId, Password uPw) {
+        if (uId == null || uPw == null) return false;
+
+        Member member = memberDAO.select(uId);
+        if (member == null) return false;
+        if (!member.getuPw().equals(uPw.getuPw())) return false;
+
+        return true;
+    }
+
+    @Override
+    public boolean checkNewPassword(String uId, Password uNewPw) {
+        if (uId == null || uNewPw == null) return false;
+
+        Member member = memberDAO.select(uId);
+        if (member == null) return false;
+        if (member.getuPw().equals(uNewPw.getuPw())) return false;
+
+        return true;
+    }
+
+
 
     @Override
     public boolean removeByUserId(String uId, Password uPw) {

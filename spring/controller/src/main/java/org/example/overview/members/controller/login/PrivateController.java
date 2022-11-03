@@ -7,6 +7,7 @@ import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,7 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
     }
 
 
+    /* uPw와 uNewPw가 같으면 패스워드 업데이트 불가능 기능 추가 (22.11.03) */
     @PostMapping({"/private/rev", "/private/rev/{uId}"})
     public String updateUserPassword(@PathVariable(required = false) String uId,
                                      @RequestParam(required = false) String uPw,
@@ -63,8 +65,6 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
         String view = updatePage(model, session);
         Status respStatus = Status.FAIL;
 
-
-        System.out.println(uId);
 
         if (!session.getAttribute("SESSION_ID").equals(uId)) {
             session.setAttribute("update", respStatus);
@@ -79,6 +79,48 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
         session.setAttribute("update", respStatus);
         return view;
     }
+
+
+    @PostMapping(value = "/private/checkPwd",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Status checkPassword(@RequestBody MemberDTO memberDTO) { // uId, uPw
+        System.out.println("memberDTO = " + memberDTO);
+        if (memberDTO == null) return Status.NULL;
+
+
+        boolean res = memberService.checkPassword(memberDTO.getuId(), Password.of(memberDTO.getuPwStr()));
+        Status status = Status.FAIL;
+
+        if (res) {
+            status = Status.SUCCESS;
+        }
+
+        System.out.println("res = " + res);
+        return status;
+    }
+
+    @PostMapping(value = "/private/checkNewPwd",
+            consumes = MediaType.APPLICATION_JSON_VALUE, // "{"uId": "", "uNewPw": ""}"
+            produces = MediaType.APPLICATION_JSON_VALUE) // "SUCCESS", "FAIL"
+    @ResponseBody
+    public Status checkNewPassword(@RequestBody MemberDTO memberDTO) { // uId, uNewPw
+        System.out.println("memberDTO = " + memberDTO);
+        if (memberDTO == null) return Status.NULL;
+
+
+        boolean res = memberService.checkNewPassword(memberDTO.getuId(), Password.of(memberDTO.getuNewPwStr()));
+        Status status = Status.FAIL;
+
+        if (res) {
+            status = Status.SUCCESS;
+        }
+
+        System.out.println("res = " + res);
+        return status;
+    }
+
 
     @GetMapping("/private/rm")
     public String withdrawPage(Model model, HttpSession session) {

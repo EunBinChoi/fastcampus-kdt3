@@ -148,7 +148,6 @@ public class MemberDAO implements IMemberDAO {
             e.printStackTrace();
         } finally {
             connectionPoolMgr.freeConnection(conn, stmt);
-
         }
         return res;
     }

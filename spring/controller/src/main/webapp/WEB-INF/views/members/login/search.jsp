@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>JSP</title>
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header>

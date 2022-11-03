@@ -27,6 +27,8 @@ import java.util.List;
 public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConfigurer: @EnableWebMvc에서 제공한 빈들을 커스터마이징할 수 있는 기능 제공 인터페이스
     // dispatcher-servlet.xml
 
+    // @Valid를 사용하기 위한 빈 설정
+    // spring-boot-validator
     @Bean
     public Validator localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
