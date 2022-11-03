@@ -1,18 +1,24 @@
 package org.example.overview.members.dto;
 
-import jakarta.validation.constraints.*;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.vo.MemberVO;
+import org.example.overview.valid.GeneralValidationGroup;
+import org.example.overview.valid.TestValidationGroup;
 import org.springframework.stereotype.Component;
 
-@Component
+import javax.validation.constraints.*;
+
 public class MemberDTO {
 
-    @Size(min = 0, max = 0, message = "uId Error")
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    @Pattern(regexp = "[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}", groups = GeneralValidationGroup.class)
     private String uId = "";
 
+    @NotNull(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private Password uPw = null;
 
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    @Pattern(regexp = "[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", groups = GeneralValidationGroup.class)
     private String uEmail = "";
 
 

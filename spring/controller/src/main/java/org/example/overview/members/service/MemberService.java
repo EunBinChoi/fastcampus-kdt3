@@ -91,6 +91,8 @@ public class MemberService implements IMemberService {
         if (uId == null) return null;
 
         Member member = memberDAO.select(uId);
+        if (member == null) return null;
+
         return member.toDTO();
     }
 

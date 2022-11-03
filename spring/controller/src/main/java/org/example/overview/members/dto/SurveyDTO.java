@@ -3,10 +3,21 @@ package org.example.overview.members.dto;
 
 import org.example.overview.members.entity.Survey;
 import org.example.overview.members.vo.SurveyVO;
+import org.example.overview.valid.GeneralValidationGroup;
+import org.example.overview.valid.TestValidationGroup;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 public class SurveyDTO {
+
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String uId = "";
+
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String season = "";
+
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String fruit = "";
 
     public SurveyDTO() {

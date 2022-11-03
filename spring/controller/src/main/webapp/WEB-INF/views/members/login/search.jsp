@@ -16,6 +16,7 @@
     function search() {
         const searchRequest = new XMLHttpRequest();
         searchRequest.open("post", "/members/search?q=" + $("#q").val(), true);
+        searchRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf8");
         searchRequest.onreadystatechange = () => {
             if(searchRequest.readyState == 4 && searchRequest.status == 200) {
 

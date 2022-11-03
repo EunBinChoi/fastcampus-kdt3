@@ -21,7 +21,7 @@
     <h1>Hello ${uId}!</h1>
 
     <h2>Current Time - ${now}</h2>
-    <h2>Server Time - ${serverTime}</h2>
+    <h2>Redirect Value - ${redirect}</h2>
 
     <%
         LocalDateTime now = null;

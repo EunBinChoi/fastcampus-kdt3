@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class CookieController { // 쿠키 컨트롤러
     private final SessionMgr sessionMgr; // = SessionMgr.getInstance();
     private final CookieMgr cookieMgr; // = CookieMgr.getInstance();
+    
 
     @Autowired
     public CookieController(SessionMgr sessionMgr, CookieMgr cookieMgr) {

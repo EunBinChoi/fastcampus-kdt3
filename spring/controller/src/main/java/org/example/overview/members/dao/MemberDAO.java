@@ -1,5 +1,7 @@
 package org.example.overview.members.dao;
 
+
+import org.example.overview.members.database.ConnectionPoolMgr;
 import org.example.overview.members.database.JDBCMgr;
 import org.example.overview.members.entity.Member;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 public class MemberDAO implements IMemberDAO {
 //    private static MemberDAO memberDAO = null;
 
+    private ConnectionPoolMgr connectionPoolMgr;
     private Connection conn = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -29,9 +32,12 @@ public class MemberDAO implements IMemberDAO {
     private static final String MEMBER_DELETE = "delete member where uId = ?";
     private static final String MEMBER_DELETE_ALL = "delete member";
 
-//    public MemberDAO () {
-//        System.out.println("MemberDAO()");
-//    }
+    public MemberDAO () {
+
+        if (connectionPoolMgr == null) {
+            connectionPoolMgr = ConnectionPoolMgr.getInstance();
+        }
+    }
 
 //    public static MemberDAO getInstance() {
 //        if (memberDAO == null) {
@@ -44,7 +50,7 @@ public class MemberDAO implements IMemberDAO {
     public List<Member> search(String q) { // 이름이나 이메일로 검색
         List<Member> memberList = new LinkedList<>();
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_SEARCH);
             stmt.setString(1, "%" + q + "%");
             stmt.setString(2, "%" + q + "%");
@@ -57,11 +63,14 @@ public class MemberDAO implements IMemberDAO {
 
                 memberList.add(new Member(mId, uPw, uEmail));
             }
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(rs, stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
 
         return memberList;
@@ -71,7 +80,7 @@ public class MemberDAO implements IMemberDAO {
     public Member select(String uId) {
         Member member = null;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_SELECT);
             stmt.setString(1, uId);
 
@@ -83,11 +92,14 @@ public class MemberDAO implements IMemberDAO {
                 String mEmail = rs.getString("uEmail");
                 member = new Member(mId, mPw, mEmail);
             }
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(rs, stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
         return member;
     }
@@ -96,7 +108,7 @@ public class MemberDAO implements IMemberDAO {
     public List<Member> selectAll() {
         List<Member> memberList = new LinkedList<>();
         try {
-            conn = JDBCMgr.getConnection();
+            conn = ConnectionPoolMgr.getInstance().getConnection();
             stmt = conn.prepareStatement(MEMBER_SELECT_ALL);
 
             rs = stmt.executeQuery();
@@ -107,11 +119,14 @@ public class MemberDAO implements IMemberDAO {
 
                 memberList.add(new Member(uId, uPw, uEmail));
             }
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(rs, stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
         return memberList;
     }
@@ -120,16 +135,20 @@ public class MemberDAO implements IMemberDAO {
     public int insert(Member member) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_INSERT);
             stmt.setString(1, member.getuId());
             stmt.setString(2, member.getuPw());
             stmt.setString(3, member.getuEmail());
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
+
         }
         return res;
     }
@@ -143,15 +162,19 @@ public class MemberDAO implements IMemberDAO {
     public int update(String uId, String uPw) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
             stmt.setString(1, uPw);
             stmt.setString(2, uId);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
+
         }
         return res;
     }
@@ -160,14 +183,18 @@ public class MemberDAO implements IMemberDAO {
     public int delete(String uId) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_DELETE);
             stmt.setString(1, uId);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
+
         }
         return res;
     }
@@ -176,13 +203,17 @@ public class MemberDAO implements IMemberDAO {
     public int deleteAll() {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_DELETE_ALL);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
+
         }
         return res;
     }

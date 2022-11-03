@@ -55,11 +55,16 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
     }
 
 
-    @PostMapping("/private/rev/{uId}")
-    public String updateUserPassword(@PathVariable String uId, @RequestParam String uPw, @RequestParam String uNewPw,
+    @PostMapping({"/private/rev", "/private/rev/{uId}"})
+    public String updateUserPassword(@PathVariable(required = false) String uId,
+                                     @RequestParam(required = false) String uPw,
+                                     @RequestParam(required = false) String uNewPw,
                                      Model model, HttpSession session) {
         String view = updatePage(model, session);
         Status respStatus = Status.FAIL;
+
+
+        System.out.println(uId);
 
         if (!session.getAttribute("SESSION_ID").equals(uId)) {
             session.setAttribute("update", respStatus);
@@ -89,7 +94,9 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
 
 
     @PostMapping("/private/rm/{uId}")
-    public String removeByUserId(@PathVariable String uId, @RequestParam String uPw, @RequestParam(required = false) String agree,
+    public String removeByUserId(@PathVariable String uId,
+                                 @RequestParam String uPw,
+                                 @RequestParam(required = false) String agree,
                                  Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 
         String view = withdrawPage(model, session);

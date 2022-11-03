@@ -65,11 +65,7 @@
         <%
             }
         %>
-
-
     </ul>
-
-
 </header>
 </body>
 </html>

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +56,7 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
 
 
     @PostMapping("/survey/res/{uId}")
-    public String doSurvey(@PathVariable String uId, @RequestParam String season, @RequestParam String fruit,
+    public String doSurvey(@PathVariable String uId, @RequestParam @Null String season, @RequestParam String fruit,
                            Model model, HttpSession session) {
         String view = surveyPage(model, session);
         Status respStatus = Status.FAIL;
@@ -77,6 +79,9 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
         }
 
         model.addAttribute("survey", new SurveyVO(season, fruit));
+//        model.addAttribute("season", season);
+//        model.addAttribute("fruit", fruit);
+
         respStatus = Status.SUCCESS;
 
         session.setAttribute("survey", respStatus);

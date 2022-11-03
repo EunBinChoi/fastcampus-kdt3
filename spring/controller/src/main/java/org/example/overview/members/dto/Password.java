@@ -1,8 +1,11 @@
 package org.example.overview.members.dto;
 
-import jakarta.validation.constraints.Digits;
-import org.springframework.stereotype.Component;
+import org.example.overview.valid.GeneralValidationGroup;
+import org.example.overview.valid.TestValidationGroup;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +13,8 @@ import java.util.Objects;
 
 public class Password {
 
+    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    @Pattern(regexp = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}", groups = GeneralValidationGroup.class)
     private String uPw;
 
     private Password() {}

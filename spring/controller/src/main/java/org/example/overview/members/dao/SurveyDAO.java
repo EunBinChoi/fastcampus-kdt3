@@ -1,5 +1,6 @@
 package org.example.overview.members.dao;
 
+import org.example.overview.members.database.ConnectionPoolMgr;
 import org.example.overview.members.database.JDBCMgr;
 import org.example.overview.members.entity.Survey;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class SurveyDAO implements ISurveyDAO {
 //    private static SurveyDAO surveyDAO  = null;
 
+    private ConnectionPoolMgr connectionPoolMgr;
     private Connection conn = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -28,7 +30,16 @@ public class SurveyDAO implements ISurveyDAO {
     private static final String SURVEY_DELETE = "delete survey where uId = ?";
     private static final String SURVEY_DELETE_ALL = "delete survey";
 
-//    public static SurveyDAO getInstance() {
+    public SurveyDAO () {
+
+        if (connectionPoolMgr == null) {
+            connectionPoolMgr = ConnectionPoolMgr.getInstance();
+        }
+    }
+
+
+
+    //    public static SurveyDAO getInstance() {
 //        if (surveyDAO == null) {
 //            surveyDAO = new SurveyDAO();
 //        }
@@ -39,7 +50,7 @@ public class SurveyDAO implements ISurveyDAO {
     public Survey select(String uId) {
         Survey survey = null;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_SELECT);
             stmt.setString(1, uId);
 
@@ -51,11 +62,14 @@ public class SurveyDAO implements ISurveyDAO {
                 String fruit = rs.getString("fruit");
                 survey = new Survey(mId, season, fruit);
             }
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(rs, stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
         return survey;
     }
@@ -64,7 +78,7 @@ public class SurveyDAO implements ISurveyDAO {
     public List<Survey> selectAll() {
         List<Survey> surveyList = new LinkedList<>();
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_SELECT_ALL);
 
             rs = stmt.executeQuery();
@@ -75,11 +89,14 @@ public class SurveyDAO implements ISurveyDAO {
 
                 surveyList.add(new Survey(uId, season, fruit));
             }
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(rs, stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
         return surveyList;
     }
@@ -88,16 +105,19 @@ public class SurveyDAO implements ISurveyDAO {
     public int insert(Survey survey) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_INSERT);
             stmt.setString(1, survey.getuId());
             stmt.setString(2, survey.getSeason());
             stmt.setString(3, survey.getFruit());
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt, rs);
         }
         return res;
     }
@@ -111,15 +131,18 @@ public class SurveyDAO implements ISurveyDAO {
     public int updateSeason(String uId, String season) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_SEASON_UPDATE);
             stmt.setString(1, season);
             stmt.setString(2, uId);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
         }
         return res;
     }
@@ -128,15 +151,18 @@ public class SurveyDAO implements ISurveyDAO {
     public int updateFruit(String uId, String fruit) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_FRUIT_UPDATE);
             stmt.setString(1, fruit);
             stmt.setString(2, uId);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
         }
         return res;
     }
@@ -145,14 +171,17 @@ public class SurveyDAO implements ISurveyDAO {
     public int delete(String uId) {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_DELETE);
             stmt.setString(1, uId);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
         }
         return res;
     }
@@ -161,13 +190,16 @@ public class SurveyDAO implements ISurveyDAO {
     public int deleteAll() {
         int res = 0;
         try {
-            conn = JDBCMgr.getConnection();
+            conn = connectionPoolMgr.getConnection();
             stmt = conn.prepareStatement(SURVEY_DELETE_ALL);
             res = stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            JDBCMgr.close(stmt, conn);
+            connectionPoolMgr.freeConnection(conn, stmt);
         }
         return res;
     }

@@ -6,6 +6,7 @@ import org.example.overview.sessions.SessionMgr;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,23 +48,17 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
     }
 
 
-    @PostMapping("/search")
+    @PostMapping(value = "/search",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String findByUserIdOrEmail(@RequestParam String q, HttpSession session) {
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
-
+    public List<MemberDTO> findByUserIdOrEmail(@RequestParam String q, HttpSession session) {
         if (q == null || q.equals("")) {
-            return getAllUsers(session);
+            return memberService.getAllUsers();
         }
 
         List<MemberDTO> memberDTOList = memberService.findByUserIdOrEmail(q);
-
-        if (memberDTOList != null) {
-            return parseListToJSONArrayString(memberDTOList);
-        }
-        return "";
+        return memberDTOList;
     }
 
 
