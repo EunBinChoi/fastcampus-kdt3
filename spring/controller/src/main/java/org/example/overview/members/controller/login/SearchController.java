@@ -57,13 +57,13 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
     public List<MemberVO> findByUserIdOrEmail(@RequestParam(required = false) String q) {
         if (q == null || q.equals("")) {
             List<MemberDTO> memberDTOList = memberService.getAllUsers();
-            List<MemberVO> memberVOLIst = memberDTOList.stream().map(m -> m.toVO()).collect(Collectors.toList());
-            return memberVOLIst;
+            List<MemberVO> memberVOList = memberDTOList.stream().map(m -> m.toVO()).collect(Collectors.toList());
+            return memberVOList;
         }
 
         List<MemberDTO> memberDTOList = memberService.findByUserIdOrEmail(q);
-        List<MemberVO> memberVOLIst = memberDTOList.stream().map(m -> m.toVO()).collect(Collectors.toList());
-        return memberVOLIst;
+        List<MemberVO> memberVOList = memberDTOList.stream().map(m -> m.toVO()).collect(Collectors.toList());
+        return memberVOList;
     }
 
 }

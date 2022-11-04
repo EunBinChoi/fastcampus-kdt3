@@ -11,13 +11,13 @@ import javax.validation.constraints.NotEmpty;
 
 public class SurveyDTO {
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String uId = "";
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String season = "";
 
-    @NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
+    //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String fruit = "";
 
     public SurveyDTO() {
