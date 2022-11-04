@@ -29,17 +29,6 @@ import javax.validation.Valid;
 @RequestMapping("/members")
 public class SignupController {
 
-    private SessionMgr sessionMgr; //= SessionMgr.getInstance();
-    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
-    private MemberService memberService; // = MemberService.getInstance();
-
-
-    @Autowired
-    public SignupController(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
-        this.sessionMgr = sessionMgr;
-        this.cookieMgr = cookieMgr;
-        this.memberService = memberService;
-    }
 
     @GetMapping("/signup")
     public String signupPage(HttpSession session) {
@@ -51,48 +40,4 @@ public class SignupController {
 
         return view;
     }
-
-    @PostMapping("/signup")
-    public String doSignup(@ModelAttribute @Validated(GeneralValidationGroup.class) MemberDTO memberDTO,
-                           BindingResult bindingResult,
-                           HttpSession session) {
-
-        String view = signupPage(session);
-        Status respStatus = Status.FAIL;
-
-
-        if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(error -> System.out.println(error));
-            session.setAttribute("signup", respStatus);
-            return view;
-        }
-
-
-        boolean res = memberService.signup(memberDTO.getuId(), memberDTO.getuPwStr(), memberDTO.getuEmail());
-        if (res) {
-            view = "redirect:/";
-            respStatus = Status.SUCCESS;
-        }
-
-        session.setAttribute("signup", respStatus);
-        return view;
-    }
-
-    @PostMapping(value = "/signup/duplicate",
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Status checkDuplicateId(@RequestParam String uId) {
-        if (uId == null || uId.equals("")) return Status.NULL;
-
-        MemberDTO memberDTO = memberService.getByUserId(uId);
-        Status status = Status.FAIL;
-
-        if (memberDTO == null) {
-            status = Status.SUCCESS;
-        }
-
-        return status;
-    }
-
 }

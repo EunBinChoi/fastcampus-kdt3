@@ -53,44 +53,6 @@ public class LoginController {
         return view;
     }
 
-    @PostMapping("/login")
-    public String doLogin(@RequestParam String uId,
-                          @RequestParam String uPw,
-                          @RequestParam(required = false) String save,
-                          Model model, HttpServletRequest request,
-                          HttpSession session,
-                          HttpServletResponse response) {
-
-        String view = loginPage(request, session); // login.jsp
-        Status respStatus = Status.FAIL;
-
-
-
-        MemberDTO memberDTO = memberService.login(uId, uPw);
-        if (memberDTO != null) {
-            sessionMgr.create(session, uId);
-
-            saveCookieForAutoLogin(uId, save, response);
-            model.addAttribute("uId", session.getAttribute("SESSION_ID"));
-
-            view = "redirect:/";
-            respStatus = Status.SUCCESS;
-        }
-
-
-        session.setAttribute("login", respStatus);
-        return view;
-
-    }
-
-    private void saveCookieForAutoLogin(String uId, String save, HttpServletResponse response) {
-        if (save == null) return;
-
-        if (save.equals("on")) {
-            cookieMgr.create(response, new String[] {uId, "true"});
-        }
-    }
-
 }
 
 

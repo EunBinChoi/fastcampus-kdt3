@@ -20,14 +20,11 @@ import java.util.Map;
 @Controller
 @RequestMapping("/members")
 public class SearchController { // 유저 검색 페이지 컨트롤러
-    private MemberService memberService; // = MemberService.getInstance();
-
     private SessionMgr sessionMgr; // = SessionMgr.getInstance();
 
 
     @Autowired
-    public SearchController(MemberService memberService, SessionMgr sessionMgr) {
-        this.memberService = memberService;
+    public SearchController( SessionMgr sessionMgr) {
         this.sessionMgr = sessionMgr;
     }
 

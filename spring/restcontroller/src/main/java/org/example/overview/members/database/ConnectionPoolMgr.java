@@ -23,7 +23,7 @@ public class ConnectionPoolMgr {
 
 
     private String _driver = "org.h2.Driver",
-            _url = "jdbc:h2:~/JDBC",
+            _url = "jdbc:h2:tcp://localhost/~/JDBC",
             _user = "sa",
             _password = "";
     private boolean _traceOn = false;

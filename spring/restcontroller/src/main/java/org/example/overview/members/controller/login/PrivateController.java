@@ -19,15 +19,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/members")
 public class PrivateController { // 개인 설정 페이지 컨트롤러
-    private MemberService memberService; // = MemberService.getInstance();
-
-    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
     private SessionMgr sessionMgr; // = SessionMgr.getInstance();
 
     @Autowired
-    public PrivateController(MemberService memberService, CookieMgr cookieMgr, SessionMgr sessionMgr) {
-        this.memberService = memberService;
-        this.cookieMgr = cookieMgr;
+    public PrivateController(SessionMgr sessionMgr) {
         this.sessionMgr = sessionMgr;
     }
 
@@ -43,7 +38,7 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
         return view;
     }
 
-    @GetMapping("/private/rev")
+    @GetMapping("/private/update")
     public String updatePage(Model model, HttpSession session) {
         String view = "members/login/update";
 
@@ -57,7 +52,7 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
 
 
 
-    @GetMapping("/private/rm")
+    @GetMapping("/private/withdraw")
     public String withdrawPage(Model model, HttpSession session) {
         String view = "members/login/withdraw";
 

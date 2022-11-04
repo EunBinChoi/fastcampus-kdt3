@@ -20,13 +20,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/members")
 public class SurveyController { // 개인 설정 페이지 컨트롤러
 
-    private SurveyService surveyService; // = SurveyService.getInstance();
-
     private SessionMgr sessionMgr; // = SessionMgr.getInstance();
 
     @Autowired
-    public SurveyController(SurveyService surveyService, SessionMgr sessionMgr) {
-        this.surveyService = surveyService;
+    public SurveyController(SessionMgr sessionMgr) {
         this.sessionMgr = sessionMgr;
     }
 

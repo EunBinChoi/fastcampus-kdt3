@@ -20,7 +20,7 @@
 
     function duplicateId() {
         const checkIdRequest = new XMLHttpRequest();
-        const url = "/members/signup/duplicate?uId=" + $("#uId").val();
+        const url = "/members/signup/checkId?uId=" + $("#uId").val();
         const method = "post";
 
         checkIdRequest.open(method, url, true);

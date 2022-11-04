@@ -1,11 +1,7 @@
 package org.example.overview.config;
 
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.xstream.XStreamMarshaller;
@@ -34,10 +30,12 @@ public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConf
         return new LocalValidatorFactoryBean();
     }
 
+
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
-        messageConverters.add(createXmlHttpMessageConverter());
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(createXmlHttpMessageConverter());
+        converters.add(new MappingJackson2HttpMessageConverter());
+        WebMvcConfigurer.super.extendMessageConverters(converters);
     }
 
     private HttpMessageConverter<Object> createXmlHttpMessageConverter() {

@@ -58,7 +58,7 @@ public class MemberDTO {
     }
 
     public MemberVO toVO() {
-        return new MemberVO(uId, uEmail);
+        return new MemberVO(uId, uPw.getuPw(), uEmail);
     }
 
     public String getuId() {

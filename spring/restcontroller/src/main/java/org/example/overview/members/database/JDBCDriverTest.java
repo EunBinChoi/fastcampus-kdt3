@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class JDBCDriverTest {
     public static void main(String[] args) {
         String driver = "org.h2.Driver";
-        String url = "jdbc:h2:~/JDBC";
+        String url = "jdbc:h2:tcp://localhost/~/JDBC";
         String user = "sa";
         String password = "";
 
