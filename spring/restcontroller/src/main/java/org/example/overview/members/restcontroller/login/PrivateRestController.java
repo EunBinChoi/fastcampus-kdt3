@@ -63,8 +63,6 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
             return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
         }
 
-        System.out.println(map);
-
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setuId(map.get("uId"));
         memberDTO.setuNewPw(Password.of(map.get("uNewPw")));
