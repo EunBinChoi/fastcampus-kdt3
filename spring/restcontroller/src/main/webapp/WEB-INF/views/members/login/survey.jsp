@@ -24,7 +24,7 @@
     <div>Hello! ${uId}</div>
     <div>Please complete the survey below 👇🏻</div>
     <div>
-        <form method="post" action="/members/survey/res/${uId}">
+        <form method="post" action="/members/survey/${uId}">
             <fieldset>
                 <legend>1. Favorite Season ?</legend>
 
