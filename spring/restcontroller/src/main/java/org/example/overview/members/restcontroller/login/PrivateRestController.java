@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
@@ -38,7 +39,7 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
     @PostMapping(value = "/private/checkPwd",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Status> checkPassword(@RequestBody Map<String, String> map) {
+    public ResponseEntity<Status> checkPassword(@RequestBody Map<String, String> map, HttpSession session) {
         if (map.get("uId") == null || map.get("uPw") == null || map.get("uId").equals("") || map.get("uPw").equals("")) {
             return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
         }
