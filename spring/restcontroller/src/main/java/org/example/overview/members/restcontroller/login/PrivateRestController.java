@@ -24,6 +24,8 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
         this.memberService = memberService;
     }
 
+    // TODO: PK를 제외한 모든 개인정보를 수정하는 함수 만들기 (22.11.04)
+
 
     /* uPw와 uNewPw가 같으면 패스워드 업데이트 불가능 기능 추가 (22.11.03) */
     @PatchMapping("/private/{uId}")

@@ -22,9 +22,10 @@ public class SearchRestController { // 유저 검색 페이지 컨트롤러
         this.memberService = memberService;
     }
 
+    // TODO: 한명씩 조회하는 함수 만들기 (22.11.04)
 
-    @PostMapping(value = "/search",
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+    @PostMapping(value = "",
+            //consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MemberVO>> findByUserIdOrEmail(@RequestParam(required = false) String q) {
         if (q == null || q.equals("")) {
