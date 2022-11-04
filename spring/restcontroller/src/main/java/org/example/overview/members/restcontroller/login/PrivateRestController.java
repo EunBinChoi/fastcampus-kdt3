@@ -29,12 +29,16 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
 
     /* uPw와 uNewPw가 같으면 패스워드 업데이트 불가능 기능 추가 (22.11.03) */
     @PatchMapping("/private/{uId}")
-    public ResponseEntity<MemberVO> updateUserPassword(@PathVariable("uId") String uId,
+    public ResponseEntity<Status> updateUserPassword(@PathVariable("uId") String uId,
                                                        @RequestParam String uPw,
                                                        @RequestParam String uNewPw) {
-        boolean res = memberService.updateUserPassword(uId, Password.of(uPw), Password.of(uNewPw));
-        System.out.println(res);
-        return new ResponseEntity<>(memberService.getByUserId(uId).toVO(), HttpStatus.OK);
+        if (uPw == null || uNewPw == null) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+        if (uPw.equals("") || uNewPw.equals("")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+
+        if (memberService.updateUserPassword(uId, Password.of(uPw), Password.of(uNewPw))) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 
 

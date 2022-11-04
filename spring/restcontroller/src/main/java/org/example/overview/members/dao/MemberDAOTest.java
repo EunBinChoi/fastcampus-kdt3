@@ -8,7 +8,7 @@ public class MemberDAOTest {
 
     public void addMembers() {
         int res = memberDAO.deleteAll();
-//        if (res == 0) return;
+        //if (res == 0) return;
 
         for (int i = 'a'; i <= 'z'; i++) {
             memberDAO.insert(new Member(Character.toString(i), Password.of(Character.toString(i) + "1234", true).getuPw(), Character.toString(i) + "@gmail.com"));
