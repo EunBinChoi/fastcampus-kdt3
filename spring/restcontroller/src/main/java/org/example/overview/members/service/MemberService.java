@@ -134,6 +134,7 @@ public class MemberService implements IMemberService {
         if (member == null) return false;
         if (member.getuPw().equals(uNewPw.getuPw())) return false;
 
+
         return true;
     }
 
