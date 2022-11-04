@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>INDEX</title>
+    <title>SPRING</title>
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
