@@ -28,7 +28,9 @@ public class MemberDAO implements IMemberDAO {
     private static final String MEMBER_SELECT_ALL = "select * from member";
     private static final String MEMBER_SELECT = "select * from member where uId = ?";
     private static final String MEMBER_INSERT = "insert into member values(?, ?, ?)";
+
     private static final String MEMBER_PASSWORD_UPDATE = "update member set uPw = ? where uId = ?";
+    private static final String MEMBER_PASSWORD_EMAIL_UPDATE = "update member set uPw = ?, uEmail = ? where uId = ?";
     private static final String MEMBER_DELETE = "delete member where uId = ?";
     private static final String MEMBER_DELETE_ALL = "delete member";
 
@@ -157,14 +159,36 @@ public class MemberDAO implements IMemberDAO {
         return members.stream().map(m -> insert(m)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
     }
 
+//    @Override
+//    public int update(Member member) {
+//        int res = 0;
+//        try {
+//            conn = connectionPoolMgr.getConnection();
+//            stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
+//            stmt.setString(1, member.getuPw());
+//            stmt.setString(2, member.getuId());
+//            res = stmt.executeUpdate();
+//            conn.commit();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            connectionPoolMgr.freeConnection(conn, stmt);
+//
+//        }
+//        return res;
+//    }
+
     @Override
-    public int update(String uId, String uPw) {
+    public int update(Member member) {
         int res = 0;
         try {
             conn = connectionPoolMgr.getConnection();
-            stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
-            stmt.setString(1, uPw);
-            stmt.setString(2, uId);
+            stmt = conn.prepareStatement(MEMBER_PASSWORD_EMAIL_UPDATE);
+            stmt.setString(1, member.getuPw());
+            stmt.setString(2, member.getuEmail());
+            stmt.setString(3, member.getuId());
             res = stmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
@@ -177,6 +201,7 @@ public class MemberDAO implements IMemberDAO {
         }
         return res;
     }
+
 
     @Override
     public int delete(String uId) {

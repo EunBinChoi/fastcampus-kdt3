@@ -21,7 +21,9 @@ public interface IMemberService {
 
     List<MemberDTO> getAllUsers();
 
-    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
+//    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
+
+    boolean updateUserInformation(MemberDTO memberDTO);
 
     boolean checkPassword(String uId, Password uPw);
 

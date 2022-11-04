@@ -11,7 +11,9 @@ public interface IMemberDAO {
     List<Member> selectAll();
     int insert(Member member);
     int insertAll(List<Member> members);
-    int update(String uId, String uPw);
+//    int update(Member member);
+
+    int update(Member member);
     int delete(String uId);
     int deleteAll();
 }

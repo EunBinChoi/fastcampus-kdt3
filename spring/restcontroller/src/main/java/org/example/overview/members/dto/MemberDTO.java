@@ -41,6 +41,12 @@ public class MemberDTO {
         this.uPw = uPw;
     }
 
+    public MemberDTO(String uId, Password uPw, Password uNewPw) {
+        this.uId = uId;
+        this.uPw = uPw;
+        this.uNewPw = uNewPw;
+    }
+
     public MemberDTO(String uId, String uPw, String uEmail, boolean needEncode) {
         this.uId = uId;
         this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
@@ -53,9 +59,10 @@ public class MemberDTO {
         this.uEmail = uEmail;
     }
 
-    public Member toEntity() {
-        return new Member(uId, getuPwStr(), uEmail);
+    public Member toEntity(boolean isNewPw) {
+        return isNewPw ? new Member(uId, getuNewPwStr(), uEmail) : new Member(uId, getuPwStr(), uEmail);
     }
+
 
     public MemberVO toVO() {
         return new MemberVO(uId, uPw.getuPw(), uEmail);

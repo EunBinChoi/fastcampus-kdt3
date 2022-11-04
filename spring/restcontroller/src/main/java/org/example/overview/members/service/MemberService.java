@@ -82,7 +82,7 @@ public class MemberService implements IMemberService {
         MemberDTO memberDTO = new MemberDTO(uId, uPw, uEmail, false);
         if (memberDTO == null || memberDTO.getuPwStr() == null) return false;
 
-        int res = memberDAO.insert(memberDTO.toEntity());
+        int res = memberDAO.insert(memberDTO.toEntity(false));
         return res > 0;
     }
 
@@ -102,16 +102,29 @@ public class MemberService implements IMemberService {
         return memberList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
 
+//    @Override
+//    public boolean updateUserPassword(String uId, Password uPw, Password uNewPw) {
+//        if (uId == null || uPw == null || uNewPw == null) return false;
+//
+//        Member member = memberDAO.select(uId);
+//        if (member == null || member.getuPw() == null) return false;
+//        if (!member.getuPw().equals(uPw.getuPw())) return false;
+//        if (member.getuPw().equals(uNewPw.getuPw())) return false; // DB PWD == New PWD
+//
+//        int res = memberDAO.update(uId, uNewPw.getuPw());
+//        return res > 0;
+//    }
+
     @Override
-    public boolean updateUserPassword(String uId, Password uPw, Password uNewPw) {
-        if (uId == null || uPw == null || uNewPw == null) return false;
+    public boolean updateUserInformation(MemberDTO memberDTO) {
+        if (memberDTO == null) return false;
+        if (memberDTO.getuId() == null || memberDTO.getuPw() == null || memberDTO.getuPwStr() == null) return false;
 
-        Member member = memberDAO.select(uId);
+        Member member = memberDAO.select(memberDTO.getuId());
         if (member == null || member.getuPw() == null) return false;
-        if (!member.getuPw().equals(uPw.getuPw())) return false;
-        if (member.getuPw().equals(uNewPw.getuPw())) return false; // DB PWD == New PWD
+        if (!member.getuPw().equals(memberDTO.getuPwStr())) return false;
 
-        int res = memberDAO.update(uId, uNewPw.getuPw());
+        int res = memberDAO.update(memberDTO.toEntity(true));
         return res > 0;
     }
 

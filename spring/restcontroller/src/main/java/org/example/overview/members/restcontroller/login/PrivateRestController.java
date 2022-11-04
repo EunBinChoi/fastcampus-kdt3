@@ -25,6 +25,25 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
     }
 
     // TODO: PK를 제외한 모든 개인정보를 수정하는 함수 만들기 (22.11.04)
+    @PutMapping("/private/{uId}") // uPw, uNewPw, uNewEmail // {"uPw":"a1234", "uNewPw":"a12345", "uNewEmail": "asdas@gmail"}
+    public ResponseEntity<Status> updateUserInformation(@PathVariable(value = "uId") String uId,
+                                                        @RequestBody Map<String, String> map) {
+        if (map == null) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+        if (map.get("uPw") == null || map.get("uPw").equals("")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setuId(uId);
+        memberDTO.setuPw(Password.of(map.get("uPw")));
+        memberDTO.setuNewPw(Password.of(map.get("uNewPw")));
+        memberDTO.setuEmail(map.get("uNewEmail"));
+
+        System.out.println(memberDTO);
+
+        if (memberService.updateUserInformation(memberDTO)) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
+    }
 
 
     /* uPw와 uNewPw가 같으면 패스워드 업데이트 불가능 기능 추가 (22.11.03) */
@@ -35,16 +54,16 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
         if (uPw == null || uNewPw == null) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
         if (uPw.equals("") || uNewPw.equals("")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
-        if (memberService.updateUserPassword(uId, Password.of(uPw), Password.of(uNewPw))) {
+        if (memberService.updateUserInformation(new MemberDTO(uId, Password.of(uPw), Password.of(uNewPw)))) {
             return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 
 
-    @PostMapping(value = "/private/checkPwd",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/private/checkPwd")
+            //consumes = MediaType.APPLICATION_JSON_VALUE,
+            //produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Status> checkPassword(@RequestBody Map<String, String> map) {
         if (map.get("uId") == null || map.get("uPw") == null || map.get("uId").equals("") || map.get("uPw").equals("")) {
             return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
