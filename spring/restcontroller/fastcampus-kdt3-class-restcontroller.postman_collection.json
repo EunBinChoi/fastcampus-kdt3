@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "4704202a-d595-4c65-92b7-574006bfc20b",
+		"name": "fastcampus-kdt3-class-restcontroller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20062959"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "PrivateRestController",
+					"item": [
+						{
+							"name": "updateUserPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{API_URL}}/members/private/rev/a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"private",
+										"rev",
+										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "checkPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{API_URL}}/members/private/rev/a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"private",
+										"rev",
+										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "checkNewPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{API_URL}}/members/private/rev/a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"private",
+										"rev",
+										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "removeByUserId",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{API_URL}}/members/private/rev/a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"private",
+										"rev",
+										"a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SearchRestController",
+					"item": [
+						{
+							"name": "findByUserIdOrEmail",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SurveyRestController",
+					"item": [
+						{
+							"name": "doSurvey",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "getSurveyResultByUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "nonlogin",
+			"item": [
+				{
+					"name": "LoginRestController",
+					"item": [
+						{
+							"name": "doLogin",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SignupRestController",
+					"item": [
+						{
+							"name": "doSignup",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "checkDuplicateId",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
