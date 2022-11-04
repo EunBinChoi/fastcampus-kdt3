@@ -13,23 +13,27 @@
 					"name": "PrivateRestController",
 					"item": [
 						{
-							"name": "updateUserPassword",
+							"name": "updateUserInformation",
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\"uPw\":\"e12345\", \"uNewPw\":\"e123456\", \"uNewEmail\": \"asdas@gmail\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
-									"raw": "{{API_URL}}/members/private/rev/a",
+									"raw": "{{API_URL}}/members/private/a",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"members",
 										"private",
-										"rev",
 										"a"
 									]
 								}
@@ -41,20 +45,15 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
-									"raw": "{{API_URL}}/members/private/rev/a",
+									"raw": "{{API_URL}}/members/private/checkPwd",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"members",
 										"private",
-										"rev",
-										"a"
+										"checkPwd"
 									]
 								}
 							},
@@ -67,18 +66,22 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\"uId\":\"c\", \"uNewPw\":\"c12345\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
-									"raw": "{{API_URL}}/members/private/rev/a",
+									"raw": "{{API_URL}}/members/private/checkNewPwd",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"members",
 										"private",
-										"rev",
-										"a"
+										"checkNewPwd"
 									]
 								}
 							},
@@ -87,22 +90,31 @@
 						{
 							"name": "removeByUserId",
 							"request": {
-								"method": "POST",
+								"method": "DELETE",
 								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{API_URL}}/members/private/rev/a",
+									"raw": "{{API_URL}}/members/private/a?uPw=a1234&agree=yes",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"members",
 										"private",
-										"rev",
 										"a"
+									],
+									"query": [
+										{
+											"key": "uPw",
+											"value": "a1234"
+										},
+										{
+											"key": "agree",
+											"value": "yes"
+										}
 									]
 								}
 							},
@@ -114,10 +126,43 @@
 					"name": "SearchRestController",
 					"item": [
 						{
+							"name": "findByUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/members/a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "findByUserIdOrEmail",
 							"request": {
 								"method": "POST",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/members?q=a",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "a"
+										}
+									]
+								}
 							},
 							"response": []
 						}
@@ -129,8 +174,29 @@
 						{
 							"name": "doSurvey",
 							"request": {
-								"method": "POST",
-								"header": []
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/members/survey/a?season=spring&fruit=melon",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"survey",
+										"a"
+									],
+									"query": [
+										{
+											"key": "season",
+											"value": "spring"
+										},
+										{
+											"key": "fruit",
+											"value": "melon"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -172,7 +238,10 @@
 							"name": "doSignup",
 							"request": {
 								"method": "POST",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -180,7 +249,22 @@
 							"name": "checkDuplicateId",
 							"request": {
 								"method": "POST",
-								"header": []
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{API_URL}}/members/signup/checkId",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"signup",
+										"checkId"
+									]
+								}
 							},
 							"response": []
 						}
