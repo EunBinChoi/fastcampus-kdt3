@@ -26,17 +26,18 @@ public class SignupRestController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<MemberVO> doSignup(@ModelAttribute MemberDTO memberDTO,
-                           BindingResult bindingResult) {
+    public ResponseEntity<Status> doSignup(@ModelAttribute MemberDTO memberDTO, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println(error));
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
         }
 
-        boolean res = memberService.signup(memberDTO.getuId(), memberDTO.getuPwStr(), memberDTO.getuEmail());
-        System.out.println(res);
-        return new ResponseEntity<>(memberService.getByUserId(memberDTO.getuId()).toVO(), HttpStatus.OK);
+        if (memberService.signup(memberDTO.getuId(), memberDTO.getuPwStr(), memberDTO.getuEmail())) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/signup/checkId",

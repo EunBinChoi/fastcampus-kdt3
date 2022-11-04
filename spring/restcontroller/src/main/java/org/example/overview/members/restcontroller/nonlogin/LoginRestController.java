@@ -37,7 +37,9 @@ public class LoginRestController {
         MemberDTO memberDTO = memberService.login(uId, uPw);
         if (memberDTO == null) return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
 
-        if (save == null || !save.equals("on")) return new ResponseEntity<>(null, headers, HttpStatus.OK);
+       // if (save == null || !save.equals("on")) return new ResponseEntity<>(null, headers, HttpStatus.OK);
+
+        System.out.println(memberDTO);
 
         return new ResponseEntity<>(memberDTO.toVO(), headers, HttpStatus.OK);
     }

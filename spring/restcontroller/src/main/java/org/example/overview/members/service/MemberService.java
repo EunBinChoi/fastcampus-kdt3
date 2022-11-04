@@ -72,7 +72,7 @@ public class MemberService implements IMemberService {
         Member member = memberDAO.select(memberDTO.getuId());
         if (member == null || member.getuPw() == null) return null;
         if (member.getuPw().equals(memberDTO.getuPwStr())) {
-            return memberDTO;
+            return member.toDTO();
         }
         return null;
     }
