@@ -13,13 +13,13 @@
 					"name": "PrivateRestController",
 					"item": [
 						{
-							"name": "updateUserInformation",
+							"name": "updateUserEmail",
 							"request": {
 								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"uPw\":\"e12345\", \"uNewPw\":\"e123456\", \"uNewEmail\": \"asdas@gmail\"}",
+									"raw": "{\"uNewEmail\": \"aaaaa@gmail\"}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -35,6 +35,35 @@
 										"members",
 										"private",
 										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUserPassword",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/members/private/w?uPw=w1234&uNewPw=w12345",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"members",
+										"private",
+										"w"
+									],
+									"query": [
+										{
+											"key": "uPw",
+											"value": "w1234"
+										},
+										{
+											"key": "uNewPw",
+											"value": "w12345"
+										}
 									]
 								}
 							},
