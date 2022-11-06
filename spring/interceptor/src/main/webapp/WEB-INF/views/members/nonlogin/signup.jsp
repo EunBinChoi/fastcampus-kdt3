@@ -19,66 +19,26 @@
 <script>
 
     function duplicateId() {
-        const checkIdRequest = new XMLHttpRequest();
-        const url = "/members/signup/checkId?uId=" + $("#uId").val();
-        const method = "post";
-
-        checkIdRequest.open(method, url, true);
-        checkIdRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf8");
-        checkIdRequest.onreadystatechange = () => {
-            if (checkIdRequest.readyState == 4 && checkIdRequest.status == 200) {
-                console.log(checkIdRequest.responseText);
-                const result = $("#res");
-                const responseText = JSON.parse(checkIdRequest.responseText);
-
-                result.css("font-size", "10px");
-                result.css("font-weight", "bold");
-
-                if (responseText == "SUCCESS") {
-                    result.css("display", "block");
-                    result.css("color", "black");
-                    result.text("you can use.");
-                } else if (responseText == "FAIL") {
-                    result.css("display", "block");
-                    result.css("color", "red");
-                    result.text("you can't use.");
-                } else {
-                    result.css("display", "none");
-                }
-            }
-        }
-        checkIdRequest.send();
-    }
-
-    function duplicateIdWithJQuery() {
         $.ajax({
             type: "post",
-            url: "/members/signup/duplicate?uId=" + $("#uId").val(),
+            url: "/members/signup/checkId?uId=" + $("#uId").val(),
             contentType: "application/x-www-form-urlencoded; charset=utf8",
             dataType: "json",
-            success: (data) => {
-                console.log(data);
-                const result = $("#res");
 
-                result.css("font-size", "10px");
-                result.css("font-weight", "bold");
-
-                if (data == "SUCCESS") {
-                    result.css("display", "block");
-                    result.css("color", "black");
-                    result.text("you can use.");
-                } else if (data == "FAIL") {
-                    result.css("display", "block");
-                    result.css("color", "red");
-                    result.text("you can't use.");
-                } else {
-                    result.css("display");
-                }
+            beforeSend: () => {
+                $("#res").css("font-size", "10px");
+                $("#res").css("font-weight", "bold");
             },
-            error: (data) => {
-                console.log("errpr", data);
+            success: (data, statusText, jqXHR) => {
+                $("#res").css("display", "block");
+                $("#res").css("color", "black");
+                $("#res").text("you can use.");
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                $("#res").css("display", "block");
+                $("#res").css("color", "red");
+                $("#res").text("you can't use.");
             }
-
         });
     }
 
@@ -91,23 +51,20 @@
 
             <div class="form__list">
                 <label for="uEmail">EMAIL: </label>
-                <input type="email" id="uEmail" name="uEmail" placeholder="INPUT YOUR EMAIL"
-                       pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required/>
+                <input type="email" id="uEmail" name="uEmail" placeholder="INPUT YOUR EMAIL" required/>
             </div>
 
 
             <div class="form__list">
                 <label for="uId">ID: </label>
-                <input type="text" id="uId" name="uId" onkeyup="duplicateIdWithJQuery()" placeholder="INPUT YOUR ID"
-                       pattern="^[a-zA-Z]{1}[a-zA-Z0-9_-]{7,14}$" required/>
+                <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID" onkeyup="duplicateId()" required/>
                 <p id="res"></p>
             </div>
 
 
             <div class="form__list">
                 <label for="uPw">PASSWORD: </label>
-                <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD"
-                       pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required/>
+                <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD" required/>
             </div>
 
             <input type="submit" name="submit" value="Submit">
