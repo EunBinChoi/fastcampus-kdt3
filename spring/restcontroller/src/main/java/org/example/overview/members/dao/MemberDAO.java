@@ -30,7 +30,7 @@ public class MemberDAO implements IMemberDAO {
     private static final String MEMBER_INSERT = "insert into member values(?, ?, ?)";
 
     private static final String MEMBER_PASSWORD_UPDATE = "update member set uPw = ? where uId = ?";
-    private static final String MEMBER_PASSWORD_EMAIL_UPDATE = "update member set uPw = ?, uEmail = ? where uId = ?";
+    private static final String MEMBER_EMAIL_UPDATE = "update member set uEmail = ? where uId = ?";
     private static final String MEMBER_DELETE = "delete member where uId = ?";
     private static final String MEMBER_DELETE_ALL = "delete member";
 
@@ -159,36 +159,35 @@ public class MemberDAO implements IMemberDAO {
         return members.stream().map(m -> insert(m)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
     }
 
-//    @Override
-//    public int update(Member member) {
-//        int res = 0;
-//        try {
-//            conn = connectionPoolMgr.getConnection();
-//            stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
-//            stmt.setString(1, member.getuPw());
-//            stmt.setString(2, member.getuId());
-//            res = stmt.executeUpdate();
-//            conn.commit();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            connectionPoolMgr.freeConnection(conn, stmt);
-//
-//        }
-//        return res;
-//    }
-
     @Override
-    public int update(Member member) {
+    public int updatePassword(String uId, String uPw) {
         int res = 0;
         try {
             conn = connectionPoolMgr.getConnection();
-            stmt = conn.prepareStatement(MEMBER_PASSWORD_EMAIL_UPDATE);
-            stmt.setString(1, member.getuPw());
-            stmt.setString(2, member.getuEmail());
-            stmt.setString(3, member.getuId());
+            stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
+            stmt.setString(1, uPw);
+            stmt.setString(2, uId);
+            res = stmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connectionPoolMgr.freeConnection(conn, stmt);
+
+        }
+        return res;
+    }
+
+    @Override
+    public int updateEmail(String uId, String uEmail) {
+        int res = 0;
+        try {
+            conn = connectionPoolMgr.getConnection();
+            stmt = conn.prepareStatement(MEMBER_EMAIL_UPDATE);
+            stmt.setString(1, uEmail);
+            stmt.setString(2, uId);
             res = stmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {

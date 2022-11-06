@@ -3,6 +3,7 @@ package org.example.overview.members.restcontroller.login;
 import org.example.overview.members.dto.MemberDTO;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.members.vo.MemberVO;
+import org.example.overview.utils.UtilsMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ public class SearchRestController { // 유저 검색 페이지 컨트롤러
             //consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MemberVO>> findByUserIdOrEmail(@RequestParam(required = false) String q) {
-        if (q == null || q.equals("")) {
+        if (UtilsMethod.isNullOrEmpty(q)) {
             List<MemberDTO> memberDTOList = memberService.getAllUsers();
             List<MemberVO> memberVOList = memberDTOList.stream().map(m -> m.toVO()).collect(Collectors.toList());
             return new ResponseEntity<>(memberVOList, HttpStatus.OK);

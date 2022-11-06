@@ -2,6 +2,7 @@ package org.example.overview.members.restcontroller.nonlogin;
 
 import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.example.overview.members.dto.MemberDTO;
+import org.example.overview.members.dto.Password;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.members.vo.MemberVO;
 import org.example.overview.utils.Status;
@@ -33,7 +34,7 @@ public class SignupRestController {
             return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
         }
 
-        if (memberService.signup(memberDTO.getuId(), memberDTO.getuPwStr(), memberDTO.getuEmail())) {
+        if (memberService.signup(memberDTO.getuId(), Password.of(memberDTO.getuPwStr()), memberDTO.getuEmail())) {
             return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
         }
 
@@ -44,7 +45,7 @@ public class SignupRestController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Status> checkDuplicateId(@RequestParam String uId) {
-        if (uId == null || uId.equals("")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+//        if (uId == null || uId.equals("")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
         MemberDTO memberDTO = memberService.getByUserId(uId);
         if (memberDTO == null)  return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);

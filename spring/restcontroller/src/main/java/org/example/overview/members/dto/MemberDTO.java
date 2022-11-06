@@ -59,10 +59,20 @@ public class MemberDTO {
         this.uEmail = uEmail;
     }
 
+    public MemberDTO(String uId, Password uPw, Password uNewPw, String uEmail) {
+        this.uId = uId;
+        this.uPw = uPw;
+        this.uNewPw = uNewPw;
+        this.uEmail = uEmail;
+    }
+
+    public Member toEntity() {
+        return new Member(uId, getuPwStr(), uEmail);
+    }
+
     public Member toEntity(boolean isNewPw) {
         return isNewPw ? new Member(uId, getuNewPwStr(), uEmail) : new Member(uId, getuPwStr(), uEmail);
     }
-
 
     public MemberVO toVO() {
         return new MemberVO(uId, uPw.getuPw(), uEmail);

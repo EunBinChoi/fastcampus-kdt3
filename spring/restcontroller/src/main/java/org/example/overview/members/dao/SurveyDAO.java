@@ -37,8 +37,6 @@ public class SurveyDAO implements ISurveyDAO {
         }
     }
 
-
-
     //    public static SurveyDAO getInstance() {
 //        if (surveyDAO == null) {
 //            surveyDAO = new SurveyDAO();

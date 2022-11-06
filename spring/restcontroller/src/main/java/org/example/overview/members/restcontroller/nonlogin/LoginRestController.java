@@ -1,6 +1,7 @@
 package org.example.overview.members.restcontroller.nonlogin;
 
 import org.example.overview.members.dto.MemberDTO;
+import org.example.overview.members.dto.Password;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.members.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class LoginRestController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        MemberDTO memberDTO = memberService.login(uId, uPw);
+        MemberDTO memberDTO = memberService.login(uId, Password.of(uPw));
         if (memberDTO == null) return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
 
        // if (save == null || !save.equals("on")) return new ResponseEntity<>(null, headers, HttpStatus.OK);

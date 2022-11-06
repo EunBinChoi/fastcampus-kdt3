@@ -13,17 +13,17 @@ public interface IMemberService {
     boolean autoLogin(String autoLogin, String cookieId);
 
     MemberDTO login(String uId);
-    MemberDTO login(String uId, String uPw);
+    MemberDTO login(String uId, Password uPw);
 
-    boolean signup(String uId, String uPw, String uEmail);
+    boolean signup(String uId, Password uPw, String uEmail);
 
     MemberDTO getByUserId(String uId);
 
     List<MemberDTO> getAllUsers();
 
-//    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
+    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
 
-    boolean updateUserInformation(MemberDTO memberDTO);
+    boolean updateUserEmail(String uId, String uEmail);
 
     boolean checkPassword(String uId, Password uPw);
 

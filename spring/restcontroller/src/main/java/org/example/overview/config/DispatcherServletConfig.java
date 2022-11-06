@@ -24,7 +24,6 @@ public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConf
     // dispatcher-servlet.xml
 
     // @Valid를 사용하기 위한 빈 설정
-    // spring-boot-validator
     @Bean
     public Validator localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
