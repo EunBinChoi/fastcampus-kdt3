@@ -43,7 +43,7 @@ public class SignupControllerTest {
     public void doSignupTest() throws Exception {
         mockMvc.perform(post("/members/signup")
                         .param("uEmail", "asd@gmail.com")
-                        .param("uId", "")
+                        .param("uId", "abc")
                         .param("uPw", "a1234")
                         .session(new MockHttpSession()))
                         .andExpect(status().isOk())

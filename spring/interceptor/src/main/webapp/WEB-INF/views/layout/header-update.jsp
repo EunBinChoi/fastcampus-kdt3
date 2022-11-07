@@ -46,8 +46,8 @@
 
     <ul class="header__nav">
         <!-- block 구조여서 수직적 중앙이 맞음 -->
-        <li><a href="/members/private/update"><b>MEMBER INFO UPDATE</b></a></li>
-        <li><a href="/members/private/withdraw"><b>MEMBER INFO DELETE</b></a></li>
+        <li><a href="/members/private/update"><b>UPDATE</b></a></li>
+        <li><a href="/members/private/withdraw"><b>DELETE</b></a></li>
         <li><a href="/members/cookies"><b>COOKIE</b></a></li>
     </ul>
 
@@ -60,8 +60,8 @@
 
         <%
         } else { %>
-        <li><a href="/members/signup"><i class="fas fa-user-plus"></i></a></li>
-        <li><a href="/members/login"><i class="fas fa-toggle-off"></i></a></li>
+        <li><a href="/signup"><i class="fas fa-user-plus"></i></a></li>
+        <li><a href="/login"><i class="fas fa-toggle-off"></i></a></li>
         <%
             }
         %>

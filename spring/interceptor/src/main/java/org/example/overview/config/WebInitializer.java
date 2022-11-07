@@ -4,6 +4,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.*;
@@ -15,6 +16,7 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
         registerApplicationContext(servletContext);
         registerDispatcherServletContext(servletContext);
         registerCharacterEncodingFilter(servletContext);
+        registerHttpMethodFilter(servletContext);
     }
 
     private void registerApplicationContext(ServletContext servletContext) {
@@ -43,7 +45,11 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
         FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
         characterEncodingFilter.setInitParameter("encoding", "UTF-8");
         characterEncodingFilter.setInitParameter("forceEncoding", "true");
-        characterEncodingFilter.addMappingForServletNames(EnumSet.allOf(DispatcherType.class), true, "/**");
+        characterEncodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/**");
     }
 
+    private void registerHttpMethodFilter(ServletContext servletContext) {
+        FilterRegistration.Dynamic httpMethodFilter = servletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter());
+        httpMethodFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/**");
+    }
 }

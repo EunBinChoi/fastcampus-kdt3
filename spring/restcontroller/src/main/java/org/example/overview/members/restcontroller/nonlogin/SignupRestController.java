@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.charset.Charset;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("")
 public class SignupRestController {
     private MemberService memberService; // = MemberService.getInstance();
 
@@ -28,10 +28,6 @@ public class SignupRestController {
 
     @PostMapping("/signup")
     public ResponseEntity<Status> doSignup(@ModelAttribute MemberDTO memberDTO, BindingResult bindingResult) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println(error));
             return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
@@ -42,10 +38,10 @@ public class SignupRestController {
         if (UtilsMethod.isNullOrEmpty(memberDTO.getuEmail())) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
         if (memberService.signup(memberDTO.getuId(), Password.of(memberDTO.getuPwStr()), memberDTO.getuEmail())) {
-            return new ResponseEntity<>(Status.SUCCESS, headers, HttpStatus.OK);
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(Status.FAIL, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.CONFLICT);
     }
 
     @PostMapping(value = "/signup/checkId")

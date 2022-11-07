@@ -66,9 +66,10 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
 //            return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 //        }
 
-        Status status = memberService.checkPassword(map.get("uId"), Password.of(map.get("uPw")))
-                ? Status.SUCCESS : Status.FAIL;
-        return new ResponseEntity<>(status, HttpStatus.OK);
+        if (memberService.checkPassword(map.get("uId"), Password.of(map.get("uPw")))) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/private/checkNewPwd",
@@ -82,9 +83,10 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
 //        }
 
 
-        Status status = memberService.checkNewPassword(map.get("uId"), Password.of(map.get("uNewPw")))
-                ? Status.SUCCESS : Status.FAIL;
-        return new ResponseEntity<>(status, HttpStatus.OK);
+        if (memberService.checkNewPassword(map.get("uId"), Password.of(map.get("uNewPw")))) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 
 
@@ -94,8 +96,9 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
                                  @RequestParam(required = false) String agree) {
         if (agree == null || !agree.equals("yes")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
-        Status status = memberService.removeByUserId(uId, Password.of(uPw))
-                ? Status.SUCCESS : Status.FAIL;
-        return new ResponseEntity<>(status, HttpStatus.OK);
+        if (memberService.removeByUserId(uId, Password.of(uPw))) {
+            return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);
     }
 }

@@ -24,8 +24,7 @@
         <h3>Notice for deleting your information.</h3>
         <p>Please read the introduction for membership cancellation.</p>
     </div>
-    <form id="login__form" method="post" action="/members/private/rm/${uId}">
-
+    <form id="login__form" action="/members/private/${uId}" method="post" >
         <div class="form__list">
             <label for="uPw">PASSWORD: </label>
             <input type="password" id="uPw" name="uPw" placeholder="INPUT YOUR PASSWORD" required/>
@@ -35,6 +34,7 @@
             <label for="agree" style="color: darkred">check if you want to really delete your info.</label>
             <input type="checkbox" id="agree" name="agree" value="yes">
         </div>
+
         <input id="submit" type="submit" name="submit" value="Submit">
     </form>
 </main>

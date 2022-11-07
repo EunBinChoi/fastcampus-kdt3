@@ -60,8 +60,8 @@
 
         <%
         } else { %>
-        <li><a href="/members/signup"><i class="fas fa-user-plus"></i></a></li>
-        <li><a href="/members/login"><i class="fas fa-toggle-off"></i></a></li>
+        <li><a href="/signup"><i class="fas fa-user-plus"></i></a></li>
+        <li><a href="/login"><i class="fas fa-toggle-off"></i></a></li>
         <%
             }
         %>

@@ -30,14 +30,13 @@ public class SurveyDAO implements ISurveyDAO {
     private static final String SURVEY_DELETE = "delete survey where uId = ?";
     private static final String SURVEY_DELETE_ALL = "delete survey";
 
-    public SurveyDAO () {
-
+    public SurveyDAO() {
         if (connectionPoolMgr == null) {
-            connectionPoolMgr = ConnectionPoolMgr.getInstance();
+            connectionPoolMgr = new ConnectionPoolMgr();
         }
     }
 
-    //    public static SurveyDAO getInstance() {
+//    public static SurveyDAO getInstance() {
 //        if (surveyDAO == null) {
 //            surveyDAO = new SurveyDAO();
 //        }

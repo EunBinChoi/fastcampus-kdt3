@@ -21,7 +21,7 @@
     function duplicateId() {
         $.ajax({
             type: "post",
-            url: "/members/signup/checkId?uId=" + $("#uId").val(),
+            url: "/signup/checkId?uId=" + $("#uId").val(),
             contentType: "application/x-www-form-urlencoded; charset=utf8",
             dataType: "json",
 
@@ -47,7 +47,7 @@
 <main>
     <h1>SIGN UP</h1>
     <div>
-        <form method="post" action="/members/signup">
+        <form method="post" action="/signup">
 
             <div class="form__list">
                 <label for="uEmail">EMAIL: </label>

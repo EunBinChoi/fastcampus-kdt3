@@ -3,29 +3,25 @@ package org.example.overview.members.controller.login;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
+import org.example.overview.utils.UtilsMethod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/members")
 public class CookieController { // 쿠키 컨트롤러
-    private final SessionMgr sessionMgr; // = SessionMgr.getInstance();
-    private final CookieMgr cookieMgr; // = CookieMgr.getInstance();
-    
+    private final SessionMgr sessionMgr;
+    private final CookieMgr cookieMgr;
+
 
     @Autowired
     public CookieController(SessionMgr sessionMgr, CookieMgr cookieMgr) {
@@ -34,52 +30,37 @@ public class CookieController { // 쿠키 컨트롤러
     }
 
     @GetMapping("/cookies")
-    public String cookiePage(Model model, HttpServletRequest request, HttpSession session) {
+    public ModelAndView cookiePage(HttpServletRequest request) {
         String view = "members/login/cookie";
-
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
+        ModelAndView modelAndView = new ModelAndView(view);
 
         Map<String, String> cookies = new HashMap<>();
-
-        model.addAttribute("uId", sessionMgr.get(session));
-
         cookies.put("JSESSIONID", cookieMgr.get(request, "JSESSIONID"));
-        cookies.put("COOKIE_ID", cookieMgr.get(request, "COOKIE_ID"));
+        cookies.put("COOKIE_ID",  cookieMgr.get(request, "COOKIE_ID"));
         cookies.put("AUTO_LOGIN", cookieMgr.get(request, "AUTO_LOGIN"));
-        model.addAttribute("cookies", cookies);
+        modelAndView.addObject("cookies", cookies);
 
-
-        return view;
+        return modelAndView;
     }
 
     @GetMapping("/cookies/{cookieName}")
-    public String getCookieByName(@PathVariable String cookieName, Model model, HttpServletRequest request, HttpSession session) {
+    public ModelAndView getCookieByName(@PathVariable String cookieName, HttpServletRequest request) {
         String view = "members/login/cookie";
+        ModelAndView modelAndView = new ModelAndView(view);
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
-
-        if (cookieName == null || cookieName.equals("")) return view;
+        if (UtilsMethod.isNullOrEmpty(cookieName)) return modelAndView;
 
         Map<String, String> cookies = new HashMap<>();
-        model.addAttribute("uId", sessionMgr.get(session));
-
         cookies.put(cookieName, cookieMgr.get(request, cookieName));
-        model.addAttribute("cookies", cookies);
+        modelAndView.addObject("cookies", cookies);
 
-        return view;
+        return modelAndView;
     }
 
-    @PostMapping("/cookies/rm")
-    public String removeCookieByName(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    @PostMapping("/cookies")
+    public ModelAndView removeCookieByName(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         String view = "redirect:/members/cookies";
-
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
+        ModelAndView modelAndView = new ModelAndView(view);
 
         String[] values = null;
         if (request.getParameter("cookie") != null) {
@@ -87,13 +68,8 @@ public class CookieController { // 쿠키 컨트롤러
         }
 
         int count = cookieMgr.delete(request, response, values);
+        session.setAttribute("cookie", count > 0 ? Status.SUCCESS : Status.FAIL);
 
-        if (count > 0) {
-            session.setAttribute("cookie", Status.SUCCESS);
-        } else {
-            session.setAttribute("cookie", Status.FAIL);
-        }
-
-        return view;
+        return modelAndView;
     }
 }

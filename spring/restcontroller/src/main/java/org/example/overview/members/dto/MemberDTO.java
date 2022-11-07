@@ -1,5 +1,6 @@
 package org.example.overview.members.dto;
 
+import lombok.Builder;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.vo.MemberVO;
 import org.example.overview.valid.GeneralValidationGroup;

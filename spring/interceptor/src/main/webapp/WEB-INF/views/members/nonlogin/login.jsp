@@ -20,7 +20,7 @@
 <main>
     <h1>LOGIN</h1>
     <div>
-        <form method="post" action="/members/login">
+        <form method="post" action="/login">
             <div class="form__list">
                 <label for="uId">ID: </label>
                 <input type="text" id="uId" name="uId" placeholder="INPUT YOUR ID" required/>

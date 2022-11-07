@@ -23,7 +23,7 @@ public class SearchRestController { // 유저 검색 페이지 컨트롤러
         this.memberService = memberService;
     }
 
-    // TODO: 한명씩 조회하는 함수 만들기 (22.11.04)
+    // 한명씩 조회하는 함수 만듦 (22.11.04)
     @GetMapping(value = "/{uId}")
     public ResponseEntity<MemberVO> findByUserId(@PathVariable String uId) {
         return new ResponseEntity<>(memberService.getByUserId(uId).toVO(), HttpStatus.OK);

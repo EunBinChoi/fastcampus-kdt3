@@ -121,6 +121,7 @@ public class MemberService implements IMemberService {
 
         Member member = memberDAO.select(uId);
         if (member == null) return false;
+        if (member.getuEmail().equals(uEmail)) return false; // DB Email == New Email
 
         int res = memberDAO.updateEmail(uId, uEmail);
         return res > 0;

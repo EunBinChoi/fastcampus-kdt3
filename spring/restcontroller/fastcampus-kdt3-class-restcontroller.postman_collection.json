@@ -273,12 +273,11 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/members/login?uId=z&uPw=z1234",
+									"raw": "{{API_URL}}/login?uId=z&uPw=z1234",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
-										"members",
 										"login"
 									],
 									"query": [
@@ -306,12 +305,11 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/members/signup?uId=fooasas-_-&uEmail=foo@gmail.com&uPw=foo1234",
+									"raw": "{{API_URL}}/signup?uId=fooasas-_-&uEmail=foo@gmail.com&uPw=foo1234",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
-										"members",
 										"signup"
 									],
 									"query": [
@@ -348,12 +346,11 @@
 									]
 								},
 								"url": {
-									"raw": "{{API_URL}}/members/signup/checkId",
+									"raw": "{{API_URL}}/signup/checkId",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
-										"members",
 										"signup",
 										"checkId"
 									]

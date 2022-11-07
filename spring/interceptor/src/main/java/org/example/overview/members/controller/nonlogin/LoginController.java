@@ -1,56 +1,75 @@
 package org.example.overview.members.controller.nonlogin;
 
-import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.dto.MemberDTO;
+import org.example.overview.members.dto.Password;
 import org.example.overview.members.service.MemberService;
-import org.example.overview.sessions.SessionMgr;
-import org.example.overview.utils.Status;
+import org.example.overview.members.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.nio.charset.Charset;
 
 
 @Controller
-@RequestMapping("/members")
+@RequestMapping("")
 public class LoginController {
 
-    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
-    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
-    private MemberService memberService ; //= MemberService.getInstance();
+    private MemberService memberService ;
 
 
     @Autowired
-    public LoginController(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
-        this.sessionMgr = sessionMgr;
-        this.cookieMgr = cookieMgr;
+    public LoginController(MemberService memberService) {
         this.memberService = memberService;
     }
 
     @GetMapping("/login")
-    public String loginPage(HttpServletRequest request, HttpSession session) {
+    public ModelAndView loginPage(HttpServletRequest request, HttpSession session) {
         String view = "members/nonlogin/login";
 
-        if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
-            return "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
+//            return "redirect:/";
+//        }
+//
+//        String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
+//        String cookieId = cookieMgr.get(request, "COOKIE_ID");
+//
+//
+//        if (autoLogin != null && cookieId != null) {
+//            if (memberService.autoLogin(autoLogin, cookieId)) {
+//                sessionMgr.create(session, cookieId);
+//                view = "redirect:/";
+//            }
+//        }
 
-        String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
-        String cookieId = cookieMgr.get(request, "COOKIE_ID");
+        return new ModelAndView(view);
+    }
 
 
-        if (autoLogin != null && cookieId != null) {
-            if (memberService.autoLogin(autoLogin, cookieId)) {
-                sessionMgr.create(session, cookieId);
-                view = "redirect:/";
-            }
-        }
+    @PostMapping("/login")
+    @ResponseBody
+    public ResponseEntity<MemberVO> doLogin(@RequestParam String uId,
+                                            @RequestParam String uPw,
+                                            @RequestParam(required = false) String save) {
 
-        return view;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        MemberDTO memberDTO = memberService.login(uId, Password.of(uPw));
+        if (memberDTO == null) return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
+
+       // if (save == null || !save.equals("on")) return new ResponseEntity<>(null, headers, HttpStatus.OK);
+
+        System.out.println(memberDTO);
+
+        return new ResponseEntity<>(memberDTO.toVO(), headers, HttpStatus.OK);
     }
 
 }

@@ -1,7 +1,9 @@
 package org.example.overview.members.entity;
 
+import lombok.Builder;
 import org.example.overview.members.dto.SurveyDTO;
 
+@Builder
 public class Survey {
 
     private String uId = "";
