@@ -1,0 +1,10 @@
+DROP TABLE MEMBER;
+
+CREATE TABLE MEMBER (
+        uId VARCHAR(255),
+        uPw VARCHAR(255),
+        uEmail VARCHAR(255),
+        PRIMARY KEY (uId)
+);
+
+SELECT * FROM MEMBER;
