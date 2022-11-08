@@ -34,6 +34,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration // WebApplicationContext 생성할 수 있도록 하는 어노테이션
 public class PrivateRestControllerTest {
 
+    /*
+    * transactionManager 를 빈으로 등록 (WebAppConfig)
+    * - @Transactional 통해 transactionManager 빈을 실행시켜 @Test 환경에서 RollBack 시킴
+    * - 스프링에서 자동적으로 이러한 Transaction 에 대해 정의되어있는 함수를
+    * - TransactionTestExecutionListener 에서 탐색 후 탐색이 되면 이를 Rollback 시킴
+    *
+    * @Before (JUnit 4), @BeforeEach (JUnit 5)
+    * @After (JUnit 4),  @AfterEach (JUnit 5)
+    * - 메소드 단위의 라이프 사이클을 가지는 어노테이션
+    * - @Test 와 동일한 Transactional 을 공유함
+    *
+    *
+    * @BeforeClass (JUnit 4), @BeforeAll (JUnit 5)
+    * @AfterClass (JUnit 4),  @AfterAll (JUnit 5)
+    * - 클래스 단위의 라이프 사이클을 가지는 어노테이션
+    * - @Test 와 동일한 Transactional 을 공유하지 않음
+    * */
+
     @Autowired
     private WebApplicationContext webApplicationContext;
 
