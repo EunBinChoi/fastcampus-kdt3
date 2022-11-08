@@ -2,6 +2,8 @@ package org.example.overview.members.dao;
 
 import org.example.overview.database.ConnectionPoolMgr;
 import org.example.overview.members.entity.Survey;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -14,12 +16,14 @@ import java.util.stream.Collectors;
 
 @Repository
 public class SurveyDAO implements ISurveyDAO {
-//    private static SurveyDAO surveyDAO  = null;
 
-    private ConnectionPoolMgr connectionPoolMgr;
-    private Connection conn = null;
-    private PreparedStatement stmt = null;
-    private ResultSet rs = null;
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public MemberDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
 
     private static final String SURVEY_SELECT_ALL = "select * from survey";
     private static final String SURVEY_SELECT = "select * from survey where uId = ?";

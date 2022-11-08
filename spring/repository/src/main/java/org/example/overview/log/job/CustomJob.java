@@ -11,8 +11,8 @@ public class CustomJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
+//      logger.trace("TRACE LOG"); // logger 등록되어있지 않기 때문에 출력이 안됨
         logger.debug("DEBUG LOG");
-        logger.trace("TRACE LOG");
         logger.info("INFO LOG");
         logger.warn("WARN LOG");
         logger.error("ERROR LOG");

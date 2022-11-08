@@ -17,7 +17,6 @@ public class CustomCronTrigger {
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void start() {

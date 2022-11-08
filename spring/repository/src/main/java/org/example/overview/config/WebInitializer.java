@@ -23,7 +23,6 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
 
         servletContext.setInitParameter("contextConfigLocation", WebAppConfig.class.getName());
         servletContext.addListener(new ContextLoaderListener(appConfig));
-        servletContext.addListener(new DBConnectionListener());
     }
 
     private void registerDispatcherServletContext(ServletContext servletContext) {
