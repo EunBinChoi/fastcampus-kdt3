@@ -331,6 +331,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Test시 JSON 데이터를 확인하기 위함 -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>

@@ -95,4 +95,7 @@ public class SignupRestControllerTest {
                 .andExpect(status().isConflict())
                 .andDo(print());
     }
+
+    // 아이디가 null 일 때 테스트
+
 }

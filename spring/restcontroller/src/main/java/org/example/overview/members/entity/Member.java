@@ -1,6 +1,7 @@
 package org.example.overview.members.entity;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.example.overview.members.dto.MemberDTO;
 
 @Builder
@@ -9,6 +10,7 @@ public class Member {
     private String uId = "";
     private String uPw = "";
     private String uEmail = "";
+
 
     public Member() {
     }

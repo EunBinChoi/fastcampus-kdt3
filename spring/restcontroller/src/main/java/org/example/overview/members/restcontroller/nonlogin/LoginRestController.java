@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.charset.Charset;
 
 
-@RestController
+@RestController // @Controller + @ResponseBody (JSON)
 @RequestMapping("")
 public class LoginRestController {
 
