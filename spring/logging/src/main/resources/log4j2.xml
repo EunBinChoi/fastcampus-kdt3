@@ -16,7 +16,7 @@
 
         <!-- RollingFile  -->
         <RollingFile name="debugLog" fileName="${APP_LOG_ROOT}/app-debug.log"
-                     filePattern="${APP_LOG_ROOT}/app-debug-%d{yyyy-MM-dd}-%i.log">
+                     filePattern="${APP_LOG_ROOT}/app-debug-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
             <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -26,7 +26,7 @@
         </RollingFile>
 
         <RollingFile name="infoLog" fileName="${APP_LOG_ROOT}/app-info.log"
-                     filePattern="${APP_LOG_ROOT}/app-info-%d{yyyy-MM-dd}-%i.log">
+                     filePattern="${APP_LOG_ROOT}/app-info-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
             <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -36,7 +36,7 @@
         </RollingFile>
 
         <RollingFile name="warnLog" fileName="${APP_LOG_ROOT}/app-warn.log"
-                     filePattern="${APP_LOG_ROOT}/app-warn-%d{yyyy-MM-dd}-%i.log">
+                     filePattern="${APP_LOG_ROOT}/app-warn-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
             <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -46,7 +46,7 @@
         </RollingFile>
 
         <RollingFile name="errorLog" fileName="${APP_LOG_ROOT}/app-error.log"
-                     filePattern="${APP_LOG_ROOT}/app-error-%d{yyyy-MM-dd}-%i.log">
+                     filePattern="${APP_LOG_ROOT}/app-error-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
             <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
