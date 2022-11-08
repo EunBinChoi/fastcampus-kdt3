@@ -3,16 +3,13 @@ package org.example.overview.members.restcontroller;
 import org.example.overview.exception.DatabaseDuplicateException;
 import org.example.overview.exception.InputEmptyException;
 import org.example.overview.exception.InputInvalidException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestControllerAdvice
+@RestControllerAdvice // @RestController 부모
 public class GlobalExceptionHandler {
     @ExceptionHandler({
             NullPointerException.class,

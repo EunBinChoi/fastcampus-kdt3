@@ -25,7 +25,7 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
         this.memberService = memberService;
     }
 
-    /* PK를 제외한 모든 개인정보를 수정하는 함수 추가 (22.11.04) */
+    /* PK와 패스워드를 제외한 모든 개인정보를 수정하는 함수 추가 (22.11.04) */
     @PutMapping("/private/{uId}")
     public ResponseEntity<Status> updateUserEmail(@PathVariable(value = "uId") String uId,
                                                         @RequestBody Map<String, String> map) { // uEmail 말고 더 많은 사용자 정보 수정이 있을 수 있음

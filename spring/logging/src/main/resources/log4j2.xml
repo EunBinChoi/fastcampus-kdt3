@@ -5,7 +5,7 @@
     <!-- Logging Properties  -->
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
-        <Property name="APP_LOG_ROOT">/Users/echoiing/logs</Property>
+        <Property name="APP_LOG_ROOT">/Users/echoiing/fastcampus-kdt3/logs</Property>
     </Properties>
 
     <Appenders>
@@ -15,44 +15,42 @@
         </Console>
 
         <!-- RollingFile  -->
-        <RollingFile name="debugLog" fileName="${APP_LOG_ROOT}/app-debug.log"
-                     filePattern="${APP_LOG_ROOT}/app-debug-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+        <RollingFile name="debugLog" fileName="${APP_LOG_ROOT}/app-debug.log" filePattern="${APP_LOG_ROOT}/%d{yyyy-MM-dd-hh-mm}/app-debug-%d{yyyy-MM-dd-hh-mm}-%i.log">
             <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <!-- 100B -->
+                <SizeBasedTriggeringPolicy size="100"/>
             </Policies>
-            <DefaultRolloverStrategy max="10"/>
+            <!--  i == 500을 넘어가게 되면 1부터 다시 작성 -->
+            <DefaultRolloverStrategy max="500"/>
         </RollingFile>
 
-        <RollingFile name="infoLog" fileName="${APP_LOG_ROOT}/app-info.log"
-                     filePattern="${APP_LOG_ROOT}/app-info-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+        <RollingFile name="infoLog" fileName="${APP_LOG_ROOT}/app-info.log" filePattern="${APP_LOG_ROOT}/%d{yyyy-MM-dd-hh-mm}/app-info-%d{yyyy-MM-dd-hh-mm}-%i.log">
             <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="100"/>
             </Policies>
-            <DefaultRolloverStrategy max="10"/>
+            <DefaultRolloverStrategy max="500"/>
         </RollingFile>
 
-        <RollingFile name="warnLog" fileName="${APP_LOG_ROOT}/app-warn.log"
-                     filePattern="${APP_LOG_ROOT}/app-warn-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+        <RollingFile name="warnLog" fileName="${APP_LOG_ROOT}/app-warn.log" filePattern="${APP_LOG_ROOT}/%d{yyyy-MM-dd-hh-mm}/app-warn-%d{yyyy-MM-dd-hh-mm}-%i.log">
             <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="100"/>
             </Policies>
-            <DefaultRolloverStrategy max="10"/>
+            <DefaultRolloverStrategy max="500"/>
         </RollingFile>
 
-        <RollingFile name="errorLog" fileName="${APP_LOG_ROOT}/app-error.log"
-                     filePattern="${APP_LOG_ROOT}/app-error-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+        <RollingFile name="errorLog" fileName="${APP_LOG_ROOT}/app-error.log" filePattern="${APP_LOG_ROOT}/%d{yyyy-MM-dd-hh-mm}/app-error-%d{yyyy-MM-dd-hh-mm}-%i.log">
             <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="100"/>
             </Policies>
-            <DefaultRolloverStrategy max="10"/>
+            <DefaultRolloverStrategy max="500"/>
         </RollingFile>
     </Appenders>
 
