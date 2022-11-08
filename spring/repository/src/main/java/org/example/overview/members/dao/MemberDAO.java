@@ -32,8 +32,6 @@ public class MemberDAO implements IMemberDAO {
 
     @Override
     public List<Member> search(String q) { // 이름이나 이메일로 검색
-        // table 열의 구조 != 객체의 필드 구조
-
         return jdbcTemplate.query(MEMBER_SEARCH, (rs, rowNum) -> new Member(
                 rs.getString("uId"),
                 rs.getString("uPw"),
@@ -41,7 +39,7 @@ public class MemberDAO implements IMemberDAO {
     }
 
     @Override
-    public Member select(String uId) {
+    public Member select(String uId) { // PK를 통한 SELECT
         List<Member> memberList = jdbcTemplate.query(MEMBER_SELECT, (rs, rowNum) -> new Member(
                 rs.getString("uId"),
                 rs.getString("uPw"),
@@ -62,11 +60,8 @@ public class MemberDAO implements IMemberDAO {
 
     @Override
     public int insert(Member member) {
-        return jdbcTemplate.update(MEMBER_INSERT, ps -> {
-            ps.setString(1, member.getuId());
-            ps.setString(2, member.getuPw());
-            ps.setString(3, member.getuEmail());
-        });
+        return jdbcTemplate.update(MEMBER_INSERT,
+                member.getuId(), member.getuPw(), member.getuEmail());
     }
 
     @Override
@@ -80,29 +75,23 @@ public class MemberDAO implements IMemberDAO {
 
     @Override
     public int updatePassword(String uId, String uPw) {
-        return jdbcTemplate.update(MEMBER_PASSWORD_UPDATE, ps -> {
-            ps.setString(1, uPw);
-            ps.setString(2, uId);
-        });
+        return jdbcTemplate.update(MEMBER_PASSWORD_UPDATE, uPw, uId);
     }
 
     @Override
     public int updateEmail(String uId, String uEmail) {
-        return jdbcTemplate.update(MEMBER_EMAIL_UPDATE, ps -> {
-            ps.setString(1, uEmail);
-            ps.setString(2, uId);
-        });
+        return jdbcTemplate.update(MEMBER_EMAIL_UPDATE, uEmail, uId);
     }
 
 
     @Override
     public int delete(String uId) {
-        return jdbcTemplate.update(MEMBER_DELETE, ps -> ps.setString(1, uId));
+        return jdbcTemplate.update(MEMBER_DELETE, uId);
     }
 
     @Override
     public int deleteAll() {
-        return jdbcTemplate.update(MEMBER_DELETE_ALL, ps -> {});
+        return jdbcTemplate.update(MEMBER_DELETE_ALL);
     }
 
 }
