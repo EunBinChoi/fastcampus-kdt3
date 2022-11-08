@@ -1,4 +1,4 @@
-package org.example.overview.members.database;
+package org.example.overview.database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

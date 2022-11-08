@@ -19,10 +19,10 @@ public class MemberService implements IMemberService {
     private MemberDAO memberDAO; // = MemberDAO.getInstance(); // 객체 생성
 
 
-//    @Autowired
-//    public MemberService(MemberDAO memberDAO) {
-//        this.memberDAO = memberDAO;
-//    }
+    @Autowired
+    public MemberService(MemberDAO memberDAO) {
+        this.memberDAO = memberDAO;
+    }
 
     @Override
     public List<MemberDTO> findByUserIdOrEmail(String q) {

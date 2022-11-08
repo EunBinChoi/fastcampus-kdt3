@@ -1,10 +1,8 @@
 package org.example.overview.members.dao;
 
 
-import org.example.overview.members.database.ConnectionPoolMgr;
-import org.example.overview.members.database.JDBCMgr;
+import org.example.overview.database.ConnectionPoolMgr;
 import org.example.overview.members.entity.Member;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -36,9 +34,7 @@ public class MemberDAO implements IMemberDAO {
     private static final String MEMBER_DELETE_ALL = "delete member";
 
     public MemberDAO() {
-        if (connectionPoolMgr == null) {
-            connectionPoolMgr = new ConnectionPoolMgr();
-        }
+        connectionPoolMgr = ConnectionPoolMgr.getInstance();
     }
 
 

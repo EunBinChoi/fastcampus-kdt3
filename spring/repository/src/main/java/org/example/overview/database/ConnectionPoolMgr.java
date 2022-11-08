@@ -1,6 +1,7 @@
-package org.example.overview.members.database;
+package org.example.overview.database;
 
-import org.springframework.stereotype.Component;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -19,8 +20,8 @@ import java.util.Vector;
  */
 
 public class ConnectionPoolMgr {
+    private BasicDataSource dataSource;
     private Vector connections = new Vector(10);
-
 
     private String _driver = "org.h2.Driver",
             _url = "jdbc:h2:tcp://localhost/~/JDBC",
@@ -31,7 +32,13 @@ public class ConnectionPoolMgr {
     private int _openConnections = 10;
     private static ConnectionPoolMgr instance = null;
 
+
     public ConnectionPoolMgr() {}
+
+    @Autowired
+    public void setDataSource(BasicDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     /** Use this method to set the maximum number of open connections before
      unused connections are closed.

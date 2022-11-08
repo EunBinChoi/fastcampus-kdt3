@@ -1,8 +1,6 @@
 package org.example.overview.config;
 
-import org.example.overview.members.dao.MemberDAO;
-import org.example.overview.members.database.ConnectionPoolMgr;
-import org.springframework.context.annotation.Configuration;
+import org.example.overview.database.ConnectionPoolMgr;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

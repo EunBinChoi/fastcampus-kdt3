@@ -272,12 +272,20 @@
         <!-- org.apache DBCP 추가 -->
         <!-- org.apache.commons.dbcp.BasicDataSource; -->
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.9.0</version>
         </dependency>
 
-        <!-- HikariCP -->
+        <!-- com.mchange c3p0 DBCP 추가 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.5</version>
+        </dependency>
+
+
+        <!-- com.zaxxer HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>

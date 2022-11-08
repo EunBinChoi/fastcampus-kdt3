@@ -1,7 +1,6 @@
 package org.example.overview.members.dao;
 
-import org.example.overview.members.database.ConnectionPoolMgr;
-import org.example.overview.members.database.JDBCMgr;
+import org.example.overview.database.ConnectionPoolMgr;
 import org.example.overview.members.entity.Survey;
 import org.springframework.stereotype.Repository;
 
@@ -31,9 +30,7 @@ public class SurveyDAO implements ISurveyDAO {
     private static final String SURVEY_DELETE_ALL = "delete survey";
 
     public SurveyDAO() {
-        if (connectionPoolMgr == null) {
-            connectionPoolMgr = new ConnectionPoolMgr();
-        }
+        connectionPoolMgr = ConnectionPoolMgr.getInstance();
     }
 
 //    public static SurveyDAO getInstance() {

@@ -2,44 +2,70 @@
 
 <configuration status="debug">
 
+    <!-- Logging Properties  -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="APP_LOG_ROOT">/Users/echoiing/logs</Property>
+    </Properties>
+
     <Appenders>
-        <!-- 콜솔 -->
+        <!-- Console -->
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
 
-        <!-- 파일  -->
-        <RollingFile name="RollingFile">
-            <FileName>./logs/rollingFile.log</FileName>
-            <FilePattern>./logs/%d{yyyy-MM-dd-hh-mm}/rollingFile.zip</FilePattern>
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
-            </PatternLayout>
+        <!-- RollingFile  -->
+        <RollingFile name="debugLog" fileName="${APP_LOG_ROOT}/app-debug.log"
+                     filePattern="${APP_LOG_ROOT}/app-debug-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
-        <RollingFile name="RollingFileError">
-            <FileName>./logs/rollingFileError.log</FileName>
-            <FilePattern>./logs/%d{yyyy-MM-dd-hh-mm}/rollingFileError.zip</FilePattern>
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
-            </PatternLayout>
+        <RollingFile name="infoLog" fileName="${APP_LOG_ROOT}/app-info.log"
+                     filePattern="${APP_LOG_ROOT}/app-info-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
+        <RollingFile name="warnLog" fileName="${APP_LOG_ROOT}/app-warn.log"
+                     filePattern="${APP_LOG_ROOT}/app-warn-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <RollingFile name="errorLog" fileName="${APP_LOG_ROOT}/app-error.log"
+                     filePattern="${APP_LOG_ROOT}/app-error-%d{yyyy-MM-dd-hh-mm}-%i.log.zip">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
 
-    <loggers>
-        <root level="debug" additivity="true">
+    <Loggers>
+        <Logger name="org.example.overview" additivity="true" level="debug">
+            <AppenderRef ref="debugLog"/>
+            <AppenderRef ref="infoLog"/>
+            <AppenderRef ref="warnLog"/>
+            <AppenderRef ref="errorLog"/>
+        </Logger>
+
+        <Root level="warn" additivity="true">
             <AppenderRef ref="console"/>
-            <AppenderRef ref="RollingFile"/>
-            <AppenderRef ref="RollingFileError" level="ERROR"/>
-        </root>
-    </loggers>
-
-
+        </Root>
+    </Loggers>
 </configuration>
