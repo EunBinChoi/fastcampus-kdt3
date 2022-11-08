@@ -2,6 +2,8 @@ package restcontroller.nonlogin;
 
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
+import org.example.overview.exception.InputEmptyException;
+import org.example.overview.exception.InputInvalidException;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
@@ -27,8 +29,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,6 +59,7 @@ public class LoginRestControllerTest {
     }
 
     @Before
+    @Transactional
     public void 테스트_위한_객체_생성() {
         Member member = Member.builder()
                 .uId("test")
@@ -65,12 +70,14 @@ public class LoginRestControllerTest {
     }
 
     @After
+    @Transactional
     public void 테스트_위한_객체_소멸() {
         memberDAO.delete("test");
     }
 
-    @DisplayName("로그인 성공 테스트")
     @Test
+    @Transactional
+    @DisplayName("로그인 성공 테스트")
     public void 로그인_성공_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -80,14 +87,15 @@ public class LoginRestControllerTest {
                 .andDo(print());
     }
 
-    @DisplayName("로그인 실패 테스트")
     @Test
+    @Transactional
+    @DisplayName("로그인 실패 테스트")
     public void 로그인_실패_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("uId", "test")
                         .param("uPw", "test12345"))
-                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException().getClass()).isAssignableFrom(InputInvalidException.class))
                 .andDo(print());
     }
 

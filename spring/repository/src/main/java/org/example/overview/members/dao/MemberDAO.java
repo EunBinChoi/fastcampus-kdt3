@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 public class MemberDAO implements IMemberDAO {
     private JdbcTemplate jdbcTemplate;
 
+    public MemberDAO() {
+    }
+
     @Autowired
     public MemberDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

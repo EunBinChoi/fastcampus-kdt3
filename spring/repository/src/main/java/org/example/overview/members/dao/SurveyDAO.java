@@ -70,12 +70,12 @@ public class SurveyDAO implements ISurveyDAO {
 
     @Override
     public int updateSeason(String uId, String season) {
-        return jdbcTemplate.update(SURVEY_SEASON_UPDATE, season);
+        return jdbcTemplate.update(SURVEY_SEASON_UPDATE, season, uId);
     }
 
     @Override
     public int updateFruit(String uId, String fruit) {
-        return jdbcTemplate.update(SURVEY_SEASON_UPDATE, fruit, uId);
+        return jdbcTemplate.update(SURVEY_FRUIT_UPDATE, fruit, uId);
     }
 
     @Override

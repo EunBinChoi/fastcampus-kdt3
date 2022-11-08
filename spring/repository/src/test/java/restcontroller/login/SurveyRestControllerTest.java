@@ -2,6 +2,7 @@ package restcontroller.login;
 
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
+import org.example.overview.exception.InputInvalidException;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dao.SurveyDAO;
 import org.example.overview.members.dto.Password;
@@ -20,8 +21,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,6 +54,7 @@ public class SurveyRestControllerTest {
     }
 
     @Before
+    @Transactional
     public void 테스트_위한_객체_생성() {
         Member member = Member.builder()
                 .uId("test")
@@ -67,24 +71,27 @@ public class SurveyRestControllerTest {
     }
 
     @After
+    @Transactional
     public void 테스트_위한_객체_소멸() {
         surveyDAO.delete("test");
         memberDAO.delete("test");
     }
 
-    @DisplayName("서베이 실패 테스트")
     @Test
+    @Transactional
+    @DisplayName("서베이 실패 테스트")
     public void 서베이_실패_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/members/survey/test")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("fruit", "melon")
                         .param("season", "winter"))
-                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException().getClass()).isAssignableFrom(InputInvalidException.class))
                 .andDo(print());
     }
 
-    @DisplayName("서베이 결과 수정 테스트")
     @Test
+    @Transactional
+    @DisplayName("서베이 결과 수정 테스트")
     public void 서베이_결과_수정_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/members/survey/test")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -94,8 +101,10 @@ public class SurveyRestControllerTest {
                 .andDo(print());
     }
 
-    @DisplayName("서베이 결과 반환 테스트")
+
     @Test
+    @Transactional
+    @DisplayName("서베이 결과 반환 테스트")
     public void 서베이_결과_반환_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/members/survey/test"))
                 .andExpect(status().isOk())

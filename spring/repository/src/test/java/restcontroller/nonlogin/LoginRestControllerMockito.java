@@ -2,6 +2,7 @@ package restcontroller.nonlogin;
 
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
+import org.example.overview.exception.InputInvalidException;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
@@ -23,8 +24,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,14 +62,15 @@ public class LoginRestControllerMockito {
 
 
 
-    @DisplayName("로그인 테스트")
     @Test
+    @Transactional
+    @DisplayName("로그인 테스트")
     public void 로그인_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("uId", "a")
                         .param("uPw", "a12345"))
-                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException().getClass()).isAssignableFrom(InputInvalidException.class))
                 .andDo(print());
     }
 

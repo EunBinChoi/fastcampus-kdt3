@@ -50,8 +50,6 @@ public class WebAppConfig implements EnvironmentAware {
         basicDataSource.setMinIdle(Integer.parseInt(environment.getProperty("apache.commons.dbcp2.config.minIdle")));
         basicDataSource.setMaxWaitMillis(Long.parseLong(environment.getProperty("apache.commons.dbcp2.config.maxWaitMillis")));
 
-        System.out.println(basicDataSource);
-
         return basicDataSource;
     }
 
@@ -77,8 +75,6 @@ public class WebAppConfig implements EnvironmentAware {
         } catch (PropertyVetoException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println(comboPooledDataSource);
 
         return comboPooledDataSource;
     }
@@ -113,13 +109,13 @@ public class WebAppConfig implements EnvironmentAware {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate() { // SQL => SQL Mapper (query(), insert() / update(), delete())
+    public JdbcTemplate jdbcTemplate() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
     }
 
-    @Bean(name = "transactionManager") // Test 환경에서 @Transactional (rollback)
+    @Bean // Test 환경에서 @Transactional (rollback)
     public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
