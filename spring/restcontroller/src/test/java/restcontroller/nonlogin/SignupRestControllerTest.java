@@ -79,7 +79,7 @@ public class SignupRestControllerTest {
     @Test
     public void 회원가입_실패_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/signup")
-                        .param("uId", "test3")
+                        .param("uId", "test4")
                         .param("uPw", "test1234"))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
@@ -97,5 +97,14 @@ public class SignupRestControllerTest {
     }
 
     // 아이디가 null 일 때 테스트
+    @DisplayName("회원가입 아이디 널 테스트")
+    @Test
+    public void 회원가입_아이디_널_테스트() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/signup/checkId"))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+
+    }
 
 }
