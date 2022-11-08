@@ -61,6 +61,7 @@ public class SignupRestControllerTest {
     @After
     public void 테스트_위한_객체_소멸() {
         memberDAO.delete("test");
+        memberDAO.delete("test2");
     }
 
 
@@ -75,12 +76,15 @@ public class SignupRestControllerTest {
                 .andDo(print());
     }
 
-    @DisplayName("회원가입 실패 테스트")
+
+    @DisplayName("회원가입 이메일 널 테스트")
     @Test
-    public void 회원가입_실패_테스트() throws Exception {
+    public void 회원가입_이메일_널_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/signup")
-                        .param("uId", "test4")
-                        .param("uPw", "test1234"))
+                        .param("uId", "test")
+                        .param("uPw", "test1234")
+//                        .param("uEmail", "test@gmail.com")
+                        )
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }

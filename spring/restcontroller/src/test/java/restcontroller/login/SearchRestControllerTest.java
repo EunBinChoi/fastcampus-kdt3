@@ -73,6 +73,19 @@ public class SearchRestControllerTest {
     }
 
 
+    // https://github.com/json-path/JsonPath
+    @DisplayName("사용자 모두 검색 테스트")
+    @Test
+    public void 사용자_모두_검색_테스트() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/members")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(27)) // test 포함
+                .andDo(print()); // JSONArray -> List -> List.size()
+    }
+
+
+
     @DisplayName("사용자 키워드 검색 테스트")
     @Test
     public void 사용자_키워드_검색_테스트() throws Exception {

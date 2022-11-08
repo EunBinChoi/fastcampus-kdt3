@@ -73,6 +73,8 @@ public class PrivateRestControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/members/private/test")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSONObject.valueToString(map)))
+                // map -> JSONObject -> string
+                // new JSONObject(map).toString()
                 .andExpect(status().isOk())
                 .andDo(print());
 
