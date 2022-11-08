@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="debug">
+
+    <Appenders>
+        <!-- 콜솔 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+        </Console>
+
+        <!-- 파일  -->
+        <RollingFile name="RollingFile">
+            <FileName>./logs/rollingFile.log</FileName>
+            <FilePattern>./logs/%d{yyyy-MM-dd-hh-mm}/rollingFile.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError">
+            <FileName>./logs/rollingFileError.log</FileName>
+            <FilePattern>./logs/%d{yyyy-MM-dd-hh-mm}/rollingFileError.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <loggers>
+        <root level="debug" additivity="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="RollingFileError" level="ERROR"/>
+        </root>
+    </loggers>
+
+
+</configuration>
