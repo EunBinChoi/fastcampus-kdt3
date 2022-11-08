@@ -13,16 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class SurveyService implements ISurveyService {
 
-    private SurveyDAO surveyDAO; // = SurveyDAO.getInstance();
-    private MemberDAO memberDAO; // = MemberDAO.getInstance();
-//    private static SurveyService surveyService = null;
-
-//    public static SurveyService getInstance() {
-//        if (surveyService == null) {
-//            surveyService = new SurveyService();
-//        }
-//        return surveyService;
-//    }
+    private SurveyDAO surveyDAO;
+    private MemberDAO memberDAO;
 
     @Autowired
     public SurveyService(SurveyDAO surveyDAO, MemberDAO memberDAO) {
