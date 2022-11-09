@@ -1,0 +1,34 @@
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SPRING</title>
+    <link rel="stylesheet" href="/resources/css/style.css">
+</head>
+<body>
+<header><jsp:include page="layout/header.jsp"/></header>
+
+<%@include file="./messages/showMessage.jsp"%>
+<%
+    showMessage(request, response, "logout", Status.SUCCESS);
+    showMessage(request, response, "withdraw", Status.SUCCESS);
+    showMessage(request, response, "signup", Status.SUCCESS); // 위치 수정
+%>
+
+<main>
+    <h1>Hello ${uId}!</h1>
+    <h2>Current Time - ${now}</h2>
+
+    <%
+        LocalDateTime now = null;
+        if (request.getAttribute("now") != null) {
+            now = (LocalDateTime) request.getAttribute("now");
+        }
+    %>
+    <h2>Current Time - <%=now%></h2>
+</main>
+<footer><jsp:include page="layout/footer.jsp"/></footer>
+</body>
+</html>
