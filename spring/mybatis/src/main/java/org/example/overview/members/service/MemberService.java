@@ -6,6 +6,7 @@ import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MemberDTO> findByUserIdOrEmail(String q) {
         if (q == null) return null;
 
@@ -29,6 +31,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean autoLogin(String autoLogin, String cookieId) {
         if (autoLogin == null || cookieId == null) return false;
 
@@ -42,6 +45,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberDTO login(String uId) {
         MemberDTO memberDTO = new MemberDTO(uId);
         if (memberDTO == null) return null;
@@ -51,6 +55,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberDTO login(String uId, Password uPw) {
         MemberDTO memberDTO = new MemberDTO(uId, uPw);
         if (memberDTO == null || memberDTO.getuPwStr() == null) return null;
@@ -64,6 +69,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional
     public boolean signup(String uId, Password uPw, String uEmail) {
         MemberDTO memberDTO = new MemberDTO(uId, uPw, uEmail);
         if (memberDTO == null || memberDTO.getuPwStr() == null) return false;
@@ -73,6 +79,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberDTO getByUserId(String uId) {
         if (uId == null) return null;
 
@@ -83,12 +90,14 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MemberDTO> getAllUsers() {
         List<Member> memberList = memberDAO.selectAll();
         return memberList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public boolean updateUserPassword(String uId, Password uPw, Password uNewPw) {
         if (uId == null || uPw == null || uNewPw == null) return false;
 
@@ -102,6 +111,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional
     public boolean updateUserEmail(String uId, String uEmail) {
         if (uId == null || uEmail == null) return false;
 
@@ -114,6 +124,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean checkPassword(String uId, Password uPw) {
         if (uId == null || uPw == null) return false;
 
@@ -125,6 +136,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean checkNewPassword(String uId, Password uNewPw) {
         if (uId == null || uNewPw == null) return false;
 
@@ -139,6 +151,7 @@ public class MemberService implements IMemberService {
 
 
     @Override
+    @Transactional
     public boolean removeByUserId(String uId, Password uPw) {
         if (uId == null || uPw == null) return false;
 
@@ -151,6 +164,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional
     public boolean removeUsers() {
         int res = memberDAO.deleteAll();
         return res > 0;

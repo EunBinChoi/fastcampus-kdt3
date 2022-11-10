@@ -5,6 +5,7 @@ import org.example.overview.members.dto.SurveyDTO;
 import org.example.overview.members.entity.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional
     public boolean save(String uId, String season, String fruit) {
         if (uId == null || season == null || fruit == null) return false;
 
@@ -30,6 +32,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SurveyDTO getByUserId(String uId) {
         if (uId == null) return null;
 
@@ -40,6 +43,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SurveyDTO> getAllUsers() {
         List<Survey> surveyList = surveyDAO.selectAll();
 
@@ -47,6 +51,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional
     public boolean updateSeason(String uId, String season) {
         if (uId == null || season == null) return false;
 
@@ -55,6 +60,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional
     public boolean updateFruit(String uId, String fruit) {
         if (uId == null || fruit == null) return false;
 
@@ -63,6 +69,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional
     public boolean removeByUserId(String uId) {
         if (uId == null) return false;
 
@@ -71,8 +78,10 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
+    @Transactional
     public boolean removeUsers() {
         int res = surveyDAO.deleteAll();
         return res > 0;
     }
+
 }

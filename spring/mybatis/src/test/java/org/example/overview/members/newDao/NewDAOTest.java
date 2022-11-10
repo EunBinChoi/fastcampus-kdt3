@@ -2,12 +2,9 @@ package org.example.overview.members.newDao;
 
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
-import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;
-import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.NewMember;
 import org.example.overview.members.entity.NewSurvey;
-import org.example.overview.members.entity.Survey;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -30,7 +27,7 @@ public class NewDAOTest {
     @Test
     @DisplayName("뉴멤버 테이블 사용자 데이터 검색 테스트")
     public void 뉴멤버_테이블_사용자_데이터_검색_테스트() {
-        List<NewMember> newMemberList = newDAO.searchMember("z");
+        List<NewMember> newMemberList = newDAO.searchMember("gmail");
         newMemberList.stream().forEach(m -> m.printWithoutSurveyResult());
     }
 
@@ -38,7 +35,7 @@ public class NewDAOTest {
     @DisplayName("뉴멤버 테이블 사용자 데이터 한명 조회 테스트")
     public void 뉴멤버_테이블_사용자_데이터_한명_조회_테스트() {
         NewMember newMember = newDAO.selectMember("a");
-        newMember.printWithoutSurveyResult();
+        if (newMember != null) newMember.printWithoutSurveyResult();
     }
 
     @Test
@@ -62,7 +59,9 @@ public class NewDAOTest {
         newDAO.deleteMembers();
 
         for (int i = 'a'; i <= 'z'; i++) {
-            newDAO.insertMember(new NewMember(Character.toString(i), Password.of(Character.toString(i) + "1234", true).getuPw(), Character.toString(i) + "@gmail.com"));
+            newDAO.insertMember(new NewMember(Character.toString(i),
+                    Password.of(Character.toString(i) + "1234", true).getuPw(),
+                    Character.toString(i) + "@gmail.com"));
         }
 
         newDAO.selectMembers().stream().forEach(m -> System.out.println(m));
@@ -89,7 +88,7 @@ public class NewDAOTest {
     @DisplayName("뉴멤버 테이블 서베이 삽입 테스트")
     public void 뉴멤버_테이블_서베이_삽입_테스트() {
         NewSurvey newSurvey = new NewSurvey("spring", "watermelon");
-        newDAO.insertSurvey("b", newSurvey);
+        newDAO.insertSurvey("x", newSurvey);
 
         System.out.println("newSurvey = " + newSurvey);
     }
@@ -106,10 +105,10 @@ public class NewDAOTest {
     @Test
     @DisplayName("뉴멤버 테이블 서베이 수정 테스트")
     public void 뉴멤버_테이블_서베이_수정_테스트() {
-        newDAO.updateSurveySeason(BigInteger.ONE, "winter");
-        newDAO.updateSurveyFruit(BigInteger.ONE, "apple");
+        newDAO.updateSurveySeason(BigInteger.valueOf(53), "winter");
+        newDAO.updateSurveyFruit(BigInteger.valueOf(53), "apple");
 
-        NewSurvey newSurvey = newDAO.selectSurvey(BigInteger.ONE);
+        NewSurvey newSurvey = newDAO.selectSurvey(BigInteger.valueOf(53));
         System.out.println("newSurvey = " + newSurvey);
 
     }
@@ -119,10 +118,10 @@ public class NewDAOTest {
     @Test
     @DisplayName("뉴멤버 테이블 서베이 한개 삭제 테스트")
     public void 뉴멤버_테이블_서베이_한개_삭제_테스트() {
-        int res = newDAO.deleteSurvey(BigInteger.valueOf(17));
+        int res = newDAO.deleteSurvey(BigInteger.valueOf(53));
 
         System.out.println("res = " + res);
-        NewSurvey newSurvey = newDAO.selectSurvey(BigInteger.valueOf(17));
+        NewSurvey newSurvey = newDAO.selectSurvey(BigInteger.valueOf(53));
         System.out.println("newSurvey = " + newSurvey);
 
     }

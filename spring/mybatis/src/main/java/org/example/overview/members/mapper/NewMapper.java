@@ -2,12 +2,15 @@
 package org.example.overview.members.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 import org.example.overview.members.entity.NewMember;
 import org.example.overview.members.entity.NewSurvey;
 import org.example.overview.members.entity.Survey;
 
 import java.math.BigInteger;
 import java.util.List;
+
+import static org.h2.message.Trace.JDBC;
 
 
 @Mapper
@@ -40,9 +43,20 @@ public interface NewMapper {
     @Select("select * from new_member as a left join new_survey as b on a.survey_id = b.survey_id")
     List<NewMember> selectWithSurveys();
 
+
+    @Results(id = "newSurveyMap", value = {
+            @Result(property = "sId", column = "SURVEY_ID"),
+            @Result(property = "season", column = "SURVEY_SEASON"),
+            @Result(property = "fruit", column = "SURVEY_FRUIT")
+    })
+    @ResultType(NewSurvey.class)
+    @Select("select * from new_survey where survey_id = #{sId}")
+    NewSurvey selectSurvey(@Param("sId") BigInteger sId);
+
+
     @ResultMap("newMemberSurveyMap")
     @ResultType(NewMember.class)
-    @Select("select * from new_member as a join new_survey as b on a.survey_id = b.survey_id " +
+    @Select("select * from new_member as a left join new_survey as b on a.survey_id = b.survey_id " +
             "where user_id = #{uId}")
     NewMember selectWithSurvey(@Param("uId") String uId);
 
@@ -55,15 +69,6 @@ public interface NewMapper {
     @Select("select user_id from new_member where survey_id = #{sId}")
     String selectUserIdWithSurveyId(@Param("sId") BigInteger sId);
 
-
-    @Results(id = "newSurveyMap", value = {
-            @Result(property = "sId", column = "SURVEY_ID"),
-            @Result(property = "season", column = "SURVEY_SEASON"),
-            @Result(property = "fruit", column = "SURVEY_FRUIT")
-    })
-    @ResultType(NewSurvey.class)
-    @Select("select * from new_survey where survey_id = #{sId}")
-    NewSurvey selectSurvey(@Param("sId") BigInteger sId);
 
 
     @ResultMap("newSurveyMap")
@@ -85,7 +90,10 @@ public interface NewMapper {
     @ResultType(Integer.class)
     @Insert("insert into new_survey(survey_season, survey_fruit) values(#{survey.season}, #{survey.fruit})")
     @Options(useGeneratedKeys = true, keyColumn = "survey_id", keyProperty = "sId")
-    int insertSurvey(@Param("survey") NewSurvey survey);
+    // insert sId (AUTO INCREMENT)
+    // insert season, fruit
+    // survey.setsId(survey_id) // 문제점! (survey entity @Setter 없음......)
+    int insertSurvey(@Param("survey") NewSurvey survey); // ("spring", "melon") => (5, "spring", "melon")
 
     @ResultType(Integer.class)
     @Update("update new_member set survey_id = #{sId} where user_id = #{uId}")

@@ -38,6 +38,7 @@ public class NewSurvey {
         return fruit;
     }
 
+    // repository 단에서 맵핑하기 위해 setter 생성
     public void setsId(BigInteger sId) {
         this.sId = sId;
     }

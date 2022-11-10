@@ -137,7 +137,8 @@ public class WebAppConfig implements EnvironmentAware {
 //    }
 
     @Bean
-    public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
+    public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() { // @Transactional (트랜잭션 단위를 묶음)
+
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
         return dataSourceTransactionManager;

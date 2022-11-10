@@ -50,6 +50,7 @@ public class NewMember {
     }
 
 
+    // repository 단에서 맵핑하기 위해 setter 생성
     public void setuId(String uId) {
         this.uId = uId;
     }

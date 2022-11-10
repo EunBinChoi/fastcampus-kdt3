@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberMapper {
+
     @ResultType(List.class)
     @Select("select * from member where uId like concat('%', #{q}, '%') or uEmail like concat('%', #{q}, '%')")
     List<Member> search(@Param("q") String q);
