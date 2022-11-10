@@ -3,20 +3,16 @@ package org.example.overview.members.dto;
 
 import org.example.overview.members.entity.Survey;
 import org.example.overview.members.vo.SurveyVO;
-import org.example.overview.valid.GeneralValidationGroup;
-import org.example.overview.valid.TestValidationGroup;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import java.math.BigInteger;
 
 public class SurveyDTO {
 
     //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
-    private String uId = "";
+    private BigInteger sId = null;
 
     //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String season = "";
-
     //@NotEmpty(groups = {GeneralValidationGroup.class, TestValidationGroup.class})
     private String fruit = "";
 
@@ -28,26 +24,26 @@ public class SurveyDTO {
         this.fruit = fruit;
     }
 
-    public SurveyDTO(String uId, String season, String fruit) {
-        this.uId = uId;
+    public SurveyDTO(BigInteger sId, String season, String fruit) {
+        this.sId = sId;
         this.season = season;
         this.fruit = fruit;
     }
 
     public Survey toEntity() {
-        return new Survey(uId, season, fruit);
+        return new Survey(sId, season, fruit);
     }
 
     public SurveyVO toVO() {
-        return new SurveyVO(uId, season, fruit);
+        return new SurveyVO(sId.toString(), season, fruit);
     }
 
-    public String getuId() {
-        return uId;
+    public BigInteger getsId() {
+        return sId;
     }
 
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setsId(BigInteger sId) {
+        this.sId = sId;
     }
 
     public String getSeason() {
@@ -69,7 +65,7 @@ public class SurveyDTO {
     @Override
     public String toString() {
         return "SurveyDTO{" +
-                "uId='" + uId + '\'' +
+                "sId=" + sId +
                 ", season='" + season + '\'' +
                 ", fruit='" + fruit + '\'' +
                 '}';

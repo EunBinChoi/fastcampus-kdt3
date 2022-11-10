@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SPRING</title>
+    <title>JSP</title>
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -24,7 +24,7 @@
     <div>Hello! ${uId}</div>
     <div>Please complete the survey below 👇🏻</div>
     <div>
-        <form method="post" action="/members/survey/${uId}">
+        <form method="post" action="/members/survey/res/${uId}">
             <fieldset>
                 <legend>1. Favorite Season ?</legend>
 

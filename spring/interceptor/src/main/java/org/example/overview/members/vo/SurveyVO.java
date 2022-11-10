@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class SurveyVO {
 
-    private String uId = "";
+    private String sId = "";
     private String season = "";
     private String fruit = "";
 
@@ -16,14 +16,14 @@ public class SurveyVO {
         this.fruit = fruit;
     }
 
-    public SurveyVO(String uId, String season, String fruit) {
-        this.uId = uId;
+    public SurveyVO(String sId, String season, String fruit) {
+        this.sId = sId;
         this.season = season;
         this.fruit = fruit;
     }
 
-    public String getuId() {
-        return uId;
+    public String getsId() {
+        return sId;
     }
 
     public String getSeason() {
@@ -39,18 +39,18 @@ public class SurveyVO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SurveyVO surveyVO = (SurveyVO) o;
-        return uId.equals(surveyVO.uId) && season.equals(surveyVO.season) && fruit.equals(surveyVO.fruit);
+        return sId.equals(surveyVO.sId) && season.equals(surveyVO.season) && fruit.equals(surveyVO.fruit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, season, fruit);
+        return Objects.hash(sId, season, fruit);
     }
 
     @Override
     public String toString() {
         return "SurveyVO{" +
-                "uId='" + uId + '\'' +
+                "uId='" + sId + '\'' +
                 ", season='" + season + '\'' +
                 ", fruit='" + fruit + '\'' +
                 '}';

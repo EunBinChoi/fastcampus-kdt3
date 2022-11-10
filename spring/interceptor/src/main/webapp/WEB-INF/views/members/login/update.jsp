@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SPRING</title>
+    <title>JSP</title>
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -22,7 +22,7 @@
         $.ajax({
             type: "post",
             url: "/members/private/checkPwd",
-            data: {"uId": $("#uId"), "uPw": $("#uPw")},
+            data: JSON.stringify({"uId": $("#uId").val(), "uPw": $("#uPw").val()}),
             contentType: "application/json; charset=utf8",
             dataType: "json",
             success: (data) => {
@@ -41,11 +41,11 @@
                     result.css("color", "red");
                     result.text("not same password");
                 } else {
-                    result.css("display");
+                    result.css("display", "none");
                 }
             },
             error: (data) => {
-                console.log("errpr", data);
+                console.log("error", data);
             }
 
         });
@@ -55,7 +55,7 @@
         $.ajax({
             type: "post",
             url: "/members/private/checkNewPwd",
-            data: {"uId": $("#uId"), "uNewPw": $("#uNewPw")},
+            data: JSON.stringify({"uId": $("#uId").val(), "uNewPw": $("#uNewPw").val()}),
             contentType: "application/json; charset=utf8",
             dataType: "json",
             success: (data) => {
@@ -74,11 +74,11 @@
                     result.css("color", "red");
                     result.text("you can't use.");
                 } else {
-                    result.css("display");
+                    result.css("display", "none");
                 }
             },
             error: (data) => {
-                console.log("errpr", data);
+                console.log("error", data);
             }
 
         });

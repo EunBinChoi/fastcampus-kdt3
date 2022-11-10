@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -95,7 +96,10 @@ public class WebAppConfig implements EnvironmentAware {
 
         hikariConfig.setPoolName(environment.getProperty("com.zaxxer.hikari.config.poolName"));
         hikariConfig.setMaximumPoolSize(Integer.parseInt(environment.getProperty("com.zaxxer.hikari.config.maximumPoolSize")));
+        hikariConfig.setConnectionTimeout(Long.parseLong(environment.getProperty("com.zaxxer.hikari.config.connectionTimeOut")));
         hikariConfig.setIdleTimeout(Long.parseLong(environment.getProperty("com.zaxxer.hikari.config.idleTimeout")));
+        hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.autoCommit")));
+        hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.readOnly")));
 
         com.zaxxer.hikari.HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
 
@@ -119,25 +123,25 @@ public class WebAppConfig implements EnvironmentAware {
         return jdbcTemplate;
     }
 
+
     @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception { // <<MyBatis>> SQLSession 객체 생성 (Connection 생성하거나 SQL 전달하고 결과 반환하는 구조)
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
+        sqlSessionFactoryBean.setDataSource(dataSource()); // 명시적인 데이터 소스 설정
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean
-    public SqlSessionTemplate sqlSession() throws Exception {
-        return new SqlSessionTemplate(sqlSessionFactory());
-    }
+//    @Bean
+//    public SqlSessionTemplate sqlSession() throws Exception {
+//        return new SqlSessionTemplate(sqlSessionFactory());
+//    }
 
-    @Bean // Test 환경에서 @Transactional (rollback)
+    @Bean
     public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
         return dataSourceTransactionManager;
     }
-
 
 }
 

@@ -77,7 +77,7 @@ public class WebAppConfig implements EnvironmentAware {
         return comboPooledDataSource;
     }
 
-    @Bean
+     @Bean
     public HikariDataSource hikariDataSource() {
         // com.zaxxer.hikari.HikariConfig
 
@@ -89,7 +89,10 @@ public class WebAppConfig implements EnvironmentAware {
 
         hikariConfig.setPoolName(environment.getProperty("com.zaxxer.hikari.config.poolName"));
         hikariConfig.setMaximumPoolSize(Integer.parseInt(environment.getProperty("com.zaxxer.hikari.config.maximumPoolSize")));
+        hikariConfig.setConnectionTimeout(Long.parseLong(environment.getProperty("com.zaxxer.hikari.config.connectionTimeOut")));
         hikariConfig.setIdleTimeout(Long.parseLong(environment.getProperty("com.zaxxer.hikari.config.idleTimeout")));
+        hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.autoCommit")));
+        hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.readOnly")));
 
         com.zaxxer.hikari.HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
 
@@ -113,7 +116,7 @@ public class WebAppConfig implements EnvironmentAware {
         return jdbcTemplate;
     }
 
-    @Bean // Test 환경에서 @Transactional (rollback)
+    @Bean 
     public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
