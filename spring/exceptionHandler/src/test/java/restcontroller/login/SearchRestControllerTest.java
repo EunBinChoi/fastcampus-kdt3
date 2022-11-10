@@ -66,9 +66,6 @@ public class SearchRestControllerTest {
     public void 사용자_한명_검색_테스트() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/members/test"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("uId").value("test"))
-                .andExpect(jsonPath("uPw").value(Password.of("test1234").getuPw()))
-                .andExpect(jsonPath("uEmail").value("test@gmail.com"))
                 .andDo(print());
     }
 
