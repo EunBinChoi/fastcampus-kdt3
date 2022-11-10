@@ -8,13 +8,16 @@ import org.example.overview.members.vo.SurveyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/members")
 public class SurveyRestController { // 개인 설정 페이지 컨트롤러
 
-    private SurveyService surveyService; // = SurveyService.getInstance();
+    private SurveyService surveyService;
 
     @Autowired
     public SurveyRestController(SurveyService surveyService) {

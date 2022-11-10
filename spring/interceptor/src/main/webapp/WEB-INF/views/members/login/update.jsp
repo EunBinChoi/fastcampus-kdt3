@@ -3,12 +3,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>JSP</title>
-    <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
+    <title>SPRING</title>
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" onload="this.media='all'">
 </head>
 <body>
 <header>
-    <jsp:include page="../../layout/header.jsp"/>
+    <jsp:include page="../../layout/header-update.jsp"/>
 </header>
 
 

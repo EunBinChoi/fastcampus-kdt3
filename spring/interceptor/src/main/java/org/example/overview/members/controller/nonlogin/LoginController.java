@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 public class LoginController {
 
-    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
-    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
-    private MemberService memberService ; //= MemberService.getInstance();
+    private SessionMgr sessionMgr;
+    private CookieMgr cookieMgr;
+    private MemberService memberService;
 
 
     @Autowired
@@ -32,20 +32,20 @@ public class LoginController {
     public String loginPage(HttpServletRequest request, HttpSession session) {
         String view = "members/nonlogin/login";
 
-        if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
-            return "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
+//            return "redirect:/";
+//        }
 
-        String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
-        String cookieId = cookieMgr.get(request, "COOKIE_ID");
-
-
-        if (autoLogin != null && cookieId != null) {
-            if (memberService.autoLogin(autoLogin, cookieId)) {
-                sessionMgr.create(session, cookieId);
-                view = "redirect:/";
-            }
-        }
+//        String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
+//        String cookieId = cookieMgr.get(request, "COOKIE_ID");
+//
+//
+//        if (autoLogin != null && cookieId != null) {
+//            if (memberService.autoLogin(autoLogin, cookieId)) {
+//                sessionMgr.create(session, cookieId);
+//                view = "redirect:/";
+//            }
+//        }
 
         return view;
     }

@@ -23,11 +23,11 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
     public String privatePage(Model model, HttpSession session) {
         String view = "members/login/private";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
 
-        model.addAttribute("uId", sessionMgr.get(session));
+//        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 
@@ -35,11 +35,11 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
     public String updatePage(Model model, HttpSession session) {
         String view = "members/login/update";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
 
-        model.addAttribute("uId", sessionMgr.get(session));
+//        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 
@@ -49,11 +49,11 @@ public class PrivateController { // 개인 설정 페이지 컨트롤러
     public String withdrawPage(Model model, HttpSession session) {
         String view = "members/login/withdraw";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
 
-        model.addAttribute("uId", sessionMgr.get(session));
+//        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 }

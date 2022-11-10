@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 
 @RestController
 @RequestMapping("")
 public class LoginRestController {
 
-    private MemberService memberService ; //= MemberService.getInstance();
-
+    private MemberService memberService ;
 
     @Autowired
     public LoginRestController(MemberService memberService) {
@@ -28,17 +29,17 @@ public class LoginRestController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<MemberVO> doLogin(@RequestParam String uId,
-                                            @RequestParam String uPw,
+    public ResponseEntity<MemberVO> doLogin(@RequestParam(required = false) String uId,
+                                            @RequestParam(required = false) String uPw,
                                             @RequestParam(required = false) String save) throws InputInvalidException {
 
         MemberDTO memberDTO = memberService.login(uId, Password.of(uPw));
+        System.out.println("memberDTO = " + memberDTO);
         if (memberDTO == null) throw new InputInvalidException();
-            //return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
 
        // if (save == null || !save.equals("on")) return new ResponseEntity<>(null, headers, HttpStatus.OK);
 
-        System.out.println(memberDTO);
 
         return new ResponseEntity<>(memberDTO.toVO(), HttpStatus.OK);
     }

@@ -19,6 +19,7 @@ public class MemberDAO implements IMemberDAO {
         this.memberMapper = memberMapper;
     }
 
+
     @Override
     public List<Member> searchMember(String q) {
         return memberMapper.searchMember(q);
@@ -107,14 +108,15 @@ public class MemberDAO implements IMemberDAO {
     @Override
     public int deleteSurvey(BigInteger sId) { // 서베이 내역 삭제
         String uId = memberMapper.selectUserIdWithSurveyId(sId); // 서베이와 연결된 유저 이름을 검색
-        memberMapper.updateMemberSurveyId(uId, null); // 해당 유저의 서베이 값을 널로 수정
+        if (uId != null) memberMapper.updateMemberSurveyId(uId, null); // 해당 유저의 서베이 값을 널로 수정
         return memberMapper.deleteSurvey(sId); // 서베이 내역 삭제
     }
 
     @Override
-    public int deleteMember(String uId) {
+    public int deleteMember(String uId) { // 유저 삭제
+        // 서베이 결과는 무조건 유저 아이디가 있어야지만 등록
+        // 유저 삭제 -> 서베이 삭제
         Member member = memberMapper.selectWithSurvey(uId);
-
         System.out.println(member);
 
         int res = memberMapper.deleteMember(uId);
@@ -123,26 +125,34 @@ public class MemberDAO implements IMemberDAO {
         if (member != null && member.getSurveyResult() != null) {
             memberMapper.deleteSurvey(member.getSurveyResult().getsId());
         }
+
+        // 서베이 삭제 -> 유저 삭제
+        // 서베이의 sId를 유저 테이블에서 참조하고 있기 때문에 오류 (FK 제약조건)
+//        BigInteger sId = memberMapper.selectSurveyIdWithUserId(uId);
+//        int res = memberMapper.deleteSurvey(sId);
+//        if (res > 0) return memberMapper.deleteMember(uId);
+
         return res;
     }
 
     @Override
     public int deleteMembers() {
-        int res = memberMapper.selectMembers().stream()
+
+        // List<Member>
+        return memberMapper.selectMembers().stream()
                 .map(m -> deleteMember(m.getuId()))
                 .reduce((x, y) -> x + y)
                 .orElse(0);
-
-        return res;
     }
 
     @Override
     public int deleteSurveys() {
 
+        // List<NewSurvey>
         return memberMapper.selectSurveys().stream()
                 .map(s -> deleteSurvey(s.getsId()))
-                .reduce((x, y) -> x + y).orElse(0);
-
+                .reduce((x, y) -> x + y)
+                .orElse(0);
 
     }
 }

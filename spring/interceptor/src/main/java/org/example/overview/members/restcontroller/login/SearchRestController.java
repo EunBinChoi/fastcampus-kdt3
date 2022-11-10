@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/members")
 public class SearchRestController { // 유저 검색 페이지 컨트롤러
-    private MemberService memberService; // = MemberService.getInstance();
+    private MemberService memberService;
 
     @Autowired
     public SearchRestController(MemberService memberService) {
@@ -24,14 +24,12 @@ public class SearchRestController { // 유저 검색 페이지 컨트롤러
     }
 
     // 한명씩 조회하는 함수 만듦 (22.11.04)
-    @GetMapping(value = "/{uId}")
+    @GetMapping("/{uId}")
     public ResponseEntity<MemberVO> findByUserId(@PathVariable String uId) {
         return new ResponseEntity<>(memberService.getByUserId(uId).toVO(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "",
-            //consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("")
     public ResponseEntity<List<MemberVO>> findByUserIdOrEmail(@RequestParam(required = false) String q) {
         if (UtilsMethod.isNullOrEmpty(q)) {
             List<MemberDTO> memberDTOList = memberService.getAllUsers();

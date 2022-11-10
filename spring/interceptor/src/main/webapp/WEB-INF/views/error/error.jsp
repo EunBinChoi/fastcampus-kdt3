@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SPRING</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/style.css" onload="this.media='all'">
 </head>
 <body>
 <header><jsp:include page="../layout/header.jsp"/></header>

@@ -1,6 +1,15 @@
 package org.example.overview.config;
 
-import org.springframework.context.annotation.*;
+import org.example.overview.interceptor.AuthInterceptor;
+import org.example.overview.interceptor.LocaleInterceptor;
+import org.example.overview.interceptor.LoginInterceptor;
+import org.example.overview.interceptor.NoneAuthInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -8,29 +17,76 @@ import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 @Configuration
-@EnableWebMvc // <mvc:annotation-driven /> 와 동일 (HandlerMapping, HandlerAdatper, Interceptor등 스프링에서 필요한 빈들을 자동 설정해주는 어노테이션)
+@EnableWebMvc
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})}
 )
-public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConfigurer: @EnableWebMvc에서 제공한 빈들을 커스터마이징할 수 있는 기능 제공 인터페이스
-    // dispatcher-servlet.xml
+public class DispatcherServletConfig implements WebMvcConfigurer {
 
-    // @Valid를 사용하기 위한 빈 설정
-    // spring-boot-validator
+    private LocaleInterceptor localeInterceptor;
+    private AuthInterceptor authInterceptor;
+    private NoneAuthInterceptor nonAuthInterceptor;
+    private LoginInterceptor loginInterceptor;
+
+    @Autowired
+    public DispatcherServletConfig(LocaleInterceptor localeInterceptor, AuthInterceptor authInterceptor, NoneAuthInterceptor nonAuthInterceptor, LoginInterceptor loginInterceptor) {
+        this.localeInterceptor = localeInterceptor;
+        this.authInterceptor = authInterceptor;
+        this.nonAuthInterceptor = nonAuthInterceptor;
+        this.loginInterceptor = loginInterceptor;
+    }
+
+    /* 인터셉터 등록 */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeInterceptor)
+                .order(1)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/resources/**");
+
+        registry.addInterceptor(authInterceptor)
+                .order(2)
+                .addPathPatterns("/members/**");
+
+        registry.addInterceptor(nonAuthInterceptor)
+                .order(3)
+                .addPathPatterns("/login/**", "/signup/**");
+
+
+        registry.addInterceptor(loginInterceptor)
+                .order(4)
+                .addPathPatterns("/login/**");
+
+
+        WebMvcConfigurer.super.addInterceptors(registry);
+    }
+
+
+
+    /** @Valid 사용을 위함 */
     @Bean
     public Validator localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
     }
 
 
+    /** Message Converter 등록 */
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(createXmlHttpMessageConverter());
@@ -48,6 +104,8 @@ public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConf
         return xmlConverter;
     }
 
+
+    /** View Resolver */
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -56,6 +114,8 @@ public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConf
         return internalResourceViewResolver;
     }
 
+
+    /** Resource Handler */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");

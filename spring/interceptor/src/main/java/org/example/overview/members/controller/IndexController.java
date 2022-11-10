@@ -4,11 +4,10 @@ import org.example.overview.sessions.SessionMgr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -22,17 +21,17 @@ public class IndexController {
         this.sessionMgr = sessionMgr;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String indexPage(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+    @GetMapping("/")
+    public String indexPage(Model model, HttpServletRequest request) {
 
         LocalDateTime localDateTime = LocalDateTime.now();
 
         model.addAttribute("now", localDateTime);
         request.setAttribute("now", localDateTime);
 
-        if (session.getAttribute("SESSION_ID") != null) {
-            model.addAttribute("uId", sessionMgr.get(session));
-        }
+//        if (session.getAttribute("SESSION_ID") != null) {
+//            model.addAttribute("uId", sessionMgr.get(session));
+//        }
 
         return "index";
     }

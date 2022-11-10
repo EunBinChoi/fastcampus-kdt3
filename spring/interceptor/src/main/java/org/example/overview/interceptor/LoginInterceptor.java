@@ -1,9 +1,12 @@
 package org.example.overview.interceptor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,23 +18,21 @@ import javax.servlet.http.HttpSession;
 /**
  * 로그인한 사용자에 대해 세션에 사용자 정보 저장하는 클래스
  * */
+@Component
 public class LoginInterceptor implements HandlerInterceptor {
+
+    private Logger logger = LogManager.getLogger(LoginInterceptor.class);
+
     private SessionMgr sessionMgr;
     private CookieMgr cookieMgr;
 
     private MemberService memberService;
 
-    public LoginInterceptor() {
-    }
-
     @Autowired
-    public void setSessionMgr(SessionMgr sessionMgr) {
+    public LoginInterceptor(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
         this.sessionMgr = sessionMgr;
-    }
-
-    @Autowired
-    public void setCookieMgr(CookieMgr cookieMgr) {
         this.cookieMgr = cookieMgr;
+        this.memberService = memberService;
     }
 
     @Autowired
@@ -48,6 +49,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
         String cookieId = cookieMgr.get(request, "COOKIE_ID");
+
+        System.out.println("autoLogin = " + autoLogin);
+        System.out.println("cookieId = " + cookieId);
 
         if (autoLogin != null && cookieId != null) {
             if (memberService.autoLogin(autoLogin, cookieId)) {
@@ -68,10 +72,14 @@ public class LoginInterceptor implements HandlerInterceptor {
         String uId = request.getParameter("uId");
         String save = request.getParameter("save");
 
+        System.out.println("uId = " + uId);
+        System.out.println("save = " + save);
+
         // 로그인 성공시 세션에 로그인 아이디 정보 저장하고 초기 화면으로 이동
         if (uId != null) {
             sessionMgr.create(session, uId);
             saveCookieForAutoLogin(uId, save, response);
+            modelAndView.addObject("uId", sessionMgr.get(session));
 
             response.sendRedirect("/");
         }
@@ -82,6 +90,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     /* 로그 찍을 때 사용 */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        HttpSession session = request.getSession();
+        logger.info("ID : " + sessionMgr.get(session) + " Login Success!");
+
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 

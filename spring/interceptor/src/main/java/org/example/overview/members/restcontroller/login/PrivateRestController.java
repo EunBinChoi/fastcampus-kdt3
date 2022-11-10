@@ -1,8 +1,11 @@
 package org.example.overview.members.restcontroller.login;
 
 import exception.InputEmptyException;
+import exception.InputInvalidException;
+import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.service.MemberService;
+import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
 import org.example.overview.utils.UtilsMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +13,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/members")
 public class PrivateRestController { // 개인 설정 페이지 컨트롤러
-    private MemberService memberService; // = MemberService.getInstance();
+    private MemberService memberService;
+    private CookieMgr cookieMgr;
+    private SessionMgr sessionMgr;
 
     @Autowired
-    public PrivateRestController(MemberService memberService) {
+    public PrivateRestController(MemberService memberService, CookieMgr cookieMgr, SessionMgr sessionMgr) {
         this.memberService = memberService;
+        this.cookieMgr = cookieMgr;
+        this.sessionMgr = sessionMgr;
     }
 
     /* PK를 제외한 모든 개인정보를 수정하는 함수 추가 (22.11.04) */
@@ -62,8 +72,8 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
 
     @PostMapping(value = "/private/checkNewPwd")
     public ResponseEntity<Status> checkNewPassword(@RequestBody Map<String, String> map) { // uId, uNewPw
-        if (UtilsMethod.isNullOrEmpty(map.get("uId"))) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
-        if (UtilsMethod.isNullOrEmpty(map.get("uNewPw"))) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+        if (UtilsMethod.isNullOrEmpty(map.get("uId"))) throw new InputEmptyException();
+        if (UtilsMethod.isNullOrEmpty(map.get("uNewPw"))) throw new InputEmptyException();
 
         if (memberService.checkNewPassword(map.get("uId"), Password.of(map.get("uNewPw")))) {
             return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
@@ -74,12 +84,15 @@ public class PrivateRestController { // 개인 설정 페이지 컨트롤러
 
     @DeleteMapping("/private/{uId}")
     public ResponseEntity<Status> removeByUserId(@PathVariable String uId,
-                                 @RequestParam String uPw,
-                                 @RequestParam(required = false) String agree) {
-        if (agree == null || !agree.equals("yes")) return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
+                                                 @RequestParam String uPw,
+                                                 @RequestParam(required = false) String agree,
+                                                 HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+        if (agree == null || !agree.equals("yes")) throw new InputEmptyException();
 
-        System.out.println(Password.of(uPw));
         if (memberService.removeByUserId(uId, Password.of(uPw))) {
+            cookieMgr.delete(request, response);
+            sessionMgr.delete(session);
+
             return new ResponseEntity<>(Status.SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(Status.FAIL, HttpStatus.BAD_REQUEST);

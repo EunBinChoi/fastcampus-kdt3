@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 @RequestMapping("")
 public class SignupRestController {
     private Logger logger = LogManager.getLogger(MemberService.class);
-    private MemberService memberService; // = MemberService.getInstance();
+    private MemberService memberService;
 
 
     @Autowired
@@ -53,9 +53,7 @@ public class SignupRestController {
         throw new DatabaseDuplicateException();
     }
 
-    @PostMapping(value = "/signup/checkId")
-            //consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            //produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/signup/checkId")
     public ResponseEntity<Status> duplicateId(@RequestParam(required = false) String uId) throws DatabaseDuplicateException, InputEmptyException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

@@ -25,13 +25,13 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
 
         String view = "members/login/search";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
-
-        if (session.getAttribute("SESSION_ID") != null) {
-            model.addAttribute("uId", sessionMgr.get(session));
-        }
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
+//
+//        if (session.getAttribute("SESSION_ID") != null) {
+//            model.addAttribute("uId", sessionMgr.get(session));
+//        }
 
         return view;
     }

@@ -5,7 +5,24 @@
     color: white;
 }
 
-header {
+
+.header {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgba(0, 100, 0, 0.467);
+    padding: 0px;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+}
+
+#header__locale {
     width: 100vw;
     height: 5vh;
     display: flex;
@@ -16,9 +33,17 @@ header {
     padding: 0px;
 }
 
-header a {
-    color: white;
-    text-decoration: none;
+
+
+#header__locale form select {
+    width: 10vw;
+    height: 3vh;
+
+    font-size: 13px;
+}
+
+#header__locale form input[type="submit"] {
+    height: 3vh;
 }
 
 

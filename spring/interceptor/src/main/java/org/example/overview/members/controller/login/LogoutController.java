@@ -30,21 +30,15 @@ public class LogoutController { // 로그아웃 컨트롤러
 
     @GetMapping("/logout")
     public String doLogout(Model model,
-                           RedirectAttributes redirectAttributes,
                            HttpServletRequest request,
                            HttpSession session, HttpServletResponse response) {
         String view = "redirect:/"; // redirect:/ => index.jsp
 
-//        redirectAttributes.addAttribute("redirect", "value"); // localhost:8080/?redirect=value
-        redirectAttributes.addFlashAttribute("redirect", "value");
 
-        // model.addAttribute()
-        // @ModelAttribute()
-
-        if (session.getAttribute("SESSION_ID") == null) {
-            session.setAttribute("logout", Status.FAIL);
-            return view; // login 되어있는 상태로 redirect
-        }
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            session.setAttribute("logout", Status.FAIL);
+//            return view; // login 되어있는 상태로 redirect
+//        }
 
         cookieMgr.delete(request, response);
         sessionMgr.delete(session);

@@ -24,11 +24,11 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
     public String surveyPage(Model model, HttpSession session) {
         String view = "members/login/survey";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("uId", sessionMgr.get(session));
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
+//
+//        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 
@@ -36,11 +36,11 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
     public String surveyResPage(Model model, HttpSession session) {
         String view = "members/login/surveyResult";
 
-        if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("uId", sessionMgr.get(session));
+//        if (session.getAttribute("SESSION_ID") == null) {
+//            return "redirect:/";
+//        }
+//
+//        model.addAttribute("uId", sessionMgr.get(session));
         return view;
     }
 

@@ -38,6 +38,8 @@ public class WebAppConfig implements EnvironmentAware {
         this.environment = environment;
     }
 
+
+    /** DBCP 등록 */
     @Bean
     public BasicDataSource basicDataSource() {
         // org.apache.commons.dbcp2.BasicDataSource
@@ -115,6 +117,7 @@ public class WebAppConfig implements EnvironmentAware {
 
     }
 
+    /** Jdbc Template */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -123,6 +126,7 @@ public class WebAppConfig implements EnvironmentAware {
     }
 
 
+    /** MyBatis SqlSessionFactory 등록 */
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -135,6 +139,8 @@ public class WebAppConfig implements EnvironmentAware {
 //        return new SqlSessionTemplate(sqlSessionFactory());
 //    }
 
+
+    /** 스프링 트랜잭션 관리를 위한 transaction manager 등록 */
     @Bean
     public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();

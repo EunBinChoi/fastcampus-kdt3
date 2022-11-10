@@ -15,9 +15,9 @@ public class SignupController {
     public String signupPage(HttpSession session) {
         String view = "members/nonlogin/signup";
 
-        if (session.getAttribute("SESSION_ID") != null) {
-            view = "redirect:/";
-        }
+//        if (session.getAttribute("SESSION_ID") != null) {
+//            view = "redirect:/";
+//        }
 
         return view;
     }
