@@ -71,6 +71,13 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+        <!--  Quartz Scheduler -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -195,6 +202,7 @@
             <version>1</version>
         </dependency>
 
+
         <!-- @Valid -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
@@ -254,6 +262,13 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+        <!-- spring transaction -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
         <!-- Tomcat DBCP -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -271,12 +286,19 @@
         <!-- org.apache DBCP 추가 -->
         <!-- org.apache.commons.dbcp.BasicDataSource; -->
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.9.0</version>
         </dependency>
 
-        <!-- HikariCP -->
+        <!-- com.mchange c3p0 DBCP 추가 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.5</version>
+        </dependency>
+
+        <!-- com.zaxxer HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
@@ -291,13 +313,20 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--  JUnit  -->
+        <!-- Mybatis -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.11</version>
         </dependency>
+
+        <!-- Mybatis + Spring -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+
 
         <!--  JUnit  -->
         <dependency>
@@ -322,6 +351,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <!-- JUnit + Mock Test   -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -335,6 +365,15 @@
             <artifactId>json-path</artifactId>
             <version>2.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.23.1</version>
+            <scope>test</scope>
+        </dependency>
+
+
 
         <!-- Lombok -->
         <dependency>
@@ -379,6 +418,18 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${com.fasterxml-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

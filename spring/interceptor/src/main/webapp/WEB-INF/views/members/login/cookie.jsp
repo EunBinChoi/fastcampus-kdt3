@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SPRING</title>
+    <title>JSP</title>
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>

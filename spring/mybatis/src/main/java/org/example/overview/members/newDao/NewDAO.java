@@ -69,7 +69,14 @@ public class NewDAO implements INewDAO {
 
     @Override
     public int insertSurvey(String uId, NewSurvey survey) { // 서베이 결과 삽입
+        NewMember member = newMapper.selectMember(uId);
+        if (member == null) return 0;
+
         int res = newMapper.insertSurvey(survey); // 서베이 결과를 삽입
+
+        System.out.println("survey = " + survey);
+        // survey_id가 INCREMENT 되는 열이고 AUTO INCREMENT 된 결과를 sId에 반환하기 위해 setter 호출
+
         if (res > 0) return newMapper.updateMemberSurveyId(uId, survey.getsId()); // 정상적으로 삽입되면 유저에 연결
         return 0;
     }
@@ -116,9 +123,9 @@ public class NewDAO implements INewDAO {
         if (res == 0) return 0;
 
         if (member != null && member.getSurveyResult() != null) {
-            return newMapper.deleteSurvey(member.getSurveyResult().getsId());
+            newMapper.deleteSurvey(member.getSurveyResult().getsId());
         }
-        return 0;
+        return res;
     }
 
     @Override

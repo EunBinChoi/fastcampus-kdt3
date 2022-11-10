@@ -8,16 +8,14 @@ import java.util.List;
 
 public interface ISurveyService {
     boolean save(String uId, String season, String fruit);
-    SurveyDTO getByUserId(String uId);
+    SurveyDTO getSurveyByUserId(String uId);
 
-    List<SurveyDTO> getAllUsers();
+    boolean updateSurveySeason(String uId, String season);
 
-    boolean updateSeason(String uId, String season);
+    boolean updateSurveyFruit(String uId, String fruit);
 
-    boolean updateFruit(String uId, String fruit);
+    boolean removeSurveyByUserId(String uId);
 
-    boolean removeByUserId(String uId);
-
-    boolean removeUsers();
+    boolean removeSurveys();
 
 }

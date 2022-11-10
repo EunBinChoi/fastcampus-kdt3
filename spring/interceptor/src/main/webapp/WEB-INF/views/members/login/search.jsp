@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SPRING</title>
+    <title>JSP</title>
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -14,16 +14,19 @@
 <script>
     function search() {
         const searchRequest = new XMLHttpRequest();
-        searchRequest.open("get", "/members?q=" + $("#q").val(), true);
+        searchRequest.open("post", "/members/search?q=" + $("#q").val(), true);
         searchRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf8");
         searchRequest.onreadystatechange = () => {
             if(searchRequest.readyState == 4 && searchRequest.status == 200) {
+                console.log("gwew", searchRequest.responseText);
 
                 // 검색된 결과를 table 출력 (ajaxTable)
                 const table = $("#ajaxTable")[0]; // dom 반환
                 table.innerHTML = "";
 
                 const object = JSON.parse(searchRequest.responseText);
+                console.log(object);
+
                 for(let i = 0; i < object.length; i++) {
                     const user = [object[i].uId, object[i].uEmail];
                     const row = table.insertRow(0); // 0번째 행에 추가 (tr)
@@ -38,7 +41,7 @@
                 }
             }
         };
-        searchRequest.send();
+        searchRequest.send(null);
     }
 </script>
 

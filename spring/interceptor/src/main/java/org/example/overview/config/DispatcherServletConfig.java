@@ -1,6 +1,5 @@
 package org.example.overview.config;
 
-import org.example.overview.interceptor.*;
 import org.springframework.context.annotation.*;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -9,7 +8,6 @@ import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -22,40 +20,11 @@ import java.util.List;
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})}
 )
-public class DispatcherServletConfig implements WebMvcConfigurer {
+public class DispatcherServletConfig implements WebMvcConfigurer { // WebMvcConfigurer: @EnableWebMvc에서 제공한 빈들을 커스터마이징할 수 있는 기능 제공 인터페이스
     // dispatcher-servlet.xml
 
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor()).addPathPatterns("/login");
-        registry.addInterceptor(authInterceptor()).addPathPatterns("/members/**");
-        registry.addInterceptor(nonAuthInterceptor()).addPathPatterns(List.of("/login", "/signup"));
-//        registry.addInterceptor(localeInterceptor());
-    }
-
-    @Bean
-    public LoginInterceptor loginInterceptor() {
-        return new LoginInterceptor();
-    }
-
-    @Bean
-    public AuthInterceptor authInterceptor() {
-        return new AuthInterceptor();
-    }
-
-    @Bean
-    public NonAuthInterceptor nonAuthInterceptor() {
-        return new NonAuthInterceptor();
-    }
-
-
-    @Bean
-    public LocaleInterceptor localeInterceptor() {
-        return new LocaleInterceptor();
-    }
-
-    // @Valid 사용하기 위한 빈 설정
+    // @Valid를 사용하기 위한 빈 설정
+    // spring-boot-validator
     @Bean
     public Validator localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
@@ -66,6 +35,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(createXmlHttpMessageConverter());
         converters.add(new MappingJackson2HttpMessageConverter());
+        WebMvcConfigurer.super.extendMessageConverters(converters);
     }
 
     private HttpMessageConverter<Object> createXmlHttpMessageConverter() {
@@ -90,6 +60,5 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-
 
 }

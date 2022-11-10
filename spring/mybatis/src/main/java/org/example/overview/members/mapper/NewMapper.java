@@ -84,7 +84,7 @@ public interface NewMapper {
 
     @ResultType(Integer.class)
     @Insert("insert into new_survey(survey_season, survey_fruit) values(#{survey.season}, #{survey.fruit})")
-    @Options(useGeneratedKeys = true, keyProperty = "sId")
+    @Options(useGeneratedKeys = true, keyColumn = "survey_id", keyProperty = "sId")
     int insertSurvey(@Param("survey") NewSurvey survey);
 
     @ResultType(Integer.class)
