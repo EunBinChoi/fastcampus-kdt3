@@ -5,10 +5,7 @@ import org.example.overview.interceptor.LocaleInterceptor;
 import org.example.overview.interceptor.LoginInterceptor;
 import org.example.overview.interceptor.NoneAuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -39,16 +36,20 @@ import java.util.Locale;
 )
 public class DispatcherServletConfig implements WebMvcConfigurer {
 
-    private LocaleInterceptor localeInterceptor;
-    private AuthInterceptor authInterceptor;
-    private NoneAuthInterceptor nonAuthInterceptor;
-    private LoginInterceptor loginInterceptor;
+    LocaleInterceptor localeInterceptor;
+
+    AuthInterceptor authInterceptor;
+
+    NoneAuthInterceptor noneAuthInterceptor;
+
+    LoginInterceptor loginInterceptor;
+
 
     @Autowired
-    public DispatcherServletConfig(LocaleInterceptor localeInterceptor, AuthInterceptor authInterceptor, NoneAuthInterceptor nonAuthInterceptor, LoginInterceptor loginInterceptor) {
+    public DispatcherServletConfig(LocaleInterceptor localeInterceptor, AuthInterceptor authInterceptor, NoneAuthInterceptor noneAuthInterceptor, LoginInterceptor loginInterceptor) {
         this.localeInterceptor = localeInterceptor;
         this.authInterceptor = authInterceptor;
-        this.nonAuthInterceptor = nonAuthInterceptor;
+        this.noneAuthInterceptor = noneAuthInterceptor;
         this.loginInterceptor = loginInterceptor;
     }
 
@@ -64,7 +65,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/members/**");
 
-        registry.addInterceptor(nonAuthInterceptor)
+        registry.addInterceptor(noneAuthInterceptor)
                 .order(3)
                 .addPathPatterns("/login/**", "/signup/**");
 
@@ -120,5 +121,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
+
 
 }

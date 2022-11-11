@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 로그인한 사용자에 대해 세션에 사용자 정보 저장하는 클래스
  * */
+
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -28,15 +29,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private MemberService memberService;
 
+
     @Autowired
     public LoginInterceptor(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
         this.sessionMgr = sessionMgr;
         this.cookieMgr = cookieMgr;
-        this.memberService = memberService;
-    }
-
-    @Autowired
-    public void setMemberService(MemberService memberService) {
         this.memberService = memberService;
     }
 
@@ -92,8 +89,6 @@ public class LoginInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         HttpSession session = request.getSession();
         logger.info("ID : " + sessionMgr.get(session) + " Login Success!");
-
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 
     private void saveCookieForAutoLogin(String uId, String save, HttpServletResponse response) {

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
+
 @Component
 public class LocaleInterceptor implements HandlerInterceptor {
 
@@ -26,6 +27,7 @@ public class LocaleInterceptor implements HandlerInterceptor {
     private Locale locale;
     private LocaleResolver localeResolver;
     private MessageSource messageSource;
+
 
     @Autowired
     public LocaleInterceptor(LocaleResolver localeResolver, MessageSource messageSource) {
@@ -75,7 +77,6 @@ public class LocaleInterceptor implements HandlerInterceptor {
 
         System.out.println("messageVO = " + messageVO);
 
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
     /* 뷰에 response 객체가 전달된 후에 실행됨 */
@@ -84,6 +85,5 @@ public class LocaleInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         logger.info("Current Locale " + locale);
 
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }

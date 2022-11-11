@@ -46,14 +46,11 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HttpSession session = request.getSession();
         modelAndView.addObject("uId", sessionMgr.get(session));
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         HttpSession session = request.getSession();
         logger.info("ID : " + sessionMgr.get(session) + " Authorization Success!");
-
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 사용자가 특정 경로를 임의로 작성하여 접근하는 경우 사용자가 로그인하지 않은 상태인지 확인하는 클래스
  * */
+
 @Component
 public class NoneAuthInterceptor implements HandlerInterceptor {
 
@@ -43,7 +44,6 @@ public class NoneAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
@@ -51,6 +51,5 @@ public class NoneAuthInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         logger.info("ID : " + sessionMgr.get(session) + " Authorization Not Success!");
 
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }
