@@ -24,7 +24,6 @@ import java.beans.PropertyVetoException;
 import java.util.Locale;
 
 @Configuration
-@EnableTransactionManagement
 @PropertySource("classpath:/messages/messages.properties")
 @PropertySource("classpath:/datasource/datasource.properties")
 @ComponentScan(basePackages = "org.example.overview",

@@ -12,6 +12,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Configuration
+@EnableTransactionManagement(proxyTargetClass = true)
 @EnableWebMvc
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
@@ -36,7 +38,9 @@ import java.util.Locale;
 )
 public class DispatcherServletConfig implements WebMvcConfigurer {
 
+
     LocaleInterceptor localeInterceptor;
+
 
     AuthInterceptor authInterceptor;
 
