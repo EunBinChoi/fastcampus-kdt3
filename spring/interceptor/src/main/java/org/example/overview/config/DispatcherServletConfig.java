@@ -32,7 +32,8 @@ import java.util.Locale;
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
         includeFilters = {
-                @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Interceptor.class, Controller.class})}
+                @ComponentScan.Filter(type = FilterType.ANNOTATION,
+                        value = {Interceptor.class, Controller.class})}
 )
 public class DispatcherServletConfig implements WebMvcConfigurer {
 

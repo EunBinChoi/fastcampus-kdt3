@@ -33,12 +33,13 @@ import java.beans.PropertyVetoException;
 import java.util.Locale;
 
 @Configuration
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement // 트랜잭션 처리를 가능하게 하기 위함
 @PropertySource("classpath:/datasource/datasource.properties")
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
         includeFilters = {
-                @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Component.class, Repository.class, Service.class})}
+                @ComponentScan.Filter(type = FilterType.ANNOTATION,
+                        value = {Component.class, Repository.class, Service.class})}
 )
 @MapperScan(basePackageClasses = org.example.overview.members.mapper.MemberMapper.class)
 public class WebAppConfig implements EnvironmentAware {

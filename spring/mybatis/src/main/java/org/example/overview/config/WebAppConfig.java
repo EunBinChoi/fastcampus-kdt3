@@ -17,11 +17,13 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 @Configuration
+@EnableTransactionManagement
 @PropertySources(@PropertySource("classpath:/property/datasource.properties"))
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
