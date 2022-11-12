@@ -6,6 +6,7 @@ import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.service.MemberService;
 import org.example.overview.sessions.SessionMgr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * 로그인한 사용자에 대해 세션에 사용자 정보 저장하는 클래스
  * */
 
-@Component
+@Interceptor
 public class LoginInterceptor implements HandlerInterceptor {
 
     private Logger logger = LogManager.getLogger(LoginInterceptor.class);
@@ -30,6 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     private MemberService memberService;
 
 
+    @Lazy
     @Autowired
     public LoginInterceptor(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
         this.sessionMgr = sessionMgr;
@@ -53,6 +55,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (autoLogin != null && cookieId != null) {
             if (memberService.autoLogin(autoLogin, cookieId)) {
                 sessionMgr.create(session, cookieId);
+
                 response.sendRedirect("/");
                 return false;
             }
@@ -76,9 +79,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (uId != null) {
             sessionMgr.create(session, uId);
             saveCookieForAutoLogin(uId, save, response);
-            modelAndView.addObject("uId", sessionMgr.get(session));
-
-            response.sendRedirect("/");
         }
 
     }

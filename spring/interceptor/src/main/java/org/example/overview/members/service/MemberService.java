@@ -156,7 +156,6 @@ public class MemberService implements IMemberService {
         if (uId == null || uPw == null) return false;
 
         Member member = memberDAO.selectMember(uId);
-        System.out.println(member);
         if (member == null || member.getuPw() == null) return false;
         if (!member.getuPw().equals(uPw.getuPw())) return false;
 

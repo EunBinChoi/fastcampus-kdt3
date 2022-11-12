@@ -8,17 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class CookieMgr {
-//    private static CookieMgr cookie = null;
     private static String[] mustCookiesWhenLogin = {"COOKIE_ID", "AUTO_LOGIN"};
 
-    private CookieMgr() {}
+    public CookieMgr() {}
 
-//    public static CookieMgr getInstance() {
-//        if (cookie == null) {
-//            cookie = new CookieMgr();
-//        }
-//        return cookie;
-//    }
 
     public void create(HttpServletResponse response, String[] values) {
         create(response, mustCookiesWhenLogin, values);
@@ -35,7 +28,7 @@ public class CookieMgr {
     public void create(HttpServletResponse response, String name, String value) {
         Cookie cookie = new Cookie(name, value);
         cookie.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
-        cookie.setPath("/"); // / 경로 이하에 모두 쿠키 전달
+        cookie.setPath("/**"); // / 경로 이하에 모두 쿠키 전달
 
         response.addCookie(cookie);
     }
@@ -107,7 +100,7 @@ public class CookieMgr {
                 if (cookie.getName().equals(name)) {
                     count++;
                     cookie.setMaxAge(0);
-                    cookie.setPath("/");
+                    cookie.setPath("/**");
                     response.addCookie(cookie);
                 }
             }
@@ -125,7 +118,7 @@ public class CookieMgr {
                     if (cookie.getName().equals(names[i])) {
                         count++;
                         cookie.setMaxAge(0);
-                        cookie.setPath("/");
+                        cookie.setPath("/**");
                         response.addCookie(cookie);
                     }
                 }

@@ -5,10 +5,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.example.overview.interceptor.AuthInterceptor;
-import org.example.overview.interceptor.LocaleInterceptor;
-import org.example.overview.interceptor.LoginInterceptor;
-import org.example.overview.interceptor.NoneAuthInterceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.EnvironmentAware;
@@ -21,19 +17,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
-import java.util.Locale;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
+@PropertySource("classpath:/messages/messages.properties")
 @PropertySource("classpath:/datasource/datasource.properties")
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
@@ -51,6 +41,27 @@ public class WebAppConfig implements EnvironmentAware {
     }
 
 
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        /*
+         * ResourceBundleMessageSource: 서버를 배포할 때 messageSource 파일을 읽음
+         * ReloadableResourceBundleMessageSource: 서버 재배포 없이도 리로딩할 시간을 지정해서 해당 시간마다 messageSource 파일을 다시 읽기 위함
+         * */
+
+
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:/messages/messages"); // 메세지 properties 위치와 이름을 지정함 (기본 확장자 *.properties)
+        /*
+         * 만약 Locale 값이 있으면 /messages/messages_언어코드.properties
+         *                없으면 /messages/messages.properties
+         * */
+
+        messageSource.setDefaultEncoding("UTF-8"); // 기본 인코딩을 지정함
+        messageSource.setCacheSeconds(1); // 리소스를 1초 간격으로 다시 리로드
+
+        return messageSource;
+    }
+
 
 
     /** DBCP 등록 */
@@ -58,7 +69,7 @@ public class WebAppConfig implements EnvironmentAware {
     public BasicDataSource basicDataSource() {
         // org.apache.commons.dbcp2.BasicDataSource
 
-        org.apache.commons.dbcp2.BasicDataSource basicDataSource = new BasicDataSource();
+        BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName(environment.getProperty("spring.datasource.driverClassName"));
         basicDataSource.setUrl(environment.getProperty("spring.datasource.url"));
         basicDataSource.setUsername(environment.getProperty("spring.datasource.username"));
@@ -77,7 +88,7 @@ public class WebAppConfig implements EnvironmentAware {
     public ComboPooledDataSource comboPooledDataSource() {
         // com.mchange.v2.c3p0.ComboPooledDataSource
 
-        com.mchange.v2.c3p0.ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
         try {
             comboPooledDataSource.setDriverClass(environment.getProperty("spring.datasource.driverClassName"));
             comboPooledDataSource.setJdbcUrl(environment.getProperty("spring.datasource.url"));
@@ -103,7 +114,7 @@ public class WebAppConfig implements EnvironmentAware {
     public HikariDataSource hikariDataSource() {
         // com.zaxxer.hikari.HikariConfig
 
-        com.zaxxer.hikari.HikariConfig hikariConfig = new HikariConfig();
+        HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName(environment.getProperty("spring.datasource.driverClassName"));
         hikariConfig.setJdbcUrl(environment.getProperty("spring.datasource.url"));
         hikariConfig.setUsername(environment.getProperty("spring.datasource.username"));
@@ -116,7 +127,7 @@ public class WebAppConfig implements EnvironmentAware {
         hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.autoCommit")));
         hikariConfig.setAutoCommit(Boolean.parseBoolean(environment.getProperty("com.zaxxer.hikari.config.readOnly")));
 
-        com.zaxxer.hikari.HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
+        HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
 
         System.out.println(hikariDataSource);
 
@@ -156,7 +167,7 @@ public class WebAppConfig implements EnvironmentAware {
 
     /** 스프링 트랜잭션 관리를 위한 transaction manager 등록 */
     @Bean
-    public org.springframework.jdbc.datasource.DataSourceTransactionManager transactionManager() {
+    public DataSourceTransactionManager transactionManager() {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
         return dataSourceTransactionManager;

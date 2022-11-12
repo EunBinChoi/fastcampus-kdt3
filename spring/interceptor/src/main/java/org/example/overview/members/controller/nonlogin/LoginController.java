@@ -16,20 +16,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 public class LoginController {
 
-    private SessionMgr sessionMgr;
-    private CookieMgr cookieMgr;
-    private MemberService memberService;
-
-
-    @Autowired
-    public LoginController(SessionMgr sessionMgr, CookieMgr cookieMgr, MemberService memberService) {
-        this.sessionMgr = sessionMgr;
-        this.cookieMgr = cookieMgr;
-        this.memberService = memberService;
-    }
-
     @GetMapping("/login")
-    public String loginPage(HttpServletRequest request, HttpSession session) {
+    public String loginPage() {
         String view = "members/nonlogin/login";
 
 //        if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태

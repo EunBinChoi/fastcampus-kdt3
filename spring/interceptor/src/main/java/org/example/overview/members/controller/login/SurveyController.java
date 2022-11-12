@@ -13,15 +13,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/members")
 public class SurveyController { // 개인 설정 페이지 컨트롤러
 
-    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
-
-    @Autowired
-    public SurveyController(SessionMgr sessionMgr) {
-        this.sessionMgr = sessionMgr;
-    }
 
     @GetMapping("/survey")
-    public String surveyPage(Model model, HttpSession session) {
+    public String surveyPage() {
         String view = "members/login/survey";
 
 //        if (session.getAttribute("SESSION_ID") == null) {
@@ -33,7 +27,7 @@ public class SurveyController { // 개인 설정 페이지 컨트롤러
     }
 
     @GetMapping("/survey/res")
-    public String surveyResPage(Model model, HttpSession session) {
+    public String surveyResPage() {
         String view = "members/login/surveyResult";
 
 //        if (session.getAttribute("SESSION_ID") == null) {

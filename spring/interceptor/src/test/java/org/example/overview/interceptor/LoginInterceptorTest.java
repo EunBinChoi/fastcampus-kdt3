@@ -1,16 +1,16 @@
 package org.example.overview.interceptor;
 
+import exception.InputInvalidException;
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
+import org.example.overview.config.WebInitializer;
+import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
-import org.example.overview.sessions.SessionMgr;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.HttpSession;
-
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -36,13 +36,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebAppConfig.class, DispatcherServletConfig.class})
 @WebAppConfiguration // WebApplicationContext 생성할 수 있도록 하는 어노테이션
-public class AuthInterceptorTest {
+public class LoginInterceptorTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    private SessionMgr sessionMgr;
-
+    private CookieMgr cookieMgr;
     @Autowired
     private MemberDAO memberDAO;
 
@@ -50,10 +49,9 @@ public class AuthInterceptorTest {
 
 
     @Before
-    public void before() {
+    public void before() throws ServletException {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        // test 하기 위한 MockMvc 객체 생성. 스프링이 로드한 WebApplicationContext 인스턴스로 작동.
-
+        // test 하기 위한 MockMvc 객체 생성. 스프링이 로드한 WebApplicationContext 인스턴스로 작동.;
     }
 
     @Before
@@ -76,8 +74,8 @@ public class AuthInterceptorTest {
 
     @Test
     @Transactional
-    @DisplayName("인가 인터셉터 허용 테스트")
-    public void 인가_인터셉터_허용_테스트() throws Exception {
+    @DisplayName("로그인 인터셉터 성공 테스트")
+    public void 로그인_인터셉터_성공_테스트() throws Exception {
         MockHttpSession session = new MockHttpSession();
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
                         .session(session)
@@ -90,9 +88,20 @@ public class AuthInterceptorTest {
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
 
 
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test")
-                        .session(session))
-                .andExpect(status().isOk())
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("로그인 인터셉터 실패 테스트")
+    public void 로그인_인터셉터_실패_테스트() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                        .session(session)
+                        .param("uId", "test")
+                        .param("uPw", "test12345"))
+                .andExpect(result -> assertThat(result.getResolvedException().getClass())
+                        .isAssignableFrom(InputInvalidException.class))
+                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isNull())
                 .andDo(print())
                 .andReturn();
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
@@ -101,13 +110,41 @@ public class AuthInterceptorTest {
 
     @Test
     @Transactional
-    @DisplayName("인가 인터셉터 실패 테스트")
-    public void 인가_인터셉터_실패_테스트() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test"))
+    @DisplayName("로그인 인터셉터 자동 로그인 성공 테스트")
+    public void 로그인_인터셉터_자동_로그인_성공_테스트() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        Cookie[] cookies = new Cookie[]{
+                new Cookie("COOKIE_ID", "test"), new Cookie("AUTO_LOGIN", "true")};
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/login")
+                        .session(session)
+                        .cookie(cookies))
                 .andExpect(status().is3xxRedirection())
+                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isEqualTo("test"))
                 .andDo(print())
                 .andReturn();
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
+
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("로그인 인터셉터 자동 로그인 실패 테스트")
+    public void 로그인_인터셉터_자동_로그인_실패_테스트() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        Cookie[] cookies = new Cookie[]{
+                new Cookie("COOKIE_ID", "test"), new Cookie("AUTO_LOGIN", "false")};
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/login")
+                        .session(session)
+                        .cookie(cookies))
+                .andExpect(status().isOk())
+                .andExpect(result -> assertThat(result.getModelAndView().getViewName().equals("members/nonlogin/login")))
+                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isNull())
+                .andDo(print())
+                .andReturn();
+        Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
+
     }
 
 }

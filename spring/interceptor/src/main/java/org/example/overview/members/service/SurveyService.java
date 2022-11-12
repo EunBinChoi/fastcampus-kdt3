@@ -25,7 +25,6 @@ public class SurveyService implements ISurveyService {
         if (uId == null || season == null || fruit == null) return false;
 
         Survey survey = new Survey(season, fruit);
-        System.out.println(survey);
         int res = memberDAO.insertSurvey(uId, survey);
         return res > 0;
     }

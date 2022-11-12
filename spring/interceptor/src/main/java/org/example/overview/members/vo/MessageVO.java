@@ -7,7 +7,6 @@ import lombok.Getter;
 import java.util.Objects;
 
 @Builder
-@Getter
 public class MessageVO {
     private String INDEX_MESSAGE;
 
@@ -37,6 +36,41 @@ public class MessageVO {
     }
 
 
+    public String getINDEX_MESSAGE() {
+        return INDEX_MESSAGE;
+    }
+
+    public String getINDEX_MESSAGE_WITH_USERID() {
+        return INDEX_MESSAGE_WITH_USERID;
+    }
+
+    public String getINDEX_TIME() {
+        return INDEX_TIME;
+    }
+
+    public String getINDEX_MENU_HOME() {
+        return INDEX_MENU_HOME;
+    }
+
+    public String getINDEX_MENU_SEARCH() {
+        return INDEX_MENU_SEARCH;
+    }
+
+    public String getINDEX_MENU_SURVEY() {
+        return INDEX_MENU_SURVEY;
+    }
+
+    public String getPRIVATE_MENU_UPDATE() {
+        return PRIVATE_MENU_UPDATE;
+    }
+
+    public String getPRIVATE_MENU_WITHDRAW() {
+        return PRIVATE_MENU_WITHDRAW;
+    }
+
+    public String getPRIVATE_MENU_COOKIE() {
+        return PRIVATE_MENU_COOKIE;
+    }
 
     @Override
     public boolean equals(Object o) {

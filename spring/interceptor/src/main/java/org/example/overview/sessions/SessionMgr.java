@@ -8,21 +8,16 @@ import javax.servlet.http.HttpSession;
 
 @Component
 public class SessionMgr {
-//    private static SessionMgr session = null;
 
-    private SessionMgr() {}
+    private static String mustSessionAttrWhenLogin = "SESSION_ID";
 
-//    public static SessionMgr getInstance() {
-//        if (session == null) {
-//            session = new SessionMgr();
-//        }
-//        return session;
-//    }
+    public SessionMgr() {}
+
 
     public void create(HttpSession session, String value) {
-        if (session.getAttribute("SESSION_ID") == null) {
+        if (session.getAttribute(mustSessionAttrWhenLogin) == null) {
             session.setMaxInactiveInterval(1800); // 30분
-            session.setAttribute("SESSION_ID", value);
+            session.setAttribute(mustSessionAttrWhenLogin, value);
         }
     }
 
@@ -38,7 +33,7 @@ public class SessionMgr {
     }
 
     public void set(HttpSession session, String value) {
-        session.setAttribute("SESSION_ID", value);
+        session.setAttribute(mustSessionAttrWhenLogin, value);
     }
 
     public String get(HttpSession session, String name) {
@@ -46,14 +41,14 @@ public class SessionMgr {
     }
 
     public String get(HttpSession session) {
-        if (session.getAttribute("SESSION_ID") != null) {
-            return (String) session.getAttribute("SESSION_ID");
+        if (session.getAttribute(mustSessionAttrWhenLogin) != null) {
+            return (String) session.getAttribute(mustSessionAttrWhenLogin);
         }
         return null;
     }
 
     public void delete(HttpSession session) {
-        delete(session, "SESSION_ID");
+        delete(session, mustSessionAttrWhenLogin);
     }
 
     public void delete(HttpSession session, String name) {

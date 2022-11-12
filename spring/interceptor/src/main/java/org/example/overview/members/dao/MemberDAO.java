@@ -117,7 +117,6 @@ public class MemberDAO implements IMemberDAO {
         // 서베이 결과는 무조건 유저 아이디가 있어야지만 등록
         // 유저 삭제 -> 서베이 삭제
         Member member = memberMapper.selectWithSurvey(uId);
-        System.out.println(member);
 
         int res = memberMapper.deleteMember(uId);
         if (res == 0) return 0;

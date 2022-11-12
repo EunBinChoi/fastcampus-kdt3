@@ -5,9 +5,7 @@ import org.example.overview.config.WebAppConfig;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
-import org.example.overview.sessions.SessionMgr;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -25,8 +23,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.HttpSession;
-
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -36,12 +32,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebAppConfig.class, DispatcherServletConfig.class})
 @WebAppConfiguration // WebApplicationContext 생성할 수 있도록 하는 어노테이션
-public class AuthInterceptorTest {
+public class NoneAuthInterceptorTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
-
-    @Autowired
-    private SessionMgr sessionMgr;
 
     @Autowired
     private MemberDAO memberDAO;
@@ -76,35 +69,37 @@ public class AuthInterceptorTest {
 
     @Test
     @Transactional
-    @DisplayName("인가 인터셉터 허용 테스트")
-    public void 인가_인터셉터_허용_테스트() throws Exception {
+    @DisplayName("논인가 인터셉터 허용 테스트")
+    public void 논인가_인터셉터_허용_테스트() throws Exception {
         MockHttpSession session = new MockHttpSession();
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
-                        .session(session)
-                        .param("uId", "test")
-                        .param("uPw", "test1234"))
-                .andExpect(status().isOk())
-                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isEqualTo("test"))
-                .andDo(print())
-                .andReturn();
-        Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
-
-
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/login")
                         .session(session))
                 .andExpect(status().isOk())
+                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isNull())
                 .andDo(print())
                 .andReturn();
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
+
 
     }
 
     @Test
     @Transactional
-    @DisplayName("인가 인터셉터 실패 테스트")
-    public void 인가_인터셉터_실패_테스트() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test"))
+    @DisplayName("논인가 인터셉터 실패 테스트")
+    public void 논인가_인터셉터_실패_테스트() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                        .session(session)
+                        .param("uId", "test")
+                        .param("uPw", "test1234"))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/login")
+                        .session(session))
                 .andExpect(status().is3xxRedirection())
+                .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isNotNull())
                 .andDo(print())
                 .andReturn();
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));

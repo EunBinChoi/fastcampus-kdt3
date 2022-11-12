@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.overview.sessions.SessionMgr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,15 +18,19 @@ import javax.servlet.http.HttpSession;
  * 사용자가 특정 경로를 임의로 작성하여 접근하는 경우 사용자가 로그인한 상태인지 확인하는 클래스
  * */
 
-@Component
-public class AuthInterceptor implements HandlerInterceptor {
+@Interceptor
+public class AuthInterceptor implements HandlerInterceptor { // /members/**
 
     private Logger logger = LogManager.getLogger(AuthInterceptor.class);
     private SessionMgr sessionMgr;
 
+
+    @Lazy
     @Autowired
     public AuthInterceptor(SessionMgr sessionMgr) {
         this.sessionMgr = sessionMgr;
+        System.out.println("AuthInterceptor");
+        System.out.println(sessionMgr);
     }
 
     @Override
@@ -44,8 +50,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HttpSession session = request.getSession();
-        modelAndView.addObject("uId", sessionMgr.get(session));
+
     }
 
     @Override
