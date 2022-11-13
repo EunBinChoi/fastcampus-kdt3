@@ -25,12 +25,10 @@ public class AuthInterceptor implements HandlerInterceptor { // /members/**
     private SessionMgr sessionMgr;
 
 
-    @Lazy
+    @Lazy // 다른 참조되는 빈에 의해 사용되거나 실제 참조될 때 로드됨 (vs 즉시로딩: 빈 팩토리가 초기화될 때 싱글톤 형태로 즉시로딩)
     @Autowired
     public AuthInterceptor(SessionMgr sessionMgr) {
         this.sessionMgr = sessionMgr;
-        System.out.println("AuthInterceptor");
-        System.out.println(sessionMgr);
     }
 
     @Override
