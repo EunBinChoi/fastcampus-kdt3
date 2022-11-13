@@ -3,7 +3,6 @@ package org.example.overview.members.service;
 import org.example.overview.members.dto.MemberDTO;
 import org.example.overview.members.dto.Password;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface IMemberService {

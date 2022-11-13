@@ -2,15 +2,14 @@ package org.example.overview.config;
 
 import org.example.overview.interceptor.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
@@ -18,7 +17,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
@@ -26,24 +28,28 @@ import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
+@PropertySource("classpath:/messages/messages.properties")
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
         includeFilters = {
-                @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Interceptor.class, Controller.class})}
+                @ComponentScan.Filter(type = FilterType.ANNOTATION,
+                        value = {Interceptor.class, Controller.class})}
 )
 public class DispatcherServletConfig implements WebMvcConfigurer {
 
     private AuthInterceptor authInterceptor;
     private LocaleInterceptor localeInterceptor;
-    private LoginInterceptor loginInterceptor;
+//    private LoginInterceptor loginInterceptor;
     private NoneAuthInterceptor noneAuthInterceptor;
 
-//    @Lazy
+
+    @Lazy // 다른 참조되는 빈에 의해 사용되거나 실제 참조될 때 로드됨 (vs 즉시로딩: 빈 팩토리가 초기화될 때 싱글톤 형태로 즉시로딩)
     @Autowired
-    public DispatcherServletConfig(AuthInterceptor authInterceptor, LocaleInterceptor localeInterceptor, LoginInterceptor loginInterceptor, NoneAuthInterceptor noneAuthInterceptor) {
+    public DispatcherServletConfig(AuthInterceptor authInterceptor, LocaleInterceptor localeInterceptor,
+                                   NoneAuthInterceptor noneAuthInterceptor) {
         this.authInterceptor = authInterceptor;
         this.localeInterceptor = localeInterceptor;
-        this.loginInterceptor = loginInterceptor;
+//        this.loginInterceptor = loginInterceptor;
         this.noneAuthInterceptor = noneAuthInterceptor;
     }
 
@@ -64,22 +70,22 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
                 .addPathPatterns("/login/**", "/signup/**");
 
 
-        registry.addInterceptor(loginInterceptor)
-                .order(4)
-                .addPathPatterns("/login/**");
+//        registry.addInterceptor(loginInterceptor)
+//                .order(4)
+//                .addPathPatterns("/login/**");
 //
 
     }
 
-
     /**
      * 변경된 언어 정보를 기억할 locale 리졸버 등록
      * */
+
 //    @Bean
 //    public LocaleResolver localeResolver() {
 //        return new AcceptHeaderLocaleResolver();
 //    }
-//
+
 //    @Bean
 //    public LocaleResolver localeResolver() {
 //
@@ -105,6 +111,28 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
 //        fixedLocaleResolver.setDefaultLocale(Locale.ENGLISH);
 //        return fixedLocaleResolver;
 //    }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        /*
+         * ResourceBundleMessageSource: 서버를 배포할 때 messageSource 파일을 읽음
+         * ReloadableResourceBundleMessageSource: 서버 재배포 없이도 리로딩할 시간을 지정해서 해당 시간마다 messageSource 파일을 다시 읽기 위함
+         * */
+
+
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:/messages/messages"); // 메세지 properties 위치와 이름을 지정함 (기본 확장자 *.properties)
+        /*
+         * 만약 Locale 값이 있으면 /messages/messages_언어코드.properties
+         *                없으면 /messages/messages.properties
+         * */
+
+        messageSource.setDefaultEncoding("UTF-8"); // 기본 인코딩을 지정함
+        messageSource.setCacheSeconds(1); // 리소스를 1초 간격으로 다시 리로드
+
+        return messageSource;
+    }
+
 
 
 

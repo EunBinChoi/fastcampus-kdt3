@@ -3,17 +3,13 @@ package org.example.overview.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.example.overview.members.mapper.MemberMapper;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.example.overview.interceptor.AuthInterceptor;
-import org.example.overview.interceptor.LocaleInterceptor;
-import org.example.overview.interceptor.LoginInterceptor;
-import org.example.overview.interceptor.NoneAuthInterceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -21,19 +17,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
-import java.util.Locale;
 
 @Configuration
-@EnableTransactionManagement // 트랜잭션 처리를 가능하게 하기 위함
+@EnableTransactionManagement(proxyTargetClass = true) // 인자로 트랜잭션을 관리하는 Service 빈을 넘길 경우 트랜잭션 처리를 가능하게 하기 위함
 @PropertySource("classpath:/datasource/datasource.properties")
 @ComponentScan(basePackages = "org.example.overview",
         useDefaultFilters = false,
@@ -41,7 +30,7 @@ import java.util.Locale;
                 @ComponentScan.Filter(type = FilterType.ANNOTATION,
                         value = {Component.class, Repository.class, Service.class})}
 )
-@MapperScan(basePackageClasses = org.example.overview.members.mapper.MemberMapper.class)
+@MapperScan(basePackageClasses = MemberMapper.class)
 public class WebAppConfig implements EnvironmentAware {
 
     Environment environment; // null 임을 방지
