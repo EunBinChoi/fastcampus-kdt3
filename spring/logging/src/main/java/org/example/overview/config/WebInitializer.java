@@ -39,10 +39,9 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
     }
 
     private void registerCharacterEncodingFilter(ServletContext servletContext) {
-        FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+        FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         characterEncodingFilter.setInitParameter("encoding", "UTF-8");
         characterEncodingFilter.setInitParameter("forceEncoding", "true");
-        characterEncodingFilter.addMappingForServletNames(EnumSet.allOf(DispatcherType.class), true, "/**");
+        characterEncodingFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
     }
-
 }

@@ -47,7 +47,6 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
         characterEncodingFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
     }
 
-
     private void registerGlobalFilter(ServletContext servletContext) {
         FilterRegistration.Dynamic globalFilter = servletContext.addFilter("globalFilter", GlobalFilter.class);
         globalFilter.setInitParameter("param", "Filter Param");
