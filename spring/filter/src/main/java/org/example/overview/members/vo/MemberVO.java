@@ -1,7 +1,5 @@
 package org.example.overview.members.vo;
 
-import org.example.overview.members.dto.MemberDTO;
-
 import java.util.Objects;
 
 public class MemberVO {

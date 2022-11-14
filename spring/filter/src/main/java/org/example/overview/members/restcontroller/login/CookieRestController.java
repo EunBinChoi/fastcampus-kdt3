@@ -1,8 +1,6 @@
 package org.example.overview.members.restcontroller.login;
 
 import exception.InputEmptyException;
-import exception.InputInvalidException;
-import jdk.jshell.execution.Util;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
@@ -10,13 +8,10 @@ import org.example.overview.utils.UtilsMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +51,7 @@ public class CookieRestController { // 쿠키 컨트롤러
 
     @DeleteMapping("/cookies")
     public ResponseEntity<Status> removeCookieByName(@RequestBody Map<String, String> map,
-                                     HttpServletRequest request, HttpServletResponse response) {
+                                                     HttpServletRequest request, HttpServletResponse response) {
 //        String view = "redirect:/members/cookies";
 
 //        if (session.getAttribute("SESSION_ID") == null) {

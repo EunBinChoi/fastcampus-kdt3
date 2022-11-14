@@ -1,7 +1,6 @@
 package org.example.overview.interceptor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.vo.MessageVO;
 import org.example.overview.utils.UtilsMethod;
@@ -16,12 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
-
+@Log4j2
 @Interceptor
 public class LocaleInterceptor implements HandlerInterceptor {
-
-
-    private Logger logger = LogManager.getLogger(LocaleInterceptor.class);
 
     private LocaleResolver localeResolver;
     private MessageSource messageSource;
@@ -81,7 +77,7 @@ public class LocaleInterceptor implements HandlerInterceptor {
     /* 로그 찍을 때 사용 */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("Current Locale " + localeResolver.resolveLocale(request));
+        log.info("Current Locale " + localeResolver.resolveLocale(request));
 
     }
 }

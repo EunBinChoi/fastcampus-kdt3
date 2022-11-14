@@ -3,7 +3,6 @@ package org.example.overview.interceptor;
 import exception.InputInvalidException;
 import org.example.overview.config.DispatcherServletConfig;
 import org.example.overview.config.WebAppConfig;
-import org.example.overview.config.WebInitializer;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.dao.MemberDAO;
 import org.example.overview.members.dto.Password;

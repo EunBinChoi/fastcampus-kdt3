@@ -1,9 +1,10 @@
 package org.example.overview.members.service;
 
 import org.example.overview.members.dao.MemberDAO;
-import org.example.overview.members.dto.SurveyDTO;
 import org.example.overview.members.entity.Survey;
+import org.example.overview.members.dto.SurveyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

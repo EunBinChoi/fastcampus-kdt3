@@ -23,7 +23,6 @@ import java.nio.charset.Charset;
 @RestController
 @RequestMapping("")
 public class SignupRestController {
-    private Logger logger = LogManager.getLogger(MemberService.class);
     private MemberService memberService;
 
 

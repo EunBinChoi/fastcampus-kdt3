@@ -1,9 +1,9 @@
 
 package org.example.overview.members.mapper;
 
-import org.apache.ibatis.annotations.*;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.Survey;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;

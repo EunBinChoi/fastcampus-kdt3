@@ -9,7 +9,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
@@ -17,10 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
@@ -39,17 +35,17 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
 
     private AuthInterceptor authInterceptor;
     private LocaleInterceptor localeInterceptor;
-//    private LoginInterceptor loginInterceptor;
+    private LoginInterceptor loginInterceptor;
     private NoneAuthInterceptor noneAuthInterceptor;
 
 
     @Lazy // 다른 참조되는 빈에 의해 사용되거나 실제 참조될 때 로드됨 (vs 즉시로딩: 빈 팩토리가 초기화될 때 싱글톤 형태로 즉시로딩)
     @Autowired
     public DispatcherServletConfig(AuthInterceptor authInterceptor, LocaleInterceptor localeInterceptor,
-                                   NoneAuthInterceptor noneAuthInterceptor) {
+                                   LoginInterceptor loginInterceptor, NoneAuthInterceptor noneAuthInterceptor) {
         this.authInterceptor = authInterceptor;
         this.localeInterceptor = localeInterceptor;
-//        this.loginInterceptor = loginInterceptor;
+        this.loginInterceptor = loginInterceptor;
         this.noneAuthInterceptor = noneAuthInterceptor;
     }
 
@@ -70,9 +66,9 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
                 .addPathPatterns("/login/**", "/signup/**");
 
 
-//        registry.addInterceptor(loginInterceptor)
-//                .order(4)
-//                .addPathPatterns("/login/**");
+        registry.addInterceptor(loginInterceptor)
+                .order(4)
+                .addPathPatterns("/login/**");
 //
 
     }

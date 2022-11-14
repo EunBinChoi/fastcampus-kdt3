@@ -1,7 +1,6 @@
 package org.example.overview.members.restcontroller.login;
 
 import exception.InputEmptyException;
-import exception.InputInvalidException;
 import org.example.overview.cookies.CookieMgr;
 import org.example.overview.members.dto.Password;
 import org.example.overview.members.service.MemberService;
