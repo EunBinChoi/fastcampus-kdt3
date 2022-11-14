@@ -98,8 +98,8 @@ public class LoginInterceptorTest {
                         .session(session)
                         .param("uId", "test")
                         .param("uPw", "test12345"))
-                .andExpect(result -> assertThat(result.getResolvedException().getClass())
-                        .isAssignableFrom(InputInvalidException.class))
+                .andExpect(result -> assertThat(result.getResolvedException().getClass()) // Exception 객체
+                        .isAssignableFrom(InputInvalidException.class)) // Exception 객체 타입 확인 (instanceof)
                 .andExpect(result -> assertThat(result.getRequest().getSession().getAttribute("SESSION_ID")).isNull())
                 .andDo(print())
                 .andReturn();

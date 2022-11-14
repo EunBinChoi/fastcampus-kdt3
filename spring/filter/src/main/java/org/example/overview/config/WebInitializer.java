@@ -45,12 +45,16 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
         characterEncodingFilter.setInitParameter("encoding", "UTF-8");
         characterEncodingFilter.setInitParameter("forceEncoding", "true");
         characterEncodingFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+        // /* vs /** (spring)
+        // /* (WAS servlet) vs /** (x)
     }
 
     private void registerGlobalFilter(ServletContext servletContext) {
         FilterRegistration.Dynamic globalFilter = servletContext.addFilter("globalFilter", GlobalFilter.class);
         globalFilter.setInitParameter("param", "Filter Param");
         globalFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+        // /* vs /** (spring)
+        // /* (WAS servlet) vs /** (x)
     }
 
 }

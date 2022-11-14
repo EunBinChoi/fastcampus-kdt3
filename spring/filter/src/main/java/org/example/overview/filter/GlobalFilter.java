@@ -1,13 +1,12 @@
 package org.example.overview.filter;
 
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Log4j2
+@Log4j2 // Logger log = LoggerManage.getLogger(GlobalFilter.class)
 public class GlobalFilter implements Filter {
 
     @Override
@@ -23,7 +22,7 @@ public class GlobalFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         log.info("Request URL: " + req.getRequestURI());
-        chain.doFilter(request, response);
+        chain.doFilter(request, response); // Filter Chaining (/* (CharacterEncodingFilter, GlobalFilter))
     }
 
     @Override

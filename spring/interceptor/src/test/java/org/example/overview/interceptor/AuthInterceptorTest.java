@@ -74,8 +74,8 @@ public class AuthInterceptorTest {
     @Transactional
     @DisplayName("인가 인터셉터 허용 테스트")
     public void 인가_인터셉터_허용_테스트() throws Exception {
-        MockHttpSession session = new MockHttpSession();
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        MockHttpSession session = new MockHttpSession(); // mocking test 세션 이용
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login") // SESSION_ID 없어야만 들어갈 수 있는 페이지
                         .session(session)
                         .param("uId", "test")
                         .param("uPw", "test1234"))
@@ -86,7 +86,7 @@ public class AuthInterceptorTest {
         Arrays.stream(mvcResult.getInterceptors()).forEach(i -> System.out.println(i));
 
 
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/members/test") // SESSION_ID 있어야만 들어갈 수 있는 페이지
                         .session(session))
                 .andExpect(status().isOk())
                 .andDo(print())

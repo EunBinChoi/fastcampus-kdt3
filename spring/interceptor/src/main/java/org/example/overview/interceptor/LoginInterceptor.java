@@ -59,7 +59,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
 
-        return true;
+        return true; // /login => /members/nonlogin/login.jsp
     }
 
     /* 컨트롤러 실행 후, 뷰 실행 전에 수행됨 */

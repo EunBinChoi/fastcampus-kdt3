@@ -49,9 +49,11 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
         this.noneAuthInterceptor = noneAuthInterceptor;
     }
 
+
     /* 인터셉터 등록 */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         registry.addInterceptor(localeInterceptor)
                 .order(1)
                 .addPathPatterns("/**")
@@ -66,10 +68,9 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
                 .addPathPatterns("/login/**", "/signup/**");
 
 
-        registry.addInterceptor(loginInterceptor)
+        registry.addInterceptor(loginInterceptor) // http get /login
                 .order(4)
                 .addPathPatterns("/login/**");
-//
 
     }
 

@@ -88,7 +88,7 @@ public class LocaleInterceptorTest {
     @DisplayName("로케일 인터셉터 한국어 테스트")
     public void 로케일_인터셉터_한국어_테스트() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/")
-                        .param("lang", "ko"))
+                        .param("lang", "ko")) // localhost:8080/?lang=ko
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn();
