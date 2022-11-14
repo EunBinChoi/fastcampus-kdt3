@@ -69,7 +69,6 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .order(4)
                 .addPathPatterns("/login/**");
-//
 
     }
 
