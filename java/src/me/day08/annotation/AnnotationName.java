@@ -8,7 +8,9 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationName {
-    // 엘리먼트 타입으로 기본 데이터 타입이나 객체, 열거 타입이 올 수 있음
+    // ElementType.TYPE - 클래스 / 인터페이스 / 열거타입
+    // ElementType.FIELD - 필드
+    // ElementType.METHOD - 메소드
     String elementName1();
     int elementName2() default 5;
 }
