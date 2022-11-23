@@ -14,7 +14,7 @@ public class SportCar extends Car {
     // Car super = new Car();가 살고 있음
     private int turbo;
     private static int numOfSportCar = 0;
-    static final String COMPANY = "TESLA-SPROTS";
+    static final String COMPANY = "TESLA-SPORT";
 
     public SportCar() {
         //super();

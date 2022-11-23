@@ -1,4 +1,4 @@
-package me.day09.polymorphism.parent;
+package me.day09.polymorphism.definition;
 
 import java.util.Objects;
 

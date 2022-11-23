@@ -17,7 +17,7 @@ public class Main {
         for (int i = 0; i < sportCars.length; i++) {
             sportCars[i] = new SportCar();
         }
-        for (int i = 0; i < cars.length; i++) {
+        for (int i = 0; i < sportCars.length; i++) {
             System.out.println(sportCars[i]);
         }
     }

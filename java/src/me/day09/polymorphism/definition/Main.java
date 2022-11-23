@@ -1,4 +1,4 @@
-package me.day09.polymorphism.parent;
+package me.day09.polymorphism.definition;
 
 public class Main {
     public static void main(String[] args) {
