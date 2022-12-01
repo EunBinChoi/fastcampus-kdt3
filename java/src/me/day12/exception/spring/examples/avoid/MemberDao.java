@@ -8,6 +8,10 @@ public class MemberDao {
     public MemberDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    /*
+     * Example 1
+     */
     public void add1(Member member) throws SQLException {
         // JDBC API
         // DB에 전달된 member 추가하는 코드 (SQLException 발생 가능)
